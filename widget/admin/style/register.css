@@ -1,0 +1,32 @@
+.aide{
+	color: grey;
+	font-size: 0.8em;
+	text-decoration: none;
+}.aide:hover{
+	text-decoration: underline;
+}
+#logo{
+	width: 7vh;
+	min-width: 80px;
+	margin-bottom: 1%;
+}
+#login, #recup{display: none;}
+#register{
+	background-color: #F0F0F0;
+	display: inline-flex;
+}
+#register form span{
+	color: black;
+	font-weight: bold;
+	display:inline-block;
+	margin-top: 15px;
+}
+
+#register .wait{
+	margin-top: 10px;
+	height: 30px;
+}
+
+.erreur{
+	color: black;
+}

@@ -1,0 +1,97 @@
+header{
+	min-height: 80px;
+	height: 8vh;
+	background: #303030;
+}
+header .alignement.gauche{
+	width: 70%;
+	height: 100%;
+}
+header .alignement.droit{
+	width:30%;
+	height: 100%;
+}
+header .alignement a{
+	color: white;
+	text-decoration: none;
+}
+header .alignement a img{
+	height: 60%;
+	position: relative;
+	top: 20%;
+}
+footer{
+	min-height:35vh;
+	background: #222222;
+	color: white;
+}footer #copyright{
+	background: #1A1A1A;
+	height: 70px;
+}footer #copyright span{
+	position: relative;
+	top: 25px;
+}footer .alignement{
+	display: inline-flex;
+	min-height: 30vh;
+	width: 33.3%;
+}footer #onisowo{
+	background-color: #202020;
+}footer #onisowo img{
+	height: 120px;
+}footer #contact{
+	background-color: #232323;
+}footer #contact img{
+	height: 50px;
+	margin-left: 10px;
+	margin-left: 10px;
+}footer #presentation{
+	background-color: #272727;
+}footer #presentation h2{
+	padding-top: 10px;
+}footer #presentation p{
+	text-align:left;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-bottom: 10px;
+}footer #partner{
+	display: flex;
+	min-height: 10vh;
+	background-color: #2A2A2A;
+}footer #partner img{
+	height: 70px;
+}footer #links{
+	display: flex;
+	min-height: 50px;
+	background-color: #232323;
+}footer #links a{
+	margin-right: 20px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}footer a{
+	color: white;
+	text-decoration: none;
+}footer a:hover{
+	text-decoration: underline;
+}
+.wrapper{
+	min-height: 84vh;
+}
+.overlay{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.2);
+}
+
+#footerLight{
+	min-height: 70px;
+}
+
+@media (max-width: 800px), (orientation: portrait){
+	header .alignement.gauche{
+		width: 0;
+	}
+	header .alignement.droit, footer .alignement{
+		width: 100%;
+	}
+}

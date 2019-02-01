@@ -1,0 +1,16 @@
+#banniere .alignement{
+    min-height: 350px;
+    height: 40vh;
+    width: 100%;
+    background-size:cover;
+    font-size: 1.2em;
+}
+#banniere .alignement h1{
+    font-size: 2.5em;
+}
+#banniere .alignement button{
+    border-radius: 0;
+    font-size: 15px;
+    height: 40px;
+    width: 300px;
+}

@@ -1,0 +1,10 @@
+.biplace{
+	height: 100%;
+}
+
+@media (max-width: 499px){
+	.biplace{
+		min-width: 100%;
+		height: 50%;
+	}
+}

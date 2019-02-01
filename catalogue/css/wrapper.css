@@ -1,0 +1,61 @@
+header{
+	min-height: 80px;
+	height: 8vh;
+	background: #1E1E1E;
+}
+.alignement{
+	display: inline-block;
+	vertical-align: top;
+}
+.alignement.gauche{
+	width: 67%;
+	padding-left: 3%;
+	height: 100%;
+	text-align: left;
+}
+.alignement.droit{
+	width:25%;
+	padding-right: 5%;
+	height: 100%;
+	text-align: right;
+}
+.alignement a img{
+	height: 60%;
+	position: relative;
+	top: 20%;
+}#home{
+	width: 60px;
+	height: 60px;
+	background: grey;
+	border-radius: 100px;
+	margin-top: 10px;
+	vertical-align:middle;
+}#home:hover{
+	cursor: pointer;
+}
+#pseudo{
+	vertical-align:middle;
+	font-size: 1.1em;
+	color: white;
+	margin-left: 1%;
+}
+footer{
+	min-height:35vh;
+	background: #222222;
+	color: white;
+}footer #copyright{
+	background: #1A1A1A;
+	height: 70px;
+}footer #copyright span{
+	position: relative;
+	top: 25px;
+}
+.wrapper{
+	min-height: 84vh;
+}
+.overlay{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.2);
+}
