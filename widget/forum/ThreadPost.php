@@ -1,8 +1,8 @@
 <?php
 class ThreadPost extends Overlay implements Subscription{
 
-    public function  __construct(Post $post){
-        parent::__construct($post, "subscribe");
+    public function  __construct(Post $post, PostManager $manager){
+        parent::__construct($post, $manager, "subscribe");
     }
 
     public function subscribe($id){
@@ -15,6 +15,8 @@ class ThreadPost extends Overlay implements Subscription{
                 array_push($this->_raw->getData()[$this->_dataName], $id);
         }else
             $this->_raw->addData(["subscribe" => [$id]]);
+        $this->_raw->compressTab();
+        $this->_manager->update($this->_raw);
         return 0;
     }
 
@@ -26,7 +28,9 @@ class ThreadPost extends Overlay implements Subscription{
                 $temoin = [$this->_dataName => array_diff($this->_raw->getData()[$this->_dataName], [$id])];
                 $this->_raw->removeData($this->_dataName);
                 $this->_raw->addData($temoin);
-                return 0;
+                $this->_raw->compressTab();
+                $this->_manager->update($this->_raw);
+                return  0;
             }
         }else
             return 402;
