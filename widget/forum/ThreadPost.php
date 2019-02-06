@@ -11,8 +11,12 @@ class ThreadPost extends Overlay implements Subscription{
         if(key_exists($this->_dataName, $this->_raw->getData())){
             if(in_array($id, $this->_raw->getData()[$this->_dataName]))
                 return 400;
-            else
-                array_push($this->_raw->getData()[$this->_dataName], $id);
+            else{
+                $temoin = $this->_raw->getData()[$this->_dataName];
+                $this->_raw->removeData($this->_dataName);
+                array_push($temoin, $id);
+                $this->_raw->addData([$this->_dataName => $temoin]);
+            }
         }else
             $this->_raw->addData(["subscribe" => [$id]]);
         $this->_raw->compressTab();
@@ -34,5 +38,11 @@ class ThreadPost extends Overlay implements Subscription{
             }
         }else
             return 402;
+    }
+
+    public function hasSubscribe($id){
+        if(!key_exists("subscribe", $this->_raw->getData()))
+            return false;
+        return in_array($id, $this->_raw->getData()['subscribe']);
     }
 }
