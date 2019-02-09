@@ -1,5 +1,5 @@
 $(function(){
-    var option = "Profil";
+    var option = "Profile";
     init();
 
     $(".wrapper, footer").click(function(){
