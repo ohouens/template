@@ -1,17 +1,15 @@
 <?php
 class ThreadMessageWidget extends Widget{
-    private $_post;
 
-    public function __construct(Post $post, PDO $db){
-        $this->_post = $post;
+    public function __construct($num, $user, $message, $cote){
         parent::__construct(
             "",
-            '<div num="'.$post->getId().'" class="answer'.$this->cote().'">
+            '<div num="'.$num.'" class="answer cote_'.$cote.'">
                 <p class="user">
-                    '.UserManager::getPseudo($post->getUser(), $db).'
+                    '.$user.'
                 </p>
                 <p class="message">
-                    '.$post->getField().'
+                    '.$message.'
                 </p>
             </div>',
             "",
@@ -20,13 +18,5 @@ class ThreadMessageWidget extends Widget{
             false
         );
         $this->build();
-    }
-
-    private function cote(){
-        if(!isset($_SESSION['id']))
-            return ' left';
-        if($_SESSION['id'] == $this->_post->getUser())
-            return ' right';
-        return ' left';
     }
 }
