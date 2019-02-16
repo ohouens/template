@@ -36,10 +36,10 @@
 	padding: 20px;
 	margin-bottom: 2.5%;
 	margin-top: 2.5%;
-}.answer.right{
+}.answer.cote_1{
 	margin-left: auto;
 	margin-right: 10px;
-}.answer.left{
+}.answer.cote_0{
 	margin-left: 10px;
 }.answer .user{
 	font-size: 0.6em
