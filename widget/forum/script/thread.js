@@ -7,6 +7,26 @@ function readChat(num){
 if($("#chatReading").length){
     readChat($("#chatReading").attr("num"));
 }
+
+if($("#subscribe").length){
+    $.get('index.php?thread='+$("#subscribe").attr('num')+'&request=22', function(data){
+        if(data == "0"){
+            $('#subscribe').text('Unsubscribe').attr('class', 'reverse').attr('valide', '1');
+        }else{
+            $('#subscribe').text('Subscribe').attr('class', 'ButtonB').attr('valide', '0');
+        }
+    });
+}
+
+if($("#action_current").length){
+    $.get('index.php?thread='+$("#action_container").attr('num')+'&request=24', function(data){
+        if(data == ""){
+            $("#action_current").html("<strong>False</strong>");
+        }else{
+            $("#action_current").html(data);
+        }
+    });
+}
 //-----------------------------------------------------------------
 $("#chatWriting form").submit(function(e){
     e.preventDefault();
