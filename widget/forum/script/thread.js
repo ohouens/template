@@ -23,13 +23,13 @@ if($("#action_current").length){
         if(data == ""){
             $("#action_current").html("<strong>False</strong>");
         }else{
-            $("#action_current").html(data);
+            $("#action_current .center").html(data);
         }
     });
 }
 //-----------------------------------------------------------------
 $("#chatWriting form").submit(function(e){
-    e.preventDefault();
+    // e.preventDefault();
     var num = $("#chatWriting").attr('num');
     $.post("index.php?thread="+num+"&request=1", $(this).serialize()).done(function(data){
         if(data == "0"){
