@@ -29,6 +29,18 @@
 	margin-bottom: 10px;
 }
 
+#action_container .previous, #action_container .next{
+	cursor: pointer;
+	width: 12.5%;
+}
+#action_current{
+	width: 75%;
+}
+
+.next img, .previous img{
+	width: 50px;
+}
+
 .answer{
 	background-color: grey;
 	color: black;
