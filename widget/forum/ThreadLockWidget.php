@@ -5,42 +5,30 @@ class ThreadLockWidget extends Widget{
     public function __construct(Post $post){
         parent::__construct(
             "",
-            '<div id="action_container" num="'.$post->getId().'">
-                <div class="alignement previous"></div><!--
-                --><div id="action_current" class="alignement">
-                    '.$this->subConstruct($post).'
+            '<div id="action_container" num="'.$post->getId().'" class="plein">
+                <div class="grand rectangle previous">
+                    <div class="center">
+                        <img src="style/icon/previous.png" alt="previous"/>
+                    </div>
                 </div><!--
-                --><div class="alignement next"></div>
+                --><div id="action_current" class="grand rectangle">
+                    <div class="center">
+
+                    </div>
+                </div><!--
+                --><div class="grand rectangle next">
+                    <div class="center">
+                        <img src="style/icon/next.png" alt="next"/>
+                    </div>
+                </div>
             </div>',
             "",
             "action",
             "",
             false,
-            true
+            false
         );
         $this->_post = $post;
         $this->build();
-    }
-
-    private function subConstruct(Post $post){
-        $result = "";
-        switch($post->getFormat()){
-            case Constant::FORMAT_VOTE:
-                $result .= "vote";
-                break;
-            case Constant::FORMAT_BARRIER:
-                $result .= "barrier";
-                break;
-            case Constant::FORMAT_REQUEST:
-                $result .= "request";
-                break;
-            case Constant::FORMAT_CONTRACT:
-                $result .= "contract";
-                break;
-            default:
-
-                break;
-        }
-        return $result;
     }
 }
