@@ -2,7 +2,7 @@
 class ThreadStatutWidget extends Widget{
     protected $_post;
 
-    public function __construct(Post $post, PDO $db){
+    public function __construct(Post $post){
         parent::__construct(
             "",
             '<div id="statut_container">
@@ -10,7 +10,7 @@ class ThreadStatutWidget extends Widget{
                     <button id="subscribe" class="buttonB" num="'.$post->getId().'" valide="0">Subscribe</button>
                 </div>
                 <div id="primar_container">
-                    <span class="synchro">By: </span>'.UserManager::getPseudo($post->getUser(), $db).'<br/>
+                    <span class="synchro">By: </span>'.$post->getData()['v1'].'<br/>
                     <span class="synchro">Since: </span>'.date('d/m/Y', $post->getCreation()).'<br/>
                 </div>
                 <div id="users_container">
