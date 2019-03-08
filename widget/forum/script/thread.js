@@ -24,6 +24,9 @@ if($("#action_current").length){
             $("#action_current").html("<strong>False</strong>");
         }else{
             $("#action_current .center").html(data);
+            $("#action_current .center").first().find('.choices .choice').click(function(){
+                    alert($(this).text());
+            });
         }
     });
 }

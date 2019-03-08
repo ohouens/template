@@ -8,7 +8,7 @@ $(function(){
             $.get('index.php?thread='+$(this).attr('num')+'&request=20', function(data){
                 var dire="error";
                 if(data == "0"){
-                    $('#subscribe').text('unsubscribe').attr('class', 'reverse').attr('valide', '1');
+                    $('#subscribe').text('Unsubscribe').attr('class', 'reverse').attr('valide', '1');
                 }else{
                     alert(dire);
                 }
@@ -17,7 +17,7 @@ $(function(){
             $.get('index.php?thread='+$(this).attr('num')+'&request=21', function(data){
                 var dire="error";
                 if(data == "0"){
-                    $('#subscribe').text('subscribe').attr('class', 'ButtonB').attr('valide', '0');
+                    $('#subscribe').text('Subscribe').attr('class', 'ButtonB').attr('valide', '0');
                 }else{
                     alert(dire);
                 }

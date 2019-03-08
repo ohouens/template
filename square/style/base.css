@@ -38,9 +38,12 @@ button, input[type="submit"]{
     color: white;
     border: none;
 }
-button:hover, input[type="submit"]:hover, .reverse{
+button:hover, input[type="submit"]:hover{
     background: #33F7B7;
     cursor: pointer;
+}
+.reverse:hover{
+	background: #272727;
 }
 
 .buttonA{
