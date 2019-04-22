@@ -32,7 +32,7 @@ if($("#action_current").length){
 }
 //-----------------------------------------------------------------
 $("#chatWriting form").submit(function(e){
-    // e.preventDefault();
+    e.preventDefault();
     var num = $("#chatWriting").attr('num');
     $.post("index.php?thread="+num+"&request=1", $(this).serialize()).done(function(data){
         if(data == "0"){
