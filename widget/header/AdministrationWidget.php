@@ -26,17 +26,16 @@ class AdministrationWidget extends Widget{
         dans son store.
         Les options de bases sont:
             L'affichage du pseudo avec gérance du compte au clic(déconnexion, traduction, modifier profil, acces profil, acces statistiques),
-            L'affichage du nombre de points avec gérance au clics(acheter, transférer, récupérer, rentrer code),
+            L'affichage du nombre de points avec gérance au clics(transférer, récupérer, code),
             L'affichage du titre du dernier thread modifier avec gérance au clic(creer un nouveau thread, modifier celui la, ajouter un elements)
-            L'affichage du nombre de nouveau messages avec gérances au clic(boites de dialogues DM, nouveau message to:, creation groupe ephemere)
             L'affichage de la barre de recherche avec recherche en entrée(profil de groupe, profil d'utilisateur, thread, services, post, store)*/
         $result = [];
         array_push($result, 'ProfileOW');
-        array_push($result, 'PointOW');
         array_push($result, 'ThreadOW');
+        array_push($result, 'StoreOW');
         //array_push($result, 'GroupOW');
-        //array_push($result, 'MessageOW');
         //array_push($result, 'SearchOW');
+        //array_push($result, 'PointOW');
         return $result;
     }
 

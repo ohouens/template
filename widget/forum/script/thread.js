@@ -25,7 +25,13 @@ if($("#action_current").length){
         }else{
             $("#action_current .center").html(data);
             $("#action_current .center").first().find('.choices .choice').click(function(){
-                    alert($(this).text());
+                $.get('index.php?thread='+$("#action_container").attr('num')+'&request=25&answer='+$(this).attr('rep'), function(data){
+                    if(data == "0"){
+
+                    }else{
+                        
+                    }
+                });
             });
         }
     });
