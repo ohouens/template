@@ -5,6 +5,8 @@ abstract class OptionWidget extends Widget{
     private $_color;
     private $_links;
 
+    protected $_hash = [];
+
     public function __construct($name, $view, $color, array $links){
         parent::__construct("", "", "", "", "", false, false);
         $this->setName($name);
@@ -59,10 +61,16 @@ abstract class OptionWidget extends Widget{
         return $result;
     }
 
+    private function toLink($link){
+        if(!array_key_exists($link, $this->_hash))
+            return $link;
+        return $this->_hash[$link];
+    }
+
     private function buildLinks(){
         $result = "";
         foreach($this->_links as $link){
-            $result .= '<a href="index.php?'.$link.'"><span>'.ucfirst($link).'</span></a>
+            $result .= '<a href="index.php?'.$this->toLink($link).'"><span>'.ucfirst($link).'</span></a>
             ';
         }
         return $result;
