@@ -22,7 +22,7 @@ header .alignement a img{
 }
 footer{
 	min-height:35vh;
-	background: #222222;
+	background-color: #232323;
 	color: white;
 }footer #copyright{
 	background: #1A1A1A;
@@ -35,17 +35,17 @@ footer{
 	min-height: 30vh;
 	width: 33.3%;
 }footer #onisowo{
-	background-color: #202020;
+	/* background-color: #202020; */
 }footer #onisowo img{
 	height: 120px;
 }footer #contact{
-	background-color: #232323;
+	/* background-color: #232323; */
 }footer #contact img{
 	height: 50px;
 	margin-left: 10px;
 	margin-left: 10px;
 }footer #presentation{
-	background-color: #272727;
+	/* background-color: #272727; */
 }footer #presentation h2{
 	padding-top: 10px;
 }footer #presentation p{
@@ -56,13 +56,13 @@ footer{
 }footer #partner{
 	display: flex;
 	min-height: 10vh;
-	background-color: #2A2A2A;
+	/* background-color: #2A2A2A; */
 }footer #partner img{
 	height: 70px;
 }footer #links{
 	display: flex;
 	min-height: 50px;
-	background-color: #232323;
+	/* background-color: #232323; */
 }footer #links a{
 	margin-right: 20px;
 	margin-top: 3px;
