@@ -1,0 +1,51 @@
+#createThread{
+    max-width: 550px;
+    margin: auto;
+}
+#createThread h1{
+    font-size: 2.5em;
+    font-family: sourceBold;
+}
+#createThread .select span{
+    display: inline-block;
+    width: 33.3%;
+    font-family: sourceRegular;
+    font-size: 1.5em;
+    cursor: pointer;
+}#createThread .select span:hover{
+    text-decoration: underline;
+}
+#createThread form{
+    background: #2E2E2E;
+    margin-top: 20px;
+    display: none;
+}
+#createThread form input[name="title"]{
+    text-align: center;
+    font-size: 2em;
+}
+#createThread form input[name="when"]{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    /* font-size: 5em; */
+    /* width: 100%; */
+    /* border: none; */
+}
+#createThread form textarea{
+    border: none;
+    background: none;
+    margin-top: 3%;
+    min-height: 40vh;
+    width: 96%;
+    max-width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 1.2em;
+}
+#createThread form img{
+    cursor: pointer;
+}
+#createThread button{
+    display: none;
+}
