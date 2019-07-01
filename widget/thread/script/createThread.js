@@ -1,7 +1,14 @@
 $(function(){
     $.getScript('script/utils.js');
 
+    $("#createThread #submit").click(function(){
+        $.post('index.php?thread&request=1', $("#createThread form").serialize()).done(function(data){
+            alert(data);
+        });
+    });
+
     $("#createThread .select span").click(function(){
+        $('#createThread form').attr('origin', $(this).attr("action"));
         $("#createThread .select span").attr("class", "");
         $(this).attr("class", "selected");
         $.get('index.php?origin=createThread&getObject='+$(this).attr("action"), function(data){
