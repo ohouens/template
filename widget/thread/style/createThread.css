@@ -49,3 +49,9 @@
 #createThread button{
     display: none;
 }
+
+#erreurCreate{
+    color: white;
+    font-family: quickBold;
+    font-size: 1.2em;
+}

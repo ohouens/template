@@ -27,6 +27,7 @@ class CreateThreadWidget extends Widget{
             </div>
             <form method="post" action="index.php?thread&request=1" origin=""></form>
             <button id="submit" class="button space">Create</button>
+            <div id="erreurCreate" class="erreur"></div>
         </div>
         ';
     }
