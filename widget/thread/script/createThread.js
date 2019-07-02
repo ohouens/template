@@ -23,6 +23,7 @@ $(function(){
     				if(data == "13")dire = "file too big, maximum size is 1Mo";
     				if(data == "14")dire = "forbidden file. only png, jpg/jpeg are allowed";
     				if(data == "15")dire = "upload error";
+                    if(data == "16")dire = "Incorrect date format";
     				$('#erreurCreate').text(dire);
     				setTimeout(function(){
     					$('#erreurCreate').text("");

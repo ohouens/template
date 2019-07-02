@@ -29,7 +29,7 @@ class createThreadControl{
         return $retour;
     }
 
-    public static function createFlux(User $user, $title, $intro, $db){
+    public static function createFlux(User $user, $title, $intro, Manager $manager){
         if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
             return 10;
         if(!preg_match("#^.{1,300}$#", $intro))
@@ -39,12 +39,11 @@ class createThreadControl{
         $post->setField($intro);
         $post->setType(1);
         $post->addData(["title"=>$title]);
-        $manager = new PostManager($db);
         $manager->add($post);
         return 0;
     }
 
-    public static function createForum(User $user, $title, $cover, $db, $path=""){
+    public static function createForum(User $user, $title, $cover, Manager $manager, $path=""){
         if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
             return 10;
         $extension = substr(strrchr($cover['name'],'.'),1);
@@ -60,7 +59,6 @@ class createThreadControl{
                 $post->setField($rename);
                 $post->setType(0);
                 $post->addData(["title"=>$title]);
-                $manager = new PostManager($db);
                 $manager->add($post);
                 return 0;
                 break;
@@ -78,17 +76,16 @@ class createThreadControl{
         }
     }
 
-    public static function createTicketing(User $user, $title, $date, $db){
+    public static function createTicketing(User $user, $title, $date, Manager $manager){
         if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
             return 10;
-        if(!preg_match("#^.{1,300}$#", $date))
-            return 11;
+        if(!checkIsAValidDate($date))
+            return 16;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setField($date);
         $post->setType(2);
         $post->addData(["title"=>$title]);
-        $manager = new PostManager($db);
         $manager->add($post);
         return 0;
     }
