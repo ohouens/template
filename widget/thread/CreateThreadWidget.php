@@ -25,7 +25,7 @@ class CreateThreadWidget extends Widget{
                 --><span action="forum">Forum</span><!--
                 --><span action="ticketing">Ticketing</span>
             </div>
-            <form method="post" action="index.php?thread&request=1" origin=""></form>
+            <form enctype="multipart/form-data" method="post" action="index.php?thread&request=1"></form>
             <button id="submit" class="button space">Create</button>
             <div id="erreurCreate" class="erreur"></div>
         </div>

@@ -44,11 +44,52 @@ class createThreadControl{
         return 0;
     }
 
-    public static function createForum(User $user, $title, $cover, $db){
-        return 0;
+    public static function createForum(User $user, $title, $cover, $db, $path=""){
+        if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
+            return 10;
+        $extension = substr(strrchr($cover['name'],'.'),1);
+        $rename = $user->getID().achage(32).'.'.$extension;
+        $dest = $path.'media/forum/cover/'.$rename;
+        $verif = upload($cover, $dest, 1048576, ["png", "jpg", "jpeg"]);
+        switch($verif){
+            case 0:
+                return 15;
+            case 1:
+                $post = new Post();
+                $post->setUser($user->getId());
+                $post->setField($rename);
+                $post->setType(0);
+                $post->addData(["title"=>$title]);
+                $manager = new PostManager($db);
+                $manager->add($post);
+                return 0;
+                break;
+            case 701:
+                return 12;
+                break;
+            case 702:
+                return 13;
+                break;
+            case 703:
+                return 14;
+                break;
+            default:
+                break;
+        }
     }
 
     public static function createTicketing(User $user, $title, $date, $db){
+        if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
+            return 10;
+        if(!preg_match("#^.{1,300}$#", $date))
+            return 11;
+        $post = new Post();
+        $post->setUser($user->getId());
+        $post->setField($date);
+        $post->setType(2);
+        $post->addData(["title"=>$title]);
+        $manager = new PostManager($db);
+        $manager->add($post);
         return 0;
     }
 }
