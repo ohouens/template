@@ -27,7 +27,7 @@
 }
 @media (min-width: 500px) and (max-width: 800px){
 	#threadGrid .thread{
-		width: calc(33% - (5px * 0.66));
+		width: calc(33.3% - (5px * 0.666));
 	}
 }
 @media (min-width: 800px) and (max-width: 1200px){
