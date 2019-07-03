@@ -4,6 +4,7 @@
 	text-align: center;
 	width: 100%;
 	position: relative;
+	z-index: 77;
 }.plus a{
 	font-size: 1.1em;
 	display: block;
@@ -22,6 +23,3 @@
 	top: 35%;
 	right: 100%;
 }
-
-#profil{background: #2A2A2A;}
-#message{background: #002929;}

@@ -32,6 +32,11 @@
 	border-bottom: 1px solid black;
 	color: black;
 }
+.button{
+	height: 50px;
+	width: 300px;
+	font-size: 20px;
+}
 button, input[type="submit"]{
     width: 200px;
     background: #1E1E1E;
@@ -54,4 +59,17 @@ button:hover, input[type="submit"]:hover{
 }
 .buttonB{
 	height: 100%;
+}
+
+.selected{
+	text-decoration: underline;
+}
+
+.space{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.noBorder{
+	border: none;
 }
