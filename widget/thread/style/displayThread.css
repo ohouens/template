@@ -1,11 +1,11 @@
 #threadGrid .thread{
     width: calc(20% - (5px * 0.8));
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     background: #232323;
 }#threadGrid .thread:hover{
     background: white;
     color:black;
-    cursor: pointer
+    cursor: pointer;
 }
 #threadGrid .thread h3{
     font-size: 2.5em;
@@ -18,4 +18,20 @@
 #threadGrid .thread.flux p{
     font-size: 1.5em;
     font-family: source;
+}
+
+@media (max-width: 500px){
+	#threadGrid .thread{
+		width: calc(50% - (5px * 0.5));
+	}
+}
+@media (min-width: 500px) and (max-width: 800px){
+	#threadGrid .thread{
+		width: calc(33% - (5px * 0.66));
+	}
+}
+@media (min-width: 800px) and (max-width: 1200px){
+	#threadGrid .thread{
+		width: calc(25% - (5px * 0.75));
+	}
 }
