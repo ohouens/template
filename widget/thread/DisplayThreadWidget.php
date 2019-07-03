@@ -1,24 +1,15 @@
 <?php
 class DisplayThreadWidget extends Widget{
-    private $_post;
-
-    public function __construct(Post $post){
+    public function __construct(){
         parent::__construct(
             "",
-            $this->subConstruct($post),
+            '<div id="threadGrid"></div>',
             "",
-            $post-getId(),
+            "displayThread",
             "",
             false,
             false
         );
         $this->build();
-        $this->_post = $post;
-    }
-
-    private function subConstruct(Post $post){
-        $result = "";
-        
-        return $result;
     }
 }

@@ -1,0 +1,7 @@
+#threadGrid .thread{
+    width: 20%;
+    background: #232323;
+}
+#threadGrid .thread h3{
+    font-size: 2.5em;
+}
