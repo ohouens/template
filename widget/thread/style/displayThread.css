@@ -30,7 +30,7 @@
 		width: calc(33.3% - (5px * 0.666));
 	}
 }
-@media (min-width: 800px) and (max-width: 1200px){
+@media (min-width: 800px) and (max-width: 1400px){
 	#threadGrid .thread{
 		width: calc(25% - (5px * 0.75));
 	}
