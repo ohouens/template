@@ -19,6 +19,10 @@
     font-size: 1.5em;
     font-family: source;
 }
+#threadGrid .thread.ticketing p{
+    font-size: 3.5em;
+    font-family: source;
+}
 
 @media (max-width: 500px){
 	#threadGrid .thread{

@@ -38,7 +38,7 @@ class DisplayThreadControl{
                 $class = 'ticketing';
                 $result = '
                 <h3>'.$post->getData()['title'].'</h3>
-                <p>'.$post->getField().'</p>';
+                <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
             default:
                 break;
