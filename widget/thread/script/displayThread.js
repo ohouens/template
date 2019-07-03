@@ -2,7 +2,8 @@ $(function(){
     if($("#threadGrid").length){
         $.get('index.php?origin=displayThread&getObject=firstPage&withData=Post', function(data){
             $("#threadGrid").html(data);
-            initMasonry();
+            initAction();
+            setTimeout(function() { initMasonry(); }, 500);
         });
     }
 
@@ -11,6 +12,11 @@ $(function(){
             columWidh: '.thread',
             itemSelector: '.thread',
             gutter: 5
+        });
+    }
+    function initAction(){
+        $("#threadGrid .thread").click(function(){
+            document.location.href = 'index.php?thread='+$(this).attr('num');
         });
     }
 });
