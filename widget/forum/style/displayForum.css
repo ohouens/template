@@ -1,0 +1,32 @@
+#contentCode{
+    width: 20%;
+    background: #202020;
+}
+#contentCode #qrCode{
+    width: 80%;
+}
+
+#contentChat{
+    width: 60%;
+    background: #1A1A1A;
+}
+#contentChat #displayChat{
+    height: 85%;
+}
+#contentChat form{
+    height: 15%;
+    background: white;
+    text-align: left;
+}#contentChat form textarea{
+    border: none;
+    height: 100%;
+    width: 91%;
+}#contentChat form input[type="image"]{
+    width: 3%;
+    margin-left: 1%;
+}
+
+#contentStatistic{
+    width: 20%;
+    background: #202020;
+}

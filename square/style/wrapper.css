@@ -76,6 +76,9 @@ footer{
 .wrapper{
 	min-height: 84vh;
 }
+.wrapper .children{
+	height: 84vh;
+}
 .overlay{
 	position: relative;
 	height: 100%;

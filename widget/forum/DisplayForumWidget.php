@@ -1,20 +1,22 @@
 <?php
 class DisplayForumWidget extends Widget{
-    public function __construct(){
+    public function __construct(Post $post){
         parent::__construct(
             '',
-            '<div id="contentCode" class="grand rectangle">
-                <div class="center"></div>
-            </div>
-            <div id="contentChat" class="grand alignement">
+            '<div id="contentCode" class="grand children rectangle" num="'.$post->getId().'">
+                <div class="center">
+                    <img id="qrCode" src="" alt="qrCode"/>
+                </div>
+            </div><!--
+            --><div id="contentChat" class="grand children alignement">
                 <div id="displayChat"></div>
                 <form action="" method="post">
-                    <textarea name="answer"></textarea>
-                    <input type="image" id="addAction" src="style/icon/plus.png"/>
-                    <input type="image" id="send" src="style/icon/send.png"/>
+                    <textarea name="answer"></textarea><!--
+                    --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
+                    --><input type="image" id="send" src="style/icon/sendDirect.png"/>
                 </form>
-            </div>
-            <div id="contentStatistic" class="grand alignement">
+            </div><!--
+            --><div id="contentStatistic" class="grand children alignement">
                 <div id="contentAuthor" class="square">
                     <div class="center">
                         <div class="profilePicture"></div>
@@ -36,6 +38,7 @@ class DisplayForumWidget extends Widget{
             </div>',
             '',
             'displayForum',
+            '',
             false,
             false
         );
