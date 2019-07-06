@@ -2,8 +2,8 @@
     width: 20%;
     background: #202020;
 }
-#contentCode #qrCode{
-    width: 80%;
+#contentCode .center{
+    width: 100%;
 }
 
 #contentChat{
