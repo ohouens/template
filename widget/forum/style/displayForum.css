@@ -21,6 +21,7 @@
     border: none;
     height: 100%;
     width: 91%;
+    resize: none;
 }#contentChat form input[type="image"]{
     width: 3%;
     margin-left: 1%;
@@ -29,4 +30,29 @@
 #contentStatistic{
     width: 20%;
     background: #202020;
+}
+#contentStatistic #contentAuthor{
+    /* background: purple; */
+    height: 30%;
+}#contentAuthor .profilePicture{
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border-radius: 50%;
+}#contentAuthor .gris{
+    color: grey;
+    font-size: 0.7em;
+}
+#contentStatistic #contentFollow{
+    background: #212121;
+    height: 30%;
+}#contentFollow #followers{
+    font-size: 3.5em;
+    font-family: sourceBold;
+}#contentFollow #ff{
+    font-size: 1.5em;
+}
+#contentStatistic #contentWriter{
+    /* background: yellow; */
+    height: 40%;
 }
