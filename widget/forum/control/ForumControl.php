@@ -13,11 +13,13 @@ class ForumControl{
                 array_push($final, $answer);
         }
         foreach($final as $inter){
+            $user = self::getAutor($inter->getUser(), $userManager);
             $result .=
             '<div class="answer">
-                <p class="pseudo">'.self::getAutor($inter->getUser(), $userManager)->getPseudo().'</p>
-                <p class="text">'.$inter->getField().'</p>
+                <p class="pseudo alignement '.self::color($post, $user).'">'.$user->getPseudo().'</p><!--
+                --><p class="text alignement">'.$inter->getField().'</p>
                 <p class="gris">'.ForumControl::getSeniority($inter).'</p>
+                <hr/>
             </div>';
         }
         return $result;
@@ -25,6 +27,16 @@ class ForumControl{
 
     public static function getAutor($id, Manager $manager){
         return $manager->get($id);
+    }
+
+    public static function color(Post $post, User $user){
+        if($user->getId() == $post->getUser())
+            return 'creator';
+        if(in_array($user->getId(), $post->getData()['writer']))
+            return 'writer';
+        if(in_array($user->getId(), $post->getData()['followers']))
+            return 'follower';
+        return '';
     }
 
     public static function getSeniority(Post $post){
@@ -37,6 +49,8 @@ class ForumControl{
             return $interval->format("%m months ago");
         elseif($interval->d > 1)
             return $interval->format("%d days ago");
+        elseif($interval->h > 1)
+            return $interval->format("%h hours ago");
         elseif($interval->i > 1)
             return $interval->format("%i minutes ago");
         else

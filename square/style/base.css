@@ -72,7 +72,17 @@ button:hover, input[type="submit"]:hover{
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
-
+.gris{
+    color: grey;
+    font-size: 0.7em;
+}
 .noBorder{
 	border: none;
+}
+
+.profilePicture{
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border-radius: 50%;
 }

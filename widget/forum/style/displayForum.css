@@ -14,21 +14,29 @@
     height: 85%;
     overflow: auto;
 }.answer{
-	background-color: grey;
-	color: black;
-	width: 40%;
-	padding: 20px;
-	margin-bottom: 2.5%;
-	margin-top: 2.5%;
-}.answer.cote_1{
-	margin-left: auto;
-	margin-right: 10px;
-}.answer.cote_0{
-	margin-left: 10px;
-}.answer .user{
-	font-size: 0.6em
-}.answer .message{
-	font-size: 0.9em;
+    margin-top: 2%;
+    text-align: left;
+    padding-right: 3%;
+    padding-left: 3%;
+}.answer .pseudo{
+    width: 30%;
+    font-size: 0.9em;
+    /* background: red; */
+}.answer .text{
+    width: 70%;
+    /* background: blue; */
+}.answer .gris{
+        text-align: right;
+}.answer hr{
+    width: 50%;
+    color: grey;
+    margin: auto;
+}.answer .follower{
+    color: #33F7B7;
+}.answer .writer{
+    color: #0077BE;
+}.answer .creator{
+    color: #FFD700;
 }
 #contentChat form{
     height: 15%;
@@ -51,14 +59,6 @@
 #contentStatistic #contentAuthor{
     /* background: purple; */
     height: 30%;
-}#contentAuthor .profilePicture{
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    border-radius: 50%;
-}#contentAuthor .gris{
-    color: grey;
-    font-size: 0.7em;
 }
 #contentStatistic #contentFollow{
     background: #212121;
