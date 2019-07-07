@@ -6,9 +6,7 @@ $(function(){
         });
     }
     if($("#contentChat").length){
-        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
-            $('#displayChat').html(data);
-        });
+        loadChat();
 
         $("#addAction").click(function(e){
             e.preventDefault();
@@ -16,11 +14,21 @@ $(function(){
 
         $("#send").click(function(e){
             e.preventDefault();
+            $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
+                if(data == "0")
+                    loadChat();
+                    $("#contentChat form textarea").val('');
+            })
         });
 
         $("#contentChat form").submit(function(e){
             e.preventDefault();
             $("#send").trigger("click");
+        });
+    }
+    function loadChat(){
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
+            $('#displayChat').html(data);
         });
     }
 });

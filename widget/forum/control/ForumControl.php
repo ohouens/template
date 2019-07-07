@@ -57,7 +57,7 @@ class ForumControl{
             return "a moment moment ago";
     }
 
-    public static function createAnswer(User $user, $answer, integer $parent, PostManager $manager){
+    public static function createAnswer(User $user, $answer, $parent, PostManager $manager){
         if(!preg_match("#^.{1,1000}$#", $answer))
             return 11;
         $post = new Post();

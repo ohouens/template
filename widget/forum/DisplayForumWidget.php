@@ -37,7 +37,7 @@ class DisplayForumWidget extends Widget{
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$post->getId().'">
             <div id="displayChat"></div>
-            <form action="" method="post">
+            <form action="index.php?thread='.$post->getId().'&amp;request=2" method="post">
                 <textarea name="answer"></textarea><!--
                 --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
                 --><input type="image" id="send" src="style/icon/sendDirect.png"/>
