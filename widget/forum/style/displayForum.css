@@ -13,6 +13,22 @@
 #contentChat #displayChat{
     height: 85%;
     overflow: auto;
+}.answer{
+	background-color: grey;
+	color: black;
+	width: 40%;
+	padding: 20px;
+	margin-bottom: 2.5%;
+	margin-top: 2.5%;
+}.answer.cote_1{
+	margin-left: auto;
+	margin-right: 10px;
+}.answer.cote_0{
+	margin-left: 10px;
+}.answer .user{
+	font-size: 0.6em
+}.answer .message{
+	font-size: 0.9em;
 }
 #contentChat form{
     height: 15%;
