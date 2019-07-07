@@ -35,7 +35,7 @@ class DisplayForumWidget extends Widget{
                 '.QrCode::code('https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=http://localhost/ohouens/project/onisowo/index.php?thread='.$post->getId(), 'Scan to access').'
             </div>
         </div><!--
-        --><div id="contentChat" class="grand children alignement">
+        --><div id="contentChat" class="grand children alignement" num="'.$post->getId().'">
             <div id="displayChat"></div>
             <form action="" method="post">
                 <textarea name="answer"></textarea><!--

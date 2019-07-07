@@ -12,6 +12,7 @@
 }
 #contentChat #displayChat{
     height: 85%;
+    overflow: auto;
 }
 #contentChat form{
     height: 15%;
