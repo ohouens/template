@@ -19,18 +19,16 @@
     padding-right: 3%;
     padding-left: 3%;
 }.answer .pseudo{
-    width: 30%;
+    width: 20%;
     font-size: 0.9em;
     /* background: red; */
 }.answer .text{
-    width: 70%;
+    width: 60%;
     /* background: blue; */
 }.answer .gris{
         text-align: right;
 }.answer hr{
-    width: 50%;
     color: grey;
-    margin: auto;
 }.answer .follower{
     color: #33F7B7;
 }.answer .writer{
