@@ -43,15 +43,15 @@ class ForumControl{
         $d1 = DateTime::createFromFormat('U',$post->getCreation());
         $d2 = new DateTime("now");
         $interval = $d1->diff($d2);
-        if($interval->y > 1)
+        if($interval->y >= 1)
             return $interval->format("%y years ago");
-        elseif($interval->m > 1)
+        elseif($interval->m >= 1)
             return $interval->format("%m months ago");
-        elseif($interval->d > 1)
+        elseif($interval->d >= 1)
             return $interval->format("%d days ago");
-        elseif($interval->h > 1)
+        elseif($interval->h >= 1)
             return $interval->format("%h hours ago");
-        elseif($interval->i > 1)
+        elseif($interval->i >= 1)
             return $interval->format("%i minutes ago");
         else
             return "a moment moment ago";
