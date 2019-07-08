@@ -32,7 +32,7 @@ class DisplayForumWidget extends Widget{
     private function constructForum(Post $post, UserManager $manager){
         return '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=http://localhost/ohouens/project/onisowo/index.php?thread='.$post->getId(), 'Scan to access').'
+                '.QrCode::code('index.php?thread='.$post->getId(), 'Scan to access').'
             </div>
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$post->getId().'">
