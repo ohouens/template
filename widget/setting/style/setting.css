@@ -1,0 +1,36 @@
+#settingData{
+    width: 50%;
+    background-image: url('../../../../../media/fond/setting/data.jpg');
+    background-size: cover;
+}
+
+#settingGeneral{
+    width: 50%;
+    background-image: url('../../../../../media/fond/setting/general.jpg');
+    background-size: cover;
+}
+
+#settingData h2, #settingGeneral h2{
+    font-family: sourceBold;
+    font-size: 1.7em;
+}
+#settingData p, #settingGeneral p{
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    max-width: 75%;
+    text-align: left;
+    font-size: 1.2em;
+    font-family: source;
+}
+
+.b{
+    background: #E5E5E5;
+    color: black;
+}
+
+@media (max-width: 800px){
+	#settingData, #settingGeneral{
+		width: 100%;
+	}
+}

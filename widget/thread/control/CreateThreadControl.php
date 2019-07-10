@@ -12,7 +12,7 @@ class createThreadControl{
             case 'forum':
                 $retour .=
                 '<input type="hidden" name="origin" value="forum"/>
-                <input type="file" name="cover" accept="image/x-png,image/jpeg" style="display: none"/>
+                <input type="file" name="cover" accept="image/x-png,image/jpeg" class="vide"/>
                 <img class="large" src="style/upload_image.png" alt="preview"/><br/>
                 <input class="input  noBorder" type="text" name="title" placeholder="Title"/>';
                 break;
