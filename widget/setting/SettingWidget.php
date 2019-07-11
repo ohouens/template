@@ -68,18 +68,18 @@ class SettingWidget extends Widget{
             <a class="link" href="#changeEmail">change email</a><br/>
         </p>
         <div class="grand vide">
-            <form class="vide" id="changePdp" enctype="multipart/dataform" method="post" action="">
+            <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?setting&amp;request=1">
                 <input type="file" name="pdp" accept="image/x-png,image/jpeg" class="vide"/>
-                <div class="center profilePicture" style="background-image: url(media/user/pp/'.$user->getData()['pp'].');"></div>
+                <img class="center profilePicture" src="media/user/pp/'.$user->getData()['pp'].'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changePassword" method="post" action="">
+            <form class="vide" id="changePassword" method="post" action="index.php?setting&amp;request=2">
                 <input class="input" type="text" name="old" placeholder="old password" /><br/>
                 <input class="input" type="text" name="new" placeholder="new password" /><br/>
                 <input class="input" type="text" name="confirm" placeholder="confirm new password" /><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeEmail" method="post" action="">
+            <form class="vide" id="changeEmail" method="post" action="index.php?setting&amp;request=3">
                 <span>current email: '.$user->getEmail().'</span><br/>
                 <input class="input" type="text" name="newMail" placeholder="new email"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>

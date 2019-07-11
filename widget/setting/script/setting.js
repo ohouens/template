@@ -1,5 +1,6 @@
 $(function(){
     $.getScript('script/utils.js');
+    // previewImage(".profilePicture", "#changePdp");
 
     $(".alignement.children button").click(function(){
         var parent = $(this).parent().parent().parent();
@@ -21,5 +22,12 @@ $(function(){
         $(this).parent().find('form').css('display', 'none');
         $(this).parent().css('display', 'none');
         parent.find("p").css('display', 'block');
+    });
+
+    $(".profilePicture").click(function(){
+        $('#changePdp input[type="file"]').trigger('click');
+        $('#changePdp input[type="file"]').change(function(){
+            readURL(this, "#changePdp img");
+        });
     });
 });
