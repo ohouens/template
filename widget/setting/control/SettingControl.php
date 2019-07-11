@@ -28,11 +28,28 @@ class SettingControl{
         }
     }
 
-    public static function changePassword(){
-
+    public static function changePassword($pass, User $user, Manager $manager){
+        if($pass['old'] != $user->getPassword())
+            return 31;
+        if($pass['new'] != $pass['confirm'])
+            return 32;
+        $temoin = $user->setPassword($pass['confirm']);
+        if(is_int($temoin))
+            return $temoin;
+        $manager->update($user);
+        return 0;
     }
 
-    public static function changeEmail(){
-
+    public static function changeEmail($mail, User $user, Manager $manager){
+        $list = $manager->getList();
+        foreach($list as $member){
+            if($mail == $member->getEmail())
+                return 33;
+        }
+        $temoin = $user->setEmail($mail);
+        if(is_int($temoin))
+            return $temoin;
+        $manager->update($user);
+        return 0;
     }
 }

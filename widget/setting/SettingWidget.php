@@ -74,9 +74,9 @@ class SettingWidget extends Widget{
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changePassword" method="post" action="index.php?setting&amp;request=2">
-                <input class="input" type="text" name="old" placeholder="old password" /><br/>
-                <input class="input" type="text" name="new" placeholder="new password" /><br/>
-                <input class="input" type="text" name="confirm" placeholder="confirm new password" /><br/>
+                <input class="input" type="password" name="old" placeholder="old password" /><br/>
+                <input class="input" type="password" name="new" placeholder="new password" /><br/>
+                <input class="input" type="password" name="confirm" placeholder="confirm new password" /><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changeEmail" method="post" action="index.php?setting&amp;request=3">
