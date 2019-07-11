@@ -93,3 +93,7 @@ button:hover, input[type="submit"]:hover{
     border-radius: 50%;
 	cursor: pointer;
 }
+
+.wait{
+	width: 50px;
+}
