@@ -1,6 +1,8 @@
 $(function(){
+    var save = "";
     $.getScript('script/utils.js');
     // previewImage(".profilePicture", "#changePdp");
+    swapGender()
 
     $(".b .grand.vide form").submit(function(e){
         e.preventDefault();
@@ -58,7 +60,29 @@ $(function(){
         });
     });
 
+    $(".gender").hover(function(){
+        $(this).attr('src', 'media/dataProfiling/gender/'+$(this).attr('alt')+'.png');
+    }, function(){
+        $(this).attr('src', 'media/dataProfiling/gender/'+$(this).attr('origin')+'.png');
+        swapGender();
+    });
+    $(".gender").click(function(){
+        $(".gender").removeClass("selected");
+        $(this).addClass("selected");
+        swapGender();
+        $("#changeGender input[name='gender']").val($(this).attr('val'));
+    });
+
     $("#changeCountry select").change(function(){
         $("#changeCountry img").attr('src', 'https://www.countryflags.io/'+$(this).val()+'/flat/64.png').attr('alt', $(this).val());
     });
+
+    function swapGender(){
+        $(".gender").each(function(){
+            $(this).attr('src', 'media/dataProfiling/gender/'+$(this).attr('origin')+'.png');
+        });
+        $(".gender.selected").each(function(){
+            $(this).attr('src', 'media/dataProfiling/gender/'+$(this).attr('alt')+'.png');
+        });
+    }
 });

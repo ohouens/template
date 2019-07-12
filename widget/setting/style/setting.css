@@ -33,6 +33,13 @@
     vertical-align: middle;
 }
 
+#changeGender .gender{
+    height: 150px;
+    cursor: pointer;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 @media (max-width: 800px){
 	#settingData, #settingGeneral{
 		width: 100%;

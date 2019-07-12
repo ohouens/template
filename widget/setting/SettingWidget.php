@@ -56,6 +56,12 @@ class SettingWidget extends Widget{
     }
 
     private function dataForms(User $user){
+        $selectF = "";
+        $selectG = "";
+        if(isset($user->getData()['gender']) and $user->getData()['gender'] == 0)
+            $selectG = "selected";
+        if(isset($user->getData()['gender']) and $user->getData()['gender'] == 1)
+            $selectB = "selected";
         return
         '<p>
             <a class="link" href="#changeGender">change gender</a><br/>
@@ -66,6 +72,9 @@ class SettingWidget extends Widget{
         </p>
         <div class="grand vide">
             <form class="vide" id="changeGender" method="post" action="index.php?setting&amp;request=4">
+                <input type="hidden" name="gender"/>
+                <img class="gender '.$selectG.'" src="media/dataProfiling/gender/girl.png" origin="girl" alt="female" val="0"/>
+                <img class="gender '.$selectB.'" src="media/dataProfiling/gender/boy.png" origin="boy" alt="male" val="1"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changeCountry" method="post" action="index.php?setting&amp;request=5">

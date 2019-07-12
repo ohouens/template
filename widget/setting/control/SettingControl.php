@@ -54,7 +54,7 @@ class SettingControl{
     }
 
     public static function changeGender($gender, User $user, Manager $manager){
-        if(!preg_match("#^0|1$", $gender))
+        if(!preg_match("#^0|1$#", $gender))
             return Constant::ERROR_CODE_GENDER_FORMAT;
         $user->addData(["gender" => $gender]);
         $manager->update($user);
