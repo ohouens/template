@@ -29,6 +29,10 @@
     color: black;
 }
 
+#changeCountry select, #changeCountry img{
+    vertical-align: middle;
+}
+
 @media (max-width: 800px){
 	#settingData, #settingGeneral{
 		width: 100%;

@@ -52,4 +52,79 @@ class SettingControl{
         $manager->update($user);
         return 0;
     }
+
+    public static function changeGender($gender, User $user, Manager $manager){
+        if(!preg_match("#^0|1$", $gender))
+            return Constant::ERROR_CODE_GENDER_FORMAT;
+        $user->addData(["gender" => $gender]);
+        $manager->update($user);
+        return 0;
+    }
+
+    public static function changeCountry($country, User $user, Manager $manager){
+        if(!preg_match("#^[a-z]{2}|[A-Z]{2}$#", $country))
+            return Constant::ERROR_CODE_COUNTRY_FORMAT;
+        $user->addData(["country" => $country]);
+        $manager->update($user);
+        return 0;
+    }
+
+    public static function changeSocial($social, User $user, Manager $manager){
+        switch($social){
+            case 'artist':
+                break;
+            case 'athlete':
+                break;
+            case 'student':
+                break;
+            case 'worker':
+                break;
+            default:
+                return Constant::ERROR_CODE_SOCIAL_FORMAT;
+        }
+        $user->addData(["social" => $social]);
+        $manager->update($user);
+        return 0;
+    }
+
+    public static function changeHobby($hobby, User $user, Manager $manager){
+        switch($hobby){
+            case 'coit':
+                break;
+            case 'dance':
+                break;
+            case 'eat':
+                break;
+            case 'fashion':
+                break;
+            case 'fitness':
+                break;
+            case 'game':
+                break;
+            case 'music':
+                break;
+            case 'party':
+                break;
+            case 'read':
+                break;
+            case 'sleep':
+                break;
+            case 'think':
+                break;
+            case 'travel':
+                break;
+            default:
+                return Constant::ERROR_CODE_HOBBY_FORMAT;
+        }
+        $user->addData(["hobby" => $hobby]);
+        $manager->update($user);
+        return 0;
+    }
+
+    public static function country(User $user){
+        $data = $user->getData();
+        if(isset($data['country']))
+            return $data['country'];
+        return "Statelessness";
+    }
 }

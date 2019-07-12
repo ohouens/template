@@ -57,7 +57,34 @@ class SettingWidget extends Widget{
 
     private function dataForms(User $user){
         return
-        '';
+        '<p>
+            <a class="link" href="#changeGender">change gender</a><br/>
+            <a class="link" href="#changeCountry">change country</a><br/>
+            <a class="link" href="#changeBirth">change birth</a><br/>
+            <a class="link" href="#changeSocial">change social</a><br/>
+            <a class="link" href="#changeHobbies">change hobbies</a><br/>
+        </p>
+        <div class="grand vide">
+            <form class="vide" id="changeGender" method="post" action="index.php?setting&amp;request=4">
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeCountry" method="post" action="index.php?setting&amp;request=5">
+                '.SettingUtil::countriesList('input').'
+                <img src="https://www.countryflags.io/'.SettingControl::country($user).'/flat/64.png" alt="'.SettingControl::country($user).'"/><br/>
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeBirth" method="post" action="index.php?setting&amp;request=6">
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeSocial" method="post" action="index.php?setting&amp;request=7">
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeHobbies" method="post" action="index.php?setting&amp;request=8">
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <span class="displayError"></span><br/>
+            <a class="link" href="#">retour</a>
+        </div>';
     }
 
     private function generalForms(User $user){
@@ -84,7 +111,7 @@ class SettingWidget extends Widget{
                 <input class="input" type="text" name="newMail" placeholder="new email"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <span id="erreurSetting"></span><br/>
+            <span class="displayError"></span><br/>
             <a class="link" href="#">retour</a>
         </div>';
     }

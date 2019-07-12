@@ -4,8 +4,8 @@ $(function(){
 
     $(".b .grand.vide form").submit(function(e){
         e.preventDefault();
-        $('#erreurSetting').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
-		var dire = "erreur";
+        var displayError = $(this).parent().find('.displayError');
+        displayError.html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         var $formulaire = $(this);
         var formdata = (window.FormData) ? new FormData($formulaire[0]) : null;
         var data = (formdata !== null) ? formdata : $formulaire.serialize();
@@ -17,11 +17,11 @@ $(function(){
             data: data,
             success: function(data){
                 if(data == "0")
-    				$('#erreurSetting').html('<img src="style/icon/success.png" alt="success" class="wait" />');
+    				displayError.html('<img src="style/icon/success.png" alt="success" class="wait" />');
     			else
-    				$('#erreurSetting').text(traduction(data));
+    				displayError.text(traduction(data));
                 setTimeout(function(){
-                    $('#erreurSetting').text("");
+                    displayError.text("");
                 },3000);
             },error: function(){
                 alert('erreur');
@@ -56,5 +56,9 @@ $(function(){
         $('#changePdp input[type="file"]').change(function(){
             readURL(this, "#changePdp img");
         });
+    });
+
+    $("#changeCountry select").change(function(){
+        $("#changeCountry img").attr('src', 'https://www.countryflags.io/'+$(this).val()+'/flat/64.png').attr('alt', $(this).val());
     });
 });
