@@ -69,6 +69,14 @@ class SettingControl{
         return 0;
     }
 
+    public static function changeBirth($birth, User $user, Manager $manager){
+        if(!checkIsAValidDate($birth))
+            return 16;
+        $user->addData(["birth" => $birth]);
+        $manager->update($user);
+        return 0;
+    }
+
     public static function changeSocial($social, User $user, Manager $manager){
         switch($social){
             case 'artist':

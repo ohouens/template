@@ -58,10 +58,13 @@ class SettingWidget extends Widget{
     private function dataForms(User $user){
         $selectF = "";
         $selectG = "";
+        $birth = "";
         if(isset($user->getData()['gender']) and $user->getData()['gender'] == 0)
             $selectG = "selected";
         if(isset($user->getData()['gender']) and $user->getData()['gender'] == 1)
             $selectB = "selected";
+        if(isset($user->getData()['birth']))
+            $birth = $user->getData()['birth'];
         return
         '<p>
             <a class="link" href="#changeGender">change gender</a><br/>
@@ -83,6 +86,7 @@ class SettingWidget extends Widget{
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changeBirth" method="post" action="index.php?setting&amp;request=6">
+                <input type="date" name="birth" class="input" value="'.$birth.'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changeSocial" method="post" action="index.php?setting&amp;request=7">
