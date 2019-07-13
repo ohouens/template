@@ -73,6 +73,18 @@ $(function(){
         $("#changeGender input[name='gender']").val($(this).attr('val'));
     });
 
+    $(".social").click(function(){
+        $(".social").removeClass("selected");
+        $(this).addClass("selected");
+        $("#changeSocial input[name='social']").val($(this).attr('val'));
+    });
+
+    $(".hobby").click(function(){
+        $(".hobby").removeClass("selected");
+        $(this).addClass("selected");
+        $("#changeHobby input[name='hobby']").val($(this).attr('val'));
+    });
+
     $("#changeCountry select").change(function(){
         $("#changeCountry img").attr('src', 'https://www.countryflags.io/'+$(this).val()+'/flat/64.png').attr('alt', $(this).val());
     });

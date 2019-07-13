@@ -30,6 +30,15 @@
     overflow: auto;
 }
 
+#settingData .b p{
+    text-align: center;
+}#settingData .b .link img{
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
 #changeCountry select, #changeCountry img{
     vertical-align: middle;
 }
@@ -46,8 +55,9 @@
     cursor: pointer;
     margin-left: 5%;
     margin-right: 5%;
+    border-bottom: 3px solid #FFFFFF00;
 }#changeSocial .social.selected, #changeSocial .social:hover{
-    border-bottom: 3px solid black;
+    border-bottom-color: black;
 }
 
 #changeHobby .hobby{
@@ -62,6 +72,7 @@
 }#changeHobby .hobby.selected, #changeHobby .hobby:hover{
     background: #1A1A1A;
     color: white;
+    text-decoration: none;
 }#changeHobby .hobby .large{
     height: 150px;
     background-size: cover;

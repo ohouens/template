@@ -67,37 +67,37 @@ class SettingWidget extends Widget{
             $birth = $user->getData()['birth'];
         return
         '<p>
-            <a class="link" href="#changeGender">change gender</a><br/>
-            <a class="link" href="#changeCountry">change country</a><br/>
-            <a class="link" href="#changeBirth">change birth</a><br/>
-            <a class="link" href="#changeSocial">change social</a><br/>
-            <a class="link" href="#changeHobby">change hobbies</a><br/>
+            <a class="link" href="#changeGender"><img src="media/dataProfiling/gender.png" alt="your gender"/></a><!--
+            --><a class="link" href="#changeCountry"><img src="media/dataProfiling/location.png" alt="your nationality"/></a><!--
+            --><a class="link" href="#changeBirth"><img src="media/dataProfiling/birth.png" alt="your date of birth"/></a><!--
+            --><a class="link" href="#changeSocial"><img src="media/dataProfiling/resume.png" alt="your current situation"/></a><!--
+            --><a class="link" href="#changeHobby"><img src="media/dataProfiling/favorite.png" alt="your favorite hobby"/></a>
         </p>
         <div class="grand vide">
             <form class="vide" id="changeGender" method="post" action="index.php?setting&amp;request=4">
                 <input type="hidden" name="gender"/>
                 <img class="gender '.$selectG.'" src="media/dataProfiling/gender/girl.png" origin="girl" alt="female" val="0"/>
                 <img class="gender '.$selectB.'" src="media/dataProfiling/gender/boy.png" origin="boy" alt="male" val="1"/><br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="save"/>
             </form>
             <form class="vide" id="changeCountry" method="post" action="index.php?setting&amp;request=5">
                 '.SettingUtil::countriesList('input').'
                 <img src="https://www.countryflags.io/'.SettingControl::country($user).'/flat/64.png" alt="'.SettingControl::country($user).'"/><br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="save"/>
             </form>
             <form class="vide" id="changeBirth" method="post" action="index.php?setting&amp;request=6">
                 <input type="date" name="birth" class="input" value="'.$birth.'"/><br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="save"/>
             </form>
             <form class="vide" id="changeSocial" method="post" action="index.php?setting&amp;request=7">
-                <input type="hidden" name="gender"/>
+                <input type="hidden" name="social"/>
                 '.$this->subSocial($user).'<br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="save"/>
             </form>
             <form class="vide" id="changeHobby" method="post" action="index.php?setting&amp;request=8">
                 <input type="hidden" name="hobby"/>
                 '.$this->subHobby($user).'<br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="save"/>
             </form>
             <span class="displayError"></span><br/>
             <a class="link" href="#">retour</a>
