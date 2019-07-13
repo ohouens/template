@@ -71,7 +71,7 @@ class SettingWidget extends Widget{
             <a class="link" href="#changeCountry">change country</a><br/>
             <a class="link" href="#changeBirth">change birth</a><br/>
             <a class="link" href="#changeSocial">change social</a><br/>
-            <a class="link" href="#changeHobbies">change hobbies</a><br/>
+            <a class="link" href="#changeHobby">change hobbies</a><br/>
         </p>
         <div class="grand vide">
             <form class="vide" id="changeGender" method="post" action="index.php?setting&amp;request=4">
@@ -90,9 +90,13 @@ class SettingWidget extends Widget{
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <form class="vide" id="changeSocial" method="post" action="index.php?setting&amp;request=7">
+                <input type="hidden" name="gender"/>
+                '.$this->subSocial($user).'<br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeHobbies" method="post" action="index.php?setting&amp;request=8">
+            <form class="vide" id="changeHobby" method="post" action="index.php?setting&amp;request=8">
+                <input type="hidden" name="hobby"/>
+                '.$this->subHobby($user).'<br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <span class="displayError"></span><br/>
@@ -127,5 +131,40 @@ class SettingWidget extends Widget{
             <span class="displayError"></span><br/>
             <a class="link" href="#">retour</a>
         </div>';
+    }
+
+    private function subSocial(User $user){
+        $result = "";
+        $social = "";
+        if(isset($user->getData()['social']))
+            $social = $user->getData()['social'];
+        foreach(SettingControl::SOCIAL as $inter){
+            $select = "";
+            if($social == $inter)
+                $select = "selected";
+            $result .=
+            '<div class="alignement social '.$select.'" val="'.$inter.'">
+                <img class="large" src="media/dataProfiling/social/'.$inter.'.png" alt="'.$inter.'" val="'.$inter.'"/>
+            </div>';
+        }
+        return $result;
+    }
+
+    private function subHobby(User $user){
+        $result = "";
+        $hobby = "";
+        if(isset($user->getData()['hobby']))
+            $hobby = $user->getData()['hobby'];
+        foreach(SettingControl::HOBBY as $inter){
+            $select = "";
+            if($hobby == $inter)
+                $select = "selected";
+            $result .=
+            '<div class="alignement hobby '.$select.'" val="'.$inter.'">
+                <div class="large" style="background-image: url(\'media/dataProfiling/hobby/'.$inter.'.jpg\');"></div>
+                <h3>'.ucfirst($inter).'</h3>
+            </div>';
+        }
+        return $result;
     }
 }

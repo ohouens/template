@@ -27,6 +27,7 @@
 .b{
     background: #E5E5E5;
     color: black;
+    overflow: auto;
 }
 
 #changeCountry select, #changeCountry img{
@@ -38,6 +39,32 @@
     cursor: pointer;
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#changeSocial .social{
+    width: 150px;
+    cursor: pointer;
+    margin-left: 5%;
+    margin-right: 5%;
+}#changeSocial .social.selected, #changeSocial .social:hover{
+    border-bottom: 3px solid black;
+}
+
+#changeHobby .hobby{
+    background: white;
+    color: black;
+    width: 150px;
+    cursor: pointer;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 5%;
+    font-family: sourceRegular;
+}#changeHobby .hobby.selected, #changeHobby .hobby:hover{
+    background: #1A1A1A;
+    color: white;
+}#changeHobby .hobby .large{
+    height: 150px;
+    background-size: cover;
 }
 
 @media (max-width: 800px){

@@ -1,5 +1,8 @@
 <?php
 class SettingControl{
+    const SOCIAL = ["artist", "athlete", "cadre", "student", "worker"];
+    const HOBBY = ["coit", "dance", "eat", "fashion", "fitness", "gaming", "music", "party", "read", "sleep", "think", "travel"];
+
     public static function changePdp($cover, User $user, UserManager $manager){
         $rename = renameFile($cover, $user->getID().achage(28));
         switch(checkUpload($cover, $rename, 'media/user/pp/')){
@@ -78,52 +81,16 @@ class SettingControl{
     }
 
     public static function changeSocial($social, User $user, Manager $manager){
-        switch($social){
-            case 'artist':
-                break;
-            case 'athlete':
-                break;
-            case 'student':
-                break;
-            case 'worker':
-                break;
-            default:
-                return Constant::ERROR_CODE_SOCIAL_FORMAT;
-        }
+        if(!in_array($social, self::SOCIAL))
+            return Constant::ERROR_CODE_SOCIAL_FORMAT;
         $user->addData(["social" => $social]);
         $manager->update($user);
         return 0;
     }
 
     public static function changeHobby($hobby, User $user, Manager $manager){
-        switch($hobby){
-            case 'coit':
-                break;
-            case 'dance':
-                break;
-            case 'eat':
-                break;
-            case 'fashion':
-                break;
-            case 'fitness':
-                break;
-            case 'game':
-                break;
-            case 'music':
-                break;
-            case 'party':
-                break;
-            case 'read':
-                break;
-            case 'sleep':
-                break;
-            case 'think':
-                break;
-            case 'travel':
-                break;
-            default:
-                return Constant::ERROR_CODE_HOBBY_FORMAT;
-        }
+        if(!in_array($hobby, self::HOBBY))
+            return Constant::ERROR_CODE_HOBBY_FORMAT;
         $user->addData(["hobby" => $hobby]);
         $manager->update($user);
         return 0;
