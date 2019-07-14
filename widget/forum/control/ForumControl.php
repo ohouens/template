@@ -83,4 +83,10 @@ class ForumControl{
         $manager->update($post);
         return $retour;
     }
+
+    public static function hasSubscribe(User $user, Post $post){
+        if(in_array($user->getId(), $post->getData()['followers']))
+            return 1;
+        return 0;
+    }
 }

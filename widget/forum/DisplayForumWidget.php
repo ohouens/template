@@ -55,7 +55,7 @@ class DisplayForumWidget extends Widget{
                 <p class="center">
                     <span id="followers">'.count($post->getData()['followers']).'</span><br/>
                     <span id="ff">Followers</span><br/>
-                    <button id="follow" class="buttonC space" num="'.$post->getId().'">Follow</button>
+                    <button id="follow" class="buttonC space" num="'.$post->getId().'"></button>
                 </p>
             </div>
             <div id="contentWriter" class="square" num="'.$post->getId().'">
