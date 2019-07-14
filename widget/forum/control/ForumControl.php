@@ -68,4 +68,19 @@ class ForumControl{
         $manager->add($post);
         return 0;
     }
+
+    public static function subscribe(User $user, Post $post, PostManager $manager){
+        $id = $user->getId();
+        $followers = $post->getData()['followers'];
+        $retour = 0;
+        if(in_array($id, $followers)){
+            $followers = array_diff($followers, [$id]);
+            $retour = 1;
+        }else
+            array_push($followers, $id);
+        $post->removeData('followers');
+        $post->addData(['followers' => $followers]);
+        $manager->update($post);
+        return $retour;
+    }
 }

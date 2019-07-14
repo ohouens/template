@@ -1,8 +1,19 @@
 $(function(){
     if($("#contentStatistic").length){
-        $.get('index.php?origin=Forum&getObject='+$("#contentWriter").attr('num')+'&withData=User', function(data){
-            // alert(data);
-            // $("#contentWriter").html(data);
+        $("#follow").click(function(){
+            $.get('index.php?thread='+$(this).attr('num')+'=&request=3', function(data){
+                if(data == "0"){
+                    $("#follow").addClass('selected').text("Unfollow");
+                    $("#followers").text(parseInt($("#followers").text())+1);
+                }
+                if(data == "1"){
+                    $("#follow").removeClass("selected").text("Follow");
+                    $("#followers").text(parseInt($("#followers").text())-1);
+                }
+                if(data == "777"){
+                    alert('you nedd to sign up');
+                }
+            });
         });
     }
     if($("#contentChat").length){
@@ -15,10 +26,11 @@ $(function(){
         $("#send").click(function(e){
             e.preventDefault();
             $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
-                if(data == "0")
+                if(data == "0"){
                     loadChat();
                     $("#contentChat form textarea").val('');
-            })
+                }
+            });
         });
 
         $("#contentChat form").submit(function(e){

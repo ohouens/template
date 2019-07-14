@@ -66,8 +66,24 @@
     font-family: sourceBold;
 }#contentFollow #ff{
     font-size: 1.5em;
+}#follow.selected{
+    text-decoration: none;
+}#follow.selected:hover{
+    background: #AAAAAA;
 }
 #contentStatistic #contentWriter{
     /* background: yellow; */
     height: 40%;
+}
+
+@media (max-width: 800px){
+    #contentCode, #contentChat, #contentStatistic{
+        width: 100%;
+    }
+    #contentChat form textarea{
+        width: 79%;
+    }#contentChat form input[type="image"]{
+        width: 8%;
+        margin-left: 2%;
+    }
 }
