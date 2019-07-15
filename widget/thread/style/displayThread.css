@@ -1,41 +1,33 @@
-#threadGrid .thread{
-    width: calc(20% - (5px * 0.8));
-    margin-bottom: 5px;
-    background: #232323;
-}#threadGrid .thread:hover{
-    background: white;
-    color:black;
-    cursor: pointer;
+#contentCode{
+    width: 20%;
+    background: #202020;
 }
-#threadGrid .thread h3{
-    font-size: 2.5em;
-    font-family: sourceBold;
-}
-#threadGrid .thread.flux, #threadGrid .thread.ticketing{
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-#threadGrid .thread.flux p{
-    font-size: 1.5em;
-    font-family: source;
-}
-#threadGrid .thread.ticketing p{
-    font-size: 3.5em;
-    font-family: source;
+#contentCode .center{
+    width: 100%;
 }
 
-@media (max-width: 500px){
-	#threadGrid .thread{
-		width: calc(50% - (5px * 0.5));
-	}
+.mainSection{
+    width: 60%;
 }
-@media (min-width: 500px) and (max-width: 800px){
-	#threadGrid .thread{
-		width: calc(33.3% - (5px * 0.666));
-	}
+
+#contentStatistic{
+    width: 20%;
+    background: #202020;
 }
-@media (min-width: 800px) and (max-width: 1400px){
-	#threadGrid .thread{
-		width: calc(25% - (5px * 0.75));
-	}
+#contentStatistic #contentAuthor{
+    /* background: purple; */
+    height: 30%;
+}
+#contentStatistic .section{
+    height: 30%;
+}
+#contentStatistic #contentWriter{
+    /* background: yellow; */
+    height: 40%;
+}
+
+@media (max-width: 800px){
+    #contentCode, .mainSection, #contentStatistic{
+        width: 100%;
+    }
 }

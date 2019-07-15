@@ -1,11 +1,3 @@
-#contentCode{
-    width: 20%;
-    background: #202020;
-}
-#contentCode .center{
-    width: 100%;
-}
-
 #contentChat{
     width: 60%;
     background: #1A1A1A;
@@ -50,14 +42,6 @@
     margin-left: 1%;
 }
 
-#contentStatistic{
-    width: 20%;
-    background: #202020;
-}
-#contentStatistic #contentAuthor{
-    /* background: purple; */
-    height: 30%;
-}
 #contentStatistic #contentFollow{
     background: #212121;
     height: 30%;
@@ -71,13 +55,9 @@
 }#follow.selected:hover{
     background: #AAAAAA;
 }
-#contentStatistic #contentWriter{
-    /* background: yellow; */
-    height: 40%;
-}
 
 @media (max-width: 800px){
-    #contentCode, #contentChat, #contentStatistic{
+    #contentChat{
         width: 100%;
     }
     #contentChat form textarea{

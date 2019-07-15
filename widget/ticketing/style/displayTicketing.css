@@ -1,0 +1,11 @@
+#contentCountdown{
+    /* background: #1A1A1A; */
+    background: #202020;
+}
+
+#contentTicket #tickets{
+    font-size: 3.5em;
+    font-family: sourceBold;
+}#contentTicket #tt{
+    font-size: 1.5em;
+}
