@@ -3,6 +3,14 @@
     background: #202020;
 }
 
+#contentCountdown .countdown{
+    font-family: sourceRegular;
+    font-size: 5.5em;
+    color: #33F7B7;
+}.countdown.closed{
+    color: #272727;
+}
+
 #contentTicket #tickets{
     font-size: 3.5em;
     font-family: sourceBold;

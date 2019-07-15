@@ -76,9 +76,7 @@ class DisplayThreadWidget extends Widget{
         </div><!--
         --><div id="contentCountdown" class="mainSection grand children rectangle" num="'.$post->getId().'">
             <div class="center">
-                <h1>Countdown</h1>
                 <p class="countdown" date="'.$post->getField().'">
-
                 </p>
             </div>
         </div><!--
