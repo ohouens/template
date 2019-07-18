@@ -1,6 +1,6 @@
 <?php
 class ForumControl{
-    public static function getObject(Post $post, Manager $manager){
+    public static function getObject(User $user, Post $post, Manager $manager){
 
     }
 

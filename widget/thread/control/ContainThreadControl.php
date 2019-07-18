@@ -1,19 +1,20 @@
 <?php
 class ContainThreadControl{
-    public static function getObject(Manager $manager, $number){
+    public static function getObject(User $user, Manager $manager, $number){
         if($number == "firstPage")
-            return self::page($manager, 0);
+            return self::page($user, $manager, 0);
         elseif(preg_match("#^[0-9]+$#"))
-            return self::page($manager, $number);
+            return self::page($user, $manager, $number);
         else
             return "";
     }
 
-    private static function page(Manager $manager, $number){
+    private static function page(User $user, Manager $manager, $number){
         $page = "";
         $list = $manager->getList();
         foreach($list as $thread){
-			$page .= self::construct($thread);
+            if($thread->getUser() == $user->getId() or in_array($thread->getData()['followers'], $user->getId()))
+		         $page .= self::construct($thread);
 		}
         return $page;
     }
@@ -24,6 +25,7 @@ class ContainThreadControl{
             if($inter->getUser() == $user->getId())
                 return $inter;
         }
+        return new User();
     }
 
     private static function construct(Post $post){

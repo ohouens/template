@@ -1,6 +1,6 @@
 <?php
 class FluxControl{
-    public static function getObject(Post $post, PostManager $manager){
+    public static function getObject(User $user, Post $post, PostManager $manager){
 
     }
 
