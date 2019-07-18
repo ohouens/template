@@ -61,7 +61,7 @@ class FluxControl{
     public static function updateSubscriber(Post $post, PostManager $postManager, UserManager $userManager){
         $corps = new Widget("", "<p>bonjour</p>");
         foreach($post->getData()['subscribers'] as $subscriber){
-            $mail = new WrapperMail($post->getData()['title'], $subscriber->getEmail(), $corps);
+            $mail = new WrapperMail($post->getData()['title'], $subscriber, $corps);
             $mail->send();
         }
     }
