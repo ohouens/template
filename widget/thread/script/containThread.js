@@ -1,6 +1,6 @@
 $(function(){
     if($("#threadGrid").length){
-        $.get('index.php?origin=displayThread&getObject=firstPage&withData=Post', function(data){
+        $.get('index.php?origin=containThread&getObject=firstPage&withData=Post', function(data){
             $("#threadGrid").html(data);
             initAction();
             setTimeout(function() { initMasonry(); }, 500);

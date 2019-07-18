@@ -1,5 +1,5 @@
 <?php
-class DisplayThreadControl{
+class ContainThreadControl{
     public static function getObject(Manager $manager, $number){
         if($number == "firstPage")
             return self::page($manager, 0);
@@ -16,6 +16,14 @@ class DisplayThreadControl{
 			$page .= self::construct($thread);
 		}
         return $page;
+    }
+
+    public static function last(User $user, PostManager $manager){
+        $list = $manager->getList();
+        foreach (array_reverse($list) as $inter) {
+            if($inter->getUser() == $user->getId())
+                return $inter;
+        }
     }
 
     private static function construct(Post $post){

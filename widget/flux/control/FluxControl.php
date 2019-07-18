@@ -47,6 +47,7 @@ class FluxControl{
         $post->addData(['subscribers' => $subscribers]);
         $manager->update($post);
         $corps = new Widget("","<p>You have subscribe to the thread ".$post->getData()['title']);
+        $corps->build();
         $mail = new WrapperMail($post->getData()['title'], $user, $corps);
         $mail->send();
         return $retour;
@@ -60,6 +61,7 @@ class FluxControl{
 
     public static function updateSubscriber(Post $post, PostManager $postManager, UserManager $userManager){
         $corps = new Widget("", "<p>bonjour</p>");
+        $corps->build();
         foreach($post->getData()['subscribers'] as $subscriber){
             $mail = new WrapperMail($post->getData()['title'], $subscriber, $corps);
             $mail->send();
