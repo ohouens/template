@@ -1,0 +1,27 @@
+#contentFlux{
+    text-align: center;
+    background: #202020;
+}
+#contentFlux h1{
+    font-family: sourceBold;
+    font-size: 2em;
+    margin-bottom: 2%;
+}
+#contentFlux #messages{
+    text-align: left;
+    font-size: 1.2em;
+    font-family: source;
+}
+#contentFlux #messages p{
+    border-left: 2px solid grey;
+    padding-left: 1%;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-left: 4px;
+}
+#contentFlux .mark{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: grey;
+}
