@@ -44,12 +44,6 @@
 
 #contentStatistic #contentFollow{
     background: #212121;
-    height: 30%;
-}#contentFollow #followers{
-    font-size: 3.5em;
-    font-family: sourceBold;
-}#contentFollow #ff{
-    font-size: 1.5em;
 }#follow.selected{
     text-decoration: none;
 }#follow.selected:hover{

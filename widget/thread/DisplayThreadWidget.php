@@ -32,7 +32,7 @@ class DisplayThreadWidget extends Widget{
     private function constructForum(Post $post, UserManager $manager){
         return '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$post->getId(), 'Scan to access').'
+                '.QrCode::code('index.php?thread='.$post->getId(), 'Access forum').'
             </div>
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$post->getId().'">
@@ -51,10 +51,10 @@ class DisplayThreadWidget extends Widget{
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
-            <div id="contentFollow" class="square">
+            <div id="contentFollow" class="square section">
                 <p class="center">
-                    <span id="followers">'.count($post->getData()['followers']).'</span><br/>
-                    <span id="ff">Followers</span><br/>
+                    <span class="number">'.count($post->getData()['followers']).'</span><br/>
+                    <span class="aa">Followers</span><br/>
                     <button id="follow" class="buttonC space" num="'.$post->getId().'"></button>
                 </p>
             </div>
@@ -65,13 +65,47 @@ class DisplayThreadWidget extends Widget{
     }
 
     private function constructFlux(Post $post, UserManager $manager){
-        return '';
+        return '<div id="contentCode" class="grand children rectangle">
+            <div class="center">
+                '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Subscribe').'
+            </div>
+        </div><!--
+        --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$post->getId().'">
+            <div id="flux" class="grand">
+                <h1>'.$post->getData()['title'].'</h1>
+                <div id="messages"></div>
+            </div>
+            <div class="grand vide square">
+                <div class="center">
+                    <form method="post" action="">
+
+                    </form>
+                </div>
+            </div>
+        </div><!--
+        --><div id="contentStatistic" class="grand children alignement">
+            <div id="contentAuthor" class="square">
+                <div class="center">
+                    <div class="center profilePicture" style="background-image: url(media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].');"></div>
+                    <p class="pseudo">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</p><br/>
+                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                </div>
+            </div>
+            <div id="contentSubscriber" class="square section">
+                <p class="center">
+                    <span class="number">'.count($post->getData()['subscribers']).'</span><br/>
+                    <span class="aa">Subscribers</span>
+                </p>
+            </div>
+            <div id="contentWriter" class="square" num="'.$post->getId().'">
+                <div class="center"></div>
+            </div>';
     }
 
     private function constructTicketing(Post $post, UserManager $manager){
         return '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Scan to access').'
+                '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Get ticket').'
             </div>
         </div><!--
         --><div id="contentCountdown" class="mainSection grand children rectangle" num="'.$post->getId().'">
@@ -90,8 +124,8 @@ class DisplayThreadWidget extends Widget{
             </div>
             <div id="contentTicket" class="square section">
                 <p class="center">
-                    <span id="tickets">'.count($post->getData()['tickets']).'</span><br/>
-                    <span id="tt">Tickets</span>
+                    <span class="number">'.count($post->getData()['tickets']).'</span><br/>
+                    <span class="aa">Tickets</span>
                 </p>
             </div>
             <div id="contentWriter" class="square" num="'.$post->getId().'">

@@ -20,7 +20,13 @@
 }
 #contentStatistic .section{
     height: 30%;
+}#contentStatistic .section .number{
+    font-size: 3.5em;
+    font-family: sourceBold;
+}#contentStatistic .section .aa{
+    font-size: 1.5em;
 }
+
 #contentStatistic #contentWriter{
     /* background: yellow; */
     height: 40%;

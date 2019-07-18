@@ -1,5 +1,5 @@
 #contentCountdown{
-    /* background: #1A1A1A; */
+    /* background: #222222; */
     background: #202020;
 }
 
@@ -9,11 +9,4 @@
     color: #33F7B7;
 }.countdown.closed{
     color: #272727;
-}
-
-#contentTicket #tickets{
-    font-size: 3.5em;
-    font-family: sourceBold;
-}#contentTicket #tt{
-    font-size: 1.5em;
 }
