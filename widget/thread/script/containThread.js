@@ -3,7 +3,9 @@ $(function(){
         $.get('index.php?origin=containThread&getObject=firstPage&withData=Post', function(data){
             $("#threadGrid").html(data);
             initAction();
-            setTimeout(function() { initMasonry(); }, 500);
+            $("#threadGrid").imagesLoaded(function(){
+                initMasonry();
+            });
         });
     }
 

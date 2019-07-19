@@ -23,3 +23,6 @@
 	top: 35%;
 	right: 100%;
 }
+#action{
+	cursor: pointer;
+}
