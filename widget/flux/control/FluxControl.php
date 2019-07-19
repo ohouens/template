@@ -37,12 +37,9 @@ class FluxControl{
     public static function subscribe(User $user, Post $post, PostManager $manager){
         $id = $user->getId();
         $subscribers = $post->getData()['subscribers'];
-        $retour = 0;
-        if(in_array($id, $subscribers)){
-            $subscribers = array_diff($subscribers, [$id]);
-            $retour = 1;
-        }else
-            array_push($subscribers, $id);
+        if(in_array($id, $subscribers))
+            return 1;
+        array_push($subscribers, $id);
         $post->removeData('subscribers');
         $post->addData(['subscribers' => $subscribers]);
         $manager->update($post);
