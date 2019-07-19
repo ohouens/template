@@ -12,8 +12,8 @@ class ContainThreadControl{
     private static function page(User $user, Manager $manager, $number){
         $page = "";
         $list = $manager->getList();
-        foreach($list as $thread){
-            if($thread->getUser() == $user->getId() or in_array($thread->getData()['followers'], $user->getId()))
+        foreach(array_reverse($list) as $thread){
+            if($thread->getUser() == $user->getId() or ($thread->getType() == Constant::THREAD_FORUM and in_array($user->getId(), $thread->getData()['followers'])))
 		         $page .= self::construct($thread);
 		}
         return $page;

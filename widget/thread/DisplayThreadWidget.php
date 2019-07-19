@@ -53,7 +53,7 @@ class DisplayThreadWidget extends Widget{
             </div>
             <div id="contentFollow" class="square section">
                 <p class="center">
-                    <span class="number">'.count($post->getData()['followers']).'</span><br/>
+                    <span id="followers" class="number">'.count($post->getData()['followers']).'</span><br/>
                     <span class="aa">Followers</span><br/>
                     <button id="follow" class="buttonC space" num="'.$post->getId().'"></button>
                 </p>

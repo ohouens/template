@@ -26,15 +26,20 @@
 
 @media (max-width: 500px){
 	#threadGrid .thread{
-		width: calc(50% - (5px * 0.5));
+		width: 100%;
 	}
 }
 @media (min-width: 500px) and (max-width: 800px){
 	#threadGrid .thread{
+		width: calc(50% - (5px * 0.5));
+	}
+}
+@media (min-width: 800px) and (max-width: 1100px){
+	#threadGrid .thread{
 		width: calc(33.3% - (5px * 0.666));
 	}
 }
-@media (min-width: 800px) and (max-width: 1400px){
+@media (min-width: 1100px) and (max-width: 1400px){
 	#threadGrid .thread{
 		width: calc(25% - (5px * 0.75));
 	}
