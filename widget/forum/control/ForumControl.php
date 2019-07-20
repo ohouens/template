@@ -58,7 +58,7 @@ class ForumControl{
     }
 
     public static function createAnswer(User $user, $answer, $parent, PostManager $manager){
-        if(!preg_match("#^.{1,1000}$#", $answer))
+        if(!preg_match("#^.{1,1000}$#s", $answer))
             return 11;
         $post = new Post();
         $post->setUser($user->getId());

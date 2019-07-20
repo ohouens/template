@@ -5,7 +5,10 @@
 	display: inline-flex;
 	vertical-align: top;
 }
-.grand{height: 100%;}
+.circle{
+	border-radius: 50%;
+}
+.grand{height: 100%; overflow-y: auto;}
 .large{width: 100%;}
 .plein{
 	width: 100%;
@@ -52,6 +55,10 @@ button, input[type="submit"]{
 button:hover, input[type="submit"]:hover{
     background: #33F7B7;
     cursor: pointer;
+}
+button.selected, input[type="submit"].selected{
+	text-decoration: none;
+    background: #33F7B7;
 }
 .reverse:hover{
 	background: #272727;

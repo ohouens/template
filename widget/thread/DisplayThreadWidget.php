@@ -1,9 +1,9 @@
 <?php
 class DisplayThreadWidget extends Widget{
-    public function __construct(Post $post, UserManager $manager){
+    public function __construct(User $user, Post $post, UserManager $manager){
         parent::__construct(
             '',
-            $this->subConstruct($post, $manager),
+            $this->subConstruct($user, $post, $manager),
             '',
             'displayForum',
             '',
@@ -13,24 +13,25 @@ class DisplayThreadWidget extends Widget{
         $this->build();
     }
 
-    private function subConstruct(Post $post, UserManager $manager){
+    private function subConstruct(User $user, Post $post, UserManager $manager){
         switch($post->getType()){
             case Constant::THREAD_FORUM:
-                return $this->constructForum($post, $manager);
+                return $this->constructForum($user, $post, $manager);
                 break;
             case Constant::THREAD_FLUX:
-                return $this->constructFlux($post, $manager);
+                return $this->constructFlux($user, $post, $manager);
                 break;
             case Constant::THREAD_TICKETING:
-                return $this->constructTicketing($post, $manager);
+                return $this->constructTicketing($user, $post, $manager);
             default:
                 return '';
                 break;
         }
     }
 
-    private function constructForum(Post $post, UserManager $manager){
-        return '<div id="contentCode" class="grand children rectangle">
+    private function constructForum(User $user, Post $post, UserManager $manager){
+        return
+        '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$post->getId(), 'Access forum').'
             </div>
@@ -64,8 +65,12 @@ class DisplayThreadWidget extends Widget{
         </div>';
     }
 
-    private function constructFlux(Post $post, UserManager $manager){
-        return '<div id="contentCode" class="grand children rectangle">
+    private function constructFlux(User $user, Post $post, UserManager $manager){
+        $button = "";
+        if($post->getUser() == $user->getId())
+            $button = '<br/><button class="buttonA" id="addFlux">Add flux</button>';
+        return
+        '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Subscribe').'
             </div>
@@ -74,16 +79,19 @@ class DisplayThreadWidget extends Widget{
             <div id="flux" class="grand large">
                 <h1>'.$post->getData()['title'].'</h1>
                 <div id="messages">
+                    <div id="fluxLast"></div>
                     <p id="fluxIntro" class="fluxMessage">'.$post->getField().'</p>
                     <hr class="mark"/>
-                    <div id="fluxLast"></div>
                 </div>
             </div>
-            <div class="grand vide square">
+            <div class="grand large vide">
                 <div class="center">
-                    <form method="post" action="">
-
-                    </form>
+                    <form action="index.php?thread='.$post->getId().'&amp;request=2" method="post">
+                        <textarea class="noBorder" name="answer"></textarea>
+                        <span>300</span>
+                    </form><br/>
+                    <button class="buttonA">Add</button><br/>
+                    <span id="erreur"></span>
                 </div>
             </div>
         </div><!--
@@ -99,15 +107,18 @@ class DisplayThreadWidget extends Widget{
                 <p class="center">
                     <span class="number">'.count($post->getData()['subscribers']).'</span><br/>
                     <span class="aa">Subscribers</span>
+                    '.$button.'
                 </p>
             </div>
             <div id="contentWriter" class="square" num="'.$post->getId().'">
                 <div class="center"></div>
-            </div>';
+            </div>
+        </div>';
     }
 
-    private function constructTicketing(Post $post, UserManager $manager){
-        return '<div id="contentCode" class="grand children rectangle">
+    private function constructTicketing(User $user, Post $post, UserManager $manager){
+        return
+        '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Get ticket').'
             </div>
@@ -134,6 +145,7 @@ class DisplayThreadWidget extends Widget{
             </div>
             <div id="contentWriter" class="square" num="'.$post->getId().'">
                 <div class="center"></div>
-            </div>';
+            </div>
+        </div>';
     }
 }

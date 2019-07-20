@@ -25,3 +25,17 @@
     border-radius: 50%;
     background: grey;
 }
+
+#contentFlux form{
+    background-color: white;
+    color: black;
+    margin: auto;
+}
+#contentFlux form textarea{
+    resize: vertical;
+    width: 300px;
+    min-height: 200px;
+}
+#contentFlux .grand.vide button:hover{
+    background-color: #004080;
+}

@@ -1,14 +1,10 @@
 <?php
 class FluxControl{
-    public static function getObject(User $user, Post $post, PostManager $manager){
-
-    }
-
     public static function read(Post $post, PostManager $manager){
         $result = "";
         $list = $manager->getList();
         $final = [];
-        foreach($list as $answer){
+        foreach(array_reverse($list) as $answer){
             if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
                 array_push($final, $answer);
         }
@@ -20,18 +16,18 @@ class FluxControl{
         return $result;
     }
 
-    public static function createAnswer(User $user, $answer, Post $parent, PostManager $manager){
+    public static function createAnswer(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager){
         if($user->getId() != $parent->getUser())
             return Constant::ERROR_CODE_THREAD_WRITE_RIGHT;
-        if(!preg_match("#^.{1,300}$#", $answer))
+        if(!preg_match("#^.{1,300}$#s", $answer))
             return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setField($answer);
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent->getId()]);
-        $manager->add($post);
-        return self::updateSubscriber($post, new PostManager($db), new UserManager($db));
+        $postManager->add($post);
+        return self::updateSubscriber($parent, $postManager, $userManager);
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
@@ -60,8 +56,9 @@ class FluxControl{
         $corps = new Widget("", "<p>bonjour</p>");
         $corps->build();
         foreach($post->getData()['subscribers'] as $subscriber){
-            $mail = new WrapperMail($post->getData()['title'], $subscriber, $corps);
+            $mail = new WrapperMail($post->getData()['title'], $userManager->get($subscriber), $corps);
             $mail->send();
         }
+        return 0;
     }
 }
