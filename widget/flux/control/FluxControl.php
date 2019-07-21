@@ -8,10 +8,13 @@ class FluxControl{
             if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
                 array_push($final, $answer);
         }
+        array_push($final, $post);
         foreach($final as $inter){
             $result .=
-            '<p class="fluxMessage">'.$inter->getField().'</p>
-            <hr class="mark"/>';
+            '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin-left: 4px;">
+                '.$inter->getField().'
+            </p>
+            <hr class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: grey;"/>';
         }
         return $result;
     }
@@ -53,7 +56,7 @@ class FluxControl{
     }
 
     public static function updateSubscriber(Post $post, PostManager $postManager, UserManager $userManager){
-        $corps = new Widget("", "<p>bonjour</p>");
+        $corps = new FluxWidget($post, $postManager);
         $corps->build();
         foreach($post->getData()['subscribers'] as $subscriber){
             $mail = new WrapperMail($post->getData()['title'], $userManager->get($subscriber), $corps);

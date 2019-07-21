@@ -78,11 +78,7 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$post->getId().'">
             <div id="flux" class="grand large">
                 <h1>'.$post->getData()['title'].'</h1>
-                <div id="messages">
-                    <div id="fluxLast"></div>
-                    <p id="fluxIntro" class="fluxMessage">'.$post->getField().'</p>
-                    <hr class="mark"/>
-                </div>
+                <div id="fluxLast"></div>
             </div>
             <div class="grand large vide">
                 <div class="center">

@@ -7,7 +7,7 @@
     font-size: 2em;
     margin-bottom: 2%;
 }
-#contentFlux #messages{
+/* #contentFlux #messages{
     text-align: left;
     font-size: 1.2em;
     font-family: source;
@@ -24,7 +24,7 @@
     height: 8px;
     border-radius: 50%;
     background: grey;
-}
+} */
 
 #contentFlux form{
     background-color: white;

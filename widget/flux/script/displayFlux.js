@@ -26,6 +26,8 @@ $(function(){
             if(data == "0"){
                 initFlux();
                 $("#addFlux").trigger("click");
+                $("#contentFlux form textarea").val('');
+                $("#contentFlux form span").text('300');
             }else{
                 $('#erreur').text(traduction(data));
                 setTimeout(function(){
