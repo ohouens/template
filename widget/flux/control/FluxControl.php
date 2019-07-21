@@ -11,10 +11,10 @@ class FluxControl{
         array_push($final, $post);
         foreach($final as $inter){
             $result .=
-            '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin-left: 4px;">
+            '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
                 '.$inter->getField().'
             </p>
-            <hr class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: grey;"/>';
+            <hr class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: grey; margin: 0; display: inline-block;"/>';
         }
         return $result;
     }
