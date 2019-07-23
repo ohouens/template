@@ -6,13 +6,16 @@ class ThreadControl{
         $save = $post->getData()[$content];
         foreach(array_reverse($save) as $inter){
             if(preg_match(Constant::REGEX_EMAIL, $inter)){
-                $tmp = new User(["email"=>$inter]);
-                $tmp->addData(["isMail"=>True]);
+                if($user->getId() == $post->getUser()){
+                    $tmp = new User(["email"=>$inter]);
+                    $tmp->addData(["isMail"=>True]);
+                    array_push($final, $tmp);
+                }
             }else{
                 $tmp = $manager->get($inter);
                 $tmp->addData(["isMail"=>False]);
+                array_push($final, $tmp);
             }
-            array_push($final, $tmp);
         }
         foreach($final as $inter){
             $id = $inter->getId();
