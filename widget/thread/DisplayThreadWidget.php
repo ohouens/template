@@ -47,8 +47,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <div class="center profilePicture" style="background-image: url(media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].');"></div>
-                    <p class="pseudo">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</p><br/>
+                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -59,9 +59,7 @@ class DisplayThreadWidget extends Widget{
                     <button id="follow" class="buttonC space" num="'.$post->getId().'"></button>
                 </p>
             </div>
-            <div id="contentWriter" class="square" num="'.$post->getId().'">
-                <div class="center"></div>
-            </div>
+            <div id="contentWriter" num="'.$post->getId().'"></div>
         </div>';
     }
 
@@ -94,8 +92,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <div class="center profilePicture" style="background-image: url(media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].');"></div>
-                    <p class="pseudo">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</p><br/>
+                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -106,9 +104,7 @@ class DisplayThreadWidget extends Widget{
                     '.$button.'
                 </p>
             </div>
-            <div id="contentWriter" class="square" num="'.$post->getId().'">
-                <div class="center"></div>
-            </div>
+            <div id="contentWriter" num="'.$post->getId().'"></div>
         </div>';
     }
 
@@ -128,8 +124,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <div class="center profilePicture" style="background-image: url(media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].');"></div>
-                    <p class="pseudo">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</p><br/>
+                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -139,9 +135,7 @@ class DisplayThreadWidget extends Widget{
                     <span class="aa">Tickets</span>
                 </p>
             </div>
-            <div id="contentWriter" class="square" num="'.$post->getId().'">
-                <div class="center"></div>
-            </div>
+            <div id="contentWriter" num="'.$post->getId().'"></div>
         </div>';
     }
 }

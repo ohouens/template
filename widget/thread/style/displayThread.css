@@ -30,6 +30,23 @@
 #contentStatistic #contentWriter{
     /* background: yellow; */
     height: 40%;
+    overflow-y: auto;
+}#contentWriter p{
+    /* text-align: left; */
+    /* border-bottom: 1px solid grey; */
+}#contentWriter hr{
+    width: 80%;
+    margin: auto;
+    background: grey;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}#contentWriter img.profilePicture{
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}#contentWriter img.delete{
+    height: 20px;
+    vertical-align: middle;
 }
 
 @media (max-width: 800px){

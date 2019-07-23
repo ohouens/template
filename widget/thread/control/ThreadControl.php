@@ -23,20 +23,25 @@ class ThreadControl{
                 $link = "mailto:".$id;
                 $display = $id;
             }
+            $pp = "";
+            if(isset($inter->getData()['pp']))
+                $pp = '<img class="profilePicture" src="media/user/pp/'.$inter->getData()['pp'].'" alt="profile picture">';
             $delete = "";
             if($user->getId() == $post->getUser()){
                 $delete =
                 '<a href="?thread='.$post->getId().'&amp;delete='.$id.'">
-                    <img src="style/icon/wrong.png" alt="delete"/>
+                    <img class="delete" src="style/icon/wrong.png" alt="delete"/>
                 </a>';
             }
             $result .=
             '<p class="">
-                <a href="'.$link.'">
+                <a href="'.$link.'" class="link">
+                    '.$pp.'
                     '.$display.'
                 </a>
                 '.$delete.'
-            </p>';
+            </p>
+            <hr>';
         }
         return $result;
     }
