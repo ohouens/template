@@ -56,8 +56,8 @@ class SettingWidget extends Widget{
     }
 
     private function dataForms(User $user){
-        $selectF = "";
         $selectG = "";
+        $selectB = "";
         $birth = "";
         if(isset($user->getData()['gender']) and $user->getData()['gender'] == 0)
             $selectG = "selected";
