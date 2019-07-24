@@ -13,3 +13,7 @@
     font-family: quickBold;
     font-size: 0.8em;
 }
+
+@media(max-width: 800px){
+    .grand.square{background: #E5E5E5;}
+}
