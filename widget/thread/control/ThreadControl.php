@@ -51,6 +51,8 @@ class ThreadControl{
 
     public static function subscribe($content, User $user, Post $post, PostManager $manager){
         $id = $user->getId();
+        if($user->getPseudo() == "")
+            $id = $user->getEmail();
         $save = $post->getData()[$content];
         $retour = 0;
         if(in_array($id, $save)){

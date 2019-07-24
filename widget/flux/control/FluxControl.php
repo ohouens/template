@@ -35,6 +35,8 @@ class FluxControl{
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
         $id = $user->getId();
+        if($user->getPseudo() == "")
+            $id = $user->getEmail();
         $subscribers = $post->getData()['subscribers'];
         if(in_array($id, $subscribers))
             return 1;
@@ -46,7 +48,7 @@ class FluxControl{
         $corps->build();
         $mail = new WrapperMail($post->getData()['title'], $user, $corps);
         $mail->send();
-        return $retour;
+        return 0;
     }
 
     public static function hasSubscribe(User $user, Post $post){
