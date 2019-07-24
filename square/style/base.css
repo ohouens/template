@@ -92,6 +92,9 @@ button.selected, input[type="submit"].selected{
 .noBorder{
 	border: none;
 }
+.noBackground{
+	background: none;
+}
 
 .profilePicture{
     width: 100px;
