@@ -36,10 +36,17 @@ class FluxControl{
     public static function subscribe(User $user, Post $post, PostManager $manager){
         $state = ThreadControl::subscribe('subscribers', $user, $post, $manager);
         if($state == 0){
-            $corps = new Widget("","<p>You have subscribe to the thread ".$post->getData()['title']);
-            $corps->build();
+            $corps = new SubscribeMailWidget($user, $post, $manager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
             $mail->send();
+        }
+        return $state;
+    }
+
+    public static function unsubscribe(User $user, Post $post, PostManager $manager){
+        $state = ThreadControl::unsubscribe('subscribers', $user, $post, $manager);
+        if($state == 0){
+
         }
         return $state;
     }
@@ -51,10 +58,9 @@ class FluxControl{
     }
 
     public static function updateSubscriber(Post $post, PostManager $postManager, UserManager $userManager){
-        $corps = new FluxWidget($post, $postManager);
-        $corps->build();
         foreach($post->getData()['subscribers'] as $subscriber){
             $user = ThreadControl::getUser($subscriber, $userManager);
+            $corps = new HistoryMailWidget($user, $post, $postManager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
             $mail->send();
         }
