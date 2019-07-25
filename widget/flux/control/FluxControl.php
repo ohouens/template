@@ -56,8 +56,7 @@ class FluxControl{
         foreach($post->getData()['subscribers'] as $subscriber){
             $user = ThreadControl::getUser($subscriber, $userManager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
-            // $mail->send();
-            var_dump($mail);
+            $mail->send();
         }
         return 0;
     }
