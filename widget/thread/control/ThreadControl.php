@@ -49,21 +49,61 @@ class ThreadControl{
         return $result;
     }
 
+    public static function getId(User $user){
+        if($user->getPseudo() == "")
+            return $user->getEmail();
+        return $user->getId();
+    }
+
+    public static function getUser($user, UserManager $um){
+        if(preg_match(Constant::REGEX_EMAIL, $user))
+            return new User(['email'=>$user]);
+        else
+            return $um->get($user);
+    }
+
     public static function subscribe($content, User $user, Post $post, PostManager $manager){
         $id = $user->getId();
-        if($user->getPseudo() == "")
+        $key = "none";
+        if($user->getPseudo() == ""){
             $id = $user->getEmail();
+            $key = achage(32);
+        }
         $save = $post->getData()[$content];
-        $retour = 0;
-        if(in_array($id, $save)){
-            $save = array_diff($save, [$id]);
-            $retour = 1;
-        }else
-            array_push($save, $id);
+        if(in_array($id, $save))
+            return 1;
+        array_push($save, $id);
         $post->removeData($content);
         $post->addData([$content => $save]);
+        $pass = $post->getData()['keys'];
+        $pass[$id] = $key;
+        $post->removeData('keys');
+        $post->addData(['keys' => $pass]);
         $manager->update($post);
-        return $retour;
+        return 0;
+    }
+
+    public static function unsubscribe($content, User $user, Post $post, PostManager $manager){
+        $id = $user->getId();
+        $key = "none";
+        if($user->getPseudo() == ""){
+            $id = $user->getEmail();
+            $key = $user->getData()['pass'];
+        }
+        $save = $post->getData()[$content];
+        $pass = $post->getData()['keys'];
+        if(!in_array($id, $save))
+            return 1;
+        if($pass[$id] != $key)
+            return 2;
+        $save = array_diff($save, [$id]);
+        unset($pass[$id]);
+        $post->removeData($content);
+        $post->addData([$content => $save]);
+        $post->removeData('keys');
+        $post->addData(['keys' => $pass]);
+        $manager->update($post);
+        return 0;
     }
 
     public static function hasSubscribe($content, User $user, Post $post){

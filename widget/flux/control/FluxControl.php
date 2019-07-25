@@ -34,21 +34,14 @@ class FluxControl{
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
-        $id = $user->getId();
-        if($user->getPseudo() == "")
-            $id = $user->getEmail();
-        $subscribers = $post->getData()['subscribers'];
-        if(in_array($id, $subscribers))
-            return 1;
-        array_push($subscribers, $id);
-        $post->removeData('subscribers');
-        $post->addData(['subscribers' => $subscribers]);
-        $manager->update($post);
-        $corps = new Widget("","<p>You have subscribe to the thread ".$post->getData()['title']);
-        $corps->build();
-        $mail = new WrapperMail($post->getData()['title'], $user, $corps);
-        $mail->send();
-        return 0;
+        $state = ThreadControl::subscribe('subscribers', $user, $post, $manager);
+        if($state == 0){
+            $corps = new Widget("","<p>You have subscribe to the thread ".$post->getData()['title']);
+            $corps->build();
+            $mail = new WrapperMail($post->getData()['title'], $user, $corps);
+            $mail->send();
+        }
+        return $state;
     }
 
     public static function hasSubscribe(User $user, Post $post){
@@ -61,8 +54,10 @@ class FluxControl{
         $corps = new FluxWidget($post, $postManager);
         $corps->build();
         foreach($post->getData()['subscribers'] as $subscriber){
-            $mail = new WrapperMail($post->getData()['title'], $userManager->get($subscriber), $corps);
-            $mail->send();
+            $user = ThreadControl::getUser($subscriber, $userManager);
+            $mail = new WrapperMail($post->getData()['title'], $user, $corps);
+            // $mail->send();
+            var_dump($mail);
         }
         return 0;
     }
