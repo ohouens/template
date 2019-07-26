@@ -24,7 +24,8 @@ class SubscribeMailWidget extends Widget{
         <hr/>
         <div>
             Do you want to subscribe to other flux without giving your email each time ?
-            <form action="https://onisowo.com/" style="text-align:center;">
+            <form action="https://onisowo.com/index.php" method="get" style="text-align:center;">
+                <input type="hidden" name="origin" value="mail"/>
                 <input type="submit" value="Sign in" style="display:inline; cursor:pointer; border:none; color:#ffffff; background:#3e3e3e; height: 30px; width: 200px;" />
             </form>
         </div>
