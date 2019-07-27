@@ -1,9 +1,9 @@
 <?php
 class QrCode{
-    public static function code($link, $writing){
+    public static function code($link, $writing, $dimension=500){
         return '
-        <div class="presentation">
-            <img id="qrCode" src="https://chart.googleapis.com/chart?cht=qr&amp;chs=500x500&amp;chl=http://onisowo.com/'.$link.'" alt="http://onisowo.com/'.$link.'"/>
+        <div class="presentation" style="text-align: center;">
+            <img id="qrCode" src="https://chart.googleapis.com/chart?cht=qr&amp;chs='.$dimension.'x'.$dimension.'&amp;chl=http://onisowo.com/'.$link.'" alt="http://onisowo.com/'.$link.'"/>
             <div class="square">
                 <div class="center">
                     '.$writing.'

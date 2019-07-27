@@ -63,12 +63,8 @@ class ThreadControl{
     }
 
     public static function subscribe($content, User $user, Post $post, PostManager $manager){
-        $id = $user->getId();
-        $key = "none";
-        if($user->getPseudo() == ""){
-            $id = $user->getEmail();
-            $key = achage(32);
-        }
+        $id = self::getId($user);
+        $key = $key = achage(32);
         $save = $post->getData()[$content];
         if(in_array($id, $save))
             return 1;
@@ -84,12 +80,8 @@ class ThreadControl{
     }
 
     public static function unsubscribe($content, User $user, Post $post, PostManager $manager){
-        $id = $user->getId();
-        $key = "none";
-        if($user->getPseudo() == ""){
-            $id = $user->getEmail();
-            $key = $user->getData()['pass'];
-        }
+        $id = self::getId($user);
+        $key = $key = $user->getData()['pass'];
         $save = $post->getData()[$content];
         $pass = $post->getData()['keys'];
         if(!in_array($id, $save))
