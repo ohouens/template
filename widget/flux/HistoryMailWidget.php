@@ -14,9 +14,7 @@ class HistoryMailWidget extends Widget{
     }
 
     private function subConstruct(User $user, Post $post, PostManager $manager){
-        $id = $user->getEmail();
-        if($user->getPseudo() != "")
-            $id = $user->getId();
+        $id = ThreadControl::getId($user);
         $history = new FluxWidget($post, $manager);
         return
         '<p style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
@@ -26,7 +24,7 @@ class HistoryMailWidget extends Widget{
         '.$history->getContent().'
         <hr/>
         <div style="text-align: center">
-            <a href="https://onisowo.com/index.php?thread='.$post->getId().'&amp;request=3&amp;user='.$id.'&amp;token='.$post->getData()['keys'][$user->getEmail()].'">unsubscribe</a><br/>
+            <a href="https://onisowo.com/index.php?thread='.$post->getId().'&amp;request=3&amp;user='.$id.'&amp;token='.$post->getData()['keys'][$id].'">unsubscribe</a><br/>
             <p>Developed by ohouens</p>
         </div>';
     }
