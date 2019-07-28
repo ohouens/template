@@ -43,12 +43,11 @@ class TicketingControl {
             return 2;
         //verif existance ticket
         $check = $post->getData()['check'];
-        if(!in_array($id, $check))
-            return 1;
         //change statut of ticket
         $check[$id] = 1;
         $post->addData(['check' => $check]);
         $manager->update($post);
+        return 0;
     }
 
     public static function hasValidate(User $user, Post $post){
