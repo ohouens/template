@@ -50,4 +50,14 @@ class TicketingControl {
         $post->addData(['check' => $check]);
         $manager->update($post);
     }
+
+    public static function hasValidate(User $user, Post $post){
+        $id = ThreadControl::getId($user);
+        $check = $post->getData()['check'];
+        return $check[$id];
+    }
+
+    public static function getStatut(User $user, Post $post){
+        return '<div class="circle val'.self::hasValidate($user, $post).'"></div>';
+    }
 }

@@ -135,7 +135,7 @@ class DisplayThreadWidget extends Widget{
                     <span class="aa">Tickets</span>
                 </p>
             </div>
-            <div id="contentWriter" num="'.$post->getId().'"></div>
+            <div id="contentWriter" class="ticketing" num="'.$post->getId().'"></div>
         </div>';
     }
 }

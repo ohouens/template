@@ -47,6 +47,8 @@
 }#contentWriter img.delete{
     height: 20px;
     vertical-align: middle;
+}#contentWriter .name, #contentWriter .special{
+    vertical-align: middle;
 }
 
 @media (max-width: 800px){

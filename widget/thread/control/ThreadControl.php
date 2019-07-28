@@ -37,13 +37,13 @@ class ThreadControl{
                 </a>';
             }
             $result .=
-            '<p class="">
+            '<p class="name alignement">
                 <a href="'.$link.'" class="link">
                     '.$pp.'
                     '.$display.'
                 </a>
                 '.$delete.'
-            </p>
+            </p><div class="special alignement" thread="'.$post->getId().'" num="'.$id.'"></div>
             <hr>';
         }
         return $result;

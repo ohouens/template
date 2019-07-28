@@ -10,3 +10,16 @@
 }.countdown.closed{
     color: #272727;
 }
+
+
+#contentWriter.ticketing img.delete{
+    display: none;
+}
+.special .circle{
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+}
+.circle.val1{background: green;}
+.circle.val0{background: red;}
+.circle.val2{background: yellow;}
