@@ -73,7 +73,6 @@ class ThreadControl{
         $post->addData([$content => $save]);
         $pass = $post->getData()['keys'];
         $pass[$id] = $key;
-        $post->removeData('keys');
         $post->addData(['keys' => $pass]);
         $manager->update($post);
         return 0;
@@ -81,19 +80,17 @@ class ThreadControl{
 
     public static function unsubscribe($content, User $user, Post $post, PostManager $manager){
         $id = self::getId($user);
-        $key = $key = $user->getData()['pass'];
         $save = $post->getData()[$content];
-        $pass = $post->getData()['keys'];
+        $keys = $post->getData()['keys'];
         if(!in_array($id, $save))
             return 1;
-        if($pass[$id] != $key)
+        if($keys[$id] != $user->getData()['pass'])
             return 2;
         $save = array_diff($save, [$id]);
-        unset($pass[$id]);
+        unset($keys[$id]);
         $post->removeData($content);
         $post->addData([$content => $save]);
-        $post->removeData('keys');
-        $post->addData(['keys' => $pass]);
+        $post->addData(['keys' => $keys]);
         $manager->update($post);
         return 0;
     }
