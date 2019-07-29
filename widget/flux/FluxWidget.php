@@ -15,7 +15,7 @@ class FluxWidget extends Widget{
 
     private function subConstruct(Post $post, PostManager $manager){
         return
-        '<div id="messages" style="text-align: left; font-size: 1.2em; font-family: source;">
+        '<div id="messages"  class="width" style="text-align: left; font-size: 1.2em; font-family: source;">
             '.FluxControl::read($post, $manager).'
         </div>';
     }
