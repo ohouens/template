@@ -17,14 +17,7 @@ $(function(){
                 if(data == "0"){
     				window.location.replace('index.php?thread=last');
     			}else{
-    				if(data == "10")dire = "incorrect title";
-    				if(data == "11")dire = "description too short or too long";
-    				if(data == "12")dire = "A cover is needed";
-    				if(data == "13")dire = "file too big, maximum size is 1Mo";
-    				if(data == "14")dire = "forbidden file. only png, jpg/jpeg are allowed";
-    				if(data == "15")dire = "upload error";
-                    if(data == "16")dire = "Incorrect date format";
-    				$('#erreurCreate').text(dire);
+    				$('#erreurCreate').text(traduction(data));
     				setTimeout(function(){
     					$('#erreurCreate').text("");
     				},3000);
@@ -37,6 +30,7 @@ $(function(){
 
     $("#createThread form").submit(function(e){
         e.preventDefault();
+        $('#createThread #submit').trigger('click');
     })
 
     $("#createThread .select span").click(function(){
