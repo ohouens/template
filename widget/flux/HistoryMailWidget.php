@@ -17,13 +17,13 @@ class HistoryMailWidget extends Widget{
         $id = ThreadControl::getId($user);
         $history = new FluxWidget($post, $manager);
         return
-        '<p style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
-        <h1 style="text-align:center;">Notify</h1>
-        <p>Update has arrived for the flux "'.$post->getData()['title'].'"</p>
-        <hr/>
+        '<p  class="width" style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
+        <h1  class="width" style="text-align:center;">Notify</h1>
+        <p class="width">Update has arrived for the flux "'.$post->getData()['title'].'"</p>
+        <hr class="space width"/>
         '.$history->getContent().'
-        <hr/>
-        <div style="text-align: center">
+        <hr class="space width"/>
+        <div  class="width" style="text-align: center">
             <a href="https://onisowo.com/index.php?thread='.$post->getId().'&amp;request=3&amp;user='.$id.'&amp;token='.$post->getData()['keys'][$id].'">unsubscribe</a><br/>
             <p>Developed by ohouens</p>
         </div>';

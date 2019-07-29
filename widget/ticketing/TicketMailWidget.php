@@ -27,8 +27,8 @@ class TicketMailWidget extends widget{
             <hr class="space width"/>';
         $id = ThreadControl::getId($customer);
         return
-        '<p style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
-        <h1 style="text-align:center;">Ticket</h1>
+        '<p class="width" style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
+        <h1 class="width" style="text-align:center;">Ticket</h1>
         <p class="width">
             This is your ticket from "'.$post->getData()['title'].'"<br/>
             you can let the owner scan the qrCode to validate your ticket.
