@@ -34,7 +34,7 @@ class TicketMailWidget extends widget{
             you can let the owner scan the qrCode to validate your ticket.
         </p>
         '.QrCode::code(
-            '?thread='.$post->getId().'&amp;request=7&amp;customer='.$id.'&amp;token='.$post->getData()['keys'][$id],
+            '?thread='.$post->getId().'%26request=7%26customer='.$id.'%26token='.$post->getData()['keys'][$id],
             '',
             300
          ).'
