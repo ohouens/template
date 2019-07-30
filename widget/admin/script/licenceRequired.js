@@ -1,6 +1,5 @@
 $(function(){
     $("#buyLicence").click(function(){
-        alert('o');
-        window.location.href = "index.php?licence";
+        window.location.href = "index.php?store=detail&object=licence";
     });
 });

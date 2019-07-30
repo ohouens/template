@@ -1,0 +1,68 @@
+#licence{
+    background-size: cover;
+}#licence .super{
+    display: block;
+    min-height: 84vh;
+}
+
+#licence h1{
+    /* background-color: red; */
+    font-family: sourceBold;
+    font-size: 3em;
+}
+
+#licence #intro{
+    width: 66%;
+    padding-left: 2%;
+    padding-right: 2%;
+    /* background: orange; */
+    vertical-align: middle;
+    text-align: left;
+    font-family: sourceRegular;
+    font-size: 1.4em;
+    margin-top: 3%;
+}
+#licence #price{
+    margin-top: 3%;
+    width: 30%;
+    /* background: blue; */
+    vertical-align: middle;
+    font-family: sourceRegular;
+    font-size: 4em;
+}#licence #price strong{
+    font-family: sourceBold;
+    color: yellow;
+}
+
+#licence #desc{
+    /* background: pink; */
+    min-height: 40vh;
+}
+#licence #desc .center .alignement{
+    width: 30.3%;
+    text-align: left;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    font-family: source;
+    font-size: 1.1em;
+}
+#licence #desc .center .alignement h2{
+    text-align: center;
+    font-family: sourceRegular;
+}
+#licence #desc .center .alignement h2 img{
+    height: 40px;
+    vertical-align: middle;
+}
+
+#logPaypal{
+    background: #FFC439;
+    color: black;
+    height: 45px;
+    width: 400px;
+    border-radius: 40px;
+}#logPaypal:hover{background: #F2BA36;}
+#logPaypal img, #logPaypal span{
+    vertical-align: middle;
+    font-size: 0.8em;
+}
