@@ -12,20 +12,15 @@
 }
 
 #licence #intro{
-    width: 66%;
     padding-left: 2%;
     padding-right: 2%;
-    /* background: orange; */
     vertical-align: middle;
-    text-align: left;
-    font-family: sourceRegular;
-    font-size: 1.4em;
     margin-top: 3%;
+}#licence #intro img{
+    vertical-align: middle;
 }
 #licence #price{
     margin-top: 3%;
-    width: 30%;
-    /* background: blue; */
     vertical-align: middle;
     font-family: sourceRegular;
     font-size: 4em;
