@@ -21,7 +21,7 @@ class LicenceWidget extends Widget{
             </div>';
         }
         return
-        '<div id="licence" style="background-image: url(\'media/fond/store/upgrade.jpg\');">
+        '<div id="licence" style="background-image: url(\'media/fond/store/licence.jpg\');">
             <div class="super">
                 <h1>Licence</h1>
                 <p id="intro" class="alignement">

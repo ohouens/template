@@ -61,3 +61,14 @@
     vertical-align: middle;
     font-size: 0.8em;
 }
+
+
+@media (max-width: 800px){
+    #licence #desc .center .alignement{
+        width: 74%;
+        padding-left: 12%;
+        padding-right: 12%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+}
