@@ -55,6 +55,7 @@
     color: black;
     height: 45px;
     width: 400px;
+    max-width: 80%;
     border-radius: 40px;
 }#logPaypal:hover{background: #F2BA36;}
 #logPaypal img, #logPaypal span{
