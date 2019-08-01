@@ -102,4 +102,14 @@ class SettingControl{
             return $data['country'];
         return "Statelessness";
     }
+
+    public static function deleteAccount(User $user, $password, $token, UserManager $manager){
+        if($user->getPassword() != $password)
+            return Constant::ERROR_CODE_USER_PASSWORD;
+        if($user->getToken() != $token)
+            return Constant::ERROR_CODE_USER_TOKEN;
+        $user->setActive(0);
+        $manager->update($user);
+        return 0;
+    }
 }

@@ -4,7 +4,7 @@ $(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($(this).attr('action'), $(this).serialize()).done(function(data){
             if(data == "0")
-                location.reload();
+                window.location.href = "index.php?logout";
             else
                 $("#error").text(traduction(data));
             setTimeout(function(){
