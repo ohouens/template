@@ -1,0 +1,17 @@
+#desactivate{
+    background: #E5E5E5;
+    color: black;
+}
+#desactivate h1{
+    font-family: sourceBold;
+    font-size: 2.5em;
+    margin-bottom: 5%;
+}
+#desactivate p{
+    font-family: sourceRegular;
+    font-size: 1.2em;
+    margin-bottom: 2%;
+}#desactivate p strong{font-family: sourceBold;}
+#desactivate form .input{max-width: 400px;}
+#desactivate form .button{width: 300px; max-width: 75%;}
+#desactivate form span{color: black;}
