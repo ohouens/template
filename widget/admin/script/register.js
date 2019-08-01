@@ -1,15 +1,14 @@
 $(function(){
+    $.getScript('script/utils.js');
+
     $('#login').on('submit', function(e){
 		e.preventDefault();
         $('#erreurLog').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
-		var dire = "erreur";
 		$.post("index.php",$("#login").serialize()).done(function(data){
 			if(data == "0"){
 				location.reload();
 			}else{
-				if(data == "294")dire = "incorrect password";
-				if(data == "293")dire = "this account doesn't exist";
-				$('#erreurLog').text(dire);
+				$('#erreurLog').text(traduction(data));
 				setTimeout(function(){
 					$('#erreurLog').text("");
 				},3000);
@@ -20,22 +19,11 @@ $(function(){
 	$('#signin').on('submit', function(e){
 		e.preventDefault();
         $('#erreurSign').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
-		var dire = "error";
 		$.post("index.php",$("#signin").serialize()).done(function(data){
 			if(data == "0"){
 				location.reload();
 			}else{
-                if(data == "20")dire = "Pseudo must be length from 1 to 20 characters";
-				if(data == "211")dire = "Pseudo must contain at least one lower case";
-				if(data == "212")dire = "Pseudo can only contain lower case, underscore and numbers";
-				if(data == "22")dire = "incorrect email";
-				if(data == "23")dire = "Password must be at least 8 characters";
-				if(data == "24")dire = "Password must at least contain 1 lower case";
-				if(data == "25")dire = "Password must at least contain 1 upper case";
-				if(data == "26")dire = "Password must at least contain 1 number";
-                if(data == "291")dire = "this pseudo is already taken";
-                if(data == "292")dire = "this email is already taken";
-				$('#erreurSign').text(dire);
+				$('#erreurSign').text(traduction(data));
 				setTimeout(function(){
 					$('#erreurSign').text("");
 				},3000);
@@ -47,10 +35,17 @@ $(function(){
 		e.preventDefault();
         $('#erreurRecup').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
 		$.post("index.php",$("#recup").serialize()).done(function(data){
-			$('#erreurRecup').text(data);
-			setTimeout(function(){
-				$('#erreurRecup').text("");
-			},3000);
+            if(data == "0"){
+                $('#erreurRecup').html('<img src="style/icon/success.png" alt="success" class="wait" />');
+    			setTimeout(function(){
+    				$('#erreurRecup').text("You can check your email");
+    			},1500);
+            }else{
+    			$('#erreurRecup').text(traduction(data));
+    			setTimeout(function(){
+    				$('#erreurRecup').text("");
+    			},3000);
+            }
 		});
 	});
 
