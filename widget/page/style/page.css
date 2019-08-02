@@ -1,1 +1,43 @@
+#pageCover{
+    background-color: #252525;
+    min-height: 33vh;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+}
+#pageCover .alignement{
+    vertical-align: middle;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+#pageCover h1{
+    font-size: 3.5em;
+    font-family: sourceBold;
+}
+#pageCover .licence{
+    border-bottom: 6px solid white;
+}
+#pageCover .flag{
+    height: 100px;
+}
+#pageCover .profilePicture{
+    height: 150px;
+    width: 150px;
+}
 
+#pageInfo .rectangle{
+    color: black;
+    width: 33.3%;
+    min-height: 45vh;
+}
+#pageInfo .rectangle img{
+    height: 20vh;
+}
+#pageInfo .rectangle.birth p{
+    font-size: 1.4em;
+    font-family: sourceRegular;
+}
+#pageInfo .rectangle.birth span{
+    font-size: 3em;
+    font-family: sourceBold;
+    color: #33F7B7;
+}

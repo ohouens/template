@@ -103,6 +103,17 @@ class SettingControl{
         return "Statelessness";
     }
 
+    public static function gender(User $user){
+        switch($user->getData()['gender']){
+            case 0:
+                return 'girl';
+            case 1:
+                return 'boy';
+            default:
+                return '';
+        }
+    }
+
     public static function deleteAccount(User $user, $password, $token, UserManager $manager){
         if($user->getPassword() != $password)
             return Constant::ERROR_CODE_USER_PASSWORD;
