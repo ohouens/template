@@ -17,6 +17,9 @@ class ListThreadWidget extends Widget{
         $page = "";
         $list = ThreadControl::list($user, $manager);
         foreach($list as $inter){
+            $lock = "unlocked";
+            if($inter->getData()['writers'] != [])
+                $lock = "locked";
             $page .=
             '<p class="list">
                 <a class="link" href="index.php?thread='.$inter->getId().'&list">
@@ -24,7 +27,7 @@ class ListThreadWidget extends Widget{
                     type:'.ThreadControl::getType($inter).'<br/>
                     date:'.date("d/m/Y", $inter->getCreation()).'<br/>
                     influence:'.count($inter->getData()[ThreadControl::getInfluence($inter)]).'<br/>
-                </a>
+                </a><img class="lock" src="style/icon/'.$lock.'.png" alt="'.$lock.'"/>
             </p>';
         }
         return

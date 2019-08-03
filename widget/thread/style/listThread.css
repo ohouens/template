@@ -4,6 +4,7 @@
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
 #thread .list{
     background: #252525;
     /* color: black; */
@@ -13,14 +14,20 @@
     max-width: 600px;
     margin: auto;
     margin-bottom: 20px;
-}
-#thread .list .link{
-    padding-left: 10px;
-    padding-right: 10px;
-    display: block;
-    width: 100%;
-    text-decoration: none;
-}#thread .list .link:hover{
+}#thread .list:hover{
     background: white;
     color: black;
+}
+#thread .list .link{
+    padding-left: 3%;
+    padding-right: 3%;
+    width: 89%;
+    display: inline-block;
+    text-decoration: none;
+}
+
+#thread .list .lock{
+    display: inline-block;
+    width: 5%;
+    vertical-align: top;
 }
