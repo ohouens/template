@@ -1,7 +1,20 @@
 <?php
 class ThreadControl{
+    public static function getType(Post $post){
+        switch($post->getType()){
+            case Constant::THREAD_FLUX:
+                return "flux";
+            case Constant::THREAD_FORUM:
+                return "forum";
+            case Constant::THREAD_TICKETING:
+                return "ticketing";
+            default:
+                return 'thread';
+        }
+    }
+
     public static function getInfluence(Post $post){
-        switch ($post->getType()) {
+        switch($post->getType()) {
             case Constant::THREAD_FLUX:
                 return 'subscribers';
             case Constant::THREAD_FORUM:
