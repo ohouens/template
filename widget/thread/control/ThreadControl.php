@@ -1,8 +1,21 @@
 <?php
 class ThreadControl{
-    public static function getSubscribers($content, User $user, Post $post, UserManager $manager){
-        $result = "";
+    public static function getInfluence(Post $post){
+        switch ($post->getType()) {
+            case Constant::THREAD_FLUX:
+                return 'subscribers';
+            case Constant::THREAD_FORUM:
+                return 'followers';
+            case Constant::THREAD_TICKETING:
+                return 'tickets';
+            default:
+                return '';
+        }
+    }
+
+    public static function getSubscribers(User $user, Post $post, UserManager $manager){
         $final = [];
+        $content = self::getInfluence($post);
         $save = $post->getData()[$content];
         foreach(array_reverse($save) as $inter){
             if(preg_match(Constant::REGEX_EMAIL, $inter)){
@@ -17,36 +30,25 @@ class ThreadControl{
                 array_push($final, $tmp);
             }
         }
-        foreach($final as $inter){
-            $id = $inter->getId();
-            $link = '?page='.$id;
-            $display = $inter->getPseudo();
-            if($inter->getData()['isMail']){
-                $id = $inter->getEmail();
-                $link = "mailto:".$id;
-                $display = $id;
-            }
-            $pp = "";
-            if(isset($inter->getData()['pp']))
-                $pp = '<img class="profilePicture" src="media/user/pp/'.$inter->getData()['pp'].'" alt="profile picture">';
-            $delete = "";
-            if($user->getId() == $post->getUser()){
-                $delete =
-                '<a href="?thread='.$post->getId().'&amp;delete='.$id.'">
-                    <img class="delete" src="style/icon/wrong.png" alt="delete"/>
-                </a>';
-            }
-            $result .=
-            '<p class="name alignement">
-                <a href="'.$link.'" class="link">
-                    '.$pp.'
-                    '.$display.'
-                </a>
-                '.$delete.'
-            </p><div class="special alignement" thread="'.$post->getId().'" num="'.$id.'"></div>
-            <hr>';
-        }
-        return $result;
+        return $final;
+    }
+
+    public static function list(User $user, PostManager $manager){
+        $final = [];
+        $list = $manager->getList();
+        foreach(array_reverse($list) as $thread){
+            if(
+                ($thread->getType() == Constant::THREAD_FORUM or $thread->getType() == Constant::THREAD_TICKETING or $thread->getType() == Constant::THREAD_FLUX) and
+                (
+                    $thread->getUser() == $user->getId() or
+                    ($thread->getType() == Constant::THREAD_FORUM and in_array($user->getId(), $thread->getData()['followers'])) or
+                    ($thread->getType() == Constant::THREAD_TICKETING and in_array($user->getId(), $thread->getData()['tickets'])) or
+                    ($thread->getType() == Constant::THREAD_FLUX and in_array($user->getId(), $thread->getData()['subscribers']))
+                )
+            )
+		         array_push($final, $thread);
+		}
+        return $final;
     }
 
     public static function getId(User $user){

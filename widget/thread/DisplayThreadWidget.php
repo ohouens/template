@@ -1,5 +1,39 @@
 <?php
 class DisplayThreadWidget extends Widget{
+    public static function subscribers(User $user, Post $post, $subscribers){
+        $result = "";
+        foreach($subscribers as $inter){
+            $id = $inter->getId();
+            $link = '?page='.$id;
+            $display = $inter->getPseudo();
+            if($inter->getData()['isMail']){
+                $id = $inter->getEmail();
+                $link = "mailto:".$id;
+                $display = $id;
+            }
+            $pp = "";
+            if(isset($inter->getData()['pp']))
+                $pp = '<img class="profilePicture" src="media/user/pp/'.$inter->getData()['pp'].'" alt="profile picture">';
+            $delete = "";
+            if($user->getId() == $post->getUser()){
+                $delete =
+                '<a href="?thread='.$post->getId().'&amp;delete='.$id.'">
+                    <img class="delete" src="style/icon/wrong.png" alt="delete"/>
+                </a>';
+            }
+            $result .=
+            '<p class="name alignement">
+                <a href="'.$link.'" class="link">
+                    '.$pp.'
+                    '.$display.'
+                </a>
+                '.$delete.'
+            </p><div class="special alignement" thread="'.$post->getId().'" num="'.$id.'"></div>
+            <hr>';
+        }
+        return $result;
+    }
+
     public function __construct(User $user, Post $post, UserManager $manager){
         parent::__construct(
             '',
