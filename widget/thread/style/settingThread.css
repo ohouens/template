@@ -1,0 +1,28 @@
+#resume h1{
+    font-family: sourceBold;
+    font-size: 3em;
+    margin-bottom: 3%;
+}
+
+#resume .list{
+    font-size: 1.3em;
+    font-family: sourceRegular;
+    text-align: left;
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+#resume .list .tab{
+    font-family: sourceBold;
+    display: inline-block;
+    min-width: 200px;
+}
+
+#resume #delete:hover{
+    background: red;
+}
+
+#resume .input{
+    max-width: 200px;
+    font-size: 0.7em;
+}

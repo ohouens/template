@@ -1,5 +1,24 @@
 <?php
 class ThreadControl{
+    public static function open(User $user, Post $post, $open, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($open == "yes")
+            $post->addData(["writers"=>[]]);
+        else
+            $post->addData(["writers"=>[$user->getId()]]);
+        $manager->update($post);
+        return 0;
+    }
+
+    public static function delete(User $user, Post $post, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        $post->setActive(0);
+        $manager->update($post);
+        return 0;
+    }
+
     public static function getType(Post $post){
         switch($post->getType()){
             case Constant::THREAD_FLUX:
