@@ -16,7 +16,7 @@ class LicenceWidget extends Widget{
     private function subConstruct($user, $manager){
         if(LicenceControl::isValide($user, $manager)){
             return
-            '<div id="childV" style="background-image: url(\'media/fond/store/licence.jpg\');">
+            '<div id="childV">
                 <div id="licenceV" class="center">
                     <div class="square">
                         <div class="center">
