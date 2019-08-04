@@ -14,7 +14,9 @@ class SettingThreadWidget extends Widget{
     }
 
     public function subConstruct(User $user, Post $post){
-        $lock = "";
+        $lock = "no";
+        if($post->getData()['writers'] == [])
+            $lock = "yes";
         $save = "";
         if($user->getId() == $post->getUser()){
             $yes = "";
@@ -42,7 +44,7 @@ class SettingThreadWidget extends Widget{
                         <span class="tab">type:</span>'.ThreadControl::getType($post).'<br/>
                         <span class="tab">date:</span>'.date("d/m/Y", $post->getCreation()).'<br/>
                         <span class="tab">influence:</span>'.count($post->getData()[ThreadControl::getInfluence($post)]).'<br/>
-                        <span class="tab">open:</span> '.$lock.'
+                        <span class="tab">open:</span>'.$lock.'
                     </div>
                     '.$save.'
                     <button id="view" class="button space">View</button><br/>
