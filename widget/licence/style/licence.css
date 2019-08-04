@@ -73,3 +73,31 @@
         margin-bottom: 5%;
     }
 }
+
+/*-----------------------------------licenceV-----------------------------------*/
+#childV{
+    min-height: 84vh;
+    display: flex;
+}
+#licenceV{
+    background-size: cover;
+    width: 400px;
+    padding: 15px;
+    background: #063444;
+    color: #dfdb7e;
+    font-family: sourceRegular;
+}
+#licenceV img{
+    width: 350px;
+}
+#licenceV h1{
+    font-family: sourceBold;
+    font-size: 3em;
+}
+#licenceV #name{
+    font-family: sourceBold;
+}
+#licenceV #name, #licenceV #intro{
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
