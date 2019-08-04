@@ -16,10 +16,10 @@
 }
 #contentStatistic #contentAuthor{
     /* background: purple; */
-    height: 30%;
+    min-height: 30%;
 }
 #contentStatistic .section{
-    height: 30%;
+    min-height: 30%;
 }#contentStatistic .section .number{
     font-size: 3.5em;
     font-family: sourceBold;
