@@ -38,7 +38,7 @@ class LicenceWidget extends Widget{
             <div class="super">
                 <h1>Licence</h1>
                 <p id="intro" class="alignement">
-                    <img src="media/licence/secureView.png" alt="PayPal Secure Mark">
+                    <img src="media/paypal/paypal-logo.png" alt="PayPal Secure Mark">
                 </p><p id="price" class="alignement"><strong>50€</strong></p>
                 <div class="square" id="desc">
                     <div class="center">

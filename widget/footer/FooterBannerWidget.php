@@ -24,7 +24,7 @@ class FooterBannerWidget extends Widget{
                 <a href="https://twitter.com/ohouens/"><img src="style/icon/twitter.png" alt="twitter"></a>
             </div>
             <div class="petit">
-                <a href="https://paypal.com/"><img src="media/licence/secureView.png" alt="paypal secure"></a>
+                <a href="https://paypal.com/"><img src="media/paypal/secureView.png" alt="paypal secure"></a>
                 <a href="https://ovh.com/"><img src="media/footer/ovh.png" alt="ovh"></a>
             </div>
         </div>';
