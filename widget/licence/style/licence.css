@@ -81,14 +81,15 @@
 }
 #licenceV{
     background-size: cover;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     padding: 15px;
     background: #063444;
     color: #dfdb7e;
     font-family: sourceRegular;
 }
 #licenceV img{
-    width: 350px;
+    width: 87.5%;
 }
 #licenceV h1{
     font-family: sourceBold;
