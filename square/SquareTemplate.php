@@ -72,27 +72,19 @@ class SquareTemplate extends Base{
         echo'</div>';
     }
 
-    public function footer(Html $onisowo, Html $contact, Html $presentation, Html $partner){
+    public function footer(Html $banner){
         ?>
         </div>
         <footer>
             <p id="copyright"><span>© ohouens 2019</span></p>
-        	<div id="onisowo" class="alignement">
-                <?php $onisowo->show(); ?>
-        	</div><!--
-        	--><div id="contact" class="alignement">
-                <?php $contact->show(); ?>
-        	</div><!--
-        	--><div id="presentation" class="alignement">
-                <?php $presentation->show(); ?>
-        	</div>
-        	<div id="partner">
-                <?php $partner->show(); ?>
+        	<div id="banner">
+                <div class="large center">
+                    <?php $banner->show(); ?>
+                </div>
         	</div>
         	<div id="links">
         		<p class="center">
         			<a href="https://oniswo.com/policy/sale/">Sale policy</a>
-        			<a href="https://jobs.onisowo.com">Jobs</a>
         			<a href="https://partner.onisowo.com">Collaboration</a>
         			<a href="https://oniswo.com/policy/privacy/">Privacy policy</a>
         		</p>

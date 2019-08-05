@@ -1,0 +1,24 @@
+#contact div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#contact #footerLogo{
+    height: 80px;
+    vertical-align: middle;
+}
+#contact strong{
+    font-size: 1.7em;
+    font-family: sourceBold;
+    vertical-align: middle;
+}
+#contact a img{
+    height: 60px;
+    vertical-align: middle;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+#contact .petit a img{
+    height: 40px;
+    margin: 0;
+}
