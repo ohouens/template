@@ -17,6 +17,10 @@ class RegisterWidget extends Widget{
              <form id="login" method="post" autocomplete="off">
              	<input type="text" name="pseudo" placeholder="pseudo" class="input"/><br/>
              	<input type="password" name="password" placeholder="password" class="input"/><br/>
+                <span>
+                    <input type="checkbox" name="prolonged" id="prolonged" checked/>
+                    <label for="prolonged">stay logged in</label>
+                </span><br/>
              	<input type="submit" value="Log in" class="validation buttonA"/>
              	<p>
              		<a href="#" class="aide" id="helpPass">Forgot your password ?</a>
