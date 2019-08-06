@@ -36,7 +36,7 @@ class SettingControl{
             return 31;
         if($pass['new'] != $pass['confirm'])
             return 32;
-        $temoin = $user->setPassword($pass['confirm']);
+        $temoin = $user->hashPassword($pass['confirm']);
         if(is_int($temoin))
             return $temoin;
         $manager->update($user);
