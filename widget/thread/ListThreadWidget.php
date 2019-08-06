@@ -30,6 +30,8 @@ class ListThreadWidget extends Widget{
                 </a><img class="lock" src="style/icon/'.$lock.'.png" alt="'.$lock.'"/>
             </p>';
         }
+        if($page == "")
+            return "";
         return
         '<div id="thread">
             '.$page.'

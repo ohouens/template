@@ -1,9 +1,9 @@
 <?php
 class NoThreadWidget extends Widget{
-    public function __construct(User $user, Widget $content){
+    public function __construct(Widget $content){
         parent::__construct(
             '',
-            $this->subConstruct($user, $content),
+            $this->subConstruct($content),
             '',
             'NoThread',
             '',
@@ -13,13 +13,13 @@ class NoThreadWidget extends Widget{
         $this->build();
     }
 
-    private function subConstruct(User $user, Widget $content){
+    private function subConstruct(Widget $content){
         if($content->getContent() == "")
             return
             '<div id="noThread" class="children square">
                 <div class="center">
                     <p>
-                        <img src="style/icon/void.png" alt="that\'s sad" style="width:350px;"/><br/>
+                        <img src="style/icon/void.png" alt="that\'s sad" style="width:250px;"/><br/>
                         You have subscribe to 0 thread<br/>
                         You can check associations and commerces near you to subscribe to their content
                     </p>
