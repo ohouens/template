@@ -20,7 +20,7 @@ class NoThreadWidget extends Widget{
                 <div class="center">
                     <p>
                         <img src="style/icon/void.png" alt="that\'s sad" style="width:250px;"/><br/>
-                        You have subscribe to 0 thread<br/>
+                        You have subscribed to 0 thread<br/>
                         You can check associations and commerces near you to subscribe to their content
                     </p>
                 </div>
