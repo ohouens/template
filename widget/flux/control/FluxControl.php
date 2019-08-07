@@ -12,7 +12,7 @@ class FluxControl{
         foreach($final as $inter){
             $result .=
             '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
-                '.$inter->getField().'
+                '.nl2br($inter->getField()).'
             </p>
             <hr class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: grey; margin: 0; display: inline-block;"/>';
         }
@@ -22,7 +22,7 @@ class FluxControl{
     public static function createAnswer(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager){
         if($user->getId() != $parent->getUser())
             return Constant::ERROR_CODE_THREAD_WRITE_RIGHT;
-        if(!preg_match("#^.{1,300}$#s", $answer))
+        if(!preg_match("#^.{1,500}$#s", $answer))
             return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         $post->setUser($user->getId());

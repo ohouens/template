@@ -32,7 +32,7 @@ class createThreadControl{
     public static function createFlux(User $user, $title, $intro, Manager $manager){
         if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
             return 10;
-        if(!preg_match("#^.{1,1000}$#", $intro))
+        if(!preg_match("#^.{1,1000}$#s", $intro))
             return 11;
         $post = new Post();
         $post->setUser($user->getId());
