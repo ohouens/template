@@ -36,8 +36,11 @@ class SubscribeMailWidget extends Widget{
         <hr class="space width"/>
         '.$novo.'
         <div  class="width" style="text-align: center">
-            <a href="https://onisowo.com/index.php?thread='.$post->getId().'&amp;request=3&amp;user='.$id.'&amp;token='.$post->getData()['keys'][$id].'">unsubscribe</a><br/>
+            <a href="https://onisowo.com/index.php?thread='.$post->getId().'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">unsubscribe</a><br/>
             <p>Developed by ohouens</p>
+            <p style="color:#A5A5A5; font-size: 15px;">
+                Be sure to never purchase or enter informations from link in mails that could be ours, hackers are on the rise nowadays.
+            </p>
         </div>';
     }
 }
