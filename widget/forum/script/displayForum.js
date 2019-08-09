@@ -23,7 +23,8 @@ $(function(){
         });
     }
     if($("#contentChat").length){
-        loadChat();
+        // loadChat();
+        setInterval(function(){loadChat()}, 1000);
 
         $("#addAction").click(function(e){
             e.preventDefault();
@@ -44,6 +45,7 @@ $(function(){
             $("#send").trigger("click");
         });
     }
+
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat').html(data);
