@@ -10,6 +10,7 @@ class QrCode{
                     '.$writing.'
                 </div>
             </div>
-        </div>';
+        </div>
+        <div id="qrInfo" class="space"></div>';
     }
 }
