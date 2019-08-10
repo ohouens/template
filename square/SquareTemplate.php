@@ -85,7 +85,7 @@ class SquareTemplate extends Base{
         	<div id="links">
         		<p class="center">
         			<a href="https://oniswo.com/policy/sale/">Sale policy</a>
-        			<a href="https://partner.onisowo.com">Collaboration</a>
+        			<a href="https://oniswo.com/policy/terms/">Terms of use</a>
         			<a href="https://oniswo.com/policy/privacy/">Privacy policy</a>
         		</p>
         	</div>
