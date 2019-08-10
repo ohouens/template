@@ -1,7 +1,6 @@
 $(function(){
     var save = "";
     $.getScript('script/utils.js');
-    // previewImage(".profilePicture", "#changePdp");
     swapGender()
 
     $(".b .grand.vide form").submit(function(e){

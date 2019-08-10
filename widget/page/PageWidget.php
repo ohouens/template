@@ -42,13 +42,21 @@ class PageWidget extends Widget{
         $statut = "";
         if(isset($user->getData()['social']))
             $statut = '<img class="large" src="media/dataProfiling/social/'.$user->getData()['social'].'.png" alt="'.$user->getData()['social'].'" val="'.$user->getData()['social'].'"/>';
+        $linkedin = "";
+        if(isset($user->getData()['linkedin']))
+            $linkedin = '<a href="'.SettingControl::linkedin($user).'" target="_blank"><img class="petit" src="style/icon/linkedin.png" alt="linkedin"></a>';
+        $instagram = "";
+        if(isset($user->getData()['instagram']))
+            $instagram = '<a href="'.SettingControl::instagram($user).'" target="_blank"><img class="petit" src="style/icon/instagram.png" alt="instagram"></a>';
 
         return
         '<div id="pageCover" class="square">
             <div class="center large">
                 <img class="profilePicture alignement" src="media/user/pp/'.$user->getData()['pp'].'" alt=" ">
                 <h1 class="alignement '.$licence.'">'.$user->getPseudo().'</h1>
-                '.$flag.'
+                '.$flag.'<br/>
+                '.$linkedin.'
+                '.$instagram.'
             </div>
         </div>
         <div id="pageInfo">

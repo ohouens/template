@@ -23,6 +23,9 @@
     height: 150px;
     width: 150px;
 }
+#pageCover img.petit{
+    height: 120px;
+}
 
 #pageInfo .rectangle{
     color: black;

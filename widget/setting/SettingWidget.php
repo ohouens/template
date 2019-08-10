@@ -110,6 +110,8 @@ class SettingWidget extends Widget{
             <a class="link" href="#changePdp">change profile picture</a><br/>
             <a class="link" href="#changePassword">change password</a><br/>
             <a class="link" href="#changeEmail">change email</a><br/>
+            <a class="link" href="#changeLinkedin">change linkedin</a><br/>
+            <a class="link" href="#changeInstagram">change instagram</a><br/>
         </p>
         <div class="grand vide">
             <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?setting&amp;request=1">
@@ -128,8 +130,16 @@ class SettingWidget extends Widget{
                 <input class="input" type="text" name="newMail" placeholder="new email"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
+            <form class="vide" id="changeLinkedin" method="post" action="index.php?setting&amp;request=9">
+                <input class="input" type="text" name="linkedin" placeholder="https://www.linkedin.com/your_profile" value="'.SettingControl::linkedin($user).'"/><br/>
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeInstagram" method="post" action="index.php?setting&amp;request=10">
+                @<input class="input" type="text" name="instagram" placeholder="instagram_username" value="'.SettingControl::getInstagram($user).'"/><br/>
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
             <span class="displayError"></span><br/>
-            <a class="link" href="#">retour</a>
+            <a class="link" href="#">back</a>
         </div>';
     }
 
