@@ -23,7 +23,6 @@ $(function(){
         });
     }
     if($("#contentChat").length){
-        var reprise = "last";
         var end = false;
         var first = true;
 
@@ -62,12 +61,11 @@ $(function(){
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat').html(data);
-            $(".answer").mouseenter(function(){
-                reprise = $(this).attr("id");
-            });
             if(end || first){
                 first = false;
-                window.location.href = "index.php?thread="+$("#follow").attr('num')+"#last";
+                $('#displayChat').animate({
+                    scrollTop: $('#last').offset().top + $('#last').offset().top
+                }, 500);
             }
         });
     }
