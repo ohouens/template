@@ -23,6 +23,19 @@ $(function(){
         });
     }
     if($("#contentChat").length){
+        var reprise = "last";
+        var end = false;
+        var first = true;
+
+        $('#displayChat').on('scroll', function() {
+            var addition = $(this).scrollTop() + $(this).innerHeight() + 1;
+            if(addition >= $(this)[0].scrollHeight) {
+                end = true;
+            }else{
+                end = false;
+            }
+        });
+
         // loadChat();
         setInterval(function(){loadChat()}, 1000);
 
@@ -49,6 +62,13 @@ $(function(){
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat').html(data);
+            $(".answer").mouseenter(function(){
+                reprise = $(this).attr("id");
+            });
+            if(end || first){
+                first = false;
+                window.location.href = "index.php?thread="+$("#follow").attr('num')+"#last";
+            }
         });
     }
 });

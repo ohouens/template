@@ -12,10 +12,14 @@ class ForumControl{
             if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
                 array_push($final, $answer);
         }
-        foreach($final as $inter){
+        for($i=0; $i<count($final); $i++){
+            $inter = $final[$i];
+            $id = $inter->getId();
+            if($i == count($final)-1)
+                $id = "last";
             $user = self::getAutor($inter->getUser(), $userManager);
             $result .=
-            '<div class="answer">
+            '<div class="answer" id="'.$id.'">
                 <p class="pseudo alignement '.self::color($post, $user).'">'.$user->getPseudo().'</p><!--
                 --><p class="text alignement">'.nl2br($inter->getField()).'</p>
                 <p class="gris">'.ForumControl::getSeniority($inter).'</p>
