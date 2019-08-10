@@ -7,4 +7,8 @@ $(function(){
             $("#qrInfo").text("");
         },3000);
     });
+
+    $("#qrCode").dblclick(function(){
+        window.location.href = $(this).attr("src");
+    });
 });
