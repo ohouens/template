@@ -17,7 +17,7 @@ class ForumControl{
             $result .=
             '<div class="answer">
                 <p class="pseudo alignement '.self::color($post, $user).'">'.$user->getPseudo().'</p><!--
-                --><p class="text alignement">'.$inter->getField().'</p>
+                --><p class="text alignement">'.nl2br($inter->getField()).'</p>
                 <p class="gris">'.ForumControl::getSeniority($inter).'</p>
                 <hr/>
             </div>';
