@@ -81,7 +81,7 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
+                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
                     <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
