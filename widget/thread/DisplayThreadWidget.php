@@ -48,19 +48,22 @@ class DisplayThreadWidget extends Widget{
     }
 
     private function subConstruct(User $user, Post $post, UserManager $manager){
+        $result = '<div class="flickery">';
         switch($post->getType()){
             case Constant::THREAD_FORUM:
-                return $this->constructForum($user, $post, $manager);
+                $result .= $this->constructForum($user, $post, $manager);
                 break;
             case Constant::THREAD_FLUX:
-                return $this->constructFlux($user, $post, $manager);
+                $result .= $this->constructFlux($user, $post, $manager);
                 break;
             case Constant::THREAD_TICKETING:
-                return $this->constructTicketing($user, $post, $manager);
+                $result .= $this->constructTicketing($user, $post, $manager);
             default:
                 return '';
                 break;
         }
+        $result .= '</div>';
+        return $result;
     }
 
     private function constructForum(User $user, Post $post, UserManager $manager){

@@ -14,4 +14,7 @@ $(function(){
             });
         });
     }
+
+    if($(this).width() < 800)
+        $(".flickery").flickity();
 });
