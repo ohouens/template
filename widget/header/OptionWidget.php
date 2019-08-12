@@ -31,7 +31,7 @@ abstract class OptionWidget extends Widget{
         </div>';
     }
 
-    public abstract function screen();
+    public abstract function screen(Manager $manager);
 
     public function getName(){return $this->_name;}
     public function getView(){return $this->_view;}
