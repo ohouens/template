@@ -8,7 +8,7 @@ class RegisterWidget extends Widget{
              	<input type="text" name="pseudo" placeholder="pseudo" class="input"/><br/>
              	<input type="text" name="email" placeholder="email" class="input"/><br/>
              	<input type="password" name="password" placeholder="password" class="input"/><br/>
-                <span>By clicking the sign up button, you accept my <a href="https://onisowo.com/policy/privacy/" target="_blank">privacy policy</a></span><br/>
+                <span>By clicking the sign up button, you accept our <a href="https://onisowo.com/policy/privacy/" target="_blank">privacy policy</a></span><br/>
              	<input type="submit" value="Sign Up" class="validation buttonA"/>
              	<p>
              		<a href="#" class="aide" id="helpLog">Log in</a>
