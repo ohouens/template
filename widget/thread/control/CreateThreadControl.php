@@ -30,10 +30,10 @@ class createThreadControl{
     }
 
     public static function createFlux(User $user, $title, $intro, Manager $manager){
-        if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
-            return 10;
+        if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
+            return Constant::ERROR_CODE_THREAD_TITLE;
         if(!preg_match("#^.{1,1000}$#s", $intro))
-            return 11;
+            return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setField($intro);
@@ -46,8 +46,8 @@ class createThreadControl{
     }
 
     public static function createForum(User $user, $title, $cover, Manager $manager, $path=""){
-        if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
-            return 10;
+        if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
+            return Constant::ERROR_CODE_THREAD_TITLE;
         $extension = substr(strrchr($cover['name'],'.'),1);
         $rename = $user->getID().achage(32).'.'.$extension;
         $dest = $path.'media/forum/cover/'.$rename;
@@ -81,10 +81,10 @@ class createThreadControl{
     }
 
     public static function createTicketing(User $user, $title, $date, Manager $manager){
-        if(!preg_match("#^([\w]+[?. ]?){2,77}$#", $title))
-            return 10;
+        if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
+            return Constant::ERROR_CODE_THREAD_TITLE;
         if(!checkIsAValidDate($date))
-            return 16;
+            return Constant::ERROR_CODE_THREAD_DATE;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setField($date);
