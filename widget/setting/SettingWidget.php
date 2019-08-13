@@ -24,7 +24,7 @@ class SettingWidget extends Widget{
                     <h2>Profile data</h2>
                     <p>
                         You can improve your profile by adding data that you want.<br/>
-                        This will give you access to threads which are only accessible for certain type of profile
+                        This will gives you access to threads which are only accessible for certain type of profile
                         and we will recommend you threads that fit better your preferences.
                     </p>
                     <button class="button">Manage</button>
