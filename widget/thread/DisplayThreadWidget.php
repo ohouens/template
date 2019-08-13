@@ -58,6 +58,7 @@ class DisplayThreadWidget extends Widget{
                 break;
             case Constant::THREAD_TICKETING:
                 $result .= $this->constructTicketing($user, $post, $manager);
+                break;
             default:
                 return '';
                 break;
