@@ -8,6 +8,8 @@ class ProfileOW extends OptionWidget{
     }
 
     public function screen(Manager $manager){
+        if(isset($this->_user->getData()['instagram']))
+            return "You can copy the link of a thread by clicking on the qr code";
         return "Now you can link your instagram profile in your profile setting";
     }
 }
