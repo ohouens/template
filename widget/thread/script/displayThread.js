@@ -16,5 +16,8 @@ $(function(){
     }
 
     if($(this).width() < 800)
-        $(".flickery").flickity();
+        $(".flickery").flickity({
+            draggable: false,
+            groupCells: true
+        });
 });
