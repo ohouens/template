@@ -14,6 +14,7 @@ class TicketMailWidget extends widget{
     }
 
     private function subConstruct(User $customer, Post $post){
+        global $hash;
         $novo = "";
         if($customer->getPseudo() == "")
             $novo =
@@ -34,14 +35,14 @@ class TicketMailWidget extends widget{
             you can let the owner scan the qrCode to validate your ticket.
         </p>
         '.QrCode::code(
-            '?thread='.$post->getId().'%26request=7%26customer='.$id.'%26token='.$post->getData()['keys'][$id],
+            '?thread='.$hash->get($post->getId()).'%26request=7%26customer='.$id.'%26token='.$post->getData()['keys'][$id],
             '',
             300
          ).'
         <hr class="space width"/>
         '.$novo.'
         <div  class="width" style="text-align: center">
-            <a href="https://onisowo.com/index.php?thread='.$post->getId().'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">cancel</a><br/>
+            <a href="https://onisowo.com/index.php?thread='.$hash->get($post->getId()).'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">cancel</a><br/>
             <p>Developed by ohouens</p>
             <p style="color:#A5A5A5; font-size: 15px;">
                 Be sure to never purchase or enter informations from link in mails that could be ours, hackers are on the rise nowadays.

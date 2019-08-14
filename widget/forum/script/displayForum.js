@@ -1,13 +1,13 @@
 $(function(){
     if($("#contentStatistic").length){
-        $.get('index.php?thread='+$("#follow").attr('num')+'=&request=4', function(data){
+        $.get('index.php?thread='+$("#follow").attr('num')+'&request=4', function(data){
             if(data == "1")
                 $("#follow").addClass("selected").text("Unfollow");
             else
                 $("#follow").text("Follow");
         });
         $("#follow").click(function(){
-            $.get('index.php?thread='+$(this).attr('num')+'=&request=3', function(data){
+            $.get('index.php?thread='+$(this).attr('num')+'&request=3', function(data){
                 if(data == "0"){
                     $("#follow").addClass('selected').text("Unfollow");
                     $("#followers").text(parseInt($("#followers").text())+1);

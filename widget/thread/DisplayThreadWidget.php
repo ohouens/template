@@ -1,6 +1,7 @@
 <?php
 class DisplayThreadWidget extends Widget{
     public static function subscribers(User $user, Post $post, $subscribers){
+        global $hash;
         $result = "";
         foreach($subscribers as $inter){
             $id = $inter->getId();
@@ -17,7 +18,7 @@ class DisplayThreadWidget extends Widget{
             $delete = "";
             if($user->getId() == $post->getUser()){
                 $delete =
-                '<a href="?thread='.$post->getId().'&amp;delete='.$id.'">
+                '<a href="?thread='.$hash->get($post->getId()).'&amp;delete='.$id.'">
                     <img class="delete" src="style/icon/wrong.png" alt="delete"/>
                 </a>';
             }
@@ -28,7 +29,7 @@ class DisplayThreadWidget extends Widget{
                     '.$display.'
                 </a>
                 '.$delete.'
-            </p><div class="special alignement" thread="'.$post->getId().'" num="'.$id.'"></div>
+            </p><div class="special alignement" thread="'.$hash->get($post->getId()).'" num="'.$id.'"></div>
             <hr>';
         }
         return $result;
@@ -68,15 +69,16 @@ class DisplayThreadWidget extends Widget{
     }
 
     private function constructForum(User $user, Post $post, UserManager $manager){
+        global $hash;
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$post->getId(), 'Access forum').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()), 'Access forum').'
             </div>
         </div><!--
-        --><div id="contentChat" class="grand children alignement" num="'.$post->getId().'">
+        --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
             <div id="displayChat"></div>
-            <form action="index.php?thread='.$post->getId().'&amp;request=2" method="post">
+            <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <textarea name="answer"></textarea><!--
                 --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
                 --><input type="image" id="send" src="style/icon/sendDirect.png"/>
@@ -94,31 +96,32 @@ class DisplayThreadWidget extends Widget{
                 <p class="center">
                     <span id="followers" class="number">'.count($post->getData()['followers']).'</span><br/>
                     <span class="aa">Followers</span><br/>
-                    <button id="follow" class="buttonC space" num="'.$post->getId().'"></button>
+                    <button id="follow" class="buttonC space" num="'.$hash->get($post->getId()).'"></button>
                 </p>
             </div>
-            <div id="contentWriter" num="'.$post->getId().'"></div>
+            <div id="contentWriter" num="'.$hash->get($post->getId()).'"></div>
         </div>';
     }
 
     private function constructFlux(User $user, Post $post, UserManager $manager){
+        global $hash;
         $button = "";
         if($post->getUser() == $user->getId())
             $button = '<br/><button class="buttonA" id="addFlux">Add flux</button>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Subscribe').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Subscribe').'
             </div>
         </div><!--
-        --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$post->getId().'">
+        --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
             <div id="flux" class="grand large">
                 <h1>'.$post->getData()['title'].'</h1>
                 <div id="fluxLast"></div>
             </div>
             <div class="grand large vide">
                 <div class="center">
-                    <form action="index.php?thread='.$post->getId().'&amp;request=2" method="post">
+                    <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                         <textarea class="noBorder" name="answer"></textarea>
                         <span>300</span>
                     </form><br/>
@@ -142,18 +145,19 @@ class DisplayThreadWidget extends Widget{
                     '.$button.'
                 </p>
             </div>
-            <div id="contentWriter" num="'.$post->getId().'"></div>
+            <div id="contentWriter" num="'.$hash->get($post->getId()).'"></div>
         </div>';
     }
 
     private function constructTicketing(User $user, Post $post, UserManager $manager){
+        global $hash;
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$post->getId().'%26request=3', 'Get ticket').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Get ticket').'
             </div>
         </div><!--
-        --><div id="contentCountdown" class="mainSection grand children rectangle" num="'.$post->getId().'">
+        --><div id="contentCountdown" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
             <div class="center">
                 <p class="countdown" date="'.$post->getField().'">
                 </p>
@@ -173,7 +177,7 @@ class DisplayThreadWidget extends Widget{
                     <span class="aa">Tickets</span>
                 </p>
             </div>
-            <div id="contentWriter" class="ticketing" num="'.$post->getId().'"></div>
+            <div id="contentWriter" class="ticketing" num="'.$hash->get($post->getId()).'"></div>
         </div>';
     }
 }

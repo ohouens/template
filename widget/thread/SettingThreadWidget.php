@@ -14,6 +14,7 @@ class SettingThreadWidget extends Widget{
     }
 
     public function subConstruct(User $user, Post $post){
+        global $hash;
         $lock = "no";
         if($post->getData()['writers'] == [])
             $lock = "yes";
@@ -25,7 +26,7 @@ class SettingThreadWidget extends Widget{
                 $yes = "selected";
             else $no = "selected";
             $lock =
-            '<form class="alignement" method="post" action="index.php?thread='.$post->getId().'&amp;request=8">
+            '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <select class="input" name="open">
                     <option value="yes" '.$yes.'>yes</option>
                     <option value="no" '.$no.'>no</option>
@@ -38,7 +39,7 @@ class SettingThreadWidget extends Widget{
         return
         '<div id="setWidget" class="children square">
             <div class="large center">
-                <div id="resume" num="'.$post->getId().'">
+                <div id="resume" num="'.$hash->get($post->getId()).'">
                     <h1>'.$post->getData()['title'].'</h1>
                     <div class="list">
                         <span class="tab">type:</span>'.ThreadControl::getType($post).'<br/>

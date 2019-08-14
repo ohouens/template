@@ -14,6 +14,7 @@ class ListThreadWidget extends Widget{
     }
 
     private function subConstruct(User $user, PostManager $manager){
+        global $hash;
         $page = "";
         $list = ThreadControl::list($user, $manager);
         foreach($list as $inter){
@@ -22,7 +23,7 @@ class ListThreadWidget extends Widget{
                 $lock = "locked";
             $page .=
             '<p class="list">
-                <a class="link" href="index.php?thread='.$inter->getId().'&list">
+                <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&list">
                     '.$inter->getData()['title'].'<br/>
                     type:'.ThreadControl::getType($inter).'<br/>
                     date:'.date("d/m/Y", $inter->getCreation()).'<br/>

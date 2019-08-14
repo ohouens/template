@@ -40,6 +40,7 @@ class ContainThreadControl{
     }
 
     private static function construct(Post $post){
+        global $hash;
         $result = "";
         $class = "";
         switch($post->getType()){
@@ -65,7 +66,7 @@ class ContainThreadControl{
                 break;
         }
         return '
-        <div class="alignement thread '.$class.'" num="'.$post->getId().'">
+        <div class="alignement thread '.$class.'" num="'.$hash->get($post->getId()).'">
         '.$result.'
         </div>';
         return $result;
