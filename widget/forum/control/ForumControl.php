@@ -36,7 +36,7 @@ class ForumControl{
     public static function color(Post $post, User $user){
         if($user->getId() == $post->getUser())
             return 'creator';
-        if(in_array($user->getId(), $post->getData()['writer']))
+        if(in_array($user->getId(), $post->getData()['writers']))
             return 'writer';
         if(in_array($user->getId(), $post->getData()['followers']))
             return 'follower';
