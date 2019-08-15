@@ -6,7 +6,7 @@ class DescHomeWidget extends Widget{
             '<div id="descHome" class="grand" style="background:url(\'media/fond/home/homeDesc.jpg\'); background-size:cover;">
                 <div class="super">
                     <div class="center">
-                        <img src="style/logo(1).png" alt="big logo">
+                        <img src="style/icon(1).png" alt="big logo">
                     </div>
                 </div>
             </div>',

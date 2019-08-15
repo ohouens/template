@@ -21,7 +21,7 @@ class Base{
     		<meta name="viewport" content="width=320"/>
             <link rel="stylesheet" href="style/affichage.css"/>
     		<?php foreach($this->_styles as $style)echo'<link rel="stylesheet" href="'.static::$racine.'style/'.$style.'.css"/>'; ?>
-    		<link rel="icon" type="image/png" href="style/logo.png" />
+    		<link rel="icon" type="image/png" href="style/icon.png" />
     		<script src="script/jquery.js"></script>
     		<title><?php echo $this->_title; ?></title>
     	</head>
