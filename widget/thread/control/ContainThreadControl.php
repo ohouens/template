@@ -13,11 +13,12 @@ class ContainThreadControl{
         $page = "";
         $list = $manager->getList();
         foreach(array_reverse($list) as $thread){
-            if(
-                (in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX, Constant::THREAD_TICKETING]) and $thread->getUser() == $user->getId()) or
-                ($thread->getType() == Constant::THREAD_FORUM and in_array($user->getId(), $thread->getData()['followers']))
-            ){
-		         $page .= self::construct($thread);}
+            if(in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX, Constant::THREAD_TICKETING]) and
+                (
+                    $thread->getUser() == $user->getId() or
+                    in_array($user->getId(), $thread->getData()[ThreadControl::getInfluence($thread)])
+                )
+            )$page .= self::construct($thread);
 		}
         if($page == "")
             return
