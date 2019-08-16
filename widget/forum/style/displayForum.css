@@ -32,14 +32,36 @@
     height: 15%;
     background: white;
     text-align: left;
+}#contentChat form .slide{
+    width: 91%;
+    height: 100%;
+    overflow:hidden;
+    text-align: center;
+    vertical-align: bottom;
 }#contentChat form textarea{
     border: none;
-    height: 100%;
-    width: 91%;
     resize: none;
 }#contentChat form input[type="image"]{
     width: 3%;
     margin-left: 1%;
+}
+#contentChat form #barrierBlock{
+    font-family: sourceRegular;
+    background:#1E1E1E;
+    color: #33F7B7;
+}
+#contentChat form #voteBlock{
+    background:#1E1E1E;
+}#voteBlock .input{
+    font-family: sourceRegular;
+    color: #33F7B7;
+    margin: 0;
+    text-align: center;
+}#voteBlock .little.input{
+    color: white;
+    width: 20%;
+    min-width: 20%;
+    margin-top: 3%;
 }
 
 #contentStatistic #contentFollow{
@@ -54,7 +76,7 @@
     #contentChat{
         width: 100%;
     }
-    #contentChat form textarea{
+    #contentChat form .slide{
         width: 79%;
     }#contentChat form input[type="image"]{
         width: 8%;

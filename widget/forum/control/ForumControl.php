@@ -61,14 +61,38 @@ class ForumControl{
             return "a moment moment ago";
     }
 
-    public static function createAnswer(User $user, $answer, $parent, PostManager $manager){
-        if(!preg_match("#^.{1,1000}$#s", $answer))
-            return 11;
+    public static function createAnswer(User $user, $var, $parent, PostManager $manager){
         $post = new Post();
         $post->setUser($user->getId());
-        $post->setField($answer);
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent]);
+        switch($var['state']){
+            case 0: //message
+                if(!preg_match("#^.{1,1000}$#s", $var['answer']))
+                    return Constant::ERROR_CODE_THREAD_LENGTH;
+                $post->setField($var['answer']);
+                break;
+            case 1: //lock barrier
+                if(!preg_match("/^[0-9]{1,5}$/", $var['length']))
+                    return Constant::ERROR_CODE_THREAD_ANSWER;
+                $post->setField($var['length']);
+                $post->addData(["lock"=>"barrier"]);
+                break;
+            case 2: //lock vote
+                if(!preg_match("/^.{1,100}$/", $var['question']))
+                    return Constant::ERROR_CODE_THREAD_LENGTH;
+                if(!preg_match("/^.{1,20}$/", $var['a1']))
+                    return Constant::ERROR_CODE_THREAD_ANSWER;
+                if(!preg_match("/^.{1,20}$/", $var['a2']))
+                    return Constant::ERROR_CODE_THREAD_ANSWER;
+                $post->setField($var['question']);
+                $post->addData(["a1"=>$var["a1"], "a2"=>$var["a2"]]);
+                if(preg_match("/^.{1,20}$/", $var['a3']))
+                    $post->addData(["a3"=>$var["a3"]]);
+                if(preg_match("/^.{1,20}$/", $var['a4']))
+                    $post->addData(["a4"=>$var["a4"]]);
+                break;
+        }
         $manager->add($post);
         return 0;
     }

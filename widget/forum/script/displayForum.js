@@ -25,6 +25,7 @@ $(function(){
     if($("#contentChat").length){
         var end = false;
         var first = true;
+        var state = 0;
 
         $('#displayChat').on('scroll', function() {
             var addition = $(this).scrollTop() + $(this).innerHeight() + 1;
@@ -40,6 +41,18 @@ $(function(){
 
         $("#addAction").click(function(e){
             e.preventDefault();
+            $("#contentChat form .slide .kid").css("display", "none");
+            if(state == 0){
+                $("#barrierBlock.kid").css("display", "flex");
+                state = 1
+            }else if (state == 1) {
+                $("#voteBlock.kid").css("display", "block");
+                state = 2
+            }else{
+                $("textarea.kid").css("display", "block");
+                state = 0
+            }
+            $("#contentChat form input[name='state']").val(state);
         });
 
         $("#send").click(function(e){
@@ -48,6 +61,7 @@ $(function(){
                 if(data == "0"){
                     loadChat();
                     $("#contentChat form textarea").val('');
+                    $("#contentChat form #voteBlock input").val('');
                 }
             });
         });

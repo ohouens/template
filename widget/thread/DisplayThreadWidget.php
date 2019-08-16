@@ -79,7 +79,23 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
             <div id="displayChat"></div>
             <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
-                <textarea name="answer"></textarea><!--
+                <input type="hidden" name="state" value="0">
+                <div class="slide alignement">
+                    <div id="barrierBlock" class="kid plein vide">
+                        <div class="center">
+                            <input type="hidden" name="length" value="1000">
+                            <span>1000</span> secondes
+                        </div>
+                    </div>
+                    <div id="voteBlock" class="kid plein vide">
+                        <input type="text" class="input" placeholder="question ?" name="question"><br>
+                        <input type="text" class="little input" placeholder="answer 1" name="a1">
+                        <input type="text" class="little input" placeholder="answer 2" name="a2">
+                        <input type="text" class="little input" placeholder="answer 3" name="a3">
+                        <input type="text" class="little input" placeholder="answer 4" name="a4">
+                    </div>
+                    <textarea name="answer" class="kid plein"></textarea>
+                </div><!--
                 --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
                 --><input type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>
