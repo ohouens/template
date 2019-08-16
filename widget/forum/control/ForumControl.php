@@ -86,6 +86,7 @@ class ForumControl{
                 if(!preg_match("/^.{1,20}$/", $var['a2']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
                 $post->setField($var['question']);
+                $post->addData(["lock"=>"vote"]);
                 $post->addData(["a1"=>$var["a1"], "a2"=>$var["a2"]]);
                 if(preg_match("/^.{1,20}$/", $var['a3']))
                     $post->addData(["a3"=>$var["a3"]]);
