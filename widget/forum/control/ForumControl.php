@@ -17,16 +17,84 @@ class ForumControl{
             $id = $inter->getId();
             if($i == count($final)-1)
                 $id = "last";
+            $body ='<p class="text alignement">'.nl2br($inter->getField()).'</p>';
+            if(isset($inter->getData()['lock']))
+                $body = self::readLock($inter, $postManager);
             $user = self::getAutor($inter->getUser(), $userManager);
             $result .=
             '<div class="answer" id="'.$id.'">
                 <p class="pseudo alignement '.self::color($post, $user).'">'.$user->getPseudo().'</p><!--
-                --><p class="text alignement">'.nl2br($inter->getField()).'</p>
+                -->'.$body.'
                 <p class="gris">'.ForumControl::getSeniority($inter).'</p>
                 <hr/>
             </div>';
         }
         return $result;
+    }
+
+    public static function readLock(Post $lock, PostManager $manager){
+        global $user;
+        $result = '<div class="lock">';
+        $active = "active";
+        if($lock->getActive() == 2)
+            $active = "";
+        $voted = "";
+        if(in_array($user->getId(), $lock->getData()['unlock']))
+            $voted = "voted";
+        switch($lock->getData()['lock']){
+            case "barrier":
+                $date = $lock->getCreation() + intval($lock->getField()) - time();
+                if($date <= 0){
+                    $date = "0";
+                    if($lock->getActive() == 1){
+                        $lock->setActive(2);
+                        $manager->update($lock);
+                    }
+                }
+                $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
+                if($verroux <= 0 and $lock->getActive() == 1){
+                    $lock->setActive(2);
+                    $manager->update($lock);
+                }
+                $view = '<p>'.$verroux.' locks</p> <p>'.$date.' secondes</p>';
+                if($lock->getActive() == 2)
+                    $view = "Unlocked";
+                $result .=
+                '<div class="square barrier '.$active.' '.$voted.'">
+                    <div class="center">
+                        '.$view.'
+                    </div>
+                </div>';
+                break;
+            case "vote":
+                break;
+        }
+        $result .= '</div>';
+        return $result;
+    }
+
+    public static function getLastLock(Post $post, PostManager $manager){
+        $list = array_reverse($manager->getList());
+        foreach($list as $inter){
+            if($inter->getType() == Constant::THREAD_ANSWER){
+                if($inter->getData()['parent'] == $post->getId())
+                    return $inter;
+            }
+        }
+        return null;
+    }
+
+    public static function notifyLock(User $user, Post $post, $notify, PostManager $manager){
+        $lock = self::getLastLock($post, $manager);
+        if($lock->getActive() == 2)
+            return 443;
+        if(in_array($user->getId(), $lock->getData()['unlock']))
+            return 444;
+        $unlock = $lock->getData()['unlock'];
+        array_push($unlock, $user->getId());
+        $lock->addData(['unlock'=>$unlock]);
+        $manager->update($lock);
+        return Constant::ERROR_CODE_OK;
     }
 
     public static function getAutor($id, Manager $manager){
@@ -75,8 +143,13 @@ class ForumControl{
             case 1: //lock barrier
                 if(!preg_match("/^[0-9]{1,5}$/", $var['length']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
+                $temoin = $manager->get($parent);
+                if(count($temoin->getData()['followers']) <= 0)
+                    return 447;
                 $post->setField($var['length']);
                 $post->addData(["lock"=>"barrier"]);
+                $post->addData(["N"=>count($temoin->getData()['followers'])]);
+                $post->addData(["unlock"=>[]]);
                 break;
             case 2: //lock vote
                 if(!preg_match("/^.{1,100}$/", $var['question']))

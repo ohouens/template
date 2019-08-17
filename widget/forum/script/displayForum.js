@@ -70,6 +70,13 @@ $(function(){
             e.preventDefault();
             $("#send").trigger("click");
         });
+
+        $("#notifyBarrier").click(function(){
+            $.get("index.php?thread="+$("#contentChat").attr('num')+"&request=9&notify", function(data){
+                if(data == 0)
+                    $("#notifyBarrier").addClass("selected");
+            });
+        });
     }
 
     function loadChat(){
@@ -78,8 +85,17 @@ $(function(){
             if(end || first){
                 first = false;
                 $('#displayChat').animate({
-                    scrollTop: $('#last').offset().top + $('#last').offset().top
+                    scrollTop: $('#last').offset().top + ($('#last').offset().top)*10
                 }, 500);
+            }
+            if($("#last .lock .active").length){
+                $("#contentChat #sendChat").css('display', 'none');
+                $("#contentChat #displayLock").css('display', 'flex');
+                if($("#last .lock .active.barrier.voted").length)
+                    $("#notifyBarrier").addClass("selected");
+            }else{
+                $("#contentChat #sendChat").css('display', 'block');
+                $("#contentChat #displayLock").css('display', 'none');
             }
         });
     }

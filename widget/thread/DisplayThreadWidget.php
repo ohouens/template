@@ -78,7 +78,7 @@ class DisplayThreadWidget extends Widget{
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
             <div id="displayChat"></div>
-            <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
+            <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
                 <div class="slide alignement">
                     <div id="barrierBlock" class="kid plein vide">
@@ -99,6 +99,17 @@ class DisplayThreadWidget extends Widget{
                 --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
                 --><input type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>
+            <div id="displayLock" class="vide">
+                <div class="center">
+                    <button id="notifyBarrier" class="button">Notify</button>
+                    <div id="notifyVote" class="vide">
+                        <button class="kid buttonA a1" ></button>
+                        <button class="kid buttonA a2" ></button>
+                        <button class="kid buttonA a3" ></button>
+                        <button class="kid buttonA a4" ></button>
+                    </div>
+                </div>
+            </div>
         </div><!--
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">

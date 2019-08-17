@@ -27,30 +27,39 @@
     color: #0077BE;
 }.answer .creator{
     color: #FFD700;
+}.answer .lock .barrier{
+    background-color: #1E1E1E;
+    min-height: 300px;
+    text-align: center;
+    color: #37F7B7;
+    font-size: 2em;
+    font-family: sourceRegular;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-#contentChat form{
+#contentChat #sendChat{
     height: 15%;
     background: white;
     text-align: left;
-}#contentChat form .slide{
+}#contentChat #sendChat .slide{
     width: 91%;
     height: 100%;
     overflow:hidden;
     text-align: center;
     vertical-align: bottom;
-}#contentChat form textarea{
+}#contentChat #sendChat textarea{
     border: none;
     resize: none;
-}#contentChat form input[type="image"]{
+}#contentChat #sendChat input[type="image"]{
     width: 3%;
     margin-left: 1%;
 }
-#contentChat form #barrierBlock{
+#contentChat #sendChat #barrierBlock{
     font-family: sourceRegular;
     background:#1E1E1E;
     color: #33F7B7;
 }
-#contentChat form #voteBlock{
+#contentChat #sendChat #voteBlock{
     background:#1E1E1E;
 }#voteBlock .input{
     font-family: sourceRegular;
@@ -62,6 +71,11 @@
     width: 20%;
     min-width: 20%;
     margin-top: 3%;
+}
+#contentChat #displayLock{
+    height: 15%;
+    background: #212121;
+    overflow: hidden;
 }
 
 #contentStatistic #contentFollow{
@@ -76,9 +90,9 @@
     #contentChat{
         width: 100%;
     }
-    #contentChat form .slide{
+    #contentChat #sendChat .slide{
         width: 79%;
-    }#contentChat form input[type="image"]{
+    }#contentChat #sendChat input[type="image"]{
         width: 8%;
         margin-left: 2%;
     }
