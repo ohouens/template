@@ -21,7 +21,7 @@ class ForumControl{
             $user = self::getAutor($inter->getUser(), $userManager);
             $result .=
             '<div class="answer" id="'.$id.'">
-                <p class="pseudo alignement '.self::color($post, $user).'">'.$user->getPseudo().'</p><!--
+                <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
                 -->'.$body.'
                 <p class="gris">'.ForumControl::getSeniority($inter).'</p>
                 <hr/>
