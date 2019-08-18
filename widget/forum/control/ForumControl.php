@@ -13,7 +13,7 @@ class ForumControl{
             $id = $inter->getId();
             if($i == count($final)-1)
                 $id = "last";
-            $body ='<p class="text alignement">'.nl2br($inter->getField()).'</p>';
+            $body ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
             if(isset($inter->getData()['lock'])){
                 self::checkLockActive($inter, $postManager);
                 $body = self::readLock($inter);
@@ -93,7 +93,7 @@ class ForumControl{
                 $result .=
                 '<div class="square vote '.$active.' '.$voted.'" answer="'.$answer.'"'.$attr.'>
                     <div class="center large">
-                        <p class="question">'.$lock->getField().'</p>
+                        <p class="question">'.htmlspecialchars($lock->getField()).'</p>
                         '.$view.'
                     </div>
                 </div>';
@@ -211,16 +211,16 @@ class ForumControl{
             case 2: //lock vote
                 if(!preg_match("/^.{1,100}$/", $var['question']))
                     return Constant::ERROR_CODE_THREAD_LENGTH;
-                if(!preg_match("/^.{1,20}$/", $var['a1']))
+                if(!preg_match("/^[\w]{1,20}$/", $var['a1']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
-                if(!preg_match("/^.{1,20}$/", $var['a2']))
+                if(!preg_match("/^[\w]{1,20}$/", $var['a2']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
                 $post->setField($var['question']);
                 $post->addData(["lock"=>"vote"]);
                 $answer = [$var['a1'] => [], $var['a2'] => []];
-                if(preg_match("/^.{1,20}$/", $var['a3']))
+                if(preg_match("/^[\w]{1,20}$/", $var['a3']))
                     $answer[$var['a3']] = [];
-                if(preg_match("/^.{1,20}$/", $var['a4']))
+                if(preg_match("/^[\w]{1,20}$/", $var['a4']))
                     $answer[$var['a4']] = [];
                 $post->addData(["answer"=>$answer]);
                 $post->addData(["unlock"=>[]]);
