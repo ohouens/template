@@ -1,9 +1,5 @@
 <?php
 class ForumControl{
-    public static function getObject(User $user, Post $post, Manager $manager){
-
-    }
-
     public static function read(Post $post, PostManager $postManager, UserManager $userManager){
         $result = "";
         $list = $postManager->getList();
@@ -18,8 +14,10 @@ class ForumControl{
             if($i == count($final)-1)
                 $id = "last";
             $body ='<p class="text alignement">'.nl2br($inter->getField()).'</p>';
-            if(isset($inter->getData()['lock']))
-                $body = self::readLock($inter, $postManager);
+            if(isset($inter->getData()['lock'])){
+                self::checkLockActive($inter, $postManager);
+                $body = self::readLock($inter);
+            }
             $user = self::getAutor($inter->getUser(), $userManager);
             $result .=
             '<div class="answer" id="'.$id.'">
@@ -32,7 +30,30 @@ class ForumControl{
         return $result;
     }
 
-    public static function readLock(Post $lock, PostManager $manager){
+    public static function checkLockActive(Post $lock, PostManager $manager){
+        switch($lock->getData()['lock']){
+            case "barrier":
+                $date = $lock->getCreation() + intval($lock->getField()) - time();
+                if($date <= 0 and $lock->getActive() == 1){
+                    $lock->setActive(2);
+                    $manager->update($lock);
+                }
+                $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
+                if($verroux <= 0 and $lock->getActive() == 1){
+                    $lock->setActive(2);
+                    $manager->update($lock);
+                }
+                break;
+            case "vote":
+                if($lock->getCreation()+3600*3-time() <= 0 and $lock->getActive() == 1){
+                    $lock->setActive(2);
+                    $manager->update($lock);
+                }
+                break;
+        }
+    }
+
+    public static function readLock(Post $lock){
         global $user;
         $result = '<div class="lock">';
         $active = "active";
@@ -43,22 +64,12 @@ class ForumControl{
             $voted = "voted";
         switch($lock->getData()['lock']){
             case "barrier":
-                $date = $lock->getCreation() + intval($lock->getField()) - time();
-                if($date <= 0){
-                    $date = "0";
-                    if($lock->getActive() == 1){
-                        $lock->setActive(2);
-                        $manager->update($lock);
-                    }
+                $view = "Unlocked";
+                if($lock->getActive() == 1){
+                    $date = $lock->getCreation() + intval($lock->getField()) - time();
+                    $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
+                    $view = '<p>'.$verroux.' locks</p> <p>'.$date.' secondes</p>';
                 }
-                $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
-                if($verroux <= 0 and $lock->getActive() == 1){
-                    $lock->setActive(2);
-                    $manager->update($lock);
-                }
-                $view = '<p>'.$verroux.' locks</p> <p>'.$date.' secondes</p>';
-                if($lock->getActive() == 2)
-                    $view = "Unlocked";
                 $result .=
                 '<div class="square barrier '.$active.' '.$voted.'">
                     <div class="center">
@@ -67,6 +78,25 @@ class ForumControl{
                 </div>';
                 break;
             case "vote":
+                $view = "";
+                $answer = "";
+                $i = 1;
+                $attr = "";
+                foreach($lock->getData()['answer'] as $key => $value){
+                    $attr .= ' a'.$i.'="'.$key.'"';
+                    $i++;
+                }
+                if($lock->getActive()['lock'] == 2 or $voted == "voted"){
+                    $view = self::votePercentage($lock);
+                    $answer = self::getVoteAnswer($user, $lock);
+                }
+                $result .=
+                '<div class="square vote '.$active.' '.$voted.'" answer="'.$answer.'"'.$attr.'>
+                    <div class="center large">
+                        <p class="question">'.$lock->getField().'</p>
+                        '.$view.'
+                    </div>
+                </div>';
                 break;
         }
         $result .= '</div>';
@@ -94,7 +124,34 @@ class ForumControl{
         array_push($unlock, $user->getId());
         $lock->addData(['unlock'=>$unlock]);
         $manager->update($lock);
+        if($lock->getData()['lock'] == "vote"){
+            $answer = $lock->getData()['answer'];
+            array_push($answer[$notify], $user->getId());
+            $lock->addData(["answer"=>$answer]);
+            $manager->update($lock);
+        }
         return Constant::ERROR_CODE_OK;
+    }
+
+    public static function votePercentage(Post $lock){
+        $result = '<div class="aN">';
+        $total = count($lock->getData()['unlock']);
+        foreach($lock->getData()['answer'] as $key => $list){
+            $p = 0;
+            if($total > 0)
+                $p = round(count($list)*100/$total, 1);
+            $result .= '<span class="name">'.$key.':</span><div class="percentage"><div class="grand" style="width:'.$p.'%;"></div></div> <span class="stat">'.$p.'%</span><br><br>';
+        }
+        $result .= '</div>';
+        return $result;
+    }
+
+    public static function getVoteAnswer(User $user, Post $lock){
+        foreach($lock->getData()['answer'] as $key => $list){
+            if(in_array($user->getId(), $list))
+                return $key;
+        }
+        return "";
     }
 
     public static function getAutor($id, Manager $manager){
@@ -160,11 +217,13 @@ class ForumControl{
                     return Constant::ERROR_CODE_THREAD_ANSWER;
                 $post->setField($var['question']);
                 $post->addData(["lock"=>"vote"]);
-                $post->addData(["a1"=>$var["a1"], "a2"=>$var["a2"]]);
+                $answer = [$var['a1'] => [], $var['a2'] => []];
                 if(preg_match("/^.{1,20}$/", $var['a3']))
-                    $post->addData(["a3"=>$var["a3"]]);
+                    $answer[$var['a3']] = [];
                 if(preg_match("/^.{1,20}$/", $var['a4']))
-                    $post->addData(["a4"=>$var["a4"]]);
+                    $answer[$var['a4']] = [];
+                $post->addData(["answer"=>$answer]);
+                $post->addData(["unlock"=>[]]);
                 break;
         }
         $manager->add($post);

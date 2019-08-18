@@ -101,12 +101,12 @@ class DisplayThreadWidget extends Widget{
             </form>
             <div id="displayLock" class="vide">
                 <div class="center">
-                    <button id="notifyBarrier" class="button">Notify</button>
+                    <button id="notifyBarrier" class="button vide">Notify</button>
                     <div id="notifyVote" class="vide">
-                        <button class="kid buttonA a1" ></button>
-                        <button class="kid buttonA a2" ></button>
-                        <button class="kid buttonA a3" ></button>
-                        <button class="kid buttonA a4" ></button>
+                        <button id="a1" class="kid buttonA"></button>
+                        <button id="a2" class="kid buttonA"></button>
+                        <button id="a3" class="kid buttonA"></button>
+                        <button id="a4" class="kid buttonA"></button>
                     </div>
                 </div>
             </div>

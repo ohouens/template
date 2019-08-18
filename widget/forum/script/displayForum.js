@@ -77,6 +77,13 @@ $(function(){
                     $("#notifyBarrier").addClass("selected");
             });
         });
+
+        $("#notifyVote button").click(function(){
+            $.get("index.php?thread="+$("#contentChat").attr('num')+"&request=9&notify="+$(this).text(), function(data){
+                if(data == 0)
+                    $(this).addClass("selected");
+            });
+        });
     }
 
     function loadChat(){
@@ -91,6 +98,25 @@ $(function(){
             if($("#last .lock .active").length){
                 $("#contentChat #sendChat").css('display', 'none');
                 $("#contentChat #displayLock").css('display', 'flex');
+                if($("#last .lock .active.barrier").length) $("#notifyBarrier").css("display", "inline");
+                else $("#notifyBarrier").css("display", "none");
+                if($("#last .lock .active.vote").length){
+                    $("#notifyVote").css("display", "block");
+                    $("#notifyVote #a1").text($("#last .lock .active").attr('a1'));
+                    $("#notifyVote #a2").text($("#last .lock .active").attr('a2'));
+                    $("#notifyVote #a3").text($("#last .lock .active").attr('a3'));
+                    $("#notifyVote #a4").text($("#last .lock .active").attr('a4'));
+                    $("#notifyVote button").each(function(){
+                        if($(this).text() == '')
+                            $(this).css('display', 'none');
+                        else{
+                            $(this).css('display', 'inline-block');
+                            if($(this).text() == $("#last .lock .active.vote").attr("answer"))
+                                $(this).addClass("selected");
+                        }
+                    });
+                }
+                else $("#notifyVote").css("display", "none");
                 if($("#last .lock .active.barrier.voted").length)
                     $("#notifyBarrier").addClass("selected");
             }else{
