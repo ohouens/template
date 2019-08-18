@@ -46,10 +46,12 @@
     font-size: 1.2em;
     display: inline-block;
     width: 20%;
+    vertical-align: middle;
 }.answer .lock .aN .stat{
     display: inline-block;
     width: 10%;
     text-align: left;
+    vertical-align: middle;
 }.answer .lock .aN .percentage{
     display: inline-block;
     background: black;
