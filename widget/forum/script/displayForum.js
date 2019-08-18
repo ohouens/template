@@ -92,7 +92,7 @@ $(function(){
             if(end || first){
                 first = false;
                 $('#displayChat').animate({
-                    scrollTop: $('#last').offset().top + ($('#last').offset().top)*10
+                    scrollTop: $('#last').offset().top + ($('#last').offset().top)*10000
                 }, 500);
             }
             if($("#last .lock .active").length){
