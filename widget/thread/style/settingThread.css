@@ -1,3 +1,7 @@
+#setWidget{
+    min-height: 84vh;
+}
+
 #resume h1{
     font-family: sourceBold;
     font-size: 3em;

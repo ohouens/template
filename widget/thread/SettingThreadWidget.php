@@ -37,7 +37,7 @@ class SettingThreadWidget extends Widget{
             <button id="save" class="button space">Save</button>';
         }
         return
-        '<div id="setWidget" class="children square">
+        '<div id="setWidget" class="square">
             <div class="large center">
                 <div id="resume" num="'.$hash->get($post->getId()).'">
                     <h1>'.$post->getData()['title'].'</h1>
