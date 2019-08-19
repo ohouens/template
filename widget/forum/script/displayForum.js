@@ -33,11 +33,13 @@ $(function(){
                 end = true;
             }else{
                 end = false;
+                if($(this).scrollTop() == 0)
+                    loadFirst();
             }
         });
 
-        // loadChat();
-        setInterval(function(){loadChat()}, 1000);
+        loadChat();
+        setInterval(function(){loadLast()}, 1000);
 
         $("#addAction").click(function(e){
             e.preventDefault();
@@ -59,7 +61,6 @@ $(function(){
             e.preventDefault();
             $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
                 if(data == "0"){
-                    loadChat();
                     $("#contentChat form textarea").val('');
                     $("#contentChat form #voteBlock input").val('');
                 }
@@ -86,10 +87,41 @@ $(function(){
         });
     }
 
+    function loadFirst(){
+        var cursor = parseInt($("#history .first").attr("cursor"));
+        cursor = cursor + 1;
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&begin='+cursor, function(data){
+            $("#contentChat #buffer").html(data);
+            if((!first) && $("#contentChat #buffer .last").attr('num') < $('#displayChat #history .first').attr('num')){
+                $('#displayChat #history .first').removeClass('first');
+                $("#contentChat #buffer .last").removeClass("last");
+                $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
+            }
+        });
+    }
+
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
-            $('#displayChat').html(data);
+            $('#displayChat #history').html(data);
+        });
+    }
+
+    function loadChatBis(){
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&temoin='+$("#history .first").attr("num"), function(data){
+            $('#displayChat #history').html(data);
+            $(".answer").first().addClass("first");
+        });
+    }
+
+    function loadLast(){
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&last', function(data){
+            $("#contentChat #buffer").html(data);
+            if((!first) && $("#contentChat #buffer #last").attr('num') != $('#displayChat #end #last').attr('num')){
+                loadChatBis();
+            }
+            $('#displayChat #end').html(data);
             if(end || first){
+                $('#displayChat #history').css('display', 'block');
                 first = false;
                 $('#displayChat').animate({
                     scrollTop: $('#last').offset().top + ($('#last').offset().top)*10000

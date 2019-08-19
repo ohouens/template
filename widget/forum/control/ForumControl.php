@@ -1,32 +1,49 @@
 <?php
 class ForumControl{
-    public static function read(Post $post, PostManager $postManager, UserManager $userManager){
+    public static function read(Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
+        if(!is_numeric($begin) or !is_numeric($step))
+            return;
+        $i=0;
+        $check = true;
+        $verif = true;
         $result = "";
-        $list = $postManager->getList();
+        $list = array_reverse($postManager->getList());
         $final = [];
         foreach($list as $answer){
             if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
                 array_push($final, $answer);
         }
-        for($i=0; $i<count($final); $i++){
+        while($i<count($final) and $check){
             $inter = $final[$i];
-            $id = $inter->getId();
-            if($i == count($final)-1)
+            $id = "";
+            if($i == 0)
                 $id = "last";
-            $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
-            $body = preg_replace("#(https?://[\w?./=&]+)#", '<a href="$1" target="_blank">$1</a>', $text);
-            if(isset($inter->getData()['lock'])){
-                self::checkLockActive($inter, $postManager);
-                $body = self::readLock($inter);
+            $first = "";
+            if($verif)
+                $first = "last";
+            if($i == $begin+$step-1)
+                $first = "first";
+            if($i>=$begin){
+                $verif = false;
+                $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
+                $body = preg_replace("#(https?://[\w?./=&]+)#", '<a href="$1" target="_blank">$1</a>', $text);
+                if(isset($inter->getData()['lock'])){
+                    self::checkLockActive($inter, $postManager);
+                    $body = self::readLock($inter);
+                }
+                $user = self::getAutor($inter->getUser(), $userManager);
+                $result =
+                '<div class="'.$first.' answer" id="'.$id.'" cursor="'.$i.'" num="'.$inter->getId().'">
+                    <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
+                    -->'.$body.'
+                    <p class="gris">'.ForumControl::getSeniority($inter).'</p>
+                    <hr/>
+                </div>'.$result;
             }
-            $user = self::getAutor($inter->getUser(), $userManager);
-            $result .=
-            '<div class="answer" id="'.$id.'">
-                <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
-                -->'.$body.'
-                <p class="gris">'.ForumControl::getSeniority($inter).'</p>
-                <hr/>
-            </div>';
+            $i++;
+            $check = $i<$begin+$step;
+            if($stepIsId)
+                $check = $inter->getId() != $step;
         }
         return $result;
     }

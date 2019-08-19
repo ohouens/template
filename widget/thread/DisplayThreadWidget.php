@@ -77,7 +77,11 @@ class DisplayThreadWidget extends Widget{
             </div>
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
-            <div id="displayChat"></div>
+            <div id="displayChat">
+                <div id="history" class="vide"></div>
+                <div id="end"></div>
+            </div>
+            <div id="buffer" class="vide"></div>
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
                 <div class="slide alignement">
