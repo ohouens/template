@@ -7,45 +7,48 @@ class ForumControl{
         $check = true;
         $verif = true;
         $result = "";
-        $list = array_reverse($postManager->getList());
-        $final = [];
-        foreach($list as $answer){
-            if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
-                array_push($final, $answer);
-        }
-        while($i<count($final) and $check){
-            $inter = $final[$i];
-            $id = "";
-            if($i == 0)
-                $id = "last";
-            $first = "";
-            if($verif)
-                $first = "last";
-            if($i == $begin+$step-1)
-                $first = "first";
-            if($i>=$begin){
-                $verif = false;
-                $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
-                $body = preg_replace("#(https?://[\w?./=&]+)#", '<a href="$1" target="_blank">$1</a>', $text);
-                if(isset($inter->getData()['lock'])){
-                    self::checkLockActive($inter, $postManager);
-                    $body = self::readLock($inter);
+        $cursor = $post->getData()["head"];
+        try{
+            while($cursor != NULL and $check){
+                $inter = $postManager->get($cursor);
+                if(is_int($inter))
+                    throw new Exception("Error Processing linked list Request");
+                $id = "";
+                if($i == 0)
+                    $id = "last";
+                $first = "";
+                if($verif)
+                    $first = "last";
+                if($i == $begin+$step-1)
+                    $first = "first";
+                if($i>=$begin){
+                    $verif = false;
+                    $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
+                    $body = preg_replace("#(https?://[\w?./=&]+)#", '<a href="$1" target="_blank">$1</a>', $text);
+                    if(isset($inter->getData()['lock'])){
+                        self::checkLockActive($inter, $postManager);
+                        $body = self::readLock($inter);
+                    }
+                    $user = self::getAutor($inter->getUser(), $userManager);
+                    $result =
+                    '<div class="'.$first.' answer" id="'.$id.'" cursor="'.$i.'" num="'.$inter->getId().'">
+                        <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
+                        -->'.$body.'
+                        <p class="gris">'.ForumControl::getSeniority($inter).'</p>
+                        <hr/>
+                    </div>'.$result;
                 }
-                $user = self::getAutor($inter->getUser(), $userManager);
-                $result =
-                '<div class="'.$first.' answer" id="'.$id.'" cursor="'.$i.'" num="'.$inter->getId().'">
-                    <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
-                    -->'.$body.'
-                    <p class="gris">'.ForumControl::getSeniority($inter).'</p>
-                    <hr/>
-                </div>'.$result;
+                $i++;
+                $check = $i<$begin+$step;
+                if($stepIsId)
+                    $check = $inter->getId() != $step;
+                $cursor = $inter->getData()["next"];
             }
-            $i++;
-            $check = $i<$begin+$step;
-            if($stepIsId)
-                $check = $inter->getId() != $step;
+            return $result;
+        }catch(Exception $e){
+            echo $e->getMessage();
+            ThreadControl::initList($post, $postManager);
         }
-        return $result;
     }
 
     public static function checkLockActive(Post $lock, PostManager $manager){

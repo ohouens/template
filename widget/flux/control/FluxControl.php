@@ -2,11 +2,12 @@
 class FluxControl{
     public static function read(Post $post, PostManager $manager){
         $result = "";
-        $list = $manager->getList();
         $final = [];
-        foreach(array_reverse($list) as $answer){
-            if($answer->getType() == Constant::THREAD_ANSWER and $answer->getData()['parent'] == $post->getId())
-                array_push($final, $answer);
+        $cursor = $post->getData()["head"];
+        while($cursor != NULL){
+            $load = $manager->get($cursor);
+            array_push($final, $load);
+            $cursor = $load->getData()["next"];
         }
         array_push($final, $post);
         foreach($final as $inter){

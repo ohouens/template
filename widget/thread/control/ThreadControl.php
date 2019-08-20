@@ -15,6 +15,21 @@ class ThreadControl{
         return 0;
     }
 
+    public static function initList(Post $post, PostManager $pm){
+		if(in_array($post->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX])){
+            $post->addData(["head"=>NULL]);
+			foreach($pm->getList() as $inter){
+				if($inter->getType() == Constant::THREAD_ANSWER and $inter->getData()['parent'] == $post->getId()){
+					$inter->addData(["next" => $post->getData()["head"]]);
+					$post->addData(["head" => $inter->getId()]);
+                    $pm->update($inter);
+        			$pm->update($post);
+				}
+			}
+		}
+        return 0;
+    }
+
     public static function open(User $user, Post $post, $open, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
