@@ -103,6 +103,7 @@ $(function(){
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat #history').html(data);
+            $(".answer").first().addClass("first");
         });
     }
 

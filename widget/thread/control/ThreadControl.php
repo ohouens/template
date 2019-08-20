@@ -1,5 +1,20 @@
 <?php
 class ThreadControl{
+    public static function updateList(Post $post, PostManager $pm){
+        $list = $pm->getList();
+		if(in_array($post->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX])){
+			foreach($list as $inter){
+				if($inter->getType() == Constant::THREAD_ANSWER and $inter->getData()['parent'] == $post->getId() and !isset($inter->getData()['next'])){
+					$inter->addData(["next" => $post->getData()["head"]]);
+					$post->addData(["head" => $inter->getId()]);
+                    $pm->update($inter);
+        			$pm->update($post);
+				}
+			}
+		}
+        return 0;
+    }
+
     public static function open(User $user, Post $post, $open, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;

@@ -209,6 +209,7 @@ class ForumControl{
         $post->setUser($user->getId());
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent]);
+        $temoin = $manager->get($parent);
         switch($var['state']){
             case 0: //message
                 if(!preg_match("#^.{1,1000}$#s", $var['answer']))
@@ -218,7 +219,6 @@ class ForumControl{
             case 1: //lock barrier
                 if(!preg_match("/^[0-9]{1,5}$/", $var['length']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
-                $temoin = $manager->get($parent);
                 if(count($temoin->getData()['followers']) <= 0)
                     return 447;
                 $post->setField($var['length']);
@@ -245,7 +245,7 @@ class ForumControl{
                 break;
         }
         $manager->add($post);
-        return 0;
+        return ThreadControl::updateList($temoin, $manager);
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
