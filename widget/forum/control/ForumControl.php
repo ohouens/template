@@ -128,7 +128,7 @@ class ForumControl{
         $list = array_reverse($manager->getList());
         foreach($list as $inter){
             if($inter->getType() == Constant::THREAD_ANSWER){
-                if($inter->getData()['parent'] == $post->getId())
+                if($inter->getData()['parent'] == $post->getId() and isset($inter->getData()['lock']))
                     return $inter;
             }
         }
@@ -208,11 +208,14 @@ class ForumControl{
     }
 
     public static function createAnswer(User $user, $var, $parent, PostManager $manager){
+        $temoin = $manager->get($parent);
+        $lock = self::getLastLock($temoin, $manager);
+        if($lock != NULL and $lock->getActive() == 1)
+            return Constant::ERROR_CODE_THREAD_ANSWER;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent]);
-        $temoin = $manager->get($parent);
         switch($var['state']){
             case 0: //message
                 if(!preg_match("#^.{1,1000}$#s", $var['answer']))
