@@ -34,3 +34,8 @@
 #login span{
 	margin-top: 35px;
 }
+
+#signin span{
+	max-width: 60%;
+	text-align: left;
+}

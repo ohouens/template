@@ -12,5 +12,10 @@
 }#nonMail #mention{
     font-family: quickBold;
     font-size: 0.8em;
+}#nonMail span{
+    display: inline-block;
+    margin-top: 15px;
+	max-width: 300px;
 }
+
 .grand.square{background: #E5E5E5;}
