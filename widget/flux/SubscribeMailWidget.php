@@ -24,12 +24,12 @@ class SubscribeMailWidget extends Widget{
                 Do you want to subscribe to other flux without giving your email each time ?
                 <form action="https://onisowo.com/index.php" method="get" style="text-align:center;">
                     <input type="hidden" name="origin" value="mail"/>
-                    <input type="submit" value="Sign in" style="display:inline; cursor:pointer; border:none; color:#ffffff; background:#3e3e3e; height: 30px; width: 200px;" />
+                    <input type="submit" value="Sign up" style="display:inline; cursor:pointer; border:none; color:#ffffff; background:#3e3e3e; height: 30px; width: 200px;" />
                 </form>
             </div>
             <hr class="space width"/>';
         return
-        '<p  class="width" style="text-align: center;"><img src="https://onisowo.com/style/logo.png" alt="icon" style="width: 60px; height: 60px;"/></p>
+        '<p  class="width" style="text-align: center;"><img src="https://onisowo.com/style/icon.png" alt="icon" style="width: 60px; height: 60px;"/></p>
         <h1  class="width" style="text-align:center;">New Subscription</h1>
         <p class="width">You just subscribed to the flux "'.$post->getData()['title'].'"</p>
         <hr class="space width"/>
