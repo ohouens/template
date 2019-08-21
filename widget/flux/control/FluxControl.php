@@ -4,7 +4,7 @@ class FluxControl{
         $result = "";
         $final = [];
         $cursor = $post->getData()["head"];
-        while($cursor != NULL){
+        while($cursor != 0){
             $load = $manager->get($cursor);
             array_push($final, $load);
             $cursor = $load->getData()["next"];

@@ -9,7 +9,7 @@ class ForumControl{
         $result = "";
         $cursor = $post->getData()["head"];
         try{
-            while($cursor != NULL and $check){
+            while($cursor != 0 and $check){
                 $inter = $postManager->get($cursor);
                 if(is_int($inter))
                     throw new Exception("Error Processing linked list Request");
