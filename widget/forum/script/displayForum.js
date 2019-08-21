@@ -90,12 +90,17 @@ $(function(){
     function loadFirst(){
         var cursor = parseInt($("#history .first").attr("cursor"));
         cursor = cursor + 1;
+        var height = $('#last').offset().top;
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&begin='+cursor, function(data){
             $("#contentChat #buffer").html(data);
             if((!first) && $("#contentChat #buffer .last").attr('num') < $('#displayChat #history .first').attr('num')){
                 $('#displayChat #history .first').removeClass('first');
                 $("#contentChat #buffer .last").removeClass("last");
                 $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
+
+                $("#displayChat").animate({
+                    scrollTop: $('#last').offset().top - height
+                }, 0);
             }
         });
     }
