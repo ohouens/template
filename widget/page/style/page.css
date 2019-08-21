@@ -11,6 +11,7 @@
 }
 #pageCover h1{
     font-size: 3.5em;
+    max-width: 95%;
     font-family: sourceBold;
 }
 #pageCover .licence{
