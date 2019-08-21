@@ -88,41 +88,38 @@ $(function(){
     }
 
     function loadFirst(){
-        var cursor = parseInt($("#history .first").attr("cursor"));
+        var cursor = parseInt($("#history .answer").first().attr("cursor"));
         cursor = cursor + 1;
         var height = $('#last').offset().top;
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&begin='+cursor, function(data){
             $("#contentChat #buffer").html(data);
-            if((!first) && $("#contentChat #buffer .last").attr('num') < $('#displayChat #history .first').attr('num')){
-                $('#displayChat #history .first').removeClass('first');
-                $("#contentChat #buffer .last").removeClass("last");
+            if((!first) && $("#buffer .answer").last().attr('num') < $("#history .answer").first().attr('num')){
                 $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
 
                 $("#displayChat").animate({
                     scrollTop: $('#last').offset().top - height
                 }, 0);
             }
+            $("#contentChat #buffer").html("");
         });
     }
 
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat #history').html(data);
-            $(".answer").first().addClass("first");
         });
     }
 
     function loadChatBis(){
-        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&temoin='+$("#history .first").attr("num"), function(data){
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&temoin='+$("#history .answer").first().attr("num"), function(data){
             $('#displayChat #history').html(data);
-            $(".answer").first().addClass("first");
         });
     }
 
     function loadLast(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&last', function(data){
             $("#contentChat #buffer").html(data);
-            if((!first) && $("#contentChat #buffer #last").attr('num') != $('#displayChat #end #last').attr('num')){
+            if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num')){
                 loadChatBis();
             }
             $('#displayChat #end').html(data);
@@ -161,6 +158,7 @@ $(function(){
                 $("#contentChat #sendChat").css('display', 'block');
                 $("#contentChat #displayLock").css('display', 'none');
             }
+            $("#contentChat #buffer").html("");
         });
     }
 });
