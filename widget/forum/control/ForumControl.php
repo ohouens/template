@@ -223,7 +223,7 @@ class ForumControl{
                 $post->setField($var['answer']);
                 break;
             case 1: //lock barrier
-                if(!in_array($user->getPseudo(), $temoin->getData()['writers']))
+                if($user->getId() != $temoin->getUser() and !in_array($user->getPseudo(), $temoin->getData()['writers']))
                     return 444;
                 if(!preg_match("/^[0-9]{1,5}$/", $var['length']))
                     return Constant::ERROR_CODE_THREAD_ANSWER;
@@ -235,7 +235,7 @@ class ForumControl{
                 $post->addData(["unlock"=>[]]);
                 break;
             case 2: //lock vote
-                if(!in_array($user->getPseudo(), $temoin->getData()['writers']))
+                if($user->getId() != $temoin->getUser() and !in_array($user->getPseudo(), $temoin->getData()['writers']))
                     return 444;
                 if(!preg_match("/^.{1,100}$/", $var['question']))
                     return Constant::ERROR_CODE_THREAD_LENGTH;
