@@ -19,7 +19,7 @@ class ListThreadWidget extends Widget{
         $list = ThreadControl::list($user, $manager);
         foreach($list as $inter){
             $lock = "unlocked";
-            if($inter->getData()['writers'] != [])
+            if(!$inter->getData()['open'])
                 $lock = "locked";
             $page .=
             '<p class="list">

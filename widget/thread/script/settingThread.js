@@ -6,7 +6,7 @@ $(function(){
     $("#resume #save").click(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($("#resume form").attr('action'), $("#resume form").serialize()).done(function(data){
-            if(data == "0")
+            if(data == "00")
                 $("#error").html('<img src="style/icon/success.png" alt="success" class="wait" />');
             else
                 $("#error").html('<img src="style/icon/fail.png" alt="fail" class="wait" />');
@@ -14,6 +14,11 @@ $(function(){
                 $("#error").text("");
             },3000);
         });
+    });
+
+    $("#resume form").submit(function(e){
+        e.preventDefault();
+        $("#resume #save").trigger("click");
     });
 
     $("#resume #delete").click(function(){

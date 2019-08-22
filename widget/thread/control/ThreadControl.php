@@ -30,15 +30,33 @@ class ThreadControl{
         return 0;
     }
 
-    public static function open(User $user, Post $post, $open, PostManager $manager){
+    public static function setOpen(User $user, Post $post, $open, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
         if($open == "yes")
-            $post->addData(["writers"=>[]]);
+            $post->addData(["open"=>true]);
         else
-            $post->addData(["writers"=>[$user->getId()]]);
+            $post->addData(["open"=>false]);
         $manager->update($post);
         return 0;
+    }
+
+    public static function isOpen(Post $post){
+        return $post->getData()["open"];
+    }
+
+    public static function setWriters(User $user, Post $post, $writers, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if(!preg_match("#^([a-z0-9_]{1,20} ?){0,}$#", $writers))
+            return Constant::ERROR_CODE_PSEUDO_LENGTH;
+        $post->addData(["writers"=>explode(" ", $writers)]);
+        $manager->update($post);
+        return 0;
+    }
+
+    public static function getWriters(Post $post){
+        return implode(" ", $post->getData()["writers"]);
     }
 
     public static function delete(User $user, Post $post, PostManager $manager){
