@@ -35,6 +35,8 @@ class FluxControl{
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
+        if(!$post->getData()['open'])
+            return 5;
         $state = ThreadControl::subscribe('subscribers', $user, $post, $manager);
         if($state == 0){
             $corps = new SubscribeMailWidget($user, $post, $manager);

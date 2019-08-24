@@ -265,8 +265,11 @@ class ForumControl{
         if(in_array($id, $followers)){
             $followers = array_diff($followers, [$id]);
             $retour = 1;
-        }else
+        }else{
+            if(!$post->getData()['open'])
+                return 5;
             array_push($followers, $id);
+        }
         $post->removeData('followers');
         $post->addData(['followers' => $followers]);
         $manager->update($post);

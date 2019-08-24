@@ -1,6 +1,8 @@
 <?php
 class TicketingControl {
     public static function subscribe(User $user, Post $post, PostManager $manager){
+        if(!$post->getData()['open'])
+            return 5;
         $state = ThreadControl::subscribe('tickets', $user, $post, $manager);
         if($state == 0){
             //User check creation
