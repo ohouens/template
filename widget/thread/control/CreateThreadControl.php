@@ -42,6 +42,7 @@ class createThreadControl{
         $post->addData(["writers"=>[]]);
         $post->addData(["subscribers"=>[]]);
         $post->addData(["open"=>true]);
+        $post->addData(["head"=>0]);
         $manager->add($post);
         return 0;
     }
@@ -65,6 +66,7 @@ class createThreadControl{
                 $post->addData(["writers"=>[]]);
                 $post->addData(["followers"=>[]]);
                 $post->addData(["open"=>true]);
+                $post->addData(["head"=>0]);
                 $manager->add($post);
                 return 0;
                 break;

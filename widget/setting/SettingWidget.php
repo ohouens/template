@@ -100,7 +100,7 @@ class SettingWidget extends Widget{
                 <input class="buttonC space" type="submit" value="save"/>
             </form>
             <span class="displayError"></span><br/>
-            <a class="link" href="#">retour</a>
+            <a class="link" href="#">back</a>
         </div>';
     }
 
