@@ -37,11 +37,13 @@ $(function(){
     })
 
     $(".b p a").click(function(e){
-        e.preventDefault();
-        var parent = $(this).parent().parent();
-        $(this).parent().css('display', 'none');
-        parent.find(".grand.vide").css('display', 'block');
-        $($(this).attr('href')).css('display', 'block');
+        if($(this).attr("href").charAt(0) == "#"){
+            e.preventDefault();
+            var parent = $(this).parent().parent();
+            $(this).parent().css('display', 'none');
+            parent.find(".grand.vide").css('display', 'block');
+            $($(this).attr('href')).css('display', 'block');
+        }
     });
 
     $(".b .grand.vide a").click(function(e){

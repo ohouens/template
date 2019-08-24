@@ -111,7 +111,10 @@ class SettingWidget extends Widget{
             <a class="link" href="#changePassword">change password</a><br/>
             <a class="link" href="#changeEmail">change email</a><br/>
             <a class="link" href="#changeLinkedin">change linkedin</a><br/>
-            <a class="link" href="#changeInstagram">change instagram</a><br/>
+            <a class="link" href="#changeInstagram">change instagram</a>
+            <br><br>
+            <a class="link" href="index.php?reset=data">reset data</a><br>
+            <a class="link" href="index.php?desactivate='.$user->getId().'&amp;key='.$user->getToken().'">delete account</a><br>
         </p>
         <div class="grand vide">
             <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?setting&amp;request=1">

@@ -3,6 +3,13 @@ class SettingControl{
     const SOCIAL = ["artist", "athlete", "cadre", "student", "worker"];
     const HOBBY = ["coit", "dance", "eat", "fashion", "fitness", "gaming", "music", "party", "read", "sleep", "think", "travel"];
 
+    public static function reset(User $user, $data, UserManager $manager){
+        foreach($data as $inter)
+            $user->removeData($inter);
+        $manager->update($user);
+        return Constant::ERROR_CODE_OK;
+    }
+
     public static function changePdp($cover, User $user, UserManager $manager){
         $rename = renameFile($cover, $user->getID().achage(28));
         switch(checkUpload($cover, $rename, 'media/user/pp/')){
