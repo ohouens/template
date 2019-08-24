@@ -66,6 +66,10 @@
     vertical-align: middle;
 }.answer .lock .aN .percentage div{
     background: #33F7B7;
+}.answer .lock .vote .nbVote{
+    color: white;
+    text-align: right;
+    padding-right: 5%;
 }
 #contentChat #sendChat{
     height: 15%;

@@ -155,7 +155,8 @@ class ForumControl{
     }
 
     public static function votePercentage(Post $lock){
-        $result = '<div class="aN">';
+        $result =
+        '<div class="aN">';
         $total = count($lock->getData()['unlock']);
         foreach($lock->getData()['answer'] as $key => $list){
             $p = 0;
@@ -163,7 +164,9 @@ class ForumControl{
                 $p = round(count($list)*100/$total, 1);
             $result .= '<span class="name">'.$key.':</span><div class="percentage"><div class="grand" style="width:'.$p.'%;"></div></div> <span class="stat">'.$p.'%</span><br><br>';
         }
-        $result .= '</div>';
+        $result .=
+        '   <p class="nbVote">'.$total.' votes</p>
+        </div>';
         return $result;
     }
 

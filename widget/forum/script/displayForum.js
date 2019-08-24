@@ -93,7 +93,7 @@ $(function(){
         var height = $('#last').offset().top;
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&begin='+cursor, function(data){
             $("#contentChat #buffer").html(data);
-            if((!first) && $("#buffer .answer").last().attr('num') < $("#history .answer").first().attr('num')){
+            if((!first) && parseInt($("#buffer .answer").last().attr('num')) < parseInt($("#history .answer").first().attr('num'))){
                 $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
 
                 $("#displayChat").animate({
