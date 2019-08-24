@@ -162,6 +162,6 @@ class SettingControl{
             return Constant::ERROR_CODE_USER_TOKEN;
         $user->setActive(0);
         $manager->update($user);
-        return Constant::ERROR_CODE_OK;
+        return $user->end();
     }
 }
