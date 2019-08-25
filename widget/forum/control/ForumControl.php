@@ -29,14 +29,19 @@ class ForumControl{
                         self::checkLockActive($inter, $postManager);
                         $body = self::readLock($inter);
                     }
-                    $user = self::getAutor($inter->getUser(), $userManager);
-                    $result =
-                    '<div class="'.$first.' answer" id="'.$id.'" cursor="'.$i.'" num="'.$inter->getId().'">
-                        <p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p><!--
-                        -->'.$body.'
-                        <p class="gris">'.ForumControl::getSeniority($inter).'</p>
-                        <hr/>
-                    </div>'.$result;
+                    try{
+                        $user = self::getAutor($inter->getUser(), $userManager);
+                        $account = '<p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p>';
+                    }catch(Exception $e){
+                        $account = '<p class="pseudo alignement">Account deleted</p>';
+                    }
+                        $result =
+                        '<div class="'.$first.' answer" id="'.$id.'" cursor="'.$i.'" num="'.$inter->getId().'">
+                            '.$account.'<!--
+                            -->'.$body.'
+                            <p class="gris">'.ForumControl::getSeniority($inter).'</p>
+                            <hr/>
+                        </div>'.$result;
                 }
                 $i++;
                 $check = $i<$begin+$step;
@@ -179,7 +184,10 @@ class ForumControl{
     }
 
     public static function getAutor($id, Manager $manager){
-        return $manager->get($id);
+        $autor = $manager->get($id);
+        if(is_int($autor))
+            throw new Exception("Error autor doesn't exist");
+        return $autor;
     }
 
     public static function color(Post $post, User $user){

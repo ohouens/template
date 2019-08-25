@@ -98,16 +98,22 @@ class ThreadControl{
         $content = self::getInfluence($post);
         $save = $post->getData()[$content];
         foreach(array_reverse($save) as $inter){
-            if(preg_match(Constant::REGEX_EMAIL, $inter)){
-                if($user->getId() == $post->getUser()){
-                    $tmp = new User(["email"=>$inter]);
-                    $tmp->addData(["isMail"=>True]);
+            try{
+                if(is_int($inter))
+                    throw new Exception("Error Processing Request");
+                if(preg_match(Constant::REGEX_EMAIL, $inter)){
+                    if($user->getId() == $post->getUser()){
+                        $tmp = new User(["email"=>$inter]);
+                        $tmp->addData(["isMail"=>True]);
+                        array_push($final, $tmp);
+                    }
+                }else{
+                    $tmp = $manager->get($inter);
+                    $tmp->addData(["isMail"=>False]);
                     array_push($final, $tmp);
                 }
-            }else{
-                $tmp = $manager->get($inter);
-                $tmp->addData(["isMail"=>False]);
-                array_push($final, $tmp);
+            }catch(Exception $e){
+
             }
         }
         return $final;
