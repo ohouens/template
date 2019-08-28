@@ -112,7 +112,7 @@ class ForumControl{
                     $attr .= ' a'.$i.'="'.$key.'"';
                     $i++;
                 }
-                if($lock->getActive()['lock'] == 2 or $voted == "voted"){
+                if($lock->getActive() == 2 or $voted == "voted"){
                     $view = self::votePercentage($lock);
                     $answer = self::getVoteAnswer($user, $lock);
                 }
