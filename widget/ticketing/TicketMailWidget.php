@@ -43,7 +43,7 @@ class TicketMailWidget extends widget{
         '.$novo.'
         <div  class="width" style="text-align: center">
             <a href="https://onisowo.com/index.php?thread='.$hash->get($post->getId()).'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">cancel</a><br/>
-            <p>Developed by ohouens</p>
+            <p>Developed by otgfeak</p>
             <p style="color:#A5A5A5; font-size: 15px;">
                 Be sure to never purchase or enter informations from link in mails that could be ours, hackers are on the rise nowadays.
             </p>
