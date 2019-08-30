@@ -31,6 +31,7 @@ class FluxControl{
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent->getId()]);
         $postManager->add($post);
+        ThreadControl::updateList($parent, $postManager);
         return self::updateSubscriber($parent, $postManager, $userManager);
     }
 
