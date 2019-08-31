@@ -16,7 +16,7 @@ $(function(){
 
     $("#contentFlux form textarea").on('keyup paste', function(){
         var l = parseInt($(this).val().length);
-        var count = 300 - l;
+        var count = 500 - l;
         $(this).next().text(count);
     });
 
@@ -27,7 +27,7 @@ $(function(){
                 initFlux();
                 $("#addFlux").trigger("click");
                 $("#contentFlux form textarea").val('');
-                $("#contentFlux form span").text('300');
+                $("#contentFlux form span").text('500');
             }else{
                 $('#erreur').text(traduction(data));
                 setTimeout(function(){

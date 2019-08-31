@@ -154,7 +154,7 @@ class DisplayThreadWidget extends Widget{
                 <div class="center">
                     <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                         <textarea class="noBorder" name="answer"></textarea>
-                        <span>300</span>
+                        <span>500</span>
                     </form><br/>
                     <button class="buttonA">Add</button><br/>
                     <span id="erreur"></span>

@@ -11,9 +11,11 @@ class FluxControl{
         }
         array_push($final, $post);
         foreach($final as $inter){
+            $body = preg_replace("#(https?://[\w?./=&]+)#", '<a href="$1" target="_blank">$1</a>', $inter->getField());
+            $text = nl2br(htmlspecialchars($body));
             $result .=
             '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
-                '.nl2br(htmlspecialchars($inter->getField())).'
+                '.$body.'
             </p>
             <hr class="mark" style="width: 8px; height: 8px; border-radius: 50%; background: grey; margin: 0; display: inline-block;"/>';
         }
