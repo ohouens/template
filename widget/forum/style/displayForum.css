@@ -20,7 +20,7 @@
 }.answer .text{
     width: 60%;
     /* background: blue; */
-}.answer .text a{
+}#end .answer .text a{
     color: blue;
 }.answer .gris{
         text-align: right;

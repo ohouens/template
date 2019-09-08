@@ -70,6 +70,9 @@ class DisplayThreadWidget extends Widget{
 
     private function constructForum(User $user, Post $post, UserManager $manager){
         global $hash;
+        $option = '<input type="image" value="">';
+        if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
+            $option = '<input type="image" id="addAction" src="style/icon/plus.png"/>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -100,7 +103,7 @@ class DisplayThreadWidget extends Widget{
                     </div>
                     <textarea name="answer" class="kid plein"></textarea>
                 </div><!--
-                --><input type="image" id="addAction" src="style/icon/plus.png"/><!--
+                -->'.$option.'<!--
                 --><input type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>
             <div id="displayLock" class="vide">
