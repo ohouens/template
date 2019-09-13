@@ -18,6 +18,7 @@ $(function(){
     if($(this).width() < 800)
         $(".flickery").flickity({
             draggable: false,
-            groupCells: true
+            groupCells: true,
+            initialIndex: 1
         });
 });
