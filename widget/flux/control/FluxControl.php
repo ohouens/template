@@ -13,7 +13,7 @@ class FluxControl{
         foreach($final as $inter){
             $text = nl2br(htmlspecialchars($inter->getField()));
             $text = preg_replace("#&amp;#", '&', $text);
-            $body = preg_replace("#(https?://[\w?./=&-_]+)#", '<a href="$1" target="_blank">$1</a>', $text);
+            $body = preg_replace("#(https?://[\w?./=&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
             $result .=
             '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
                 '.$body.'
