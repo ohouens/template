@@ -26,7 +26,7 @@ class FluxControl{
     public static function createAnswer(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager){
         if($user->getId() != $parent->getUser())
             return Constant::ERROR_CODE_THREAD_WRITE_RIGHT;
-        if(!preg_match("#^.{1,500}$#s", $answer))
+        if(!preg_match("#^.{1,520}$#s", $answer))
             return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         $post->setUser($user->getId());
