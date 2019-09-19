@@ -28,8 +28,7 @@ class TicketMailWidget extends widget{
             <hr class="space width"/>';
         $id = ThreadControl::getId($customer);
         return
-        '<p class="width" style="text-align: center;"><img src="https://onisowo.com/style/icon.png" alt="icon" style="width: 60px; height: 60px;"/></p>
-        <h1 class="width" style="text-align:center;">Ticket</h1>
+        '<h1 class="width" style="text-align:center;">Ticket</h1>
         <p class="width">
             This is your ticket from "'.$post->getData()['title'].'"<br/>
             you can let the owner scan the qrCode to validate your ticket.
@@ -42,11 +41,7 @@ class TicketMailWidget extends widget{
         <hr class="space width"/>
         '.$novo.'
         <div  class="width" style="text-align: center">
-            <a href="https://onisowo.com/index.php?thread='.$hash->get($post->getId()).'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">cancel</a><br/>
-            <p>Developed by otgfeak</p>
-            <p style="color:#A5A5A5; font-size: 15px;">
-                Be sure to never purchase or enter informations from link in mails that could be ours, hackers are on the rise nowadays.
-            </p>
+            <a href="https://onisowo.com/index.php?thread='.$hash->get($post->getId()).'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">cancel</a>
         </div>';
     }
 }

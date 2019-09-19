@@ -29,8 +29,7 @@ class SubscribeMailWidget extends Widget{
             </div>
             <hr class="space width"/>';
         return
-        '<p  class="width" style="text-align: center;"><img src="https://onisowo.com/style/icon.png" alt="icon" style="width: 60px; height: 60px;"/></p>
-        <h1  class="width" style="text-align:center;">New Subscription</h1>
+        '<h1  class="width" style="text-align:center;">New Subscription</h1>
         <p class="width">You just subscribed to the flux "'.$post->getData()['title'].'"</p>
         <hr class="space width"/>
         '.$history->getContent().'
@@ -38,10 +37,6 @@ class SubscribeMailWidget extends Widget{
         '.$novo.'
         <div  class="width" style="text-align: center">
             <a href="https://onisowo.com/index.php?thread='.$hash->get($post->getId()).'&request=3&user='.$id.'&token='.$post->getData()['keys'][$id].'">unsubscribe</a><br/>
-            <p>Developed by otgfeak</p>
-            <p style="color:#A5A5A5; font-size: 15px;">
-                Be sure to never purchase or enter informations from link in mails that could be ours, hackers are on the rise nowadays.
-            </p>
         </div>';
     }
 }
