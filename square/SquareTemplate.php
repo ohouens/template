@@ -76,7 +76,7 @@ class SquareTemplate extends Base{
         ?>
         </div>
         <footer>
-            <p id="copyright"><span>© otgfeak</span></p>
+            <p id="copyright"><span>© ohouens 2019</span></p>
         	<div id="banner">
                 <div class="large center">
                     <?php $banner->show(); ?>
@@ -97,7 +97,7 @@ class SquareTemplate extends Base{
         ?>
         </div>
         <footer id="footerLight">
-            <p id="copyright"><span>© otgfeak</span></p>
+            <p id="copyright"><span>© ohouens 2019</span></p>
         </footer>
         <?php
     }
