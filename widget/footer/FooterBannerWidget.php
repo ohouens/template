@@ -19,8 +19,10 @@ class FooterBannerWidget extends Widget{
             <div>
                 <img id="footerLogo" src="style/logo(1).png" alt="logo onisowo">
                 <strong>ONISOWO</strong>
-                <a href="https://twitter.com/otgfeak/" target="_blank"><img src="style/icon/twitterWhite.png" alt="twitter"></a>
+                <a href="mailto:ryan@ohouens.com"><img src="style/icon/mail.png" alt="mail"></a>
             </div>
         </div>';
     }
+
+    //<a href="https://twitter.com/otgfeak/" target="_blank"><img src="style/icon/twitterWhite.png" alt="twitter"></a>
 }
