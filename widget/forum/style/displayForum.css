@@ -19,8 +19,11 @@
     color: inherit;
 }.answer .text{
     width: 60%;
-	white-space: pre-wrap;
+	/* white-space: pre-wrap; */
     /* background: blue; */
+}.answer .text .indent{
+    display: inline-block;
+    width: 25px;
 }#end .answer .text a{
     color: blue;
 }.answer .gris{
