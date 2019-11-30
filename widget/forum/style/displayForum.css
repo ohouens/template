@@ -19,6 +19,7 @@
     color: inherit;
 }.answer .text{
     width: 60%;
+	white-space: pre-wrap;
     /* background: blue; */
 }#end .answer .text a{
     color: blue;
