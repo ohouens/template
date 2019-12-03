@@ -18,7 +18,8 @@ class SettingControl{
             case 1:
                 try{
                     $old = $user->getData()['pp'];
-                    unlink('media/user/pp/'.$old);
+                    if($old != "black.png")
+                        unlink('media/user/pp/'.$old);
                 }finally{
                     $user->addData(["pp" => $rename]);
                     $manager->update($user);
