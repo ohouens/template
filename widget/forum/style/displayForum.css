@@ -126,7 +126,7 @@
 }
 
 @media (max-width: 800px){
-    #contentChat{
+    #contentChat, .answer .pseudo, .answer .text{
         width: 100%;
     }
     #contentChat #sendChat .slide{
