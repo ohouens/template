@@ -120,7 +120,7 @@ class SettingWidget extends Widget{
             <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?setting&amp;request=1">
                 <input type="file" name="pdp" accept="image/x-png,image/jpeg" class="vide"/>
                 <img class="center profilePicture" src="media/user/pp/'.$user->getData()['pp'].'"/><br/>
-                <input class="buttonC space" type="submit" value="change"/>
+                <input class="buttonC space" type="submit" value="validate"/>
             </form>
             <form class="vide" id="changePassword" method="post" action="index.php?setting&amp;request=2">
                 <input class="input" type="password" name="old" placeholder="old password" /><br/>
