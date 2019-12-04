@@ -75,6 +75,9 @@
     text-align: right;
     padding-right: 5%;
 }
+.cache{
+    display: none;
+}
 #contentChat #sendChat{
     height: 15%;
     background: white;

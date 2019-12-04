@@ -87,6 +87,14 @@ $(function(){
         });
     }
 
+    function editSwitch(){
+        $(".answer").dblclick(function(){
+            $("#sendChat textarea[name='answer']").text($(this).find('.text').text());
+            $(".nonCache").css("display", "none");
+            $(".cache").css("display", "inline-block");
+        });
+    }
+
     function loadFirst(){
         var cursor = parseInt($("#history .answer").first().attr("cursor"));
         cursor = cursor + 1;
@@ -95,6 +103,7 @@ $(function(){
             $("#contentChat #buffer").html(data);
             if((!first) && parseInt($("#buffer .answer").last().attr('num')) < parseInt($("#history .answer").first().attr('num'))){
                 $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
+                editSwitch();
 
                 $("#displayChat").animate({
                     scrollTop: $('#last').offset().top - height
@@ -107,12 +116,14 @@ $(function(){
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat #history').html(data);
+            editSwitch();
         });
     }
 
     function loadChatBis(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&temoin='+$("#history .answer").first().attr("num"), function(data){
             $('#displayChat #history').html(data);
+            editSwitch();
         });
     }
 

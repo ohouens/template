@@ -87,6 +87,8 @@ class DisplayThreadWidget extends Widget{
             <div id="buffer" class="vide"></div>
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
+                <input type="hidden" name="action" value="0">
+                <input type="hidden" name="cursor" value="0">
                 <div class="slide alignement">
                     <div id="barrierBlock" class="kid plein vide">
                         <div class="center">
@@ -103,8 +105,10 @@ class DisplayThreadWidget extends Widget{
                     </div>
                     <textarea name="answer" class="kid plein"></textarea>
                 </div><!--
+                --><input class="cache" type="image" id="delete" src="style/icon/delete.png"/><!--
+                --><input class="cache" type="image" id="edit" src="style/icon/edit.png"/><!--
                 -->'.$option.'<!--
-                --><input type="image" id="send" src="style/icon/sendDirect.png"/>
+                --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>
             <div id="displayLock" class="vide">
                 <div class="center">
