@@ -116,8 +116,8 @@ class ThreadControl{
         $save = $post->getData()[$content];
         foreach(array_reverse($save) as $inter){
             try{
-                if(is_int($inter))
-                    throw new Exception("Error Processing Request");
+                // if(is_int($inter))
+                //     throw new Exception("Error Processing Request");
                 if(preg_match(Constant::REGEX_EMAIL, $inter)){
                     if($user->getId() == $post->getUser()){
                         $tmp = new User(["email"=>$inter]);
