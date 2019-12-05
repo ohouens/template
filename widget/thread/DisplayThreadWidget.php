@@ -70,9 +70,9 @@ class DisplayThreadWidget extends Widget{
 
     private function constructForum(User $user, Post $post, UserManager $manager){
         global $hash;
-        $option = '<input type="image" value="">';
+        $option = '<input class="nonCache" type="image" value="">';
         if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
-            $option = '<input type="image" id="addAction" src="style/icon/plus.png"/>';
+            $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -87,7 +87,6 @@ class DisplayThreadWidget extends Widget{
             <div id="buffer" class="vide"></div>
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
-                <input type="hidden" name="action" value="0">
                 <input type="hidden" name="cursor" value="0">
                 <div class="slide alignement">
                     <div id="barrierBlock" class="kid plein vide">

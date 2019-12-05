@@ -59,8 +59,25 @@ class ThreadControl{
         return implode(" ", $post->getData()["writers"]);
     }
 
+    public static function isAdmin(User $user, Post $post, PostManager $manager){
+        if($post->getType() != Constant::THREAD_ANSWER)
+            return false;
+        $parent = $manager->get($post->getData()["parent"]);
+        return $user->getId() == $parent->getUser();
+    }
+
+    public static function edit(User $user, Post $post, $answer, PostManager $manager){
+        if($user->getId() != $post->getUser() and !self::isAdmin($user, $post, $manager))
+            return Constant::ERROR_CODE_USER_WRONG;
+        if(!isset($post->getData()["originalField"]))
+            $post->addData(["originalField"=>$post->getField()]);
+        $post->setField($answer);
+        $manager->update($post);
+        return 0;
+    }
+
     public static function delete(User $user, Post $post, PostManager $manager){
-        if($user->getId() != $post->getUser())
+        if($user->getId() != $post->getUser() and !self::isAdmin($user, $post, $manager))
             return Constant::ERROR_CODE_USER_WRONG;
         $post->setActive(0);
         $manager->update($post);

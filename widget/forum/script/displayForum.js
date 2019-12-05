@@ -67,6 +67,30 @@ $(function(){
             });
         });
 
+        $("#edit").click(function(e){
+            e.preventDefault();
+            $.post("index.php?thread=0&request=43", $("#contentChat form").serialize()).done(function(data){
+                if(data == "0"){
+                    $("#contentChat form textarea").val('');
+                    $("#contentChat form #voteBlock input").val('');
+                    editOff();
+                    loadChat();
+                }
+            });
+        });
+
+        $("#delete").click(function(e){
+            e.preventDefault();
+            $.post("index.php?thread=0&request=42", $("#contentChat form").serialize()).done(function(data){
+                if(data == "0"){
+                    $("#contentChat form textarea").val('');
+                    $("#contentChat form #voteBlock input").val('');
+                    editOff();
+                    loadchat();
+                }
+            });
+        });
+
         $("#contentChat form").submit(function(e){
             e.preventDefault();
             $("#send").trigger("click");
@@ -90,9 +114,17 @@ $(function(){
     function editSwitch(){
         $(".answer").dblclick(function(){
             $("#sendChat textarea[name='answer']").text($(this).find('.text').text());
+            $("#sendChat input[name='cursor']").val($(this).attr('num'));
             $(".nonCache").css("display", "none");
             $(".cache").css("display", "inline-block");
         });
+    }
+
+    function editOff(){
+        $("#sendChat textarea[name='answer']").text("");
+        $("#sendChat input[name='cursor']").val("0");
+        $(".cache").css("display", "none");
+        $(".nonCache").css("display", "inline-block");
     }
 
     function loadFirst(){
