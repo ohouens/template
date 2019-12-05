@@ -81,14 +81,16 @@ $(function(){
 
         $("#delete").click(function(e){
             e.preventDefault();
-            $.post("index.php?thread=0&request=42", $("#contentChat form").serialize()).done(function(data){
-                if(data == "0"){
-                    $("#contentChat form textarea").val('');
-                    $("#contentChat form #voteBlock input").val('');
-                    editOff();
-                    loadchat();
-                }
-            });
+            if(confirm("Do you want to delete this post ?")){
+                $.post("index.php?thread=0&request=42", $("#contentChat form").serialize()).done(function(data){
+                    if(data == "0"){
+                        $("#contentChat form textarea").val('');
+                        $("#contentChat form #voteBlock input").val('');
+                        editOff();
+                        loadchat();
+                    }
+                });
+            }
         });
 
         $("#contentChat form").submit(function(e){
