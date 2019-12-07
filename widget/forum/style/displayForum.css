@@ -76,11 +76,9 @@
     padding-right: 5%;
 }
 .cache{display: none;}
-.crochet{color: #33F7B7}
+.crochet{color: #ffc828;}
 .accolade{color: #e7c351;}
-.hashtag{
-    color: #00b2d6;
-}
+.hashtag{color: #cddbd3;}
 .at{
     color: #ff009d;
     text-decoration: none;
