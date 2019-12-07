@@ -71,20 +71,11 @@ class DisplayThreadWidget extends Widget{
     private function constructForum(User $user, Post $post, UserManager $manager){
         global $hash;
         $option = '<input class="nonCache" type="image" value="">';
-        if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
+        if(ThreadControl::checkMode($user, $post, "execute"))
             $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
-        return
-        '<div id="contentCode" class="grand children rectangle">
-            <div class="center">
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()), 'Access forum').'
-            </div>
-        </div><!--
-        --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
-            <div id="displayChat">
-                <div id="history" class="vide"></div>
-                <div id="end"></div>
-            </div>
-            <div id="buffer" class="vide"></div>
+        $chat = "";
+        if(ThreadControl::checkMode($user, $post, "write"))
+            $chat = '
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
                 <input type="hidden" name="cursor" value="0">
@@ -108,7 +99,20 @@ class DisplayThreadWidget extends Widget{
                 --><input class="cache" type="image" id="edit" src="style/icon/edit.png"/><!--
                 -->'.$option.'<!--
                 --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
-            </form>
+            </form>';
+        return
+        '<div id="contentCode" class="grand children rectangle">
+            <div class="center">
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()), 'Access forum').'
+            </div>
+        </div><!--
+        --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
+            <div id="displayChat">
+                <div id="history" class="vide"></div>
+                <div id="end"></div>
+            </div>
+            <div id="buffer" class="vide"></div>
+            '.$chat.'
             <div id="displayLock" class="vide">
                 <div class="center">
                     <button id="notifyBarrier" class="button vide">Notify</button>

@@ -45,6 +45,23 @@ class ThreadControl{
         return $post->getData()["open"];
     }
 
+    public static function setMode(User $user, Post $post, $mode, $right, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($right == "everyone")
+            $post->addData([$mode=>1]);
+        else
+            $post->addData([$mode=>0]);
+        $manager->update($post);
+        return 0;
+    }
+
+    public static function checkMode(User $user, Post $post, $mode){
+        if(!isset($post->getData()[$mode]))
+            return true;
+        return $user->getId() == $post->getUser() or $post->getData()[$mode] == 1;
+    }
+
     public static function setWriters(User $user, Post $post, $writers, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;

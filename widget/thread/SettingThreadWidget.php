@@ -25,13 +25,36 @@ class SettingThreadWidget extends Widget{
             if($post->getData()['open'])
                 $yes = "selected";
             else $no = "selected";
+            $readme = "";
+            $writeme = "";
+            $executeme = "";
+            if($post->getData()['read'] == 0)
+                $readme = "selected";
+            if($post->getData()['write'] == 0)
+                $writeme = "selected";
+            if($post->getData()['execute'] == 0)
+                $executeme = "selected";
             $lock =
             '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <span class="tab">open:</span><select class="input" name="open">
                     <option value="yes" '.$yes.'>yes</option>
                     <option value="no" '.$no.'>no</option>
                 </select><br/>
-                <span class="tab">writers:</span><textarea name="writers">'.ThreadControl::getWriters($post).'</textarea>
+                <span class="tab">read:</span><select class="input" name="read">
+                    <option value="everyone">everyone</option>
+                    <option value="me" '.$readme.'>me</option>
+                    <option value="only">only</option>
+                </select><br/>
+                <span class="tab">write:</span><select class="input" name="write">
+                    <option value="everyone">everyone</option>
+                    <option value="me" '.$writeme.'>me</option>
+                    <option value="only">only</option>
+                </select><br/>
+                <span class="tab">execute:</span><select class="input" name="execute">
+                    <option value="everyone">everyone</option>
+                    <option value="me" '.$executeme.'>me</option>
+                    <option value="only">only</option>
+                </select><br/>
             </form>';
             $save =
             '<button id="delete" class="button space">Delete</button>
