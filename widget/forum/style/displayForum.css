@@ -78,6 +78,10 @@
 .cache{
     display: none;
 }
+.at{
+    color: #ff009d;
+    text-decoration: none;
+}
 #contentChat #sendChat{
     height: 15%;
     background: white;

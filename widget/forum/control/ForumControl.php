@@ -26,6 +26,7 @@ class ForumControl{
                     $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
                     $body = preg_replace("#(https?://[\w?./=~&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
                     $body = preg_replace("#    #", '<span class="indent"></span>', $body);
+                    $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
                     if(isset($inter->getData()['lock'])){
                         self::checkLockActive($inter, $postManager);
                         $body = self::readLock($inter);
