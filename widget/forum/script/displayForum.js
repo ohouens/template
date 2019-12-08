@@ -168,6 +168,7 @@ $(function(){
                 loadChatBis();
             }
             $('#displayChat #end').html(data);
+            editSwitch();
             if(end || first){
                 $('#displayChat #history').css('display', 'block');
                 first = false;
