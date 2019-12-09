@@ -224,9 +224,9 @@ class ForumControl{
     }
 
     public static function createAnswer(User $user, $var, $parent, PostManager $manager){
-        if(!ThreadControl::checkMode($user, $post, "write"))
-            return 44;
         $temoin = $manager->get($parent);
+        if(!ThreadControl::checkMode($user, $temoin, "write"))
+            return 44;
         $lock = self::getLastLock($temoin, $manager);
         if($lock != NULL and $lock->getActive() == 1)
             return Constant::ERROR_CODE_THREAD_ANSWER;
