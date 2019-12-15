@@ -111,7 +111,8 @@ class SettingWidget extends Widget{
             <a class="link" href="#changePassword">change password</a><br/>
             <a class="link" href="#changeEmail">change email</a><br/>
             <a class="link" href="#changeLinkedin">change linkedin</a><br/>
-            <a class="link" href="#changeInstagram">change instagram</a>
+            <a class="link" href="#changeInstagram">change instagram</a><br/>
+            <a class="link" href="#changeSnapchat">change snapchat</a>
             <br><br>
             <a class="link" href="index.php?reset=data">reset data</a><br>
             <a class="link" href="index.php?desactivate='.$user->getId().'&amp;key='.$user->getToken().'">delete account</a><br>
@@ -139,6 +140,10 @@ class SettingWidget extends Widget{
             </form>
             <form class="vide" id="changeInstagram" method="post" action="index.php?setting&amp;request=10">
                 @<input class="input" type="text" name="instagram" placeholder="instagram_username" value="'.SettingControl::getInstagram($user).'"/><br/>
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeSnapchat" method="post" action="index.php?setting&amp;request=11">
+                @<input class="input" type="text" name="snapchat" placeholder="snapchat_username" value="'.SettingControl::getSnapchat($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <span class="displayError"></span><br/>

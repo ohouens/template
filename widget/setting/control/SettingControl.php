@@ -59,6 +59,14 @@ class SettingControl{
         return Constant::ERROR_CODE_OK;
     }
 
+    public static function changeSnapchat($snap, User $user, UserManager $manager){
+        if(!preg_match("/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/im", $snap))
+            return Constant::ERROR_CODE_INSTAGRAM_FORMAT;
+        $user->addData(["snapchat"=>$snap]);
+        $manager->update($user);
+        return Constant::ERROR_CODE_OK;
+    }
+
     public static function changeLinkedin($li, User $user, UserManager $manager){
         if(!preg_match("#^https://([a-z]{2,3}\.)?linkedin\.com/.*$#", $li))
             return Constant::ERROR_CODE_LINKEDIN_FORMAT;
@@ -144,6 +152,12 @@ class SettingControl{
         return $user->getData()['instagram'];
     }
 
+    public static function getSnapchat(User $user){
+        if(!isset($user->getData()['snapchat']))
+            return "";
+        return $user->getData()['snapchat'];
+    }
+
     public static function instagram(User $user){
         if(!isset($user->getData()['instagram']))
             return "";
@@ -154,6 +168,12 @@ class SettingControl{
         if(!isset($user->getData()['linkedin']))
             return "";
         return $user->getData()['linkedin'];
+    }
+
+    public static function snapchat(User $user){
+        if(!isset($user->getData()['snapchat']))
+            return "";
+        return "https://www.snapchat.com/add/".$user->getData()['snapchat'];
     }
 
     public static function deleteAccount(User $user, $password, $token, UserManager $manager){
