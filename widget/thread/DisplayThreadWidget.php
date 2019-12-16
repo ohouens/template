@@ -18,7 +18,7 @@ class DisplayThreadWidget extends Widget{
             $delete = "";
             if($user->getId() == $post->getUser()){
                 $delete =
-                '<a href="?thread='.$hash->get($post->getId()).'&amp;delete='.$id.'">
+                '<a class="removeU" href="?thread='.$hash->get($post->getId()).'&amp;delete='.$id.'">
                     <img class="delete" src="style/icon/wrong.png" alt="delete"/>
                 </a>';
             }

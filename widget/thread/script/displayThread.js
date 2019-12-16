@@ -2,6 +2,12 @@ $(function(){
     if($("#contentWriter").length){
         $.get('?thread='+$("#contentWriter").attr('num')+'&request=6', function(data){
             $("#contentWriter").html(data);
+            $(".removeU").click(function(e){
+                e.preventDefault();
+                if(confirm("Do you want to remove this user ?")){
+                    window.location.href = $(this).attr("href");
+                }
+            });
             initSpecial();
         });
     }
