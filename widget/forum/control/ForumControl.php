@@ -246,7 +246,7 @@ class ForumControl{
                 if(!preg_match("#^.{1,1000}$#s", $var['answer']))
                     return Constant::ERROR_CODE_THREAD_LENGTH;
                 $post->setField($var['answer']);
-                if(self::isOrder($var["answer"])){
+                if(self::isOrder($var["answer"]) and isset($temoin->getData()["tunnel"])){
                     if(!ThreadControl::isOpen($temoin))
                         return 0;
                     $result = self::createOrder($user, $var["answer"], $temoin, $pm, $um);
