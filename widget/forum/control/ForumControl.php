@@ -229,11 +229,11 @@ class ForumControl{
             return "a moment moment ago";
     }
 
-    public static function createAnswer(User $user, $var, $parent, PostManager $manager){
-        $temoin = $manager->get($parent);
+    public static function createAnswer(User $user, $var, $parent, PostManager $pm, UserManager $um){
+        $temoin = $pm->get($parent);
         if(!ThreadControl::checkMode($user, $temoin, "write"))
             return 44;
-        $lock = self::getLastLock($temoin, $manager);
+        $lock = self::getLastLock($temoin, $pm);
         if($lock != NULL and $lock->getActive() == 1)
             return Constant::ERROR_CODE_THREAD_ANSWER;
         $post = new Post();
@@ -277,9 +277,51 @@ class ForumControl{
                 $post->addData(["answer"=>$answer]);
                 $post->addData(["unlock"=>[]]);
                 break;
+            case 3: //tunnel order
+                if(!self::isValideorder($var["answer"]))
+                    return Constant::ERROR_CODE_THREAD_ANSWER;
+                $result = self::createOrder($var["answer"]);
+                if($result == 44)
+                    return Constant::ERROR_CODE_THREAD_ANSWER;
+                $post->setField($result);
+                FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
+                break;
         }
-        $manager->add($post);
-        return ThreadControl::updateList($temoin, $manager);
+        $pm->add($post);
+        return ThreadControl::updateList($temoin, $pm);
+    }
+
+    public static function isValideOrder($order){
+        if(!preg_match("/^.{1,100}$/", $order))
+            return false;
+        if(!preg_match("/^~\$ .*$/", $order))
+            return false;
+        return true;
+    }
+
+    public static function createOrder(User $user, $answer, PostManager $pm, UserManager $um){
+        $order = explode(" ", $answer);
+        $result = [];
+        array_push($result, "@".$user->getPseudo().":~$");
+        array_push($result, $order[1]);
+        switch ($order[1]){
+            case 'supply':
+                // code...
+                break;
+            case 'demand':
+                if(!preg_match("^[\w]{1,50}$", $result))
+                    return 44;
+                break;
+            case 'accept':
+                // code...
+                break;
+            case 'refuse':
+                // code...
+                break;
+            default:
+                return 44;
+        }
+        return implode(" ", $result);
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
