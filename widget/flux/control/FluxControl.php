@@ -14,6 +14,7 @@ class FluxControl{
             $text = nl2br(htmlspecialchars($inter->getField()));
             $text = preg_replace("#&amp;#", '&', $text);
             $body = preg_replace("#(https?://[\w?./=&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
+            $body = preg_replace("#::(.*)::#", '::<span class="warning">$1</span>::', $body);
             $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="https://onisowo.com/index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
             $result .=
             '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
