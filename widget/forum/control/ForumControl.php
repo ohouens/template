@@ -246,9 +246,12 @@ class ForumControl{
                     return Constant::ERROR_CODE_THREAD_LENGTH;
                 $post->setField($var['answer']);
                 if(self::isOrder($var["answer"])){
+                    if(!ThreadControl::isOpen($temoin))
+                        return 0;
                     $result = self::createOrder($user, $var["answer"], $temoin, $pm, $um);
                     if($result == 44)
                         return Constant::ERROR_CODE_THREAD_ANSWER;
+                    $post->addData(["order"=>explode(" ", $result)[1]]);
                     $post->setField($result);
                     FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
                 }
@@ -301,25 +304,10 @@ class ForumControl{
         array_push($result, "@".$user->getPseudo().":~$");
         array_push($result, $order[1]);
         switch ($order[1]){
-            case 'supply':
-                // code...
-                break;
-            case 'demand':
-                if(!preg_match("/^[\w]{1,50}$/", $order[2]))
+            case 'declare':
+                if(!preg_match("/^.{1,100}$/", implode(" ", array_slice($order, 2))))
                     return 44;
-                $nb = 0;
-                if(isset($parent->getData()["order"]))
-                    $nb = $parent->getData()["order"];
-                $parent->addData(["order"=>$nb+1]);
-                $pm->update($parent);
-                array_push($result, "#".$parent->getData()["order"]);
                 array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
-                break;
-            case 'accept':
-                // code...
-                break;
-            case 'refuse':
-                // code...
                 break;
             default:
                 return 44;
