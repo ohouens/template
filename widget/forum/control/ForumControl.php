@@ -31,6 +31,7 @@ class ForumControl{
                     $body = preg_replace("#{(.*)}#", '<span class="accolade">{</span>$1<span class="accolade">}</span>', $body);
                     $body = preg_replace("#::(.*)::#", '::<span class="warning">$1</span>::', $body);
                     $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
+                    $body = preg_replace("/(~[$])/", '<span class="unix" style="color: #007070;">$1</span>', $body);
                     if(isset($inter->getData()['lock'])){
                         self::checkLockActive($inter, $postManager);
                         $body = self::readLock($inter);
@@ -252,7 +253,7 @@ class ForumControl{
                     if($result == 44)
                         return Constant::ERROR_CODE_THREAD_ANSWER;
                     $post->addData(["order"=>explode(" ", $result)[1]]);
-                    $post->setField($result);
+                    $post->setField(explode(":", $result)[1]);
                     FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
                 }
                 break;
