@@ -245,6 +245,13 @@ class ForumControl{
                 if(!preg_match("#^.{1,1000}$#s", $var['answer']))
                     return Constant::ERROR_CODE_THREAD_LENGTH;
                 $post->setField($var['answer']);
+                if(self::isOrder($var["answer"])){
+                    $result = self::createOrder($user, $var["answer"], $temoin, $pm, $um);
+                    if($result == 44)
+                        return Constant::ERROR_CODE_THREAD_ANSWER;
+                    $post->setField($result);
+                    FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
+                }
                 break;
             case 1: //lock barrier
                 if($user->getId() != $temoin->getUser() and !in_array($user->getPseudo(), $temoin->getData()['writers']))
@@ -277,29 +284,18 @@ class ForumControl{
                 $post->addData(["answer"=>$answer]);
                 $post->addData(["unlock"=>[]]);
                 break;
-            case 3: //tunnel order
-                if(!self::isValideorder($var["answer"]))
-                    return Constant::ERROR_CODE_THREAD_ANSWER;
-                $result = self::createOrder($var["answer"]);
-                if($result == 44)
-                    return Constant::ERROR_CODE_THREAD_ANSWER;
-                $post->setField($result);
-                FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
-                break;
         }
         $pm->add($post);
         return ThreadControl::updateList($temoin, $pm);
     }
 
-    public static function isValideOrder($order){
-        if(!preg_match("/^.{1,100}$/", $order))
-            return false;
-        if(!preg_match("/^~\$ .*$/", $order))
+    public static function isOrder($order){
+        if(!preg_match("/^\~[$] /", $order))
             return false;
         return true;
     }
 
-    public static function createOrder(User $user, $answer, PostManager $pm, UserManager $um){
+    public static function createOrder(User $user, $answer, Post $parent, PostManager $pm, UserManager $um){
         $order = explode(" ", $answer);
         $result = [];
         array_push($result, "@".$user->getPseudo().":~$");
@@ -309,8 +305,15 @@ class ForumControl{
                 // code...
                 break;
             case 'demand':
-                if(!preg_match("^[\w]{1,50}$", $result))
+                if(!preg_match("/^[\w]{1,50}$/", $order[2]))
                     return 44;
+                $nb = 0;
+                if(isset($parent->getData()["order"]))
+                    $nb = $parent->getData()["order"];
+                $parent->addData(["order"=>$nb+1]);
+                $pm->update($parent);
+                array_push($result, "#".$parent->getData()["order"]);
+                array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
                 break;
             case 'accept':
                 // code...
