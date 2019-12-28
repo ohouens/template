@@ -71,7 +71,7 @@ class DisplayThreadWidget extends Widget{
     private function constructForum(User $user, Post $post, UserManager $manager){
         global $hash;
         $option = '<input class="nonCache" type="image" value="">';
-        if(ThreadControl::checkMode($user, $post, "execute"))
+        if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
             $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
         $chat = "";
         if(ThreadControl::checkMode($user, $post, "write"))
