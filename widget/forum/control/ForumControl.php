@@ -306,7 +306,7 @@ class ForumControl{
         array_push($result, $order[1]);
         switch ($order[1]){
             case 'declare':
-                if(!preg_match("/^.{1,100}$/", implode(" ", array_slice($order, 2))))
+                if(!preg_match("/^.{1,240}$/", implode(" ", array_slice($order, 2))))
                     return 44;
                 array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
                 break;
