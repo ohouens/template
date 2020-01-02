@@ -39,3 +39,9 @@
 	max-width: 60%;
 	text-align: left;
 }
+
+@media (max-width: 499px){
+    #DescriptionHome{
+        display: none;
+    }
+}
