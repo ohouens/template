@@ -74,7 +74,8 @@ class DisplayThreadWidget extends Widget{
         if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
             $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
         $chat = "";
-        if(ThreadControl::checkMode($user, $post, "write"))
+        $grand = ' style="height: 100%;"';
+        if(ThreadControl::checkMode($user, $post, "write")){
             $chat = '
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">
@@ -100,6 +101,8 @@ class DisplayThreadWidget extends Widget{
                 -->'.$option.'<!--
                 --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>';
+            $grand = '';
+        }
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -107,7 +110,7 @@ class DisplayThreadWidget extends Widget{
             </div>
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
-            <div id="displayChat">
+            <div id="displayChat"'.$grand.'>
                 <div id="history" class="vide"></div>
                 <div id="end"></div>
             </div>
