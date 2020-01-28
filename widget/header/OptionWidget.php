@@ -70,7 +70,7 @@ abstract class OptionWidget extends Widget{
     private function buildLinks(){
         $result = "";
         foreach($this->_links as $link){
-            $result .= '<a href="index.php?'.$this->toLink($link).'"><span>'.ucfirst($link).'</span></a>
+            $result .= '<a href="index.php?'.$this->toLink($link).'&amp;menu='.$this->getName().'"><span>'.ucfirst($link).'</span></a>
             ';
         }
         return $result;

@@ -1,7 +1,9 @@
 $(function(){
     var option = "Profile";
+    let searchParams = new URLSearchParams(window.location.search).get('menu');
+    if(searchParams != null)
+        option = searchParams
     init();
-
     $(".wrapper, footer").click(function(){
         $('.plus').each(function(){
             if($(this).css("display") == "block")
@@ -34,7 +36,8 @@ $(function(){
     }
 
     function init(){
-        $('#action .action').not($('.action')[0]).css("display", "none");
+        $('#action .action').not($('#'+option)).css("display", "none");
+        $("#menu").css('background', $('#'+option).css('background-color'));
         screen();
     }
 });
