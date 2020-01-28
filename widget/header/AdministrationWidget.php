@@ -11,7 +11,7 @@ class AdministrationWidget extends Widget{
                 '.$this->buildOptions().'
             </div><!--
             --><div id="menu" style="background: #2A2A2A;width:20%;height: 100%;" class="action alignement">
-                <a href="#"><img src="style/icon/menu.png" alt="menu"/></a>
+                <a><img src="style/icon/menu.png" alt="menu"/></a>
                 <div class="plus">
                     '.$this->buildMenu().'
                 </div>

@@ -25,6 +25,8 @@ $(function(){
         screen();
     });
 
+    $(".wrapper").css('padding-top', $("header").height()+"px");
+
     function screen(){
         $.get('index.php?screen='+option, function(data){
             $("header .alignement.gauche").html(data);

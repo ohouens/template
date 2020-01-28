@@ -1,7 +1,10 @@
 header{
 	min-height: 80px;
 	height: 8vh;
+	width: 100%;
 	background: #303030;
+	position: fixed;
+	z-index: 45;
 }
 header .alignement.gauche{
 	width: 70%;
@@ -20,6 +23,7 @@ header .alignement a img{
 	height: 60%;
 	position: relative;
 	top: 20%;
+	cursor: pointer;
 }
 footer{
 	min-height:35vh;
