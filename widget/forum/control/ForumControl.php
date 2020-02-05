@@ -38,12 +38,7 @@ class ForumControl{
                     }
                     try{
                         $user = self::getAutor($inter->getUser(), $userManager);
-                        $color = "";
-                        if($user->getPseudo() == "lenaig")
-                            $color = ' style="color:#f33bee;"';
-                        if($user->getPseudo() == "sahara")
-                            $color = ' style="color:#ebff00;"';
-                        $account = '<p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'"'.$color.'>'.$user->getPseudo().'</a></p>';
+                        $account = '<p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p>';
                     }catch(Exception $e){
                         $account = '<p class="pseudo alignement">Account deleted</p>';
                     }
