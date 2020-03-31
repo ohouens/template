@@ -30,6 +30,19 @@ class ThreadControl{
         return 0;
     }
 
+    public static function setTunnel(User $user, Post $post, $fluxId, PostManager $manager){
+        if($fluxId == "")
+            return 0;
+        $flux = $manager->get($fluxId);
+        if($flux->getType() != Constant::THREAD_FLUX)
+            return Constant::ERROR_CODE_NOT_FOUND;
+        if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
+        $post->addData(["tunnel"=>$fluxId]);
+        $manager->update($post);
+        return 0;
+    }
+
     public static function setOpen(User $user, Post $post, $open, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
