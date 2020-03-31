@@ -42,6 +42,7 @@ $(function(){
 
     $("input[name='tunnel']").on('keyup paste', function(){
         var str = $(this).val();
-        // res = str.replace(/f/, $1)
+        res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
+        $(this).val(res);
     });
 });
