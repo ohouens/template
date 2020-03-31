@@ -109,7 +109,8 @@ class SettingWidget extends Widget{
         '<p>
             <a class="link" href="#changePdp">change profile picture</a><br/>
             <a class="link" href="#changePassword">change password</a><br/>
-            <a class="link" href="#changeEmail">change email</a><br/>
+            <a class="link" href="#changeEmail">change email</a>
+            <br/><br/>
             <a class="link" href="#changeLinkedin">change linkedin</a><br/>
             <a class="link" href="#changeInstagram">change instagram</a><br/>
             <a class="link" href="#changeSnapchat">change snapchat</a>
