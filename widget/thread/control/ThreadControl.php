@@ -18,6 +18,7 @@ class ThreadControl{
     public static function initList(Post $post, PostManager $pm){
 		if(in_array($post->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX])){
             $post->addData(["head"=>0]);
+            $pm->update($post);
 			foreach($pm->getList() as $inter){
 				if($inter->getType() == Constant::THREAD_ANSWER and $inter->getData()['parent'] == $post->getId()){
 					$inter->addData(["next" => $post->getData()["head"]]);
