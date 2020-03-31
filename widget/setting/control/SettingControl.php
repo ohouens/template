@@ -61,7 +61,7 @@ class SettingControl{
 
     public static function changeSnapchat($snap, User $user, UserManager $manager){
         if(!preg_match("/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/im", $snap))
-            return Constant::ERROR_CODE_INSTAGRAM_FORMAT;
+            return Constant::ERROR_CODE_SNAPCHAT_FORMAT;
         $user->addData(["snapchat"=>$snap]);
         $manager->update($user);
         return Constant::ERROR_CODE_OK;
