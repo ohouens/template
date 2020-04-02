@@ -13,7 +13,7 @@ class ContainThreadControl{
         $page = "";
         $list = $manager->getList();
         foreach(array_reverse($list) as $thread){
-            if(in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX, Constant::THREAD_TICKETING]) and
+            if(in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX, Constant::THREAD_TICKETING, Constant::THREAD_LIST]) and
                 (
                     $thread->getUser() == $user->getId() or
                     in_array($user->getId(), $thread->getData()[ThreadControl::getInfluence($thread)])
@@ -43,7 +43,7 @@ class ContainThreadControl{
         return new User();
     }
 
-    private static function construct(Post $post){
+    public  static function construct(Post $post){
         global $hash;
         $result = "";
         $class = "";
@@ -66,13 +66,19 @@ class ContainThreadControl{
                 <h3>'.$post->getData()['title'].'</h3>
                 <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
+            case Constant::THREAD_LIST:
+                $class = 'list';
+                $result = '
+                <p>[   ]</p>
+                <h3>'.$post->getData()['title'].'</h3>';
+                break;
             default:
                 break;
         }
         return '
-        <div class="alignement thread '.$class.'" num="'.$hash->get($post->getId()).'">
+        <a class="alignement thread '.$class.'" href="index.php?thread='.$hash->get($post->getId()).'">
         '.$result.'
-        </div>';
+        </a>';
         return $result;
     }
 }

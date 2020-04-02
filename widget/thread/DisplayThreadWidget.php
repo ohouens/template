@@ -60,6 +60,9 @@ class DisplayThreadWidget extends Widget{
             case Constant::THREAD_TICKETING:
                 $result .= $this->constructTicketing($user, $post, $manager);
                 break;
+            case Constant::THREAD_LIST:
+                $result .= $this->constructList($user, $post, $manager);
+                break;
             default:
                 return '';
                 break;
@@ -222,6 +225,35 @@ class DisplayThreadWidget extends Widget{
                 </p>
             </div>
             <div id="contentWriter" class="ticketing" num="'.$hash->get($post->getId()).'"></div>
+        </div>';
+    }
+
+    private function constructList(User $user, Post $post, UserManager $manager){
+        global $hash;
+        return
+        '<div id="contentCode" class="grand children rectangle">
+            <div class="center">
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Follow').'
+            </div>
+        </div><!--
+        --><div id="threadList" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
+
+        </div><!--
+        --><div id="contentStatistic" class="grand children alignement">
+            <div id="contentAuthor" class="square">
+                <div class="center">
+                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
+                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                </div>
+            </div>
+            <div id="contentList" class="square section">
+                <p class="center">
+                    <span class="number">'.count($post->getData()['followers']).'</span><br/>
+                    <span class="aa">List</span>
+                </p>
+            </div>
+            <div id="contentWriter" class="list" num="'.$hash->get($post->getId()).'"></div>
         </div>';
     }
 }

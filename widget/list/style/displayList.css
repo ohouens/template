@@ -1,0 +1,17 @@
+#threadList{
+    overflow: auto;
+}
+#threadList .thread{
+    width: calc(33.3% - (5px * 0.666));
+    margin-bottom: 5px;
+}
+@media (max-width: 500px){
+	#threadList .thread{
+		width: 100%;
+	}
+}
+@media (min-width: 500px) and (max-width: 800px){
+	#threadList .thread{
+		width: calc(50% - (5px * 0.5));
+	}
+}

@@ -136,6 +136,8 @@ class ThreadControl{
                 return 'followers';
             case Constant::THREAD_TICKETING:
                 return 'tickets';
+            case Constant::THREAD_LIST:
+                return 'followers';
             default:
                 return '';
         }
