@@ -10,20 +10,28 @@ $(function(){
                 });
             });
         });
+        $.get('index.php?thread='+$("#follow").attr('num')+'&request=4', function(data){
+            if(data == "1")
+                $("#follow").addClass("selected").text("Unfollow");
+            else
+                $("#follow").text("Follow");
+        });
         $("#follow").click(function(){
-            $.get('index.php?thread='+$(this).attr('num')+'&request=3', function(data){
-                if(data == "0"){
-                    $("#follow").addClass('selected').text("Unfollow");
-                    $("#followers").text(parseInt($("#followers").text())+1);
-                }
-                if(data == "1"){
-                    $("#follow").removeClass("selected").text("Follow");
-                    $("#followers").text(parseInt($("#followers").text())-1);
-                }
-                if(data == "777"){
-                    alert('you nedd to sign up');
-                }
-            });
+            if(!$(this).hasClass("selected")){
+                $.get('index.php?thread='+$(this).attr('num')+'&request=3', function(data){
+                    if(data == "0"){
+                        $("#follow").addClass('selected').text("Unfollow");
+                        $("#followers").text(parseInt($("#followers").text())+1);
+                    }
+                });
+            }else{
+                $.get('index.php?thread='+$(this).attr('num')+'&request=3&token', function(data){
+                    if(data == "0"){
+                        $("#follow").removeClass('selected').text("Follow");
+                        $("#followers").text(parseInt($("#followers").text())-1);
+                    }
+                });
+            }
         });
     }
 });
