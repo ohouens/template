@@ -236,8 +236,8 @@ class DisplayThreadWidget extends Widget{
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Follow').'
             </div>
         </div><!--
-        --><div id="threadList" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
-
+        --><div id="displayList" class="mainSection grand children alignement">
+            <div id="threadList" class="grand"  num="'.$hash->get($post->getId()).'"></div>
         </div><!--
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
@@ -249,8 +249,9 @@ class DisplayThreadWidget extends Widget{
             </div>
             <div id="contentList" class="square section">
                 <p class="center">
-                    <span class="number">'.count($post->getData()['followers']).'</span><br/>
-                    <span class="aa">List</span>
+                    <span class="number">'.count($post->getData()['list']).'</span><br/>
+                    <span class="aa">Threads</span><br/>
+                    <button id="follow" class="buttonC space" num="'.$hash->get($post->getId()).'"></button>
                 </p>
             </div>
             <div id="contentWriter" class="list" num="'.$hash->get($post->getId()).'"></div>
