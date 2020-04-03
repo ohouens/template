@@ -12,19 +12,19 @@
 
 
 #displayWriter{background: #222222;}
-#contentWriter.ticketing img.delete{
+#displayWriter #contentWriter.ticketing img.delete{
     display: none;
 }
-#contentWriter hr{
+#displayWriter #contentWriter hr{
     visibility: hidden;
     margin: 0;
 }
-#contentWriter p.name{
+#displayWriter #contentWriter p.name{
     font-size: 3em;
     font-family: sourceBold;
     margin-top: 2%;
     margin-bottom: 2%;
-}#contentWriter p.name img{
+}#displayWriter #contentWriter p.name img{
     width: 80px;
     height: 80px;
 }
