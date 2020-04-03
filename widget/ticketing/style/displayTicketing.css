@@ -1,19 +1,32 @@
 #contentCountdown{
-    /* background: #222222; */
-    background: #202020;
+    height: 40%;
 }
 
 #contentCountdown .countdown{
     font-family: sourceRegular;
-    font-size: 5.5em;
+    font-size: 2.5em;
     color: #33F7B7;
 }.countdown.closed{
     color: #272727;
 }
 
 
+#displayWriter{background: #222222;}
 #contentWriter.ticketing img.delete{
     display: none;
+}
+#contentWriter hr{
+    visibility: hidden;
+    margin: 0;
+}
+#contentWriter p.name{
+    font-size: 3em;
+    font-family: sourceBold;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}#contentWriter p.name img{
+    width: 80px;
+    height: 80px;
 }
 .special .circle{
     width: 10px;

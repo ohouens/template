@@ -198,17 +198,17 @@ class DisplayThreadWidget extends Widget{
 
     private function constructTicketing(User $user, Post $post, UserManager $manager){
         global $hash;
+        $timer = "Closed";
+        if($post->getField() > time())
+            $timer = $post->getField();
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Get ticket').'
             </div>
         </div><!--
-        --><div id="contentCountdown" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
-            <div class="center">
-                <p class="countdown" date="'.$post->getField().'">
-                </p>
-            </div>
+        --><div id="displayWriter" class="mainSection grand children alignement" num="'.$hash->get($post->getId()).'">
+                <div id="contentWriter" class="ticketing" num="'.$hash->get($post->getId()).'"></div>
         </div><!--
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
@@ -224,7 +224,11 @@ class DisplayThreadWidget extends Widget{
                     <span class="aa">Tickets</span>
                 </p>
             </div>
-            <div id="contentWriter" class="ticketing" num="'.$hash->get($post->getId()).'"></div>
+            <div id="contentCountdown" class="square">
+                <div class="center">
+                    <p class="countdown" date="'.$timer.'"></p>
+                </div>
+            </div>
         </div>';
     }
 
