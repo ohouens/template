@@ -22,6 +22,14 @@ class createThreadControl{
                 <input class="input large" type="text" name="title" placeholder="Title"/>
                 <input type="date" name="when" class="input"/>';
                 break;
+            case 'list':
+                $retour .=
+                '<input type="hidden" name="origin" value="list"/>
+                <input class="input large" type="text" name="title" placeholder="Title"/>
+                <input class="input large" type="text" name="thread" placeholder="links"/>
+                <input type="hidden" name="list"/>
+                <div id="preview" class="large"></div>';
+                break;
             default:
                 $retour .= '';
                 break;
@@ -96,6 +104,24 @@ class createThreadControl{
         $post->addData(["title"=>$title]);
         $post->addData(["writers"=>[]]);
         $post->addData(["tickets"=>[]]);
+        $post->addData(["open"=>true]);
+        $manager->add($post);
+        return 0;
+    }
+
+    public static function createList(User $user, $title, $list, Manager $manager){
+        if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
+            return Constant::ERROR_CODE_THREAD_TITLE;
+        if(count($list) < 1)
+            return Constant::ERROR_CODE_THREAD_LENGTH;
+        $post = new Post();
+        $post->setUser($user->getId());
+        $post->setField("null");
+        $post->setType(Constant::THREAD_LIST);
+        $post->addData(["title"=>$title]);
+        $post->addData(["list"=>$list]);
+        $post->addData(["writers"=>[]]);
+        $post->addData(["followers"=>[]]);
         $post->addData(["open"=>true]);
         $manager->add($post);
         return 0;

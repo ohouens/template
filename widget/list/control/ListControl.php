@@ -1,5 +1,18 @@
 <?php
 class ListControl{
+    public static function filterList($temoin){
+        global $hash;
+        $list = [];
+        $test = ["", " "];
+        foreach($temoin as $num){
+            if(!in_array($num, $test)){
+                array_push($list, $hash->traduct($num));
+                array_push($test, $num);
+            }
+        }
+        return $list;
+    }
+
     public static function read(Post $post, PostManager $manager){
         $result = "";
         foreach($post->getData()['list'] as $num){
