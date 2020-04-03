@@ -4,7 +4,7 @@ class ListControl{
         $result = "";
         foreach($post->getData()['list'] as $num){
             $thread = $manager->get($num);
-            $result .= ContainThreadControl::construct($thread);
+            $result .= ContainThreadControl::construct($thread, $manager);
         }
         return $result;
     }

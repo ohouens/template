@@ -17,9 +17,15 @@
     color: inherit;
     text-decoration: none;
 }
-.thread.flux, .thread.ticketing, .thread.list{
+.thread.flux, .thread.ticketing{
     padding-top: 5px;
     padding-bottom: 5px;
+}
+.thread.list .cover{
+    width: 50%;
+    display: inline-block;
+    background-size: cover;
+    height: 150px;
 }
 .thread.list p{
     font-family: sourceBold;

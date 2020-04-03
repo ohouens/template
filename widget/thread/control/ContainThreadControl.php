@@ -18,7 +18,7 @@ class ContainThreadControl{
                     $thread->getUser() == $user->getId() or
                     in_array($user->getId(), $thread->getData()[ThreadControl::getInfluence($thread)])
                 )
-            )$page .= self::construct($thread);
+            )$page .= self::construct($thread, $manager);
 		}
         if($page == "")
             return
@@ -43,7 +43,7 @@ class ContainThreadControl{
         return new User();
     }
 
-    public  static function construct(Post $post){
+    public  static function construct(Post $post, PostManager $manager){
         global $hash;
         $result = "";
         $class = "";
@@ -67,10 +67,45 @@ class ContainThreadControl{
                 <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
             case Constant::THREAD_LIST:
+                $i = 0;
+                $j = 0;
+                $list = $post->getData()['list'];
+                $cover = "";
+                $img = [];
+                while($i < count($list) and $j < 4){
+                    $thread = $manager->get($list[$i]);
+                    if($thread->getType() == Constant::THREAD_FORUM){
+                        array_push($img,$thread->getField());
+                        $j++;
+                    }
+                    $i++;
+                }
+                switch($j){
+                    case 1:
+                        $cover='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].'); width: 100%; height: 300px;"></div>';
+                        break;
+                    case 2:
+                        $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
+                        break;
+                    case 3:
+                        // code...
+                        $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].'); width: 100%;"></div>';
+                        break;
+                    case 4:
+                        $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[3].');"></div>';
+                        break;
+
+                }
                 $class = 'list';
                 $result = '
-                <p>[   ]</p>
-                <h3>'.$post->getData()['title'].'</h3>';
+                '.$cover.'
+                <h3>'.$post->getData()['title'].'[ ]</h3>';
                 break;
             default:
                 break;
