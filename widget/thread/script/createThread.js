@@ -14,7 +14,6 @@ $(function(){
             processData: false,
             data: data,
             success: function(data){
-                alert(data)
                 if(data == "0"){
     				window.location.replace('index.php?thread=last');
     			}else{
