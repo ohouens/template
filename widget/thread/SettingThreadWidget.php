@@ -37,6 +37,10 @@ class SettingThreadWidget extends Widget{
                 $executeme = "selected";
             if(isset($post->getData()['tunnel']))
                 $tunnel = $hash->get($post->getData()['tunnel']);
+            $echoTunnel = "";
+            if($post->getType() == Constant::THREAD_FORUM)
+                $echoTunnel = '<br/>
+                <span class="tab">tunnel:</span><input type="text" value="'.$tunnel.'" class="input" name="tunnel"/>';
             $lock =
             '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <span class="tab">open:</span><select class="input" name="open">
@@ -57,8 +61,7 @@ class SettingThreadWidget extends Widget{
                     <option value="everyone">everyone</option>
                     <option value="me" '.$executeme.'>me</option>
                     <option value="only">only</option>
-                </select><br/>
-                <span class="tab">tunnel:</span><input type="text" value="'.$tunnel.'" class="input" name="tunnel"/>
+                </select>'.$echoTunnel.'
             </form>';
             $save =
             '<button id="delete" class="button space">Delete</button>

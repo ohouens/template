@@ -174,10 +174,11 @@ class ThreadControl{
         $list = $manager->getList();
         foreach(array_reverse($list) as $thread){
             if(
-                ($thread->getType() == Constant::THREAD_FORUM or $thread->getType() == Constant::THREAD_TICKETING or $thread->getType() == Constant::THREAD_FLUX) and
+                (in_array($thread->getType(), [Constant::THREAD_FORUM ,Constant::THREAD_TICKETING ,Constant::THREAD_FLUX, Constant::THREAD_LIST])) and
                 (
                     $thread->getUser() == $user->getId() or
                     ($thread->getType() == Constant::THREAD_FORUM and in_array($user->getId(), $thread->getData()['followers'])) or
+                    ($thread->getType() == Constant::THREAD_LIST and in_array($user->getId(), $thread->getData()['followers'])) or
                     ($thread->getType() == Constant::THREAD_TICKETING and in_array($user->getId(), $thread->getData()['tickets'])) or
                     ($thread->getType() == Constant::THREAD_FLUX and in_array($user->getId(), $thread->getData()['subscribers']))
                 )
