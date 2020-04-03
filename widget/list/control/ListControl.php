@@ -16,8 +16,24 @@ class ListControl{
         if($state == 0 and $all){
             foreach($post->getData()['list'] as $num){
                 $thread = $manager->get($num);
-                $content = ThreadControl::getInfluence($thread);
-                ThreadControl::subscribe($content, $user, $post, $manager);
+                switch($thread->getType()){
+                    case Constant::THREAD_FORUM://--active/thread/operation/action/forum/subscribe|unsubscribe--//
+                        if(ForumControl::hasSubscribe($user, $thread) == 0)
+                            ForumControl::subscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_FLUX://--active/thread/operation/action/flux-
+                        FluxControl::subscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_TICKETING:
+                        TicketingControl::subscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_LIST:
+                        if(ThreadControl::hasSubscribe(ThreadControl::getInfluence($thread), $user, $thread) == 0)
+                            ListControl::subscribe($user, $thread, $manager, true);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         return $state;
@@ -28,8 +44,25 @@ class ListControl{
         if($state == 0 and $all){
             foreach($post->getData()['list'] as $num){
                 $thread = $manager->get($num);
-                $content = ThreadControl::getInfluence($thread);
-                ThreadControl::unsubscribe($content, $user, $post, $manager);
+                $user->addData(["pass"=>$thread->getData()['keys'][$user->getId()]]);
+                switch($thread->getType()){
+                    case Constant::THREAD_FORUM://--active/thread/operation/action/forum/subscribe|unsubscribe--//
+                        if(ForumControl::hasSubscribe($user, $thread) == 1)
+                            ForumControl::subscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_FLUX://--active/thread/operation/action/flux-
+                        FluxControl::unsubscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_TICKETING:
+                        TicketingControl::unsubscribe($user, $thread, $manager);
+                        break;
+                    case Constant::THREAD_LIST:
+                        if(ThreadControl::hasSubscribe(ThreadControl::getInfluence($thread), $user, $thread) == 1)
+                            ListControl::unsubscribe($user, $thread, $manager, true);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         return $state;

@@ -21,14 +21,12 @@ $(function(){
                 $.get('index.php?thread='+$(this).attr('num')+'&request=3', function(data){
                     if(data == "0"){
                         $("#follow").addClass('selected').text("Unfollow");
-                        $("#followers").text(parseInt($("#followers").text())+1);
                     }
                 });
             }else{
                 $.get('index.php?thread='+$(this).attr('num')+'&request=3&token', function(data){
                     if(data == "0"){
                         $("#follow").removeClass('selected').text("Follow");
-                        $("#followers").text(parseInt($("#followers").text())-1);
                     }
                 });
             }

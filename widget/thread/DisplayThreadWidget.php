@@ -233,7 +233,7 @@ class DisplayThreadWidget extends Widget{
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Follow').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3&redirect', 'Follow').'
             </div>
         </div><!--
         --><div id="displayList" class="mainSection grand children alignement">

@@ -43,7 +43,7 @@ class FluxControl{
     public static function subscribe(User $user, Post $post, PostManager $manager){
         if(!$post->getData()['open'])
             return 5;
-        $state = ThreadControl::subscribe('subscribers', $user, $post, $manager);
+        $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager);
         if($state == 0){
             $corps = new SubscribeMailWidget($user, $post, $manager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
@@ -53,7 +53,7 @@ class FluxControl{
     }
 
     public static function unsubscribe(User $user, Post $post, PostManager $manager){
-        $state = ThreadControl::unsubscribe('subscribers', $user, $post, $manager);
+        $state = ThreadControl::unsubscribe(ThreadControl::getInfluence($post), $user, $post, $manager);
         if($state == 0){
 
         }
