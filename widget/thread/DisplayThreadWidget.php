@@ -199,7 +199,7 @@ class DisplayThreadWidget extends Widget{
     private function constructTicketing(User $user, Post $post, UserManager $manager){
         global $hash;
         $timer = "Closed";
-        if($post->getField() > time())
+        if(strtotime($post->getField()) > time())
             $timer = $post->getField();
         return
         '<div id="contentCode" class="grand children rectangle">
