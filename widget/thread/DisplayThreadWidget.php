@@ -16,11 +16,13 @@ class DisplayThreadWidget extends Widget{
             if(isset($inter->getData()['pp']))
                 $pp = '<img class="profilePicture" src="media/user/pp/'.$inter->getData()['pp'].'" alt="profile picture">';
             $delete = "";
+            $special = "";
             if($user->getId() == $post->getUser()){
                 $delete =
                 '<a class="removeU" href="?thread='.$hash->get($post->getId()).'&amp;delete='.$id.'">
                     <img class="delete" src="style/icon/wrong.png" alt="delete"/>
                 </a>';
+                $special = '<div class="special alignement" thread="'.$hash->get($post->getId()).'" num="'.$id.'"></div>';
             }
             $result .=
             '<p class="name alignement">
@@ -29,7 +31,7 @@ class DisplayThreadWidget extends Widget{
                     '.$display.'
                 </a>
                 '.$delete.'
-            </p><div class="special alignement" thread="'.$hash->get($post->getId()).'" num="'.$id.'"></div>
+            </p>'.$special.'
             <hr>';
         }
         return $result;
