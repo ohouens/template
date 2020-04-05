@@ -30,7 +30,8 @@
 }
 .special .circle{
     width: 10px;
-    height: 10px;
+    height: 40px;
+    border-radius: 0;
     margin-left: 5px;
 }
 .circle.val1{background: green;}
