@@ -242,14 +242,13 @@ class ForumControl{
                     return Constant::ERROR_CODE_THREAD_LENGTH;
                 $post->setField($var['answer']);
                 if(self::isOrder($var["answer"])){
-                    if($temoin->getData()['execute'] == 0 or !isset($temoin->getData()["tunnel"]))
+                    if($temoin->getData()['execute'] == 0)
                         return 0;
                     $result = self::createOrder($user, $var["answer"], $temoin, $pm, $um);
-                    if($result == 44)
-                        return Constant::ERROR_CODE_THREAD_ANSWER;
+                    if(is_int($result))
+                        return $result;
                     $post->addData(["order"=>explode(" ", $result)[1]]);
                     $post->setField(explode(":", $result)[1]);
-                    FluxControl::createAnswer($um->get($temoin->getUser()), $result, $pm->get($temoin->getData()["tunnel"]), $pm, $um);
                 }
                 break;
             case 1: //lock barrier
@@ -295,6 +294,7 @@ class ForumControl{
     }
 
     public static function createOrder(User $user, $answer, Post $parent, PostManager $pm, UserManager $um){
+        global $hash;
         $order = explode(" ", $answer);
         $result = [];
         array_push($result, "@".$user->getPseudo().":~$");
@@ -304,11 +304,27 @@ class ForumControl{
                 if(!preg_match("/^.{1,240}$/", implode(" ", array_slice($order, 2))))
                     return 44;
                 array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
-                break;
+                $result = implode(" ", $result);
+                FluxControl::createAnswer($um->get($parent->getUser()), $result, $pm->get($parent->getData()["tunnel"]), $pm, $um);
+                return $result;
+            case 'add':
+                if($parent->getUser() != $user->getId())
+                    return 44;
+                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
+                    return 45;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
+                    return 46;
+                $thread = $pm->get($hash->traduct($order[3]));
+                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
+                    return 47;
+                ListControl::subscribe($um->get($order[2]), $thread, $pm, true);
+                array_push($result, "@".$order[2]);
+                array_push($result, "to");
+                array_push($result, $order[3]);
+                return implode(" ", $result);
             default:
                 return 44;
         }
-        return implode(" ", $result);
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager){
