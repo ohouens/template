@@ -31,6 +31,7 @@ class ForumControl{
                     $body = preg_replace("#{(.*)}#", '<span class="accolade">{</span>$1<span class="accolade">}</span>', $body);
                     $body = preg_replace("#::(.*)::#", '::<span class="warning">$1</span>::', $body);
                     $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
+                    $body = preg_replace("#([\w]{40})#", '<a href="index.php?thread=$1" class="to" style="color: #abd6f3;">$1</a>', $body);
                     $body = preg_replace("/(~[$])/", '<span class="unix" style="color: #007070;">$1</span>', $body);
                     if(isset($inter->getData()['lock'])){
                         self::checkLockActive($inter, $postManager);
