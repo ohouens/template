@@ -17,7 +17,15 @@ class ListControl{
         $result = "";
         foreach($post->getData()['list'] as $num){
             $thread = $manager->get($num);
-            $result .= ContainThreadControl::construct($thread, $manager);
+            if(!is_int($thread))
+                $result .= ContainThreadControl::construct($thread, $manager);
+            else{
+                $list = array_diff($post->getData()['list'], [$num]);
+                $post->addData(["list"=>$list]);
+                if(count($list)<=0)
+                    $post->setActive(0);
+                $manager->update($post);
+            }
         }
         return $result;
     }

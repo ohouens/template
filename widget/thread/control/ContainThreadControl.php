@@ -74,7 +74,7 @@ class ContainThreadControl{
                 $img = [];
                 while($i < count($list) and $j < 4){
                     $thread = $manager->get($list[$i]);
-                    if($thread->getType() == Constant::THREAD_FORUM){
+                    if(!is_int($thread) and $thread->getType() == Constant::THREAD_FORUM){
                         array_push($img,$thread->getField());
                         $j++;
                     }
