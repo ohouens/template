@@ -342,8 +342,50 @@ class ForumControl{
                 array_push($result, $order[3]);
                 return implode(" ", $result);
             case 'append':
+                if($parent->getUser() != $user->getId())
+                    return 44;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[2]))
+                    return 65;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
+                    return 46;
+                $thread = $pm->get($hash->traduct($order[3]));
+                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
+                    return 47;
+                $toAdd = $pm->get($hash->traduct($order[2]));
+                if(!in_array($toAdd->getType(), [Constant::THREAD_LIST, Constant::THREAD_FLUX, Constant::THREAD_FORUM, Constant::THREAD_TICKETING]))
+                    return 48;
+                $list = $thread->getData()["list"];
+                if(in_array($toAdd->getId(), $list))
+                    return 49;
+                array_push($list, $toAdd->getId());
+                $thread->addData(["list"=>$list]);
+                $pm->update($thread);
+                array_push($result, $order[2]);
+                array_push($result, "to");
+                array_push($result, $order[3]);
                 return implode(" ", $result);
             case 'pop':
+                if($parent->getUser() != $user->getId())
+                    return 44;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[2]))
+                    return 65;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
+                    return 46;
+                $thread = $pm->get($hash->traduct($order[3]));
+                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
+                    return 47;
+                $toAdd = $pm->get($hash->traduct($order[2]));
+                if(!in_array($toAdd->getType(), [Constant::THREAD_LIST, Constant::THREAD_FLUX, Constant::THREAD_FORUM, Constant::THREAD_TICKETING]))
+                    return 48;
+                $list = $thread->getData()["list"];
+                if(!in_array($toAdd->getId(), $list))
+                    return 69;
+                $list = array_diff($list, [$toAdd->getId()]);
+                $thread->addData(["list"=>$list]);
+                $pm->update($thread);
+                array_push($result, $order[2]);
+                array_push($result, "to");
+                array_push($result, $order[3]);
                 return implode(" ", $result);
             default:
                 return 44;
