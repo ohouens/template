@@ -318,7 +318,7 @@ class ForumControl{
                 $thread = $pm->get($hash->traduct($order[3]));
                 if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
                     return 47;
-                ListControl::subscribe($um->get($order[2]), $thread, $pm, true);
+                ListControl::subscribe($um->get($order[2]), $thread, $pm, false);
                 array_push($result, "@".$order[2]);
                 array_push($result, "to");
                 array_push($result, $order[3]);
