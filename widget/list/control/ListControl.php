@@ -22,8 +22,6 @@ class ListControl{
             else{
                 $list = array_diff($post->getData()['list'], [$num]);
                 $post->addData(["list"=>$list]);
-                if(count($list)<=0)
-                    $post->setActive(0);
                 $manager->update($post);
             }
         }
