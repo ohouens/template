@@ -112,8 +112,6 @@ class createThreadControl{
     public static function createList(User $user, $title, $list, Manager $manager){
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
-        if(count($list) < 0)
-            return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setField("null");

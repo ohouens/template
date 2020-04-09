@@ -88,12 +88,6 @@ class ContainThreadControl{
                         $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
                         --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
                         break;
-                    case 3:
-                        // code...
-                        $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].'); width: 100%;"></div>';
-                        break;
                     case 4:
                         $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
                         --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
