@@ -321,7 +321,7 @@ class ForumControl{
                 $subscriber = $um->get($order[2]);
                 ListControl::subscribe($subscriber, $thread, $pm, false);
                 array_push($result, "@".$order[2]);
-                array_push($result, "from");
+                array_push($result, "to");
                 array_push($result, $order[3]);
                 return implode(" ", $result);
             case 'remove':
