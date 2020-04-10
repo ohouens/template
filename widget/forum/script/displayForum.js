@@ -41,6 +41,12 @@ $(function(){
         loadChat();
         setInterval(function(){loadLast()}, 1000);
 
+        $("#sendChat textarea").on("keyup paste change",function(){
+            var str = $(this).val();
+            res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
+            $(this).val(res);
+        });
+
         $("#addAction").click(function(e){
             e.preventDefault();
             $("#contentChat form .slide .kid").css("display", "none");
