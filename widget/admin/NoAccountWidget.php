@@ -11,7 +11,7 @@ class NoAccountWidget extends Widget{
                         <input type="hidden" name="thread" value="'.$hash->get($post->getId()).'">
                         <input type="hidden" name="request" value="3">
                         <input type="email" name="email" class="input" placeholder="email"/><br/>
-                        <span>By clicking the send button, you accept my <a href="https://onisowo.com/policy/privacy/#nonUser">privacy policy</a></span><br/>
+                        <span>By clicking the send button, you accept the <a href="https://onisowo.com/policy/privacy/#nonUser">privacy policy</a></span><br/>
                         <input type="submit" value="send" class="buttonC space"/><br/>
                         <span id="erreur"></span>
                     </form>
