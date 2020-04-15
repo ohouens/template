@@ -32,8 +32,11 @@ class ThreadControl{
     }
 
     public static function setTunnel(User $user, Post $post, $fluxId, PostManager $manager){
-        if($fluxId == "")
+        if($fluxId == "" or $fluxId == NULL){
+            $post->removeData("tunnel");
+            $manager->update($post);
             return 0;
+        }
         $flux = $manager->get($fluxId);
         if($flux->getType() != Constant::THREAD_FLUX)
             return Constant::ERROR_CODE_NOT_FOUND;
