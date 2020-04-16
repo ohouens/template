@@ -13,7 +13,8 @@ class FluxControl{
         foreach($final as $inter){
             $text = nl2br(htmlspecialchars($inter->getField()));
             $text = preg_replace("#&amp;#", '&', $text);
-            $body = preg_replace("#(https?://[\w?./=&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
+            $body = preg_replace("/((https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?)/", '<a href="$1" class="to" style="color: #abd6f3;">$4</a>', $text);
+            $body = preg_replace("#[^\"](https?://[\w?./=&_-]+)#", '<a href="$1" target="_blank">$1</a>', $body);
             $body = preg_replace("#::(.*)::#", '::<span class="warning" style="color: #8d0d0d;">$1</span>::', $body);
             $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="https://onisowo.com/index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
             $result .=
