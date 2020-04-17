@@ -324,6 +324,22 @@ class ForumControl{
                 array_push($result, "to");
                 array_push($result, $order[3]);
                 return implode(" ", $result);
+            case 'addH':
+                if($parent->getUser() != $user->getId())
+                    return 44;
+                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
+                    return 45;
+                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
+                    return 46;
+                $thread = $pm->get($hash->traduct($order[3]));
+                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
+                    return 47;
+                $subscriber = $um->get($order[2]);
+                ListControl::subscribe($subscriber, $thread, $pm, true);
+                array_push($result, "@".$order[2]);
+                array_push($result, "to");
+                array_push($result, $order[3]);
+                return implode(" ", $result);
             case 'remove':
                 if($parent->getUser() != $user->getId())
                     return 44;
