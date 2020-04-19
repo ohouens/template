@@ -403,6 +403,18 @@ class ForumControl{
                 array_push($result, "from");
                 array_push($result, $order[3]);
                 return implode(" ", $result);
+            case 'instagram':
+                if($parent->getUser() != $user->getId())
+                    return 44;
+                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
+                    return 45;
+                $state = SettingControl::changeInstagram($order[3], $um->get($order[2]), $um);
+                if($state != 0)
+                    return 4444;
+                array_push($result, $order[2]);
+                array_push($result, "is now");
+                array_push($result, $order[3]);
+                return implode(" ", $result);
             default:
                 return 44;
         }
