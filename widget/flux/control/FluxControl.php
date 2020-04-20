@@ -15,7 +15,7 @@ class FluxControl{
             $text = preg_replace("#&amp;#", '&', $text);
             $body = preg_replace("/((https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?)/", '<a href="$1" class="to" style="color: #abd6f3;">$4</a>', $text);
             $body = preg_replace("/((https?:\/\/)?instagram.com\/[\w]+)/", '<a href="$1" target="_blank">instagram</a>', $body);
-            $body = preg_replace("/((https?:\/\/)?linkedin.com\/[\w\/-]+)/", '<a href="$1" target="_blank">linkedin</a>', $body);
+            $body = preg_replace("/((https?:\/\/)?linkedin.com\/[\w\/ï-]+)/", '<a href="$1" target="_blank">linkedin</a>', $body);
             $body = preg_replace("/((https?:\/\/)?(www\.)?snapchat.com\/[\w\/]+)/", '<a href="$1" target="_blank">snapchat</a>', $body);
             $body = preg_replace("#(https?://[\w?./=&_-]+ )#", '<a href="$1" target="_blank">$1</a>', $body);
             $body = preg_replace("#::(.*)::#", '::<span class="warning" style="color: #8d0d0d;">$1</span>::', $body);
