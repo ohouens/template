@@ -32,17 +32,53 @@ class ThreadControl{
     }
 
     public static function setTunnel(User $user, Post $post, $fluxId, PostManager $manager){
+        global $hash;
         if($fluxId == "" or $fluxId == NULL){
             $post->removeData("tunnel");
             $manager->update($post);
             return 0;
         }
-        $flux = $manager->get($fluxId);
-        if($flux->getType() != Constant::THREAD_FLUX)
-            return Constant::ERROR_CODE_NOT_FOUND;
-        if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId())
-            return Constant::ERROR_CODE_USER_WRONG;
-        $post->addData(["tunnel"=>$fluxId]);
+        $tab = [];
+        foreach (explode(" ", $fluxId) as $flux){
+            $inter = $hash->traduct($flux);
+            $flux = $manager->get($inter);
+            if(in_array($inter, $tab))
+                continue;
+            if($flux->getType() != Constant::THREAD_FLUX)
+                // return Constant::ERROR_CODE_NOT_FOUND;
+                continue;
+            if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId())
+                // return Constant::ERROR_CODE_USER_WRONG;
+                continue;
+            array_push($tab, $inter);
+        }
+        $post->addData(["tunnel"=>$tab]);
+        $manager->update($post);
+        return 0;
+    }
+
+    public static function setIn(User $user, Post $post, $registerId, PostManager $manager){
+        global $hash;
+        if($registerId == "" or $registerId == NULL){
+            $post->removeData("in");
+            $manager->update($post);
+            return 0;
+        }
+        $tab = [];
+        foreach (explode(" ", $registerId) as $register){
+            $inter = $hash->traduct($register);
+            $register = $manager->get($inter);
+            if(in_array($inter, $tab))
+                continue;
+            if($register->getType() != Constant::THREAD_TICKETING)
+                // return Constant::ERROR_CODE_NOT_FOUND;
+                continue;
+            if($register->getUser() != $user->getId() or $post->getUser() != $user->getId())
+                // return Constant::ERROR_CODE_USER_WRONG;
+                continue;
+            array_push($tab, $inter);
+        }
+        $post->addData(["in"=>$tab]);
         $manager->update($post);
         return 0;
     }

@@ -29,18 +29,25 @@ class SettingThreadWidget extends Widget{
             $writeme = "";
             $executeme = "";
             $tunnel = "";
+            $in = "";
             if($post->getData()['read'] == 0)
                 $readme = "selected";
             if($post->getData()['write'] == 0)
                 $writeme = "selected";
             if($post->getData()['execute'] == 0)
                 $executeme = "selected";
-            if(isset($post->getData()['tunnel']))
-                $tunnel = $hash->get($post->getData()['tunnel']);
+            if(isset($post->getData()['tunnel'])){
+                foreach($post->getData()['tunnel'] as $t)
+                    $tunnel .= $hash->get($t)." ";
+            }
+            if(isset($post->getData()['in']))
+                foreach($post->getData()['in'] as $i)
+                    $in .= $hash->get($i)." ";
             $echoTunnel = "";
             if($post->getType() == Constant::THREAD_FORUM)
                 $echoTunnel = '<br/>
-                <span class="tab">tunnel:</span><input type="text" value="'.$tunnel.'" class="input" name="tunnel"/>';
+                <span class="tab">tunnel:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>
+                <span class="tab">in:</span><textarea class="input" name="in">'.$in.'</textarea>';
             $lock =
             '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <span class="tab">open:</span><select class="input" name="open">
