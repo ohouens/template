@@ -236,10 +236,16 @@ class DisplayThreadWidget extends Widget{
 
     private function constructList(User $user, Post $post, UserManager $manager){
         global $hash;
+        $qrString = "Follow all";
+        $token="";
+        if(in_array($user->getId(), $post->getData()["followers"])){
+            $token="%26token=".$post->getData()['keys'][$user->getId()];
+            $qrString = "Unfollow all";
+        }
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect', 'Follow').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect'.$token, $qrString).'
             </div>
         </div><!--
         --><div id="displayList" class="mainSection grand children alignement">
