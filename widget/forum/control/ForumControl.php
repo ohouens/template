@@ -306,7 +306,10 @@ class ForumControl{
                     return 44;
                 array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
                 $result = implode(" ", $result);
-                FluxControl::createAnswer($um->get($parent->getUser()), $result, $pm->get($parent->getData()["tunnel"]), $pm, $um);
+                if(!ThreadControl::isIn($user, $parent, $pm))
+                    return 456;
+                foreach($parent->getData()["tunnel"] as $t)
+                    FluxControl::createAnswer($um->get($parent->getUser()), $result, $pm->get($t), $pm, $um);
                 return $result;
             case 'add':
                 if($parent->getUser() != $user->getId())
@@ -404,7 +407,7 @@ class ForumControl{
                 array_push($result, $order[3]);
                 return implode(" ", $result);
             case 'instagram':
-                if($parent->getUser() != $user->getId())
+                if($parent->getUser() != $user->getId() and !in_array($user->getId(), [1,6]))
                     return 44;
                 if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
                     return 45;

@@ -54,6 +54,8 @@ class TicketingControl {
 
     public static function hasValidate(User $user, Post $post){
         $id = ThreadControl::getId($user);
+        if(!isset($post->getData()['check'][$id]))
+            return 0;
         $check = $post->getData()['check'];
         return $check[$id];
     }

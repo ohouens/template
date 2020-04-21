@@ -31,6 +31,16 @@ class ThreadControl{
         return 0;
     }
 
+    public static function isIn(User $user, Post $parent, PostManager $pm){
+        if(!isset($parent->getData()["in"]))
+            return true;
+        foreach($parent->getData()["in"] as $registerId){
+            if(TicketingControl::hasValidate($user, $pm->get($registerId)) == 1)
+                return true;
+        }
+        return false;
+    }
+
     public static function setTunnel(User $user, Post $post, $fluxId, PostManager $manager){
         global $hash;
         if($fluxId == "" or $fluxId == NULL){
