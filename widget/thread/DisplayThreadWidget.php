@@ -153,7 +153,7 @@ class DisplayThreadWidget extends Widget{
 
     private function constructFlux(User $user, Post $post, UserManager $manager){
         global $hash;
-        $button = "";
+        $button = '<br/><button id="subscribe" class="buttonC space" num="'.$hash->get($post->getId()).'"></button>';
         if($post->getUser() == $user->getId())
             $button = '<br/><button class="buttonA" id="addFlux">Add flux</button>';
         return

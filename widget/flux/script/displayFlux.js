@@ -46,4 +46,26 @@ $(function(){
             $("#fluxLast").html(flux);
         });
     }
+
+    $.get('index.php?thread='+$("#subscribe").attr('num')+'&request=4', function(data){
+        if(data == "1")
+            $("#subscribe").addClass("selected").text("Unsubscribe");
+        else
+            $("#subscribe").text("Subscribe");
+    });
+    $("#subscribe").click(function(){
+        if(!$(this).hasClass("selected")){
+            $.get('index.php?thread='+$(this).attr('num')+'&request=3&button', function(data){
+                if(data == "0"){
+                    $("#subscribe").addClass('selected').text("Unsubscribe");
+                }
+            });
+        }else{
+            $.get('index.php?thread='+$(this).attr('num')+'&request=3&token&button', function(data){
+                if(data == "0"){
+                    $("#subscribe").removeClass('selected').text("Subscribe");
+                }
+            });
+        }
+    });
 });
