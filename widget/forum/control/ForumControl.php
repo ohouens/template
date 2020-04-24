@@ -1,18 +1,21 @@
 <?php
 class ForumControl{
     public static function isTyping($flag, User $user, Post $post, PostManager $pm){
-        $tab = [$user->getPseudo()];
+        $tab = [];
         if($flag == "true"){
-            if(isset($post->getData()["typing"])){
-                if(in_array($user->getPseudo(), $post->getData()["typing"]))
-                    return;
+            if(isset($post->getData()["typing"]))
                 $tab = $post->getData()["typing"];
-                array_push($tab, $user->getPseudo());
-            }
-        }else{
-            if(!isset($post->getData()["typing"]))
-                return;
-            $tab = array_diff($post->getData()["typing"], $tab);
+            $tab[$user->getPseudo()] = time();
+            $post->addData(["typing"=>$tab]);
+            $pm->update($post);
+        }
+        // if($flag!="true" and !isset($post->getData()["typing"]))
+        //     return;
+        $tab = $post->getData()["typing"];
+        $temoin = $post->getData()["typing"];
+        foreach($temoin as $pseudo => $t){
+            if(time() - $t > 5)
+                unset($tab[$pseudo]);
         }
         $post->addData(["typing"=>$tab]);
         $pm->update($post);
@@ -79,7 +82,7 @@ class ForumControl{
             $i = 0;
             if($begin == 0 and $step == 1 and isset($post->getData()["typing"]) and count($post->getData()["typing"]) >= 1){
                 $link = " is ";
-                foreach($post->getData()["typing"] as $pseudo){
+                foreach($post->getData()["typing"] as $pseudo => $t){
                     $i++;
                     if($i>1)
                         $inter.=", ";
