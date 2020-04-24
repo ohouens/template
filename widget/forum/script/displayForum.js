@@ -1,4 +1,9 @@
 $(function(){
+    var flag = false;
+    var timer = 0;
+    var deadline = 5000;
+    var refreshTime = 1000;
+
     if($("#contentStatistic").length){
         $.get('index.php?thread='+$("#follow").attr('num')+'&request=4', function(data){
             if(data == "1")
@@ -39,12 +44,14 @@ $(function(){
         });
 
         loadChat();
-        setInterval(function(){loadLast()}, 1000);
+        setInterval(function(){loadLast()}, refreshTime);
 
         $("#sendChat textarea").on("keyup paste change",function(){
             var str = $(this).val();
             res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
             $(this).val(res);
+            flag = true;
+            timer = 0;
         });
         $("#sendChat textarea").keypress(function(e){
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -56,9 +63,11 @@ $(function(){
                     $(this).selectRange(caret);
                 }else{
                     e.preventDefault();
+                    flag = false;
                     $("#send").trigger("click");
                 }
             }
+            timer = 0;
         });
 
         $("#addAction").click(function(e){
@@ -219,7 +228,15 @@ $(function(){
     }
 
     function loadLast(){
-        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&last', function(data){
+        if(flag){
+            timer += refreshTime;
+
+        }
+        if(timer >= deadline){
+            flag = false;
+            timer = 0;
+        }
+        $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&last&flag='+flag, function(data){
             $("#contentChat #buffer").html(data);
             if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num')){
                 loadChatBis();

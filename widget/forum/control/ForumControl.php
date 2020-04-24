@@ -1,5 +1,23 @@
 <?php
 class ForumControl{
+    public static function isTyping($flag, User $user, Post $post, PostManager $pm){
+        $tab = [$user->getPseudo()];
+        if($flag == "true"){
+            if(isset($post->getData()["typing"])){
+                if(in_array($user->getPseudo(), $post->getData()["typing"]))
+                    return;
+                $tab = $post->getData()["typing"];
+                array_push($tab, $user->getPseudo());
+            }
+        }else{
+            if(!isset($post->getData()["typing"]))
+                return;
+            $tab = array_diff($post->getData()["typing"], $tab);
+        }
+        $post->addData(["typing"=>$tab]);
+        $pm->update($post);
+    }
+
     public static function read(Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
         if(!is_numeric($begin) or !is_numeric($step))
             return;
@@ -56,6 +74,21 @@ class ForumControl{
                 if($stepIsId)
                     $check = $inter->getId() != $step;
                 $cursor = $inter->getData()["next"];
+            }
+            $inter = "";
+            $i = 0;
+            if($begin == 0 and $step == 1 and isset($post->getData()["typing"]) and count($post->getData()["typing"]) >= 1){
+                $link = " is ";
+                foreach($post->getData()["typing"] as $pseudo){
+                    $i++;
+                    if($i>1)
+                        $inter.=", ";
+                    $inter .= "@".$pseudo;
+                    if($i >= 3)break;
+                }
+                if($i > 1)
+                    $link = " are ";
+                $result.='<p id="isTyping">'.$inter.$link.'typing..</p>';
             }
             return $result;
         }catch(Exception $e){
