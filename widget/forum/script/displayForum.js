@@ -46,6 +46,13 @@ $(function(){
             res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
             $(this).val(res);
         });
+        $("#sendChat textarea").keypress(function(e){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                    e.preventDefault();
+                    $("#send").trigger("click");
+            }
+        });
 
         $("#addAction").click(function(e){
             e.preventDefault();
