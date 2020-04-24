@@ -49,8 +49,15 @@ $(function(){
         $("#sendChat textarea").keypress(function(e){
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
+                var content = this.value;
+                var caret = getCaret(this);
+                if(e.shiftKey){
+                    e.stopPropagation();
+                    $(this).selectRange(caret);
+                }else{
                     e.preventDefault();
                     $("#send").trigger("click");
+                }
             }
         });
 
@@ -125,6 +132,43 @@ $(function(){
             });
         });
     }
+
+    function getCaret(el) {
+        if (el.selectionStart) {
+            return el.selectionStart;
+        } else if (document.selection) {
+            el.focus();
+            var r = document.selection.createRange();
+            if (r == null) {
+                return 0;
+            }
+            var re = el.createTextRange(), rc = re.duplicate();
+            re.moveToBookmark(r.getBookmark());
+            rc.setEndPoint('EndToStart', re);
+            return rc.text.length;
+        }
+        return 0;
+    }
+
+    $.fn.selectRange = function(start, end) {
+        if(end === undefined) {
+            end = start;
+        }
+        return this.each(function() {
+            if('selectionStart' in this) {
+                this.selectionStart = start;
+                this.selectionEnd = end;
+            } else if(this.setSelectionRange) {
+                this.setSelectionRange(start, end);
+            } else if(this.createTextRange) {
+                var range = this.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', end);
+                range.moveStart('character', start);
+                range.select();
+            }
+        });
+    };
 
     function editSwitch(){
         $(".answer").dblclick(function(){
