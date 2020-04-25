@@ -14,7 +14,7 @@ class ForumControl{
         $tab = $post->getData()["typing"];
         $temoin = $post->getData()["typing"];
         foreach($temoin as $pseudo => $t){
-            if(time() - $t > 5)
+            if(time() - $t > 3)
                 unset($tab[$pseudo]);
         }
         $post->addData(["typing"=>$tab]);
