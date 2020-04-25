@@ -50,10 +50,9 @@ $(function(){
             var str = $(this).val();
             res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
             $(this).val(res);
-            flag = true;
-            timer = 0;
         });
         $("#sendChat textarea").keypress(function(e){
+            flag = true;
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '13'){
                 var content = this.value;

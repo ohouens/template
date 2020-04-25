@@ -21,7 +21,7 @@ class ForumControl{
         $pm->update($post);
     }
 
-    public static function read(Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
+    public static function read(User $user, Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
         if(!is_numeric($begin) or !is_numeric($step))
             return;
         $i=0;
@@ -46,7 +46,6 @@ class ForumControl{
                     $verif = false;
                     $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
                     $body = preg_replace("#(https?://[\w?./=~&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
-                    $body = preg_replace("#    #", '<span class="indent"></span>', $body);
                     $body = preg_replace("#\[(.*)\]#", '<span class="crochet">[</span>$1<span class="crochet">]</span>', $body);
                     $body = preg_replace("/(#[a-zàâçéèêëîïôûùüÿñæœ]*)/", '<span class="hashtag">$1</span>', $body);
                     $body = preg_replace("#{(.*)}#", '<span class="accolade">{</span>$1<span class="accolade">}</span>', $body);
@@ -83,15 +82,18 @@ class ForumControl{
             if($begin == 0 and $step == 1 and isset($post->getData()["typing"]) and count($post->getData()["typing"]) >= 1){
                 $link = " is ";
                 foreach($post->getData()["typing"] as $pseudo => $t){
+                    if($pseudo == $user->getPseudo())
+                        continue;
                     $i++;
                     if($i>1)
                         $inter.=", ";
-                    $inter .= "@".$pseudo;
+                    $inter .= $pseudo;
                     if($i >= 3)break;
                 }
                 if($i > 1)
                     $link = " are ";
-                $result.='<p id="isTyping">'.$inter.$link.'typing..</p>';
+                if($i>0)
+                    $result.='<p id="isTyping">'.$inter.$link.'typing..</p>';
             }
             return $result;
         }catch(Exception $e){
@@ -285,7 +287,7 @@ class ForumControl{
                     if(is_int($result))
                         return $result;
                     $post->addData(["order"=>explode(" ", $result)[1]]);
-                    $post->setField(explode(":", $result)[1]);
+                    $post->setField(array_slice(explode(":", $result), 1));
                 }
                 break;
             case 1: //lock barrier
@@ -340,12 +342,13 @@ class ForumControl{
             case 'declare':
                 if(!preg_match("/^.{1,240}$/", implode(" ", array_slice($order, 2))))
                     return 44;
-                array_push($result, '"'.implode(" ", array_slice($order, 2)).'"');
+                $message = implode(" ", array_slice($order, 2));
+                array_push($result, '"'.$message.'"');
                 $result = implode(" ", $result);
                 if(!ThreadControl::isIn($user, $parent, $pm))
                     return 456;
                 foreach($parent->getData()["tunnel"] as $t)
-                    FluxControl::createAnswer($um->get($parent->getUser()), $result, $pm->get($t), $pm, $um);
+                    FluxControl::createAnswer($um->get($parent->getUser()), "@".$user->getPseudo().": ".$message, $pm->get($t), $pm, $um);
                 return $result;
             case 'add':
                 if($parent->getUser() != $user->getId())
