@@ -98,13 +98,14 @@ class DisplayThreadWidget extends Widget{
                         <input type="text" class="little input" placeholder="answer 3" name="a3">
                         <input type="text" class="little input" placeholder="answer 4" name="a4">
                     </div>
-                    <textarea name="answer" class="kid plein"></textarea>
+                    <textarea id="areaChat" name="answer" class="kid plein emojiable-question"></textarea>
                 </div><!--
                 --><input class="cache" type="image" id="delete" src="style/icon/delete.png"/><!--
                 --><input class="cache" type="image" id="edit" src="style/icon/edit.png"/><!--
                 -->'.$option.'<!--
-                --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
+                --><input class="nonCache" type="image" id="trigger" src="style/icon/emoji.png"/>
             </form>';
+                // --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
             $grand = '';
         }
         return

@@ -5,6 +5,16 @@ $(function(){
     var refreshTime = 1000;
 
     if($("#contentStatistic").length){
+        $('.emojiable-question').emojiPicker({
+            width: '300px',
+            height: '200px',
+            button: false
+        });
+        $('#trigger').click(function(e) {
+            e.preventDefault();
+            $('#areaChat').emojiPicker('toggle');
+        });
+
         $.get('index.php?thread='+$("#follow").attr('num')+'&request=4', function(data){
             if(data == "1")
                 $("#follow").addClass("selected").text("Unfollow");
