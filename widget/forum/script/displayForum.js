@@ -73,7 +73,12 @@ $(function(){
                 }else{
                     e.preventDefault();
                     flag = false;
-                    $("#send").trigger("click");
+                    $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
+                        if(data == "0"){
+                            $("#contentChat form textarea").val('');
+                            $("#contentChat form #voteBlock input").val('');
+                        }
+                    });
                 }
             }
             timer = 0;

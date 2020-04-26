@@ -14,14 +14,14 @@ class ForumControl{
         $tab = $post->getData()["typing"];
         $temoin = $post->getData()["typing"];
         foreach($temoin as $pseudo => $t){
-            if(time() - $t > 3)
+            if(time() - $t > 2)
                 unset($tab[$pseudo]);
         }
         $post->addData(["typing"=>$tab]);
         $pm->update($post);
     }
 
-    public static function read(User $user, Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
+    public static function read(User $reader, Post $post, PostManager $postManager, UserManager $userManager, $begin=0, $step=100, $stepIsId=false){
         if(!is_numeric($begin) or !is_numeric($step))
             return;
         $i=0;
@@ -82,7 +82,7 @@ class ForumControl{
             if($begin == 0 and $step == 1 and isset($post->getData()["typing"]) and count($post->getData()["typing"]) >= 1){
                 $link = " is ";
                 foreach($post->getData()["typing"] as $pseudo => $t){
-                    if($pseudo == $user->getPseudo())
+                    if($pseudo == $reader->getPseudo())
                         continue;
                     $i++;
                     if($i>1)
