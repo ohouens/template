@@ -339,7 +339,7 @@ class ForumControl{
         array_push($result, $order[1]);
         switch ($order[1]){
             case 'declare':
-                if(!preg_match("/^.{1,240}$/", implode(" ", array_slice($order, 2))))
+                if(!preg_match("/^.{1,240}$/s", implode(" ", array_slice($order, 2))))
                     return 44;
                 $message = implode(" ", array_slice($order, 2));
                 array_push($result, '"'.$message.'"');
