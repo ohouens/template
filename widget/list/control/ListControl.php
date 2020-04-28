@@ -31,7 +31,7 @@ class ListControl{
     public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um, $all){
         if(!$post->getData()['open'])
             return 5;
-        $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $um, $manager);
+        $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
         if($state == 0 and $all){
             foreach($post->getData()['list'] as $num){
                 $thread = $manager->get($num);
