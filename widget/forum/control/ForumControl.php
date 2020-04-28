@@ -322,8 +322,7 @@ class ForumControl{
                 $post->addData(["unlock"=>[]]);
                 break;
         }
-        $pm->add($post);
-        return ThreadControl::updateList($temoin, $pm);
+        return ThreadControl::addList($post, $temoin, $pm);
     }
 
     public static function isOrder($order){

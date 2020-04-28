@@ -40,8 +40,7 @@ class FluxControl{
         $post->setField($answer);
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent->getId()]);
-        $postManager->add($post);
-        ThreadControl::updateList($parent, $postManager);
+        ThreadControl::addList($post, $parent, $postManager);
         return self::updateSubscriber($parent, $postManager, $userManager);
     }
 

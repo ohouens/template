@@ -1,5 +1,22 @@
 <?php
 class ThreadControl{
+    public static function addList(Post $post, Post $parent, PostManager $pm){
+        if(!in_array($parent->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX]))
+            return 304;
+        $pm->add($post);
+        $newHead = $pm->lastId();
+        $next = $parent->getData()["head"];
+        $parent->addData(["head"=>$newHead]);
+        $pm->update($parent);
+        $toUpdate = $pm->get($newHead);
+        if($toUpdate->getCreation() != $post->getCreation() or $toUpdate->getField() != $post->getField())
+            return ThreadControl::updateList($parent, $pm);
+        $toUpdate->setId($newHead);
+        $toUpdate->addData(["next"=>$next]);
+        $pm->update($toUpdate);
+        return 0;
+    }
+
     public static function updateList(Post $post, PostManager $pm){
         $list = $pm->getList();
 		if(in_array($post->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX])){

@@ -2,7 +2,7 @@ $(function(){
     var flag = false;
     var timer = 0;
     var deadline = 5000;
-    var refreshTime = 1000;
+    var refreshTime = 500;
 
     if($("#contentStatistic").length){
         $('.emojiable-question').emojiPicker({
@@ -100,15 +100,15 @@ $(function(){
             $("#contentChat form input[name='state']").val(state);
         });
 
-        $("#send").click(function(e){
-            e.preventDefault();
-            $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
-                if(data == "0"){
-                    $("#contentChat form textarea").val('');
-                    $("#contentChat form #voteBlock input").val('');
-                }
-            });
-        });
+        // $("#send").click(function(e){
+        //     e.preventDefault();
+        //     $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
+        //         if(data == "0"){
+        //             $("#contentChat form textarea").val('');
+        //             $("#contentChat form #voteBlock input").val('');
+        //         }
+        //     });
+        // });
 
         $("#edit").click(function(e){
             e.preventDefault();
