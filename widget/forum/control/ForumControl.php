@@ -461,21 +461,19 @@ class ForumControl{
         }
     }
 
-    public static function subscribe(User $user, Post $post, PostManager $manager){
+    public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um){
         $id = $user->getId();
         $followers = $post->getData()['followers'];
         $retour = 0;
         if(in_array($id, $followers)){
-            $followers = array_diff($followers, [$id]);
+            $user->addData(["pass"=>$post->getData()["keys"][$user->getId()]]);
+            ThreadControl::unsubscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
             $retour = 1;
         }else{
             if(!$post->getData()['open'])
                 return 5;
-            array_push($followers, $id);
+            ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
         }
-        $post->removeData('followers');
-        $post->addData(['followers' => $followers]);
-        $manager->update($post);
         return $retour;
     }
 

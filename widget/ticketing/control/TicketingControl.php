@@ -1,9 +1,9 @@
 <?php
 class TicketingControl {
-    public static function subscribe(User $user, Post $post, PostManager $manager){
+    public static function subscribe(User $user, Post $post, PostManager $manager,  UserManager $um){
         if(!$post->getData()['open'])
             return 5;
-        $state = ThreadControl::subscribe('tickets', $user, $post, $manager);
+        $state = ThreadControl::subscribe('tickets', $user, $post, $manager, $um);
         if($state == 0){
             //User check creation
             $id = $user->getId();
@@ -21,8 +21,8 @@ class TicketingControl {
         return $state;
     }
 
-    public static function unsubscribe(User $user, Post $post, PostManager $manager){
-        $state = ThreadControl::unsubscribe('tickets', $user, $post, $manager);
+    public static function unsubscribe(User $user, Post $post, PostManager $manager,  UserManager $um){
+        $state = ThreadControl::unsubscribe('tickets', $user, $post, $manager, $um);
         if($state == 0){
             //User check deleting
             $id = ThreadControl::getId($user);

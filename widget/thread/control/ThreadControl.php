@@ -267,7 +267,7 @@ class ThreadControl{
             return $um->get($user);
     }
 
-    public static function subscribe($content, User $user, Post $post, PostManager $manager){
+    public static function subscribe($content, User $user, Post $post, PostManager $manager, UserManager $um){
         $id = self::getId($user);
         $key = $key = achage(32);
         $save = $post->getData()[$content];
@@ -280,10 +280,16 @@ class ThreadControl{
         $pass[$id] = $key;
         $post->addData(['keys' => $pass]);
         $manager->update($post);
+        $following = [];
+        if(isset($user->getData()["following"]))
+            $following = $user->getData()["following"];
+        array_push($following, $post->getId());
+        $user->addData(["following"=>$following]);
+        $um->update($user);
         return 0;
     }
 
-    public static function unsubscribe($content, User $user, Post $post, PostManager $manager){
+    public static function unsubscribe($content, User $user, Post $post, PostManager $manager, UserManager $um){
         $id = self::getId($user);
         $save = $post->getData()[$content];
         $keys = $post->getData()['keys'];
@@ -297,6 +303,13 @@ class ThreadControl{
         $post->addData([$content => $save]);
         $post->addData(['keys' => $keys]);
         $manager->update($post);
+        if(!isset($user->getData()["following"]))
+            return 0;
+        $following = $user->getData()["following"];
+        $following = array_diff($following, [$post->getId()]);
+        $user->addData(["following"=>$following]);
+        $user->removeData("pass");
+        $um->update($user);
         return 0;
     }
 

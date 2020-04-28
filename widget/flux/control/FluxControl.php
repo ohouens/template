@@ -44,10 +44,10 @@ class FluxControl{
         return self::updateSubscriber($parent, $postManager, $userManager);
     }
 
-    public static function subscribe(User $user, Post $post, PostManager $manager){
+    public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um){
         if(!$post->getData()['open'])
             return 5;
-        $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager);
+        $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
         if($state == 0){
             $corps = new SubscribeMailWidget($user, $post, $manager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
@@ -56,8 +56,8 @@ class FluxControl{
         return $state;
     }
 
-    public static function unsubscribe(User $user, Post $post, PostManager $manager){
-        $state = ThreadControl::unsubscribe(ThreadControl::getInfluence($post), $user, $post, $manager);
+    public static function unsubscribe(User $user, Post $post, PostManager $manager, UserManager $um){
+        $state = ThreadControl::unsubscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
         if($state == 0){
 
         }
