@@ -11,12 +11,12 @@ class ContainThreadControl{
 
     private static function page(User $user, Manager $manager, $number){
         $page = "";
-        $list = $manager->getList();
-        foreach(array_reverse($list) as $thread){
-            if(in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX, Constant::THREAD_TICKETING, Constant::THREAD_LIST]) and
-                in_array($user->getId(), $thread->getData()[ThreadControl::getInfluence($thread)])
-            )$page .= self::construct($thread, $manager);
-		}
+        $list = $user->getData()["following"];
+        rsort($list);
+        foreach($list as $num){
+            $thread = $manager->get($num);
+            $page .= self::construct($thread, $manager);
+        }
         if($page == "")
             return
             '<div id="noThread" class="children square">
