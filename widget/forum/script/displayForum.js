@@ -254,9 +254,9 @@ $(function(){
             $("#contentChat #buffer").html(data);
             if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num')){
                 loadChatBis();
-                $('#displayChat #end').html(data);
+                // $('#displayChat #end').html(data);
             }
-            if(first)
+            // if(first)
                 $('#displayChat #end').html(data);
             editSwitch();
             if(end || first){
