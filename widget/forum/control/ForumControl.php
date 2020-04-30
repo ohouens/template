@@ -360,7 +360,7 @@ class ForumControl{
                 if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
                     return 47;
                 $subscriber = $um->get($order[2]);
-                ListControl::subscribe($subscriber, $thread, $pm, false);
+                ListControl::subscribe($subscriber, $thread, $pm, $um, false);
                 array_push($result, "@".$order[2]);
                 array_push($result, "to");
                 array_push($result, $order[3]);
@@ -376,7 +376,7 @@ class ForumControl{
                 if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
                     return 47;
                 $subscriber = $um->get($order[2]);
-                ListControl::subscribe($subscriber, $thread, $pm, true);
+                ListControl::subscribe($subscriber, $thread, $pm, $um, true);
                 array_push($result, "@".$order[2]);
                 array_push($result, "to");
                 array_push($result, $order[3]);
@@ -393,7 +393,7 @@ class ForumControl{
                     return 47;
                 $subscriber = $um->get($order[2]);
                 $subscriber->addData(["pass"=>$thread->getData()["keys"][$subscriber->getId()]]);
-                ListControl::unsubscribe($subscriber, $thread, $pm, false);
+                ListControl::unsubscribe($subscriber, $thread, $pm, $um, false);
                 array_push($result, "@".$order[2]);
                 array_push($result, "from");
                 array_push($result, $order[3]);
