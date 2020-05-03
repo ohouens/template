@@ -84,6 +84,7 @@
     color: #ff009d;
     text-decoration: none;
 }
+.emojiPickerIconWrap{height: 100%;}
 #contentChat #sendChat{
     height: 15%;
     background: white;
@@ -97,6 +98,7 @@
 }#contentChat #sendChat textarea{
     border: none;
     resize: none;
+    font-size: 1.3em;
 }#contentChat #sendChat input[type="image"]{
     width: 3%;
     margin-left: 1%;
