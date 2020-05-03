@@ -48,12 +48,26 @@ class SettingThreadWidget extends Widget{
                 $echoTunnel = '<br/>
                 <span class="tab">tunnel:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>
                 <span class="tab">in:</span><textarea class="input" name="in">'.$in.'</textarea>';
+            $notify = "";
+            if($post->getType() == Constant::THREAD_FLUX){
+                $ny="selected";
+                $nn="";
+                if(isset($post->getData()['notify']) and !$post->getData()['notify']){
+                    $nn="selected";
+                    $ny="";
+                }
+                $notify = '
+                <span class="tab">notify:</span><select class="input" name="notify">
+                    <option value="yes" '.$ny.'>yes</option>
+                    <option value="no" '.$nn.'>no</option>
+                </select><br/>';
+            }
             $lock =
             '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <span class="tab">open:</span><select class="input" name="open">
                     <option value="yes" '.$yes.'>yes</option>
                     <option value="no" '.$no.'>no</option>
-                </select><br/>
+                </select><br/>'.$notify.'
                 <span class="tab">read:</span><select class="input" name="read">
                     <option value="everyone">everyone</option>
                     <option value="me" '.$readme.'>me</option>

@@ -41,7 +41,9 @@ class FluxControl{
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent->getId()]);
         ThreadControl::addList($post, $parent, $postManager);
-        return self::updateSubscriber($parent, $postManager, $userManager);
+        if(!isset($parent->getData()['notify']) or (isset($parent->getData()['notify']) and $parent->getData()['notify']))
+            self::updateSubscriber($parent, $postManager, $userManager);
+        return 0;
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um){

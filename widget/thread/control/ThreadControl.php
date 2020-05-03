@@ -120,6 +120,16 @@ class ThreadControl{
         $manager->update($post);
         return 0;
     }
+    public static function setNotify(User $user, Post $post, $notify, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($notify == "yes")
+            $post->addData(["notify"=>true]);
+        else
+            $post->addData(["notify"=>false]);
+        $manager->update($post);
+        return 0;
+    }
 
     public static function isOpen(Post $post){
         return $post->getData()["open"];
