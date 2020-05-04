@@ -7,6 +7,10 @@
     font-size: 2em;
     margin-bottom: 2%;
 }
+#contentFlux h1 img.notify{
+    height: 35px;
+    vertical-align: middle;
+}
 /* #contentFlux #messages{
     text-align: left;
     font-size: 1.2em;

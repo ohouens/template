@@ -45,6 +45,10 @@
     font-size: 3.5em;
     font-family: source;
 }
+.thread.flux img.notify{
+    height: 35px;
+    vertical-align: middle;
+}
 
 @media (max-width: 500px){
 	#threadGrid .thread{

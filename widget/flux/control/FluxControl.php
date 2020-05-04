@@ -41,7 +41,7 @@ class FluxControl{
         $post->setType(Constant::THREAD_ANSWER);
         $post->addData(["parent"=>$parent->getId()]);
         ThreadControl::addList($post, $parent, $postManager);
-        if(!isset($parent->getData()['notify']) or (isset($parent->getData()['notify']) and $parent->getData()['notify']))
+        if(self::isNotify($parent))
             self::updateSubscriber($parent, $postManager, $userManager);
         return 0;
     }
@@ -80,5 +80,9 @@ class FluxControl{
             $mail->send();
         }
         return 0;
+    }
+
+    public static function isNotify(Post $post){
+        return isset($post->getData()["notify"]) and $post->getData()["notify"];
     }
 }

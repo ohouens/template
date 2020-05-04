@@ -157,6 +157,9 @@ class DisplayThreadWidget extends Widget{
         $button = '<br/><button id="subscribe" class="buttonC space" num="'.$hash->get($post->getId()).'"></button>';
         if($post->getUser() == $user->getId())
             $button = '<br/><button class="buttonA" id="addFlux">Add flux</button>';
+        $notify = "";
+        if(FluxControl::isNotify($post))
+            $notify = ' <img src="style/icon/notify.png" alt="notify" class="notify"/>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -165,7 +168,7 @@ class DisplayThreadWidget extends Widget{
         </div><!--
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
             <div id="flux" class="grand large">
-                <h1>'.$post->getData()['title'].'</h1>
+                <h1>'.$post->getData()['title'].$notify.'</h1>
                 <div id="fluxLast"></div>
             </div>
             <div class="grand large vide">

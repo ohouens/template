@@ -52,9 +52,12 @@ class ContainThreadControl{
                 <h3>'.$post->getData()['title'].'</h3>';
                 break;
             case Constant::THREAD_FLUX:
+                $notify = "";
+                if(FluxControl::isNotify($post))
+                    $notify = ' <img src="style/icon/notify.png" alt="notify" class="notify"/>';
                 $class = 'flux';
                 $result = '
-                <h3>'.$post->getData()['title'].'</h3>
+                <h3>'.$post->getData()['title'].$notify.'</h3>
                 <p>'.$post->getField().'</p>';
                 break;
             case Constant::THREAD_TICKETING:
