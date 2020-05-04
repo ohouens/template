@@ -28,6 +28,9 @@
     background-size: cover;
     height: 150px;
 }
+.thread.forum img{
+    vertical-align: top;
+}
 .thread.list p{
     font-family: sourceBold;
     font-size: 3em;
@@ -48,6 +51,14 @@
 .thread.flux img.notify{
     height: 35px;
     vertical-align: middle;
+}
+.thread .new, .thread.flux p.new{
+    background: red;
+    color: white;
+    font-family: sourceBold;
+    font-size: 1.2em;
+    padding: 0;
+    text-align: center;
 }
 
 @media (max-width: 500px){

@@ -13,7 +13,7 @@ class ListControl{
         return $list;
     }
 
-    public static function read(Post $post, PostManager $manager){
+    public static function read(User $user, Post $post, PostManager $manager){
         $result = "";
         if(count($post->getData()['list']) != $post->getData()["number"]){
             $post->addData(["number"=>count($post->getData()['list'])]);
@@ -22,7 +22,7 @@ class ListControl{
         foreach($post->getData()['list'] as $num){
             $thread = $manager->get($num);
             if(!is_int($thread))
-                $result .= ContainThreadControl::construct($thread, $manager);
+                $result .= ContainThreadControl::construct($user, $thread, $manager);
             else{
                 $list = array_diff($post->getData()['list'], [$num]);
                 $post->addData(["list"=>$list]);

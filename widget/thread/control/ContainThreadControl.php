@@ -15,7 +15,7 @@ class ContainThreadControl{
         rsort($list);
         foreach($list as $num){
             $thread = $manager->get($num);
-            $page .= self::construct($thread, $manager);
+            $page .= self::construct($user, $thread, $manager);
         }
         if($page == "")
             return
@@ -40,24 +40,33 @@ class ContainThreadControl{
         return new User();
     }
 
-    public  static function construct(Post $post, PostManager $manager){
+    public static function construct(User $user, Post $post, PostManager $manager){
         global $hash;
         $result = "";
         $class = "";
+        $news = "";
         switch($post->getType()){
             case Constant::THREAD_FORUM:
+                if(isset($user->getData()["number"][$post->getId()])){
+                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                        $news = '<p class="new">NEW MESSAGES</p>';
+                }
                 $class = 'forum';
                 $result = '
-                <img class="large" src="media/forum/cover/'.$post->getField().'"/>
+                <img class="large" src="media/forum/cover/'.$post->getField().'"/>'.$news.'
                 <h3>'.$post->getData()['title'].'</h3>';
                 break;
             case Constant::THREAD_FLUX:
+                if(isset($user->getData()["number"][$post->getId()])){
+                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                        $news = '<p class="new">NEW MESSAGES</p>';
+                }
                 $notify = "";
                 if(FluxControl::isNotify($post))
                     $notify = ' <img src="style/icon/notify.png" alt="notify" class="notify"/>';
                 $class = 'flux';
                 $result = '
-                <h3>'.$post->getData()['title'].$notify.'</h3>
+                <h3>'.$post->getData()['title'].$notify.'</h3>'.$news.'
                 <p>'.$post->getField().'</p>';
                 break;
             case Constant::THREAD_TICKETING:
@@ -67,6 +76,10 @@ class ContainThreadControl{
                 <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
             case Constant::THREAD_LIST:
+                if(isset($user->getData()["number"][$post->getId()])){
+                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                        $news = '<div class="new">NEW THREADS</div>';
+                }
                 $i = 0;
                 $j = 0;
                 $list = $post->getData()['list'];
@@ -98,7 +111,7 @@ class ContainThreadControl{
                 }
                 $class = 'list';
                 $result = '
-                '.$cover.'
+                '.$cover.''.$news.'
                 <h3>'.$post->getData()['title'].'[ ]</h3>';
                 break;
             default:
