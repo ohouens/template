@@ -15,6 +15,10 @@ class ListControl{
 
     public static function read(Post $post, PostManager $manager){
         $result = "";
+        if(count($post->getData()['list']) != $post->getData()["number"]){
+            $post->addData(["number"=>count($post->getData()['list'])]);
+            $manager->update($post);
+        }
         foreach($post->getData()['list'] as $num){
             $thread = $manager->get($num);
             if(!is_int($thread))
