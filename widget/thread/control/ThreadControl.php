@@ -7,6 +7,7 @@ class ThreadControl{
         $newHead = $pm->lastId();
         $next = $parent->getData()["head"];
         $parent->addData(["head"=>$newHead]);
+        $parent->addData(["number"=>$parent->getData()["number"]+1]);
         $pm->update($parent);
         $toUpdate = $pm->get($newHead);
         if($toUpdate->getCreation() != $post->getCreation() or $toUpdate->getField() != $post->getField())
@@ -326,6 +327,16 @@ class ThreadControl{
     public static function hasSubscribe($content, User $user, Post $post){
         if(in_array($user->getId(), $post->getData()[$content]))
             return 1;
+        return 0;
+    }
+
+    public static function updateNumber(User $user, Post $post, UserManager $um){
+        $tab = [];
+        if(isset($user->getData()["number"]))
+            $tab = $user->getData()["number"];
+        $tab[$post->getId()] = $post->getData()["number"];
+        $user->addData(["number"=>$tab]);
+        $um->update($user);
         return 0;
     }
 }

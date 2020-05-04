@@ -51,6 +51,7 @@ class createThreadControl{
         $post->addData(["subscribers"=>[]]);
         $post->addData(["open"=>true]);
         $post->addData(["head"=>0]);
+        $post->addData(["number"=>0]);
         $manager->add($post);
         return 0;
     }
@@ -75,6 +76,7 @@ class createThreadControl{
                 $post->addData(["followers"=>[]]);
                 $post->addData(["open"=>true]);
                 $post->addData(["head"=>0]);
+                $post->addData(["number"=>0]);
                 $manager->add($post);
                 return 0;
                 break;
@@ -105,6 +107,7 @@ class createThreadControl{
         $post->addData(["writers"=>[]]);
         $post->addData(["tickets"=>[]]);
         $post->addData(["open"=>true]);
+        $post->addData(["number"=>0]);
         $manager->add($post);
         return 0;
     }
@@ -121,6 +124,7 @@ class createThreadControl{
         $post->addData(["writers"=>[]]);
         $post->addData(["followers"=>[]]);
         $post->addData(["open"=>true]);
+        $post->addData(["number"=>0]);
         $manager->add($post);
         return 0;
     }
