@@ -49,6 +49,9 @@
 
 
 @media (max-width: 800px){
+    #licence #example{
+        display: none;
+    }
 }
 
 /*-----------------------------------licenceV-----------------------------------*/
