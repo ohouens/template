@@ -24,6 +24,7 @@
     text-align: left;
     font-family: source;
     max-width: 450px;
+    width: 80%;
     margin: auto;
     vertical-align: middle;
 }
@@ -51,6 +52,14 @@
 @media (max-width: 800px){
     #licence #example{
         display: none;
+    }
+
+    #licence #desc{
+        max-width: 320px;
+    }
+
+    #licence #logPaypal{
+        max-width: 100%;
     }
 }
 
