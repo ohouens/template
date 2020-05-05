@@ -1,63 +1,46 @@
 #licence{
     background-size: cover;
 }#licence .super{
-    display: block;
     min-height: 84vh;
 }
 
 #licence h1{
     /* background-color: red; */
     font-family: sourceBold;
-    font-size: 3em;
+    font-size: 1.4em;
+    margin-bottom: 2%;
 }
 
-#licence #intro{
-    padding-left: 2%;
-    padding-right: 2%;
-    vertical-align: middle;
-    margin-top: 3%;
-}#licence #intro img{
-    vertical-align: middle;
-    height:80px;
-}
 #licence #price{
-    margin-top: 3%;
     vertical-align: middle;
-    font-family: sourceRegular;
-    font-size: 4em;
-}#licence #price strong{
+    /* font-family: sourceRegular; */
     font-family: sourceBold;
-    color: yellow;
+}#licence #price strong{
+    /* color: yellow; */
+    font-size: 2em;
 }
 
 #licence #desc{
-    /* background: pink; */
-    min-height: 40vh;
-}
-#licence #desc .center .alignement{
-    width: 30.3%;
     text-align: left;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
     font-family: source;
-    font-size: 1.1em;
+    max-width: 450px;
+    margin: auto;
+    vertical-align: middle;
 }
-#licence #desc .center .alignement h2{
-    text-align: center;
-    font-family: sourceRegular;
-}
-#licence #desc .center .alignement h2 img{
-    height: 40px;
+
+#licence #example{
+    max-width: 300px;
     vertical-align: middle;
 }
 
 #logPaypal{
+    text-align: center;
     background: #FFC439;
     color: black;
     height: 45px;
     width: 400px;
     max-width: 80%;
-    border-radius: 40px;
+    /* border-radius: 40px; */
 }#logPaypal:hover{background: #F2BA36;}
 #logPaypal img, #logPaypal span{
     vertical-align: middle;
@@ -66,13 +49,6 @@
 
 
 @media (max-width: 800px){
-    #licence #desc .center .alignement{
-        width: 74%;
-        padding-left: 12%;
-        padding-right: 12%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
 }
 
 /*-----------------------------------licenceV-----------------------------------*/
