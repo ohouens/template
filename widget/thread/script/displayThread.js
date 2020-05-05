@@ -25,6 +25,7 @@ $(function(){
         $(".flickery").flickity({
             draggable: false,
             groupCells: true,
+            pageDots: false,
             initialIndex: 1
         });
 });

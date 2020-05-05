@@ -41,6 +41,12 @@ $(function(){
         });
     }
     if($("#contentChat").length){
+        if($("#contentChat").width() < 800){
+            $("header").css("display", "none");
+            $(".wrapper").css("padding-top", "0");
+            $(".wrapper .children").css("height", "100vh");
+            $("footer").css("display", "none");
+        }
 
         $('#displayChat').on('scroll', function() {
             var addition = $(this).scrollTop() + $(this).innerHeight() + 1;
