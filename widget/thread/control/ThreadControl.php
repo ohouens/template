@@ -184,11 +184,15 @@ class ThreadControl{
         return 0;
     }
 
-    public static function delete(User $user, Post $post, PostManager $manager){
+    public static function delete(User $user, Post $post, UserManager $um, PostManager $manager){
         if($user->getId() != $post->getUser() and !self::isAdmin($user, $post, $manager))
             return Constant::ERROR_CODE_USER_WRONG;
         $post->setActive(0);
         $manager->update($post);
+        $tab = $user->getData()['threads'];
+        $tab = array_diff($tab, [$post->getId()]);
+        $user->addData(["threads"=>$tab]);
+        $um->update($user);
         return 0;
     }
 
