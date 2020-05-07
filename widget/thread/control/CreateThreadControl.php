@@ -37,7 +37,29 @@ class createThreadControl{
         return $retour;
     }
 
-    public static function createFlux(User $user, $title, $intro, Manager $manager){
+    public static function indexThreadFromStart(User $user, UserManager $um, PostManager $pm){
+        $tab = [];
+        foreach($pm->getList() as $thread){
+            if($thread->getUser() == $user->getId() and in_array($thread->getType(), [Constant::THREAD_FLUX, Constant::THREAD_LIST, Constant::THREAD_FORUM, Constant::THREAD_TICKETING]))
+                array_push($tab, $thread->getId());
+        }
+        $user->addData(["threads"=>$tab]);
+        $um->update($user);
+    }
+
+    private static function indexThread($threadId, User $user, Post $post, UserManager $um, PostManager $pm){
+        $thread = $pm->get($threadId);
+        if($post->getUser() != $thread->getUser() or $post->getData()['title'] != $thread->getData()['title'])
+            return self::indexThreadFromStart($user, $um, $pm);
+        $tab = $user->getData()["threads"];
+        array_push($tab, $threadId);
+        $user->addData(["threads"=>$tab]);
+        $um->update($user);
+    }
+
+    public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm){
+        if(count($user->getData()["threads"]) >= 77)
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         if(!preg_match("#^.{1,1000}$#s", $intro))
@@ -52,11 +74,14 @@ class createThreadControl{
         $post->addData(["open"=>true]);
         $post->addData(["head"=>0]);
         $post->addData(["number"=>0]);
-        $manager->add($post);
+        $pm->add($post);
+        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
     }
 
-    public static function createForum(User $user, $title, $cover, Manager $manager, $path=""){
+    public static function createForum(User $user, $title, $cover, UserManager $um, PostManager $pm, $path=""){
+        if(count($user->getData()["threads"]) >= 77)
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         $extension = substr(strrchr($cover['name'],'.'),1);
@@ -77,7 +102,7 @@ class createThreadControl{
                 $post->addData(["open"=>true]);
                 $post->addData(["head"=>0]);
                 $post->addData(["number"=>0]);
-                $manager->add($post);
+                $pm->add($post);
                 return 0;
                 break;
             case 701:
@@ -92,9 +117,12 @@ class createThreadControl{
             default:
                 break;
         }
+        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
     }
 
-    public static function createTicketing(User $user, $title, $date, Manager $manager){
+    public static function createTicketing(User $user, $title, $date, UserManager $um, PostManager $pm){
+        if(count($user->getData()["threads"]) >= 77)
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         if(!checkIsAValidDate($date))
@@ -108,11 +136,14 @@ class createThreadControl{
         $post->addData(["tickets"=>[]]);
         $post->addData(["open"=>true]);
         $post->addData(["number"=>0]);
-        $manager->add($post);
+        $pm->add($post);
+        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
     }
 
-    public static function createList(User $user, $title, $list, Manager $manager){
+    public static function createList(User $user, $title, $list, UserManager $um, PostManager $pm){
+        if(count($user->getData()["threads"]) >= 77)
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         $post = new Post();
@@ -125,7 +156,8 @@ class createThreadControl{
         $post->addData(["followers"=>[]]);
         $post->addData(["open"=>true]);
         $post->addData(["number"=>0]);
-        $manager->add($post);
+        $pm->add($post);
+        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
     }
 }

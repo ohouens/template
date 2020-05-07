@@ -25,6 +25,7 @@ class LicenceControl{
             "id"=>$buyerID
         ]);
         $user->addData(["licence"=>$licence->getName()]);
+		$user->addData(["threads"=>[]]);
 
         try {
             $pointManager->add($licence);
