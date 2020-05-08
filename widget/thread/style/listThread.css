@@ -1,8 +1,8 @@
 #thread{
     /* padding-left: 3%;
     padding-right: 3%; */
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
 }
 
 #thread .list{
@@ -11,9 +11,12 @@
     font-size: 1.3em;
     font-family: sourceRegular;
     text-align: left;
-    max-width: 600px;
+    width: 25%;
     margin: auto;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    /* border-width: 1%; */
+    /* border-color: black;
+    border-style: solid; */
 }#thread .list:hover{
     background: white;
     color: black;
@@ -30,4 +33,10 @@
     display: inline-block;
     width: 5%;
     vertical-align: top;
+}
+
+@media (max-width: 800px){
+    #thread .list{
+        width: 50%;
+    }
 }
