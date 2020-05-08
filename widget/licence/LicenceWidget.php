@@ -41,9 +41,9 @@ class LicenceWidget extends Widget{
                     <div id="desc" class="alignement">
                         <h1>Onisowo Licence</h1>
                         <p>
-                            Support our team and unlocked 77 thread slots.
+                            Support our team and unlock 77 thread slots.
                             You will be able to make your own distributed network
-                            and making it whatever you want.
+                            and do whatever you want with it.
                         </p>
                         <button id="logPaypal" class="space">
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>
