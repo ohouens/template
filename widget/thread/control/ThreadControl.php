@@ -252,21 +252,16 @@ class ThreadControl{
 
     public static function list(User $user, PostManager $manager){
         $final = [];
-        $list = $manager->getList();
-        foreach(array_reverse($list) as $thread){
-            if(
-                (in_array($thread->getType(), [Constant::THREAD_FORUM ,Constant::THREAD_TICKETING ,Constant::THREAD_FLUX, Constant::THREAD_LIST])) and
-                (
-                    $thread->getUser() == $user->getId() or
-                    ($thread->getType() == Constant::THREAD_FORUM and in_array($user->getId(), $thread->getData()['followers'])) or
-                    ($thread->getType() == Constant::THREAD_LIST and in_array($user->getId(), $thread->getData()['followers'])) or
-                    ($thread->getType() == Constant::THREAD_TICKETING and in_array($user->getId(), $thread->getData()['tickets'])) or
-                    ($thread->getType() == Constant::THREAD_FLUX and in_array($user->getId(), $thread->getData()['subscribers']))
-                )
-            )
-		         array_push($final, $thread);
-		}
-        return $final;
+        $result = [];
+        if(isset($user->getData()["threads"]))
+            $final = array_merge($final, $user->getData()["threads"]);
+        if(isset($user->getData()["following"]))
+            $final = array_merge($final, $user->getData()["following"]);
+        rsort($final);
+        $final = array_unique($final);
+        foreach($final as $num)
+            array_push($result, $manager->get(intval($num)));
+        return $result;
     }
 
     public static function getId(User $user){
