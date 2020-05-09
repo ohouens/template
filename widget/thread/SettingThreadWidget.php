@@ -46,8 +46,8 @@ class SettingThreadWidget extends Widget{
             $echoTunnel = "";
             if($post->getType() == Constant::THREAD_FORUM)
                 $echoTunnel = '<br/>
-                <span class="tab">tunnel:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>
-                <span class="tab">in:</span><textarea class="input" name="in">'.$in.'</textarea>';
+                <span class="tab">in:</span><textarea class="input" name="in">'.$in.'</textarea>
+                <span class="tab">out:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>';
             $notify = "";
             if($post->getType() == Constant::THREAD_FLUX){
                 $ny="selected";
@@ -62,6 +62,18 @@ class SettingThreadWidget extends Widget{
                     <option value="no" '.$nn.'>no</option>
                 </select><br/>';
             }
+            $forum="";
+            if($post->getType() == Constant::THREAD_FORUM){
+                $forum='<br/>
+                <span class="tab">write:</span><select class="input" name="write">
+                    <option value="everyone">everyone</option>
+                    <option value="me" '.$writeme.'>I</option>
+                </select><br/>
+                <span class="tab">execute:</span><select class="input" name="execute">
+                    <option value="everyone">everyone</option>
+                    <option value="me" '.$executeme.'>I</option>
+                </select>';
+            }
             $lock =
             '<form class="alignement" method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                 <span class="tab">open:</span><select class="input" name="open">
@@ -70,19 +82,8 @@ class SettingThreadWidget extends Widget{
                 </select><br/>'.$notify.'
                 <span class="tab">read:</span><select class="input" name="read">
                     <option value="everyone">everyone</option>
-                    <option value="me" '.$readme.'>me</option>
-                    <option value="only">only</option>
-                </select><br/>
-                <span class="tab">write:</span><select class="input" name="write">
-                    <option value="everyone">everyone</option>
-                    <option value="me" '.$writeme.'>me</option>
-                    <option value="only">only</option>
-                </select><br/>
-                <span class="tab">execute:</span><select class="input" name="execute">
-                    <option value="everyone">everyone</option>
-                    <option value="me" '.$executeme.'>me</option>
-                    <option value="only">only</option>
-                </select>'.$echoTunnel.'
+                    <option value="me" '.$readme.'>I</option>
+                </select>'.$forum.$echoTunnel.'
             </form>';
             $save =
             '<button id="delete" class="button space">Delete</button>
