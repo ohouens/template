@@ -259,8 +259,11 @@ class ThreadControl{
             $final = array_merge($final, $user->getData()["following"]);
         rsort($final);
         $final = array_unique($final);
-        foreach($final as $num)
-            array_push($result, $manager->get(intval($num)));
+        foreach($final as $num){
+            $thread = $manager->get(intval($num));
+            if(!is_int($thread))
+                array_push($result, $thread);
+        }
         return $result;
     }
 

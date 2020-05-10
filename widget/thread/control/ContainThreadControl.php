@@ -15,7 +15,8 @@ class ContainThreadControl{
         rsort($list);
         foreach($list as $num){
             $thread = $manager->get($num);
-            $page .= self::construct($user, $thread, $manager);
+            if(!is_int($thread))
+                $page .= self::construct($user, $thread, $manager);
         }
         if($page == "")
             return
