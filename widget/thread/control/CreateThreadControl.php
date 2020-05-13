@@ -1,6 +1,7 @@
 <?php
 class createThreadControl{
     const LIMIT = 77;
+    const UNLIMITED = [1];
 
     public static function getObject($thread){
         $retour = "";
@@ -60,7 +61,7 @@ class createThreadControl{
     }
 
     public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm){
-        if(count($user->getData()["threads"]) >= self::LIMIT)
+        if(count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -82,7 +83,7 @@ class createThreadControl{
     }
 
     public static function createForum(User $user, $title, $cover, UserManager $um, PostManager $pm, $path=""){
-        if(count($user->getData()["threads"]) >= self::LIMIT)
+        if(count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -123,7 +124,7 @@ class createThreadControl{
     }
 
     public static function createTicketing(User $user, $title, $date, UserManager $um, PostManager $pm){
-        if(count($user->getData()["threads"]) >= self::LIMIT)
+        if(count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -144,7 +145,7 @@ class createThreadControl{
     }
 
     public static function createList(User $user, $title, $list, UserManager $um, PostManager $pm){
-        if(count($user->getData()["threads"]) >= self::LIMIT)
+        if(count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
