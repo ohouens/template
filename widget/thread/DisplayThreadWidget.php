@@ -241,8 +241,8 @@ class DisplayThreadWidget extends Widget{
         global $hash;
         $qrString = "Follow all";
         $token="";
-        if(in_array($user->getId(), $post->getData()["followers"])){
-            $token="%26token=".$post->getData()['keys'][$user->getId()];
+        if(!in_array($user->getId(), $post->getData()["followers"])){
+            $token="%26token";
             $qrString = "Unfollow all";
         }
         return

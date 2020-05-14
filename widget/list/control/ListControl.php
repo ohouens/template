@@ -36,7 +36,7 @@ class ListControl{
         if(!$post->getData()['open'])
             return 5;
         $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
-        if($state == 0 and $all){
+        if($all){
             foreach($post->getData()['list'] as $num){
                 $thread = $manager->get($num);
                 switch($thread->getType()){
@@ -64,7 +64,7 @@ class ListControl{
 
     public static function unsubscribe(User $user, Post $post, PostManager $manager, UserManager $um, $all){
         $state = ThreadControl::unsubscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
-        if($state == 0 and $all){
+        if($all){
             foreach($post->getData()['list'] as $num){
                 $thread = $manager->get($num);
                 $user->addData(["pass"=>$thread->getData()['keys'][$user->getId()]]);
