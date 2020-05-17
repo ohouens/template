@@ -4,7 +4,7 @@ class DisplayThreadWidget extends Widget{
         global $hash;
         $result = "";
         foreach($subscribers as $inter){
-            $id = $inter->getId();
+            $id = $inter->getPseudo();
             $link = '?page='.$id;
             $display = $inter->getPseudo();
             if($inter->getData()['isMail']){
@@ -136,8 +136,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
-                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
+                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -185,8 +185,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
-                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
+                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -218,8 +218,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
-                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
+                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
@@ -257,8 +257,8 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentStatistic" class="grand children alignement">
             <div id="contentAuthor" class="square">
                 <div class="center">
-                    <img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt=" ">
-                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getId().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
+                    <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
+                    <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
                     <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
                 </div>
             </div>
