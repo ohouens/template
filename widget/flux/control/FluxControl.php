@@ -22,7 +22,8 @@ class FluxControl{
             $body = preg_replace("/((https?:\/\/)?(www\.)?pinterest.com\/[\w?.\/=&#_-]+)/", '<a href="$1" target="_blank">pinterest</a>', $body);
             $body = preg_replace("/((https?:\/\/[\w?.\/=&#_-]+)( |<br\/>|<br>|<br \/>))/", '<a href="$2" target="_blank">$2</a>$3', $body);
             $body = preg_replace("#::(.*)::#", '::<span class="warning" style="color: #8d0d0d;">$1</span>::', $body);
-            $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="https://onisowo.com/index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
+            $body = preg_replace("/([a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,4})/", '<a href="mailto:$1" class="mailto" style="color: #96a8c0;">$1</a>', $body);
+            $body = preg_replace("/((@([a-z0-9_]{0,20}))(:| |<br\/>|<br>|<br \/>))/", '<a href="https://onisowo.com/index.php?page=$3" class="at" style="color: #ff009d;">$2</a>$4', $body);
             $body = substr($body, 0, -1);
             $result .=
             '<p class="fluxMessage" style="border-left: 2px solid grey; padding-left: 1%; padding-top: 5px; padding-bottom: 15px; margin: 0; margin-left: 4px;">
