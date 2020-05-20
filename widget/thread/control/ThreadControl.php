@@ -67,22 +67,27 @@ class ThreadControl{
             return 0;
         }
         $tab = [];
+        $result = 0;
         foreach (explode(" ", $fluxId) as $flux){
             $inter = $hash->traduct($flux);
             $flux = $manager->get($inter);
             if(in_array($inter, $tab))
                 continue;
-            if($flux->getType() != Constant::THREAD_FLUX)
+            if($flux->getType() != Constant::THREAD_FLUX){
                 // return Constant::ERROR_CODE_NOT_FOUND;
+                $result = 1;
                 continue;
-            if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId())
+            }
+            if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
+                $result = 1;
                 continue;
+            }
             array_push($tab, $inter);
         }
         $post->addData(["tunnel"=>$tab]);
         $manager->update($post);
-        return 0;
+        return $result;
     }
 
     public static function setIn(User $user, Post $post, $registerId, PostManager $manager){
@@ -93,22 +98,27 @@ class ThreadControl{
             return 0;
         }
         $tab = [];
+        $result = 0;
         foreach (explode(" ", $registerId) as $register){
             $inter = $hash->traduct($register);
             $register = $manager->get($inter);
             if(in_array($inter, $tab))
                 continue;
-            if($register->getType() != Constant::THREAD_TICKETING)
+            if($register->getType() != Constant::THREAD_TICKETING){
                 // return Constant::ERROR_CODE_NOT_FOUND;
+                $result = 1;
                 continue;
-            if($register->getUser() != $user->getId() or $post->getUser() != $user->getId())
+            }
+            if($register->getUser() != $user->getId() or $post->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
+                $result = 1;
                 continue;
+            }
             array_push($tab, $inter);
         }
         $post->addData(["in"=>$tab]);
         $manager->update($post);
-        return 0;
+        return $result;
     }
 
     public static function setOpen(User $user, Post $post, $open, PostManager $manager){
