@@ -3,7 +3,7 @@ class RegisterWidget extends Widget{
     public function __construct(){
         parent::__construct(
             "",
-             '<p><img src="style/logo.png" id="logo" alt="logo"/></p>
+             '<p><img src="style/icon.png" id="logo" alt="logo"/></p>
              <form id="signin" method="post" autocomplete="off">
              	<input type="text" name="pseudo" placeholder="pseudo" class="input"/><br/>
              	<input type="text" name="email" placeholder="email" class="input"/><br/>
