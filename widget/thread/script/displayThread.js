@@ -19,6 +19,12 @@ $(function(){
                 tmp.html(data);
             });
         });
+        $("div.special.alignement").dblclick(function(){
+            $.get("index.php?thread="+$(this).attr("thread")+"&request=7&customer="+$(this).attr("num")+"&valide", function(data){
+                if(data == "0")
+                    $(this).find(".circle").attr("class", "circle val1");
+            });
+        });
     }
 
     if($(this).width() < 800)
