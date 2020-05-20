@@ -131,6 +131,20 @@ class ThreadControl{
         $manager->update($post);
         return 0;
     }
+    public static function setAlert(User $user, Post $post, $alert, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($alert == "yes")
+            $post->addData(["alert"=>true]);
+        else
+            $post->addData(["alert"=>false]);
+        $manager->update($post);
+        return 0;
+    }
+
+    public static function isAlert(Post $post){
+        return isset($post->getData()["alert"]) and $post->getData()["alert"];
+    }
 
     public static function isOpen(Post $post){
         return $post->getData()["open"];
@@ -204,6 +218,8 @@ class ThreadControl{
                 return "forum";
             case Constant::THREAD_TICKETING:
                 return "ticketing";
+            case Constant::THREAD_LIST:
+                return "list";
             default:
                 return 'thread';
         }

@@ -62,18 +62,24 @@ class ContainThreadControl{
                     if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
                         $news = '<p class="new">NEW MESSAGES</p>';
                 }
+                $alert = "";
+                if(ThreadControl::isAlert($post))
+                    $alert = ' <img src="style/icon/notification.png" alt="alert" class="alert"/>';
                 $notify = "";
                 if(FluxControl::isNotify($post))
                     $notify = ' <img src="style/icon/notify.png" alt="notify" class="notify"/>';
                 $class = 'flux';
                 $result = '
-                <h3>'.$post->getData()['title'].$notify.'</h3>'.$news.'
+                <h3>'.$post->getData()['title'].$alert.$notify.'</h3>'.$news.'
                 <p>'.$post->getField().'</p>';
                 break;
             case Constant::THREAD_TICKETING:
+                $alert = "";
+                if(ThreadControl::isAlert($post))
+                    $alert = ' <img src="style/icon/notification.png" alt="alert" class="alert"/>';
                 $class = 'ticketing';
                 $result = '
-                <h3>'.$post->getData()['title'].'</h3>
+                <h3>'.$post->getData()['title'].$alert.'</h3>
                 <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
             case Constant::THREAD_LIST:

@@ -14,9 +14,11 @@ class TicketingControl {
             $post->addData(['check' => $check]);
             $manager->update($post);
             //Email sending
-            $corps = new TicketMailWidget($user, $post, $manager);
-            $mail = new WrapperMail($post->getData()['title'], $user, $corps);
-            $mail->send();
+            if(ThreadControl::isAlert($post)){
+                $corps = new TicketMailWidget($user, $post, $manager);
+                $mail = new WrapperMail($post->getData()['title'], $user, $corps);
+                $mail->send();
+            }
         }
         return $state;
     }

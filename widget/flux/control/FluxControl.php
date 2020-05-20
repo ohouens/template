@@ -54,7 +54,7 @@ class FluxControl{
         if(!$post->getData()['open'])
             return 5;
         $state = ThreadControl::subscribe(ThreadControl::getInfluence($post), $user, $post, $manager, $um);
-        if($state == 0){
+        if($state == 0 and ThreadControl::isAlert($post)){
             $corps = new SubscribeMailWidget($user, $post, $manager);
             $mail = new WrapperMail($post->getData()['title'], $user, $corps);
             $mail->send();

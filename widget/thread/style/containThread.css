@@ -48,7 +48,7 @@
     font-size: 3.5em;
     font-family: source;
 }
-.thread.flux img.notify{
+.thread img.notify, .thread img.alert{
     height: 35px;
     vertical-align: middle;
 }

@@ -50,16 +50,30 @@ class SettingThreadWidget extends Widget{
                 <span class="tab">out:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>';
             $notify = "";
             if($post->getType() == Constant::THREAD_FLUX){
-                $ny="selected";
-                $nn="";
-                if(isset($post->getData()['notify']) and !$post->getData()['notify']){
-                    $nn="selected";
-                    $ny="";
+                $ny="";
+                $nn="selected";
+                if(isset($post->getData()['notify']) and $post->getData()['notify']){
+                    $nn="";
+                    $ny="selected";
                 }
                 $notify = '
                 <span class="tab">notify:</span><select class="input" name="notify">
                     <option value="yes" '.$ny.'>yes</option>
                     <option value="no" '.$nn.'>no</option>
+                </select><br/>';
+            }
+            $alert = "";
+            if(in_array($post->getType(), [Constant::THREAD_FLUX, Constant::THREAD_TICKETING])){
+                $ay="";
+                $an="selected";
+                if(isset($post->getData()['alert']) and $post->getData()['alert']){
+                    $an="";
+                    $ay="selected";
+                }
+                $alert = '
+                <span class="tab">alert:</span><select class="input" name="alert">
+                    <option value="yes" '.$ay.'>yes</option>
+                    <option value="no" '.$an.'>no</option>
                 </select><br/>';
             }
             $forum="";
@@ -79,11 +93,11 @@ class SettingThreadWidget extends Widget{
                 <span class="tab">open:</span><select class="input" name="open">
                     <option value="yes" '.$yes.'>yes</option>
                     <option value="no" '.$no.'>no</option>
-                </select><br/>'.$notify.'
+                </select><br/>
                 <span class="tab">read:</span><select class="input" name="read">
                     <option value="everyone">everyone</option>
                     <option value="me" '.$readme.'>I</option>
-                </select>'.$forum.$echoTunnel.'
+                </select>'.$forum.$echoTunnel.$alert.$notify.'
             </form>';
             $save =
             '<button id="delete" class="button space">Delete</button>
