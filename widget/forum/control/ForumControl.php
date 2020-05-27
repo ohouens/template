@@ -44,14 +44,16 @@ class ForumControl{
                     $first = "first";
                 if($i>=$begin){
                     $verif = false;
-                    $text ='<p class="text alignement">'.nl2br(htmlspecialchars($inter->getField())).'</p>';
+                    $text = nl2br(htmlspecialchars($inter->getField())).' ';
                     $body = preg_replace("#(https?://[\w?./=~&_-]+)#", '<a href="$1" target="_blank">$1</a>', $text);
                     $body = preg_replace("#\[(.*)\]#", '<span class="crochet">[</span>$1<span class="crochet">]</span>', $body);
                     $body = preg_replace("/(#[a-zàâçéèêëîïôûùüÿñæœ]*)/", '<span class="hashtag">$1</span>', $body);
                     $body = preg_replace("#{(.*)}#", '<span class="accolade">{</span>$1<span class="accolade">}</span>', $body);
                     $body = preg_replace("#::(.*)::#", '::<span class="warning">$1</span>::', $body);
-                    $body = preg_replace("#(@([a-z0-9_]{0,20}))#", '<a href="index.php?page=$2" class="at" style="color: #ff009d;">$1</a>', $body);
+                    $body = preg_replace("/([a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,4})/", '<a href="mailto:$1" class="mailto" style="color: #96a8c0;">$1</a>', $body);
+                    $body = preg_replace("/((@([a-z0-9_]{0,20}))(:| |<br\/>|<br>|<br \/>))/", '<a href="https://onisowo.com/index.php?page=$3" class="at" style="color: #ff009d;">$2</a>$4', $body);
                     $body = preg_replace("#([\w]{40})#", '<a href="index.php?thread=$1" class="to" style="color: #abd6f3;">$1</a>', $body);
+                    $body = '<p class="text alignement">'.substr($body, 0, -1).'</p>';
                     $body = preg_replace("/(~[$])/", '<span class="unix" style="color: #007070;">$1</span>', $body);
                     if(isset($inter->getData()['lock'])){
                         self::checkLockActive($inter, $postManager);
