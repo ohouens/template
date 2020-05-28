@@ -160,6 +160,9 @@ class DisplayThreadWidget extends Widget{
         $notify = "";
         if(FluxControl::isNotify($post))
             $notify = ' <img src="style/icon/notify.png" alt="notify" class="notify"/>';
+        $alert = "";
+        if(ThreadControl::isAlert($post))
+            $alert = ' <img src="style/icon/notification.png" alt="alert on subscribe" class="notify"/>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -168,7 +171,7 @@ class DisplayThreadWidget extends Widget{
         </div><!--
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
             <div id="flux" class="grand large">
-                <h1>'.$post->getData()['title'].$notify.'</h1>
+                <h1>'.$post->getData()['title'].$alert.$notify.'</h1>
                 <div id="fluxLast"></div>
             </div>
             <div class="grand large vide">
@@ -206,6 +209,9 @@ class DisplayThreadWidget extends Widget{
         $timer = "Closed";
         if(strtotime($post->getField()) > time())
             $timer = $post->getField();
+        $alert = "";
+        if(ThreadControl::isAlert($post))
+            $alert = ' <img src="style/icon/notification.png" alt="alert on subscribe" class="notify"/>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -213,6 +219,7 @@ class DisplayThreadWidget extends Widget{
             </div>
         </div><!--
         --><div id="displayWriter" class="mainSection grand children alignement" num="'.$hash->get($post->getId()).'">
+                <h1>'.$post->getData()['title'].$alert.'</h1>
                 <div id="contentWriter" class="ticketing" num="'.$hash->get($post->getId()).'"></div>
         </div><!--
         --><div id="contentStatistic" class="grand children alignement">

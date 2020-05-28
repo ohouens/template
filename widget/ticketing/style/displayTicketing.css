@@ -38,3 +38,8 @@
 .circle.val1{background: green;}
 .circle.val0{background: red;}
 .circle.val2{background: yellow;}
+
+#displayWriter h1 img.notify{
+    height: 35px;
+    vertical-align: middle;
+}
