@@ -30,11 +30,11 @@ class SettingThreadWidget extends Widget{
             $executeme = "";
             $tunnel = "";
             $in = "";
-            if($post->getData()['read'] == 0)
+            if(isset($post->getData()['read']) and $post->getData()['read'] == 0)
                 $readme = "selected";
-            if($post->getData()['write'] == 0)
+            if(isset($post->getData()['write']) and $post->getData()['write'] == 0)
                 $writeme = "selected";
-            if($post->getData()['execute'] == 0)
+            if(isset($post->getData()['execute']) and $post->getData()['execute'] == 0)
                 $executeme = "selected";
             if(isset($post->getData()['tunnel'])){
                 foreach($post->getData()['tunnel'] as $t)

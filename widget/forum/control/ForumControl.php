@@ -283,7 +283,7 @@ class ForumControl{
                     return Constant::ERROR_CODE_THREAD_LENGTH;
                 $post->setField($var['answer']);
                 if(self::isOrder($var["answer"])){
-                    if($temoin->getData()['execute'] == 0)
+                    if($temoin->getUser() != $user->getId() and $temoin->getData()['execute'] == 0)
                         return 0;
                     $result = self::createOrder($user, $var["answer"], $temoin, $pm, $um);
                     if(is_int($result))
