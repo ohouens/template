@@ -51,6 +51,9 @@ class PageWidget extends Widget{
         $snapchat = "";
         if(isset($user->getData()['snapchat']))
             $snapchat = '<a href="'.SettingControl::snapchat($user).'" target="_blank"><img class="petit" src="style/icon/snapchat.png" alt="snapchat"></a>';
+        $facebook = "";
+        if(isset($user->getData()['facebook']))
+            $facebook = '<a href="'.SettingControl::facebook($user).'" target="_blank"><img class="petit" src="style/icon/facebook.png" alt="facebook"></a>';
 
         return
         '<div id="pageCover" class="square">
@@ -61,6 +64,7 @@ class PageWidget extends Widget{
                 '.$linkedin.'
                 '.$instagram.'
                 '.$snapchat.'
+                '.$facebook.'
             </div>
         </div>
         <div id="pageInfo">

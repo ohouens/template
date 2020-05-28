@@ -113,7 +113,8 @@ class SettingWidget extends Widget{
             <br/><br/>
             <a class="link" href="#changeLinkedin">change linkedin</a><br/>
             <a class="link" href="#changeInstagram">change instagram</a><br/>
-            <a class="link" href="#changeSnapchat">change snapchat</a>
+            <a class="link" href="#changeSnapchat">change snapchat</a><br/>
+            <a class="link" href="#changeFacebook">change facebook</a>
             <br><br>
             <a class="link" href="index.php?reset=data">reset data</a><br>
             <a class="link" href="index.php?desactivate='.$user->getId().'&amp;key='.$user->getToken().'">delete account</a><br>
@@ -145,6 +146,10 @@ class SettingWidget extends Widget{
             </form>
             <form class="vide" id="changeSnapchat" method="post" action="index.php?setting&amp;request=11">
                 @<input class="input" type="text" name="snapchat" placeholder="snapchat_username" value="'.SettingControl::getSnapchat($user).'"/><br/>
+                <input class="buttonC space" type="submit" value="change"/>
+            </form>
+            <form class="vide" id="changeFacebook" method="post" action="index.php?setting&amp;request=12">
+                <input class="input" type="text" name="facebook" placeholder="https://www.facebook.com/your_profile" value="'.SettingControl::facebook($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
             <span class="displayError"></span><br/>

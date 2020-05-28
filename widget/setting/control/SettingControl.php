@@ -67,6 +67,14 @@ class SettingControl{
         return Constant::ERROR_CODE_OK;
     }
 
+    public static function changeFacebook($facebook, User $user, UserManager $manager){
+        if(!preg_match("/^https:\/\/([a-z]{2,3}\.)?facebook\.com\/.*$/", $facebook))
+            return Constant::ERROR_CODE_FACEBOOK_FORMAT;
+        $user->addData(["facebook"=>$facebook]);
+        $manager->update($user);
+        return Constant::ERROR_CODE_OK;
+    }
+
     public static function changeLinkedin($li, User $user, UserManager $manager){
         if(!preg_match("#^https://([a-z]{2,3}\.)?linkedin\.com/.*$#", $li))
             return Constant::ERROR_CODE_LINKEDIN_FORMAT;
@@ -168,6 +176,12 @@ class SettingControl{
         if(!isset($user->getData()['linkedin']))
             return "";
         return $user->getData()['linkedin'];
+    }
+
+    public static function facebook(User $user){
+        if(!isset($user->getData()['facebook']))
+            return "";
+        return $user->getData()['facebook'];
     }
 
     public static function snapchat(User $user){
