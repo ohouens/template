@@ -255,6 +255,7 @@ class DisplayThreadWidget extends Widget{
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect%26only', "Follow").'
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect'.$token, $qrString).'
             </div>
         </div><!--
