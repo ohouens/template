@@ -62,6 +62,13 @@ $(function(){
         loadChat();
         setInterval(function(){loadLast()}, refreshTime);
 
+        $("body").keyup(function(e){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '27'){
+                editOff();
+                $("#contentChat form textarea").val("");
+            }
+        });
         $("#sendChat textarea").on("keyup paste change",function(){
             var str = $(this).val();
             res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3");
@@ -79,12 +86,30 @@ $(function(){
                 }else{
                     e.preventDefault();
                     flag = false;
-                    $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
-                        if(data == "0"){
+                    save1 = $("#contentChat form textarea").val();
+                    save2 = $("#contentChat form #voteBlock input").val();
+                    if($(".cache").css("display") != "inline-block"){
+                        $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
                             $("#contentChat form textarea").val('');
                             $("#contentChat form #voteBlock input").val('');
-                        }
-                    });
+                            if(data != "0"){
+                                $("#contentChat form textarea").val(save1);
+                                $("#contentChat form #voteBlock input").val(save2);
+                            }
+                        });
+                    }else{
+                        $.post("index.php?thread=0&request=43", $("#contentChat form").serialize()).done(function(data){
+                            $("#contentChat form textarea").val('');
+                            $("#contentChat form #voteBlock input").val('');
+                            if(data == "0"){
+                                editOff();
+                                loadChat();
+                            }else{
+                                $("#contentChat form textarea").val(save1);
+                                $("#contentChat form #voteBlock input").val(save2);
+                            }
+                        });
+                    }
                 }
             }
             timer = 0;
