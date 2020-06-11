@@ -66,7 +66,6 @@ $(function(){
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if(keycode == '27'){
                 editOff();
-                $("#contentChat form textarea").val("");
             }
         });
         $("#sendChat textarea").on("keyup paste change",function(){
@@ -226,7 +225,7 @@ $(function(){
 
     function editSwitch(){
         $(".answer").dblclick(function(){
-            $("#sendChat textarea[name='answer']").text($(this).find('.text').text());
+            $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
             $("#sendChat input[name='cursor']").val($(this).attr('num'));
             $(".nonCache").css("display", "none");
             $(".cache").css("display", "inline-block");
@@ -234,7 +233,7 @@ $(function(){
     }
 
     function editOff(){
-        $("#sendChat textarea[name='answer']").text("");
+        $("#sendChat textarea[name='answer']").val("");
         $("#sendChat input[name='cursor']").val("0");
         $(".cache").css("display", "none");
         $(".nonCache").css("display", "inline-block");
