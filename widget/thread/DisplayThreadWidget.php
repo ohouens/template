@@ -138,7 +138,7 @@ class DisplayThreadWidget extends Widget{
                 <div class="center">
                     <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
                     <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
-                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                    <p class="gris"><a class="link" href="?thread='.$hash->get($post->getId()).'&amp;list">Create '.ForumControl::getSeniority($post).'</a></p>
                 </div>
             </div>
             <div id="contentFollow" class="square section">
@@ -190,7 +190,7 @@ class DisplayThreadWidget extends Widget{
                 <div class="center">
                     <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
                     <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
-                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                    <p class="gris"><a class="link" href="?thread='.$hash->get($post->getId()).'&amp;list">Create '.ForumControl::getSeniority($post).'</a></p>
                 </div>
             </div>
             <div id="contentSubscriber" class="square section">
@@ -227,7 +227,7 @@ class DisplayThreadWidget extends Widget{
                 <div class="center">
                     <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
                     <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
-                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                    <p class="gris"><a class="link" href="?thread='.$hash->get($post->getId()).'&amp;list">Create '.ForumControl::getSeniority($post).'</a></p>
                 </div>
             </div>
             <div id="contentTicket" class="square section">
@@ -267,7 +267,7 @@ class DisplayThreadWidget extends Widget{
                 <div class="center">
                     <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
                     <p class="pseudo"><a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'">'.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'</a></p><br/>
-                    <p class="gris">Create '.ForumControl::getSeniority($post).'</p>
+                    <p class="gris"><a class="link" href="?thread='.$hash->get($post->getId()).'&amp;list">Create '.ForumControl::getSeniority($post).'</a></p>
                 </div>
             </div>
             <div id="contentList" class="square section">
