@@ -106,6 +106,7 @@ class createThreadControl{
                 $post->addData(["head"=>0]);
                 $post->addData(["number"=>0]);
                 $pm->add($post);
+                self::indexThread($pm->lastId(), $user, $post, $um, $pm);
                 return 0;
                 break;
             case 701:
@@ -120,7 +121,6 @@ class createThreadControl{
             default:
                 break;
         }
-        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
     }
 
     public static function createTicketing(User $user, $title, $date, UserManager $um, PostManager $pm){
