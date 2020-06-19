@@ -69,9 +69,11 @@ class ThreadControl{
         $tab = [];
         $result = 0;
         foreach (explode(" ", $fluxId) as $flux){
+            if($flux == "" or $flux == NULL)
+                continue;
             $inter = $hash->traduct($flux);
             $flux = $manager->get($inter);
-            if(in_array($inter, $tab))
+            if(is_int($flux) or in_array($inter, $tab))
                 continue;
             if($flux->getType() != Constant::THREAD_FLUX){
                 // return Constant::ERROR_CODE_NOT_FOUND;
@@ -100,18 +102,20 @@ class ThreadControl{
         $tab = [];
         $result = 0;
         foreach (explode(" ", $registerId) as $register){
+            if($register == "" or $register == NULL)
+                continue;
             $inter = $hash->traduct($register);
             $register = $manager->get($inter);
-            if(in_array($inter, $tab))
+            if(is_int($register) or in_array($inter, $tab))
                 continue;
             if($register->getType() != Constant::THREAD_TICKETING){
                 // return Constant::ERROR_CODE_NOT_FOUND;
-                $result = 1;
+                $result = 3;
                 continue;
             }
             if($register->getUser() != $user->getId() or $post->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
-                $result = 1;
+                $result = 2;
                 continue;
             }
             array_push($tab, $inter);
