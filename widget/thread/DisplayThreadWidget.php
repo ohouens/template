@@ -50,6 +50,7 @@ class DisplayThreadWidget extends Widget{
     }
 
     private function subConstruct(User $user, Post $post, UserManager $manager){
+        ThreadControl::updateNumber($user, $post, $manager);
         $result = '<div class="flickery">';
         switch($post->getType()){
             case Constant::THREAD_FORUM:

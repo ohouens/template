@@ -362,7 +362,22 @@ class ThreadControl{
         $tab = [];
         if(isset($user->getData()["number"]))
             $tab = $user->getData()["number"];
-        $tab[$post->getId()] = $post->getData()["number"];
+        switch ($post->getType()) {
+            case Constant::THREAD_FLUX:
+                $tab[$post->getId()] = $post->getData()["head"];
+                break;
+            case Constant::THREAD_FORUM:
+                $tab[$post->getId()] = $post->getData()["head"];
+                break;
+            case Constant::THREAD_TICKETING:
+                $tab[$post->getId()] = count($post->getData()[self::getInfluence($post)]);
+                break;
+            case Constant::THREAD_LIST:
+                $tab[$post->getId()] = count($post->getData()["list"]);
+                break;
+            default:
+                break;
+        }
         $user->addData(["number"=>$tab]);
         $um->update($user);
         return 0;

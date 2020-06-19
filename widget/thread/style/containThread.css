@@ -52,7 +52,7 @@
     height: 35px;
     vertical-align: middle;
 }
-.thread .new, .thread.flux p.new{
+.thread .new, .thread.flux p.new, .thread.ticketing p.new{
     background: red;
     color: white;
     font-family: sourceBold;

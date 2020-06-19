@@ -49,7 +49,7 @@ class ContainThreadControl{
         switch($post->getType()){
             case Constant::THREAD_FORUM:
                 if(isset($user->getData()["number"][$post->getId()])){
-                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                    if($user->getData()["number"][$post->getId()] < $post->getData()["head"])
                         $news = '<p class="new">NEW MESSAGES</p>';
                 }
                 $class = 'forum';
@@ -59,7 +59,7 @@ class ContainThreadControl{
                 break;
             case Constant::THREAD_FLUX:
                 if(isset($user->getData()["number"][$post->getId()])){
-                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                    if($user->getData()["number"][$post->getId()] < $post->getData()["head"])
                         $news = '<p class="new">NEW MESSAGES</p>';
                 }
                 $alert = "";
@@ -74,17 +74,21 @@ class ContainThreadControl{
                 <p>'.$post->getField().'</p>';
                 break;
             case Constant::THREAD_TICKETING:
+                if(isset($user->getData()["number"][$post->getId()])){
+                    if($user->getData()["number"][$post->getId()] < count($post->getData()[ThreadControl::getInfluence($post)]))
+                        $news = '<p class="new">NEW MEMBERS</p>';
+                }
                 $alert = "";
                 if(ThreadControl::isAlert($post))
                     $alert = ' <img src="style/icon/notification.png" alt="alert" class="alert"/>';
                 $class = 'ticketing';
                 $result = '
-                <h3>'.$post->getData()['title'].$alert.'</h3>
+                <h3>'.$post->getData()['title'].$alert.'</h3>'.$news.'
                 <p>'.date('d\t\h <\b\r/>F <\b\r/>Y', strtotime($post->getField())).'</p>';
                 break;
             case Constant::THREAD_LIST:
                 if(isset($user->getData()["number"][$post->getId()])){
-                    if($user->getData()["number"][$post->getId()] < $post->getData()["number"])
+                    if($user->getData()["number"][$post->getId()] < count($post->getData()["list"]))
                         $news = '<div class="new">NEW THREADS</div>';
                 }
                 $i = 0;

@@ -76,7 +76,6 @@ class createThreadControl{
         $post->addData(["subscribers"=>[]]);
         $post->addData(["open"=>true]);
         $post->addData(["head"=>0]);
-        $post->addData(["number"=>0]);
         $pm->add($post);
         self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
@@ -104,7 +103,6 @@ class createThreadControl{
                 $post->addData(["followers"=>[]]);
                 $post->addData(["open"=>true]);
                 $post->addData(["head"=>0]);
-                $post->addData(["number"=>0]);
                 $pm->add($post);
                 self::indexThread($pm->lastId(), $user, $post, $um, $pm);
                 return 0;
@@ -138,7 +136,6 @@ class createThreadControl{
         $post->addData(["writers"=>[]]);
         $post->addData(["tickets"=>[]]);
         $post->addData(["open"=>true]);
-        $post->addData(["number"=>0]);
         $pm->add($post);
         self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
@@ -158,7 +155,6 @@ class createThreadControl{
         $post->addData(["writers"=>[]]);
         $post->addData(["followers"=>[]]);
         $post->addData(["open"=>true]);
-        $post->addData(["number"=>0]);
         $pm->add($post);
         self::indexThread($pm->lastId(), $user, $post, $um, $pm);
         return 0;
