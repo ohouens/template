@@ -110,12 +110,12 @@ class ThreadControl{
                 continue;
             if($register->getType() != Constant::THREAD_TICKETING){
                 // return Constant::ERROR_CODE_NOT_FOUND;
-                $result = 3;
+                $result = 1;
                 continue;
             }
             if($register->getUser() != $user->getId() or $post->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
-                $result = 2;
+                $result = 1;
                 continue;
             }
             array_push($tab, $inter);
