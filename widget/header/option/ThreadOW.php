@@ -17,6 +17,8 @@ class ThreadOW extends OptionWidget{
         shuffle($list);
         foreach($list as $num){
             $thread = $manager->get($num);
+            if(is_int($thread))
+                continue;
             switch($thread->getType()){
                 case Constant::THREAD_FLUX:
                     if(isset($this->_user->getData()["number"][$thread->getId()])){
