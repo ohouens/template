@@ -135,25 +135,39 @@ class ThreadControl{
         $manager->update($post);
         return 0;
     }
-    public static function setNotify(User $user, Post $post, $notify, PostManager $manager){
+    public static function setNotify(User $user, Post $post, $notify, PostManager $manager, PointManager $lm){
+        $result = 0;
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
-        if($notify == "yes")
-            $post->addData(["notify"=>true]);
+        if($notify == "yes"){
+            if(LicenceControl::isValide($user, $lm))
+                $post->addData(["notify"=>true]);
+            else{
+                $result = 1;
+                $post->addData(["notify"=>false]);
+            }
+        }
         else
             $post->addData(["notify"=>false]);
         $manager->update($post);
-        return 0;
+        return $result;
     }
-    public static function setAlert(User $user, Post $post, $alert, PostManager $manager){
+    public static function setAlert(User $user, Post $post, $alert, PostManager $manager, PointManager $lm){
+        $result = 0;
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
-        if($alert == "yes")
-            $post->addData(["alert"=>true]);
+        if($alert == "yes"){
+            if(LicenceControl::isValide($user, $lm))
+                $post->addData(["alert"=>true]);
+            else{
+                $result = 1;
+                $post->addData(["alert"=>false]);
+            }
+        }
         else
             $post->addData(["alert"=>false]);
         $manager->update($post);
-        return 0;
+        return $result;
     }
 
     public static function isAlert(Post $post){
