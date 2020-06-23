@@ -1,7 +1,7 @@
 <?php
 class createThreadControl{
-    const WEAK_LIMIT = 20;
-    const LIMIT = 97;
+    const WEAK_LIMIT = 0;
+    const LIMIT = 77 + WEAK_LIMIT;
     const UNLIMITED = [1];
 
     public static function getObject($thread){
