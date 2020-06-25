@@ -1,6 +1,7 @@
 <?php
 class createThreadControl{
-    const WEAK_LIMIT = 0;
+    // const WEAK_LIMIT = 0;
+    const WEAK_LIMIT = 20;
     const LIMIT = 77 + WEAK_LIMIT;
     const UNLIMITED = [1];
 
