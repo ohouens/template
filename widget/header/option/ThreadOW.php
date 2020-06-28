@@ -48,6 +48,6 @@ class ThreadOW extends OptionWidget{
                     break;
             }
         }
-        return "T_T Nothing new.. go get some friends T_T";
+        return "Nothing new";
     }
 }
