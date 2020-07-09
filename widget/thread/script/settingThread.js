@@ -6,7 +6,7 @@ $(function(){
     $("#resume #save").click(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($("#resume form").attr('action'), $("#resume form").serialize()).done(function(data){
-            if(data == "00000000")
+            if(data == "000000000")
                 $("#error").html('<img src="style/icon/success.png" alt="success" class="wait" />');
             else
                 $("#error").html('<img src="style/icon/fail.png" alt="fail" class="wait" />');
@@ -42,7 +42,7 @@ $(function(){
         }
     });
 
-    $("textarea[name='tunnel'], textarea[name='in']").on('keyup paste', function(){
+    $("textarea[name='output'], textarea[name='input'], textarea[name='lock']").on('keyup paste', function(){
         var str = $(this).val();
         res = str.replace(/(https?:\/\/)?onisowo.com\/(index.php)?\?thread=(\w{40})(&request=3)?/, "$3 ");
         $(this).val(res);
