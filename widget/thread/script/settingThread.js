@@ -13,7 +13,7 @@ $(function(){
             setTimeout(function(){
                 $("#error").text("");
             },3000);
-            if(data.charAt(6) == 1 || data.charAt(7) == 1)
+            if(data.charAt(7) == 1 || data.charAt(8) == 1)
                 alert("A licence is required to alert or notify.");
         });
     });
