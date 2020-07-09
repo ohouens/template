@@ -94,19 +94,19 @@ class ThreadControl{
         }
         $tab = [];
         $result = 0;
-        foreach (explode(" ", $fluxId) as $flux){
-            if($flux == "" or $flux == NULL)
+        foreach (explode(" ", $fluxId) as $id){
+            if($id == "" or $id == NULL)
                 continue;
-            $inter = $hash->traduct($flux);
-            $flux = $manager->get($inter);
-            if(is_int($flux) or in_array($inter, $tab))
+            $inter = $hash->traduct($id);
+            $thread = $manager->get($inter);
+            if(is_int($thread) or in_array($inter, $tab))
                 continue;
-            if(!in_array($register->getType(), [Constant::THREAD_FORUM, Constant::THREAD_LIST, Constant::THREAD_TICKETING])){
+            if(!in_array($thread->getType(), [Constant::THREAD_FORUM, Constant::THREAD_LIST, Constant::THREAD_TICKETING])){
                 // return Constant::ERROR_CODE_NOT_FOUND;
                 $result = 1;
                 continue;
             }
-            if($register->getUser() != $user->getId()){
+            if($thread->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
                 $result = 1;
                 continue;
@@ -148,10 +148,10 @@ class ThreadControl{
         }
         $tab = [];
         $result = 0;
-        foreach (explode(" ", $registerId) as $register){
-            if($register == "" or $register == NULL)
+        foreach (explode(" ", $registerId) as $id){
+            if($id == "" or $id == NULL)
                 continue;
-            $inter = $hash->traduct($register);
+            $inter = $hash->traduct($id);
             $register = $manager->get($inter);
             if(is_int($register) or in_array($inter, $tab))
                 continue;
