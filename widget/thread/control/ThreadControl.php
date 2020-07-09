@@ -49,20 +49,46 @@ class ThreadControl{
         return 0;
     }
 
-    public static function isIn(User $user, Post $parent, PostManager $pm){
-        if(!isset($parent->getData()["in"]))
-            return true;
-        foreach($parent->getData()["in"] as $registerId){
-            if(TicketingControl::hasValidate($user, $pm->get($registerId)) == 1)
-                return true;
+    public static function setInput(User $user, Post $post, $threadId, PostManager $manager){
+        global $hash;
+        if($post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($threadId == "" or $threadId == NULL){
+            $post->removeData("input");
+            $manager->update($post);
+            return 0;
         }
-        return false;
+        $tab = [];
+        $result = 0;
+        foreach (explode(" ", $threadId) as $thread){
+            if($thread == "" or $thread == NULL)
+                continue;
+            $inter = $hash->traduct($thread);
+            $thread = $manager->get($inter);
+            if(is_int($thread) or in_array($inter, $tab))
+                continue;
+            if(!in_array($thread->getType(), [Constant::THREAD_FLUX, Constant::THREAD_FORUM, Constant::THREAD_LIST, Constant::THREAD_TICKETING])){
+                // return Constant::ERROR_CODE_NOT_FOUND;
+                $result = 1;
+                continue;
+            }
+            array_push($tab, $inter);
+            $tunnel = [];
+            if(isset($thread->getData["tunnelv2"]))
+                $tunnel = $thread->getData["tunnelv2"];
+            self::setTunnel($thread, array_merge($tunnel,[$post->getId()]), $manager);
+        }
+        $post->addData(["input"=>$tab]);
+        $manager->update($post);
+        return $result;
     }
 
-    public static function setTunnel(User $user, Post $post, $fluxId, PostManager $manager){
+    public static function setOutput(User $user, Post $post, $fluxId, PostManager $manager){
         global $hash;
+        if($post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
         if($fluxId == "" or $fluxId == NULL){
-            $post->removeData("tunnel");
+            $post->removeData("output");
             $manager->update($post);
             return 0;
         }
@@ -75,27 +101,48 @@ class ThreadControl{
             $flux = $manager->get($inter);
             if(is_int($flux) or in_array($inter, $tab))
                 continue;
-            if($flux->getType() != Constant::THREAD_FLUX){
+            if(!in_array($register->getType(), [Constant::THREAD_FORUM, Constant::THREAD_LIST, Constant::THREAD_TICKETING])){
                 // return Constant::ERROR_CODE_NOT_FOUND;
                 $result = 1;
                 continue;
             }
-            if($flux->getUser() != $user->getId() or $post->getUser() != $user->getId()){
+            if($register->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
                 $result = 1;
                 continue;
             }
             array_push($tab, $inter);
         }
-        $post->addData(["tunnel"=>$tab]);
+        $post->addData(["output"=>$tab]);
         $manager->update($post);
         return $result;
     }
 
-    public static function setIn(User $user, Post $post, $registerId, PostManager $manager){
+    public static function setTunnel(Post $post, $fluxId, PostManager $manager){
+        $tab = [];
+        $result = 0;
+        foreach ($fluxId as $inter){
+            $flux = $manager->get($inter);
+            if(is_int($flux) or in_array($flux->getId(), $tab))
+                continue;
+            if($flux->getType() != Constant::THREAD_FLUX){
+                // return Constant::ERROR_CODE_NOT_FOUND;
+                $result = 1;
+                continue;
+            }
+            array_push($tab, $flux->getId());
+        }
+        $post->addData(["tunnelv2"=>$tab]);
+        $manager->update($post);
+        return $result;
+    }
+
+    public static function setLock(User $user, Post $post, $registerId, PostManager $manager){
         global $hash;
+        if($post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
         if($registerId == "" or $registerId == NULL){
-            $post->removeData("in");
+            $post->removeData("lock");
             $manager->update($post);
             return 0;
         }
@@ -113,16 +160,26 @@ class ThreadControl{
                 $result = 1;
                 continue;
             }
-            if($register->getUser() != $user->getId() or $post->getUser() != $user->getId()){
+            if($register->getUser() != $user->getId()){
                 // return Constant::ERROR_CODE_USER_WRONG;
                 $result = 1;
                 continue;
             }
             array_push($tab, $inter);
         }
-        $post->addData(["in"=>$tab]);
+        $post->addData(["lock"=>$tab]);
         $manager->update($post);
         return $result;
+    }
+
+    public static function isInLock(User $user, Post $parent, PostManager $pm){
+        if(!isset($parent->getData()["lock"]))
+            return true;
+        foreach($parent->getData()["lock"] as $registerId){
+            if(TicketingControl::hasValidate($user, $pm->get($registerId)) == 1)
+                return true;
+        }
+        return false;
     }
 
     public static function setOpen(User $user, Post $post, $open, PostManager $manager){

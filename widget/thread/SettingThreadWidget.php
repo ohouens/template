@@ -26,28 +26,34 @@ class SettingThreadWidget extends Widget{
                 $yes = "selected";
             else $no = "selected";
             $readme = "";
+            $readLock = "";
             $writeme = "";
             $executeme = "";
             $tunnel = "";
             $in = "";
+            $verrou = "";
             if(isset($post->getData()['read']) and $post->getData()['read'] == 0)
                 $readme = "selected";
+            if(isset($post->getData()['read']) and $post->getData()['read'] == 2)
+                $readLock = "selected";
             if(isset($post->getData()['write']) and $post->getData()['write'] == 0)
                 $writeme = "selected";
             if(isset($post->getData()['execute']) and $post->getData()['execute'] == 0)
                 $executeme = "selected";
-            if(isset($post->getData()['tunnel'])){
-                foreach($post->getData()['tunnel'] as $t)
+            if(isset($post->getData()['output']))
+                foreach($post->getData()['output'] as $t)
                     $tunnel .= $hash->get($t)." ";
-            }
-            if(isset($post->getData()['in']))
-                foreach($post->getData()['in'] as $i)
+            if(isset($post->getData()['input']))
+                foreach($post->getData()['input'] as $i)
                     $in .= $hash->get($i)." ";
+            if(isset($post->getData()['lock']))
+                foreach($post->getData()['lock'] as $l)
+                    $verrou .= $hash->get($l)." ";
             $echoTunnel = "";
-            if($post->getType() == Constant::THREAD_FORUM)
+            if($post->getType() == Constant::THREAD_FLUX)
                 $echoTunnel = '<br/>
-                <span class="tab">in:</span><textarea class="input" name="in">'.$in.'</textarea>
-                <span class="tab">out:</span><textarea class="input" name="tunnel">'.$tunnel.'</textarea>';
+                <span class="tab">input:</span><textarea class="input" name="input">'.$in.'</textarea>
+                <span class="tab">output:</span><textarea class="input" name="output">'.$tunnel.'</textarea>';
             $notify = "";
             if($post->getType() == Constant::THREAD_FLUX){
                 $ny="";
@@ -97,7 +103,9 @@ class SettingThreadWidget extends Widget{
                 <span class="tab">read:</span><select class="input" name="read">
                     <option value="everyone">everyone</option>
                     <option value="me" '.$readme.'>I</option>
-                </select>'.$forum.$echoTunnel.$alert.$notify.'
+                    <option value="lock1" '.$readLock.'>1st lock</option>
+                </select>
+                <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.$alert.$notify.'
             </form>';
             $save =
             '<button id="delete" class="button space">Delete</button>
