@@ -74,8 +74,8 @@ class ThreadControl{
             }
             array_push($tab, $inter);
             $tunnel = [];
-            if(isset($thread->getData["tunnelv2"]))
-                $tunnel = $thread->getData["tunnelv2"];
+            if(isset($thread->getData()["tunnelv2"]))
+                $tunnel = $thread->getData()["tunnelv2"];
             self::setTunnel($thread, array_merge($tunnel,[$post->getId()]), $manager);
         }
         $post->addData(["input"=>$tab]);

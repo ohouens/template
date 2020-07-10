@@ -346,9 +346,9 @@ class ForumControl{
                 $message = implode(" ", array_slice($order, 2));
                 array_push($result, '"'.$message.'"');
                 $result = implode(" ", $result);
-                if(!ThreadControl::isIn($user, $parent, $pm))
+                if(!ThreadControl::isInLock($user, $parent, $pm))
                     return 456;
-                foreach($parent->getData()["tunnel"] as $t)
+                foreach($parent->getData()["tunnelv2"] as $t)
                     FluxControl::createAnswer($um->get($parent->getUser()), "@".$user->getPseudo().": ".$message, $pm->get($t), $pm, $um);
                 return $result;
             case 'add':

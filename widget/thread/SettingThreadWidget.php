@@ -52,8 +52,8 @@ class SettingThreadWidget extends Widget{
             $echoTunnel = "";
             if($post->getType() == Constant::THREAD_FLUX)
                 $echoTunnel = '<br/>
-                <span class="tab">input:</span><textarea class="input" name="input">'.$in.'</textarea>
-                <span class="tab">output:</span><textarea class="input" name="output">'.$tunnel.'</textarea>';
+                <span class="tab">input:</span><textarea class="input" name="input">'.$in.'</textarea>';
+                // <span class="tab">output:</span><textarea class="input" name="output">'.$tunnel.'</textarea>';
             $notify = "";
             if($post->getType() == Constant::THREAD_FLUX){
                 $ny="";
@@ -103,7 +103,7 @@ class SettingThreadWidget extends Widget{
                 <span class="tab">read:</span><select class="input" name="read">
                     <option value="everyone">everyone</option>
                     <option value="me" '.$readme.'>I</option>
-                    <option value="lock1" '.$readLock.'>1st lock</option>
+                    <option value="lock1" '.$readLock.'>lock</option>
                 </select>
                 <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.$alert.$notify.'
             </form>';
@@ -111,6 +111,9 @@ class SettingThreadWidget extends Widget{
             '<button id="delete" class="button space">Delete</button>
             <button id="save" class="button space">Save</button>';
         }
+        $listeners = 0;
+        if(isset($post->getData()["tunnelv2"]))
+            $listeners = count($post->getData()["tunnelv2"]);
         return
         '<div id="setWidget" class="square">
             <div class="large center">
@@ -120,6 +123,7 @@ class SettingThreadWidget extends Widget{
                         <span class="tab">type:</span>'.ThreadControl::getType($post).'<br/>
                         <span class="tab">date:</span>'.date("d/m/Y", $post->getCreation()).'<br/>
                         <span class="tab">influence:</span>'.count($post->getData()[ThreadControl::getInfluence($post)]).'<br/>
+                        <span class="tab">listeners:</span>'.$listeners.'<br>
                         '.$lock.'
                     </div>
                     '.$save.'

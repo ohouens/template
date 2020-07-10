@@ -34,7 +34,9 @@ class FluxControl{
         return $result;
     }
 
-    public static function createAnswer(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager){
+    public static function createAnswer(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager, $dejavu=[], $racine=true){
+        array_push($dejavu, $parent->getId());
+        // var_dump($dejavu);
         if($user->getId() != $parent->getUser())
             return Constant::ERROR_CODE_THREAD_WRITE_RIGHT;
         if(!preg_match("#^.{1,520}$#s", $answer))
@@ -47,7 +49,34 @@ class FluxControl{
         ThreadControl::addList($post, $parent, $postManager);
         if(self::isNotify($parent))
             self::updateSubscriber($parent, $postManager, $userManager);
+        $result = self::recursion($user, $answer, $parent, $postManager, $userManager, $dejavu);
+        if(!$racine){
+            // echo "recursion:";
+            // echo "<br><br><br><br>";
+            return $result;
+        }
         return 0;
+    }
+
+    public static function recursion(User $user, $answer, Post $parent, PostManager $postManager, UserManager $userManager, $dejavu){
+        $result = $dejavu;
+        if(isset($parent->getData()["tunnelv2"])){
+            foreach($parent->getData()["tunnelv2"] as $num){
+                $thread = $postManager->get($num);
+                if(is_int($thread) or !in_array($parent->getId(), $thread->getData()["input"])){
+                    $parent->addData(["tunnelv2"=>array_diff($parent->getData()["tunnelv2"], [$thread->getId()])]);
+                    $postManager->update($parent);
+                    continue;
+                }
+                if(in_array($num, $result)){
+                    // echo "deja vu ".$num;
+                    continue;
+                }
+                array_push($result, $num);
+                $result = array_merge($result, self::createAnswer($userManager->get($thread->getUser()), $answer, $thread, $postManager, $userManager, $result, false));
+            }
+        }
+        return $result;
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um){
