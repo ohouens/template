@@ -268,7 +268,7 @@ class ForumControl{
 
     public static function createAnswer(User $user, $var, $parent, PostManager $pm, UserManager $um){
         $temoin = $pm->get($parent);
-        if(!ThreadControl::checkMode($user, $temoin, "write"))
+        if(!ThreadControl::checkMode($user, $temoin, "write", $pm))
             return 44;
         $lock = self::getLastLock($temoin, $pm);
         if($lock != NULL and $lock->getActive() == 1)

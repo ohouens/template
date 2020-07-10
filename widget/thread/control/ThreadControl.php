@@ -238,7 +238,9 @@ class ThreadControl{
     public static function setMode(User $user, Post $post, $mode, $right, PostManager $manager){
         if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
-        if($right == "everyone")
+        if($right == "lock1")
+            $post->addData([$mode=>2]);
+        elseif($right == "everyone")
             $post->addData([$mode=>1]);
         else
             $post->addData([$mode=>0]);
@@ -246,10 +248,10 @@ class ThreadControl{
         return 0;
     }
 
-    public static function checkMode(User $user, Post $post, $mode){
+    public static function checkMode(User $user, Post $post, $mode, PostManager $pm){
         if(!isset($post->getData()[$mode]))
             return true;
-        return $user->getId() == $post->getUser() or $post->getData()[$mode] == 1;
+        return $user->getId() == $post->getUser() or $post->getData()[$mode] == 1 or ($post->getData()[$mode] == 2 and self::isInLock($user, $post, $pm));
     }
 
     public static function setWriters(User $user, Post $post, $writers, PostManager $manager){

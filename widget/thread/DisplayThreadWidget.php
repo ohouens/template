@@ -36,10 +36,10 @@ class DisplayThreadWidget extends Widget{
         return $result;
     }
 
-    public function __construct(User $user, Post $post, UserManager $manager){
+    public function __construct(User $user, Post $post, UserManager $manager, PostManager $pm){
         parent::__construct(
             '',
-            $this->subConstruct($user, $post, $manager),
+            $this->subConstruct($user, $post, $manager, $pm),
             '',
             'displayForum',
             '',
@@ -49,12 +49,14 @@ class DisplayThreadWidget extends Widget{
         $this->build();
     }
 
-    private function subConstruct(User $user, Post $post, UserManager $manager){
+    private function subConstruct(User $user, Post $post, UserManager $manager, PostManager $pm){
         ThreadControl::updateNumber($user, $post, $manager);
+        if(!ThreadControl::checkMode($user, $post, "read", $pm))
+            return '<div class="rectangle" style="height:81vh;"><p class="center">this thread is private, your not enable to see it</p></div>';
         $result = '<div class="flickery">';
         switch($post->getType()){
             case Constant::THREAD_FORUM:
-                $result .= $this->constructForum($user, $post, $manager);
+                $result .= $this->constructForum($user, $post, $manager, $pm);
                 break;
             case Constant::THREAD_FLUX:
                 $result .= $this->constructFlux($user, $post, $manager);
@@ -73,14 +75,14 @@ class DisplayThreadWidget extends Widget{
         return $result;
     }
 
-    private function constructForum(User $user, Post $post, UserManager $manager){
+    private function constructForum(User $user, Post $post, UserManager $manager, PostManager $pm){
         global $hash;
         $option = '<input class="nonCache" type="image" value="">';
         if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
             $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
         $chat = "";
         $grand = ' style="height: 100%;"';
-        if(ThreadControl::checkMode($user, $post, "write")){
+        if(ThreadControl::checkMode($user, $post, "write", $pm)){
             $chat = '
             <form id="sendChat" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                 <input type="hidden" name="state" value="0">

@@ -46,6 +46,8 @@ class ContainThreadControl{
         $result = "";
         $class = "";
         $news = "";
+        if(!ThreadControl::checkMode($user, $post, "read", $manager))
+            return "";
         switch($post->getType()){
             case Constant::THREAD_FORUM:
                 if(isset($user->getData()["number"][$post->getId()])){
