@@ -348,8 +348,7 @@ class ForumControl{
                 $result = implode(" ", $result);
                 if(!ThreadControl::isInLock($user, $parent, $pm))
                     return 456;
-                foreach($parent->getData()["tunnelv2"] as $t)
-                    FluxControl::createAnswer($um->get($parent->getUser()), "@".$user->getPseudo().": ".$message, $pm->get($t), $pm, $um);
+                FluxControl::answerRelay($parent, "@".$user->getPseudo().": ".$message, $pm, $um);
                 return $result;
             case 'add':
                 if($parent->getUser() != $user->getId())
@@ -422,6 +421,7 @@ class ForumControl{
                 array_push($result, $order[2]);
                 array_push($result, "to");
                 array_push($result, $order[3]);
+                FluxControl::answerRelay($thread, "adding of ".$hash->get($toAdd->getId()), $pm, $um);
                 return implode(" ", $result);
             case 'pop':
                 if($parent->getUser() != $user->getId())
@@ -445,6 +445,7 @@ class ForumControl{
                 array_push($result, $order[2]);
                 array_push($result, "from");
                 array_push($result, $order[3]);
+                FluxControl::answerRelay($thread, "removing of ".$hash->get($toAdd->getId()), $pm, $um);
                 return implode(" ", $result);
             case 'instagram':
                 if($parent->getUser() != $user->getId() and !in_array($user->getId(), [1,6]))

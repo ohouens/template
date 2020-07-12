@@ -19,6 +19,8 @@ class TicketingControl {
                 $mail = new WrapperMail($post->getData()['title'], $user, $corps);
                 $mail->send();
             }
+            //Tunnel relay
+            FluxControl::answerRelay($post, "Registration of @".$user->getPseudo(), $manager, $um);
         }
         return $state;
     }
@@ -32,11 +34,13 @@ class TicketingControl {
             unset($check[$id]);
             $post->addData(['check' => $check]);
             $manager->update($post);
+            //Tunnel relay
+            FluxControl::answerRelay($post, "Cancellation of @".$user->getPseudo(), $manager, $um);
         }
         return $state;
     }
 
-    public static function ticketValidation(User $controller, User $customer, Post $post, PostManager $manager){
+    public static function ticketValidation(User $controller, User $customer, Post $post, PostManager $manager,  UserManager $um){
         //init users
         if($post->getUser() != $controller->getId())
             return Constant::ERROR_CODE_USER_WRONG;
@@ -51,6 +55,8 @@ class TicketingControl {
         $check[$id] = 1;
         $post->addData(['check' => $check]);
         $manager->update($post);
+        //Tunnel relay
+        FluxControl::answerRelay($post, "Validation of @".$customer->getPseudo(), $manager, $um);
         return 0;
     }
 

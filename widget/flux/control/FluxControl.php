@@ -21,6 +21,7 @@ class FluxControl{
             $body = preg_replace("/((https?:\/\/)?(www\.)?twitter.com\/[\w?.\/=&#_-]+)/", '<a href="$1" target="_blank">twitter</a>', $body);
             $body = preg_replace("/((https?:\/\/)?(www\.)?pinterest.com\/[\w?.\/=&#_-]+)/", '<a href="$1" target="_blank">pinterest</a>', $body);
             $body = preg_replace("/((https?:\/\/[\w?.\/=&#_-]+)( |<br\/>|<br>|<br \/>))/", '<a href="$2" target="_blank">$2</a>$3', $body);
+            $body = preg_replace("#([\w]{40})#", '<a href="index.php?thread=$1" class="to" style="color: #abd6f3;">$1</a>', $body);
             $body = preg_replace("#::(.*)::#", '::<span class="warning" style="color: #8d0d0d;">$1</span>::', $body);
             $body = preg_replace("/([a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,4})/", '<a href="mailto:$1" class="mailto" style="color: #96a8c0;">$1</a>', $body);
             $body = preg_replace("/((@([a-z0-9_]{0,20}))(:| |<br\/>|<br>|<br \/>))/", '<a href="https://onisowo.com/index.php?page=$3" class="at" style="color: #ff009d;">$2</a>$4', $body);
@@ -77,6 +78,17 @@ class FluxControl{
             }
         }
         return $result;
+    }
+
+    public static function answerRelay(Post $thread, $message, PostManager $pm, UserManager $um){
+        global $hash;
+        $dejavu = [];
+        if(isset($thread->getData()["tunnelv2"])){
+            foreach($thread->getData()["tunnelv2"] as $t){
+                $tunnel = $pm->get($t);
+                self::createAnswer($um->get($tunnel->getUser()), $hash->get($thread->getId())." -> ".$message, $tunnel, $pm, $um);
+            }
+        }
     }
 
     public static function subscribe(User $user, Post $post, PostManager $manager, UserManager $um){
