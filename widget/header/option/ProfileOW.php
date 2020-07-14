@@ -8,8 +8,19 @@ class ProfileOW extends OptionWidget{
     }
 
     public function screen(Manager $manager){
-        if(isset($this->_user->getData()['instagram']))
-            return "You can copy the link of a thread by clicking the qr code";
-        return "Now you can link your instagram profile in your profile setting";
+        $list = [
+            "You can copy the link of a thread by clicking the qr code",
+            "By double clicking the qr code, you will be redirected in the link of it"
+        ];
+        if(!isset($this->_user->getData()['instagram']))
+            array_push($list, "You can link your instagram profile in your profile setting");
+        if(!isset($this->_user->getData()['facebook']))
+            array_push($list, "You can link your facebook page in your profile setting");
+        if(!isset($this->_user->getData()['snapchat']))
+            array_push($list, "You can link your snapchat profile in your profile setting");
+        if(!isset($this->_user->getData()['linkedin']))
+            array_push($list, "You can link your linkedin profile in your profile setting");
+        shuffle($list);
+        return $list[1];
     }
 }
