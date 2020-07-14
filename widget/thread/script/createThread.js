@@ -14,8 +14,8 @@ $(function(){
             processData: false,
             data: data,
             success: function(data){
-                if(data == "0"){
-    				window.location.replace('index.php?thread=last');
+                if(data.length == 40){
+    				window.location.replace('index.php?thread='+data);
     			}else{
     				$('#erreurCreate').text(traduction(data));
     				setTimeout(function(){

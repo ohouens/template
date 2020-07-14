@@ -67,6 +67,7 @@ class createThreadControl{
     }
 
     public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm){
+        global $hash;
         if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
@@ -85,11 +86,13 @@ class createThreadControl{
         $post->addData(["open"=>true]);
         $post->addData(["head"=>0]);
         $pm->add($post);
-        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
-        return 0;
+        $lid = $pm->lastId();
+        self::indexThread($lid, $user, $post, $um, $pm);
+        return $hash->get($lid);
     }
 
     public static function createForum(User $user, $title, $cover, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
+        global $hash;
         if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
@@ -114,24 +117,23 @@ class createThreadControl{
                 $post->addData(["open"=>true]);
                 $post->addData(["head"=>0]);
                 $pm->add($post);
-                self::indexThread($pm->lastId(), $user, $post, $um, $pm);
-                return 0;
-                break;
+                $pm->add($post);
+                $lid = $pm->lastId();
+                self::indexThread($lid, $user, $post, $um, $pm);
+                return $hash->get($lid);
             case 701:
                 return 12;
-                break;
             case 702:
                 return 13;
-                break;
             case 703:
                 return 14;
-                break;
             default:
                 break;
         }
     }
 
     public static function createTicketing(User $user, $title, $date, UserManager $um, PostManager $pm, PointManager $lm){
+        global $hash;
         if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
@@ -149,11 +151,14 @@ class createThreadControl{
         $post->addData(["tickets"=>[]]);
         $post->addData(["open"=>true]);
         $pm->add($post);
-        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
-        return 0;
+        $pm->add($post);
+        $lid = $pm->lastId();
+        self::indexThread($lid, $user, $post, $um, $pm);
+        return $hash->get($lid);
     }
 
     public static function createList(User $user, $title, $list, UserManager $um, PostManager $pm, PointManager $lm){
+        global $hash;
         if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
@@ -170,7 +175,9 @@ class createThreadControl{
         $post->addData(["followers"=>[]]);
         $post->addData(["open"=>true]);
         $pm->add($post);
-        self::indexThread($pm->lastId(), $user, $post, $um, $pm);
-        return 0;
+        $pm->add($post);
+        $lid = $pm->lastId();
+        self::indexThread($lid, $user, $post, $um, $pm);
+        return $hash->get($lid);
     }
 }
