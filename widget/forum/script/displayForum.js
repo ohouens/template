@@ -1,5 +1,6 @@
 $(function(){
     var flag = false;
+    var flagBis = false;
     var timer = 0;
     var deadline = 5000;
     var refreshTime = 700;
@@ -284,8 +285,16 @@ $(function(){
             $("#contentChat #buffer").html(data);
             if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num'))
                 loadChatBis();
-            if($('#displayChat #end #last').attr("num") != $("#contentChat #buffer #last").attr("num"))
+            if($('#contentChat #buffer #isTyping').length || $('#displayChat #end #last').attr("num") != $("#contentChat #buffer #last").attr("num")){
+                if($('#contentChat #buffer #isTyping').length)
+                    flagBis = true;
                 $('#displayChat #end').html(data);
+            }else{
+                if(flagBis){
+                    flagBis = false;
+                    $('#displayChat #end').html(data);
+                }
+            }
             editSwitch();
             if(end || first){
                 $('#displayChat #history').css('display', 'block');
