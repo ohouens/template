@@ -282,11 +282,9 @@ $(function(){
         }
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&last&flag='+flag, function(data){
             $("#contentChat #buffer").html(data);
-            if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num')){
+            if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num'))
                 loadChatBis();
-                // $('#displayChat #end').html(data);
-            }
-            // if(first)
+            if($('#displayChat #end #last').attr("num") != $("#contentChat #buffer #last").attr("num"))
                 $('#displayChat #end').html(data);
             editSwitch();
             if(end || first){
