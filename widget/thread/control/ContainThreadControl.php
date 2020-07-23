@@ -98,7 +98,7 @@ class ContainThreadControl{
                 $list = $post->getData()['list'];
                 $cover = "";
                 $img = [];
-                while($i < count($list) and $j < 4){
+                while($i < count($list) and $j <= 4){
                     $thread = $manager->get($list[$i]);
                     if(!is_int($thread) and $thread->getType() == Constant::THREAD_FORUM){
                         array_push($img,$thread->getField());
@@ -115,8 +115,8 @@ class ContainThreadControl{
                         --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
                         break;
                     case 3:
-                        $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
+                        $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
+                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div>';
                         break;
                     case 4:
                         $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
@@ -129,7 +129,7 @@ class ContainThreadControl{
                 $class = 'list';
                 $result = '
                 '.$cover.''.$news.'
-                <h3>'.$post->getData()['title'].'[ ]</h3>';
+                <h3 number="'.$j.'">'.$post->getData()['title'].'[ ]</h3>';
                 break;
             default:
                 break;
