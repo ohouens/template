@@ -53,6 +53,10 @@ class ForumControl{
                     $body = preg_replace("/([a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,4})/", '<a href="mailto:$1" class="mailto" style="color: #96a8c0;">$1</a>', $body);
                     $body = preg_replace("/((@([a-z0-9_]{0,20}))(:| |<br\/>|<br>|<br \/>))/", '<a href="https://onisowo.com/index.php?page=$3" class="at" style="color: #ff009d;">$2</a>$4', $body);
                     $body = preg_replace("#([\w]{40})#", '<a href="index.php?thread=$1" class="to" style="color: #abd6f3;">$1</a>', $body);
+                    $body = preg_replace("#([RB_]|>)(R)#", '$1<span style="color: #FF0000;">$2</span>', $body);
+                    $body = preg_replace("#(R)([RB_]|<)#", '<span style="color: #FF0000;">$1</span>$2', $body);
+                    $body = preg_replace("#([RB_]|>)(B)#", '$1<span style="color: #0000FF;">$2</span>', $body);
+                    $body = preg_replace("#(B)([RB_]|<)#", '<span style="color: #0000FF;">$1</span>$2', $body);
                     $body = '<p class="text alignement">'.substr($body, 0, -1).'</p>';
                     $body = preg_replace("/(~[$])/", '<span class="unix" style="color: #007070;">$1</span>', $body);
                     if(isset($inter->getData()['lock'])){
