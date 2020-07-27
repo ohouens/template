@@ -23,7 +23,7 @@ class ListThreadWidget extends Widget{
                 $lock = "locked";
             $page .=
             '<p class="list alignement">
-                <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&list">
+                <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&setting">
                     '.$inter->getData()['title'].'<br/>
                     type:'.ThreadControl::getType($inter).'<br/>
                     date:'.date("d/m/Y", $inter->getCreation()).'<br/>
