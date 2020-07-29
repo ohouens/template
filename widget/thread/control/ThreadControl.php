@@ -302,9 +302,9 @@ class ThreadControl{
             case Constant::THREAD_FLUX:
                 return "flux";
             case Constant::THREAD_FORUM:
-                return "forum";
+                return "blog";
             case Constant::THREAD_TICKETING:
-                return "ticketing";
+                return "register";
             case Constant::THREAD_LIST:
                 return "list";
             default:

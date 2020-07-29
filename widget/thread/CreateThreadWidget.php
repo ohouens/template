@@ -22,8 +22,8 @@ class CreateThreadWidget extends Widget{
             <h1>New Thread</h1>
             <div class="large select">
                 <span action="flux">Flux</span><!--
-                --><span action="forum">Forum</span><!--
-                --><span action="ticketing">Ticketing</span><!--
+                --><span action="forum">Blog</span><!--
+                --><span action="ticketing">Register</span><!--
                 --><span action="list">List</span>
             </div>
             <form enctype="multipart/form-data" method="post" action="index.php?thread&request=1"></form>
