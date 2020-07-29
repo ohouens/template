@@ -19,10 +19,11 @@ $(function(){
                 tmp.html(data);
             });
         });
-        $("div.special.alignement").dblclick(function(){
+        $("div.special.alignement").click(function(){
+            var circle = $(this).find(".circle");
             $.get("index.php?thread="+$(this).attr("thread")+"&request=7&customer="+$(this).attr("num")+"&valide", function(data){
                 if(data == "0")
-                    $(this).find(".circle").attr("class", "circle val1");
+                    circle.attr("class", "circle val1");
             });
         });
     }
