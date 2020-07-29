@@ -158,6 +158,8 @@ $(function(){
             if(confirm("Do you want to delete this post ?")){
                 $.post("index.php?thread=0&request=42", $("#contentChat form").serialize()).done(function(data){
                     if(data == "0"){
+                        var c = $("#sendChat input[name='cursor']").val();
+                        $('.answer[num="'+c+'"]').css("display", "none");
                         $("#contentChat form textarea").val('');
                         $("#contentChat form #voteBlock input").val('');
                         editOff();
@@ -285,7 +287,7 @@ $(function(){
             $("#contentChat #buffer").html(data);
             if((!first) && $("#buffer .answer").last().attr('num') != $('#displayChat #end #last').attr('num'))
                 loadChatBis();
-            if($('#contentChat #buffer #isTyping').length || $('#displayChat #end #last').attr("num") != $("#contentChat #buffer #last").attr("num")){
+            if($('#contentChat #buffer #isTyping').length || $('#displayChat #end #last').attr("num") != $("#contentChat #buffer #last").attr("num") || $('#displayChat #end #last .text').html() != $("#contentChat #buffer #last .text").html()){
                 if($('#contentChat #buffer #isTyping').length)
                     flagBis = true;
                 $('#displayChat #end').html(data);
