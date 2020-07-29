@@ -106,26 +106,21 @@ class ContainThreadControl{
                     }
                     $i++;
                 }
-                switch($j){
-                    case 1:
-                        $cover='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].'); width: 100%; height: 300px;"></div>';
-                        break;
-                    case 2:
-                        $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
-                        break;
-                    case 3:
-                        $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div>';
-                        break;
-                    case 4:
-                        $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div><!--
-                        --><div class="cover" style="background-image: url(media/forum/cover/'.$img[3].');"></div>';
-                        break;
-
-                }
+                if($j > 3)
+                    $cover.='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
+                    --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
+                    --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div><!--
+                    --><div class="cover" style="background-image: url(media/forum/cover/'.$img[3].');"></div>';
+                elseif($j > 2)
+                    $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div><!--
+                    --><div class="cover" style="background-image: url(media/forum/cover/'.$img[2].');"></div>';
+                elseif($j > 1)
+                    $cover = '<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].');"></div><!--
+                    --><div class="cover" style="background-image: url(media/forum/cover/'.$img[1].');"></div>';
+                elseif($j > 0)
+                    $cover='<div class="cover" style="background-image: url(media/forum/cover/'.$img[0].'); width: 100%; height: 300px;"></div>';
+                else
+                    $cover = "";
                 $class = 'list';
                 $result = '
                 '.$cover.''.$news.'
