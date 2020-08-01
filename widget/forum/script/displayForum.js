@@ -117,29 +117,26 @@ $(function(){
 
         $("#addAction").click(function(e){
             e.preventDefault();
-            $("#contentChat form .slide .kid").css("display", "none");
             if(state == 0){
-                $("#barrierBlock.kid").css("display", "flex");
-                state = 1
+                var ta = $("#contentChat form textarea").val();
+                if(ta.substring(0,11) != "~$ declare ")
+                    $("#contentChat form textarea").val('~$ declare \n'+ta);
+                $("#contentChat form textarea").focus();
+                if($("#voteBlock.kid").length)
+                    state = 1;
+                else
+                    state = 0;
             }else if (state == 1) {
+                $("textarea.kid").css("display", "none");
                 $("#voteBlock.kid").css("display", "block");
                 state = 2
             }else{
+                $("#voteBlock.kid").css("display", "none");
                 $("textarea.kid").css("display", "block");
                 state = 0
             }
             $("#contentChat form input[name='state']").val(state);
         });
-
-        // $("#send").click(function(e){
-        //     e.preventDefault();
-        //     $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
-        //         if(data == "0"){
-        //             $("#contentChat form textarea").val('');
-        //             $("#contentChat form #voteBlock input").val('');
-        //         }
-        //     });
-        // });
 
         $("#edit").click(function(e){
             e.preventDefault();
@@ -226,12 +223,19 @@ $(function(){
         });
     };
 
+    function longPress(){
+        $(".answer").click(function(){
+            $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
+        });
+    }
+
     function editSwitch(){
         $(".answer").dblclick(function(){
             $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
             $("#sendChat input[name='cursor']").val($(this).attr('num'));
             $(".nonCache").css("display", "none");
             $(".cache").css("display", "inline-block");
+            $("#sendChat textarea[name='answer']").focus();
         });
     }
 
@@ -250,7 +254,7 @@ $(function(){
             $("#contentChat #buffer").html(data);
             if((!first) && parseInt($("#buffer .answer").last().attr('num')) < parseInt($("#history .answer").first().attr('num'))){
                 $('#displayChat #history').html($("#contentChat #buffer").html() + $('#displayChat #history').html());
-                editSwitch();
+                editSwitch(); longPress();
 
                 $("#displayChat").animate({
                     scrollTop: $('#last').offset().top - height
@@ -263,14 +267,14 @@ $(function(){
     function loadChat(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0', function(data){
             $('#displayChat #history').html(data);
-            editSwitch();
+            editSwitch(); longPress();
         });
     }
 
     function loadChatBis(){
         $.get('index.php?thread='+$("#contentChat").attr('num')+'&request=0&temoin='+$("#history .answer").first().attr("num"), function(data){
             $('#displayChat #history').html(data);
-            editSwitch();
+            editSwitch(); longPress();
         });
     }
 
@@ -297,7 +301,7 @@ $(function(){
                     $('#displayChat #end').html(data);
                 }
             }
-            editSwitch();
+            editSwitch(); longPress();
             if(end || first){
                 $('#displayChat #history').css('display', 'block');
                 first = false;

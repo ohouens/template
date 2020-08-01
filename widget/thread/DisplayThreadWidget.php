@@ -77,9 +77,17 @@ class DisplayThreadWidget extends Widget{
 
     private function constructForum(User $user, Post $post, UserManager $manager, PostManager $pm){
         global $hash;
-        $option = '<input class="nonCache" type="image" value="">';
+        $option = '';
         if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
-            $option = '<input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/>';
+            $option = '
+            <div id="voteBlock" class="kid plein vide">
+                <input type="text" class="input" placeholder="question ?" name="question"><br>
+                <input type="text" class="little input" placeholder="answer 1" name="a1">
+                <input type="text" class="little input" placeholder="answer 2" name="a2">
+                <input type="text" class="little input" placeholder="answer 3" name="a3">
+                <input type="text" class="little input" placeholder="answer 4" name="a4">
+            </div>
+            ';
         $chat = "";
         $grand = ' style="height: 100%;"';
         if(ThreadControl::checkMode($user, $post, "write", $pm)){
@@ -88,24 +96,12 @@ class DisplayThreadWidget extends Widget{
                 <input type="hidden" name="state" value="0">
                 <input type="hidden" name="cursor" value="0">
                 <div class="slide alignement">
-                    <div id="barrierBlock" class="kid plein vide">
-                        <div class="center">
-                            <input type="hidden" name="length" value="1000">
-                            <span>1000</span> secondes
-                        </div>
-                    </div>
-                    <div id="voteBlock" class="kid plein vide">
-                        <input type="text" class="input" placeholder="question ?" name="question"><br>
-                        <input type="text" class="little input" placeholder="answer 1" name="a1">
-                        <input type="text" class="little input" placeholder="answer 2" name="a2">
-                        <input type="text" class="little input" placeholder="answer 3" name="a3">
-                        <input type="text" class="little input" placeholder="answer 4" name="a4">
-                    </div>
+                    '.$option.'
                     <textarea id="areaChat" name="answer" class="kid plein emojiable-question"></textarea>
                 </div><!--
                 --><input class="cache" type="image" id="delete" src="style/icon/delete.png"/><!--
                 --><input class="cache" type="image" id="edit" src="style/icon/edit.png"/><!--
-                -->'.$option.'<!--
+                --><input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/><!--
                 --><input class="nonCache" type="image" id="trigger" src="style/icon/emoji.png"/>
             </form>';
                 // --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
@@ -126,7 +122,6 @@ class DisplayThreadWidget extends Widget{
             '.$chat.'
             <div id="displayLock" class="vide">
                 <div class="center">
-                    <button id="notifyBarrier" class="button vide">Notify</button>
                     <div id="notifyVote" class="vide">
                         <button id="a1" class="kid buttonA"></button>
                         <button id="a2" class="kid buttonA"></button>
