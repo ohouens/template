@@ -102,9 +102,9 @@ class DisplayThreadWidget extends Widget{
                 --><input class="cache" type="image" id="delete" src="style/icon/delete.png"/><!--
                 --><input class="cache" type="image" id="edit" src="style/icon/edit.png"/><!--
                 --><input class="nonCache" type="image" id="addAction" src="style/icon/plus.png"/><!--
-                --><input class="nonCache" type="image" id="trigger" src="style/icon/emoji.png"/>
+                --><input class="nonCache" type="image" id="trigger" src="style/icon/emoji.png"/><!--
+                --><input class="nonCache vide" type="image" id="send" src="style/icon/sendDirect.png"/>
             </form>';
-                // --><input class="nonCache" type="image" id="send" src="style/icon/sendDirect.png"/>
             $grand = '';
         }
         return

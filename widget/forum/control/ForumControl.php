@@ -141,20 +141,6 @@ class ForumControl{
         if(in_array($user->getId(), $lock->getData()['unlock']))
             $voted = "voted";
         switch($lock->getData()['lock']){
-            case "barrier":
-                $view = "Unlocked";
-                if($lock->getActive() == 1){
-                    $date = $lock->getCreation() + intval($lock->getField()) - time();
-                    $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
-                    $view = '<p>'.$verroux.' locks</p> <p>'.$date.' secondes</p>';
-                }
-                $result .=
-                '<div class="square barrier '.$active.' '.$voted.'">
-                    <div class="center">
-                        '.$view.'
-                    </div>
-                </div>';
-                break;
             case "vote":
                 $view = "";
                 $answer = "";
@@ -274,9 +260,6 @@ class ForumControl{
         $temoin = $pm->get($parent);
         if(!ThreadControl::checkMode($user, $temoin, "write", $pm))
             return 44;
-        $lock = self::getLastLock($temoin, $pm);
-        if($lock != NULL and $lock->getActive() == 1)
-            return Constant::ERROR_CODE_THREAD_ANSWER;
         $post = new Post();
         $post->setUser($user->getId());
         $post->setType(Constant::THREAD_ANSWER);

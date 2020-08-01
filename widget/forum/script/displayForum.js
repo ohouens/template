@@ -7,6 +7,7 @@ $(function(){
     var end = false;
     var first = true;
     var state = 0;
+    var disable = false;
 
     if($("#contentStatistic").length){
         $('.emojiable-question').emojiPicker({
@@ -129,13 +130,29 @@ $(function(){
             }else if (state == 1) {
                 $("textarea.kid").css("display", "none");
                 $("#voteBlock.kid").css("display", "block");
+                $("#send").css("display", "inline-block");
+                $("#trigger").css("display", "none");
+                disable = true;
                 state = 2
             }else{
                 $("#voteBlock.kid").css("display", "none");
                 $("textarea.kid").css("display", "block");
+                $("#send").css("display", "none");
+                $("#trigger").css("display", "inline-block");
+                disable = false;
                 state = 0
             }
             $("#contentChat form input[name='state']").val(state);
+        });
+
+        $("#send").click(function(e){
+            e.preventDefault();
+            $.post($("#contentChat form").attr('action'), $("#contentChat form").serialize()).done(function(data){
+                if(data == "0"){
+                    $("#contentChat form textarea").val('');
+                    $("#contentChat form #voteBlock input").val('');
+                }
+            });
         });
 
         $("#edit").click(function(e){
@@ -152,6 +169,8 @@ $(function(){
 
         $("#delete").click(function(e){
             e.preventDefault();
+            if(disable)
+                return;
             if(confirm("Do you want to delete this post ?")){
                 $.post("index.php?thread=0&request=42", $("#contentChat form").serialize()).done(function(data){
                     if(data == "0"){
@@ -168,20 +187,20 @@ $(function(){
 
         $("#contentChat form").submit(function(e){
             e.preventDefault();
-            $("#send").trigger("click");
-        });
-
-        $("#notifyBarrier").click(function(){
-            $.get("index.php?thread="+$("#contentChat").attr('num')+"&request=9&notify", function(data){
-                if(data == 0)
-                    $("#notifyBarrier").addClass("selected");
-            });
         });
 
         $("#notifyVote button").click(function(){
+            var b = $(this);
+            var number = $("#sendChat input[name='cursor']").val();
             $.get("index.php?thread="+$("#contentChat").attr('num')+"&request=9&notify="+$(this).text(), function(data){
-                if(data == 0)
-                    $(this).addClass("selected");
+                if(data == 0){
+                    b.addClass("selected");
+                    $.get("index.php?thread="+number+"&request=10", function(refresh){
+                        $("#contentChat #buffer").html(refresh);
+                        $('.answer[num="'+number+'"] .lock').html($("#contentChat #buffer .lock").html());
+                        $("#contentChat #buffer").html("");
+                    });
+                }
             });
         });
     }
@@ -225,7 +244,35 @@ $(function(){
 
     function longPress(){
         $(".answer").click(function(){
-            $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
+            if($(this).find(".lock").length){
+                var lock = $(this).find(".lock");
+                $("#sendChat input[name='cursor']").val($(this).attr('num'));
+                $("#contentChat #sendChat").css('display', 'none');
+                $("#contentChat #displayLock").css('display', 'flex');
+                if(lock.find(".active.vote").length){
+                    $("#notifyVote").css("display", "block");
+                    $("#notifyVote #a1").text(lock.find(".active").attr('a1'));
+                    $("#notifyVote #a2").text(lock.find(".active").attr('a2'));
+                    $("#notifyVote #a3").text(lock.find(".active").attr('a3'));
+                    $("#notifyVote #a4").text(lock.find(".active").attr('a4'));
+                    $("#notifyVote button").each(function(){
+                        if($(this).text() == '')
+                            $(this).css('display', 'none');
+                        else{
+                            $(this).css('display', 'inline-block');
+                            if($(this).text() == lock.find(".active.vote").attr("answer"))
+                                $(this).addClass("selected");
+                        }
+                    });
+                }
+                else $("#notifyVote").css("display", "none");
+                if(lock.find(".active.barrier.voted").length)
+                    $("#notifyBarrier").addClass("selected");
+            }else{
+                $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
+                $("#contentChat #sendChat").css('display', 'inline-block');
+                $("#contentChat #displayLock").css('display', 'none');
+            }
         });
     }
 
@@ -240,10 +287,12 @@ $(function(){
     }
 
     function editOff(){
+        $("#contentChat #sendChat").css('display', 'inline-block');
+        $("#contentChat #displayLock").css('display', 'none');
         $("#sendChat textarea[name='answer']").val("");
         $("#sendChat input[name='cursor']").val("0");
-        $(".cache").css("display", "none");
         $(".nonCache").css("display", "inline-block");
+        $(".cache, .nonCache.vide").css("display", "none");
     }
 
     function loadFirst(){
@@ -308,34 +357,6 @@ $(function(){
                 $('#displayChat').animate({
                     scrollTop: $('#last').offset().top + ($('#last').offset().top)*10000
                 }, 500);
-            }
-            if($("#last .lock .active").length){
-                $("#contentChat #sendChat").css('display', 'none');
-                $("#contentChat #displayLock").css('display', 'flex');
-                if($("#last .lock .active.barrier").length) $("#notifyBarrier").css("display", "inline");
-                else $("#notifyBarrier").css("display", "none");
-                if($("#last .lock .active.vote").length){
-                    $("#notifyVote").css("display", "block");
-                    $("#notifyVote #a1").text($("#last .lock .active").attr('a1'));
-                    $("#notifyVote #a2").text($("#last .lock .active").attr('a2'));
-                    $("#notifyVote #a3").text($("#last .lock .active").attr('a3'));
-                    $("#notifyVote #a4").text($("#last .lock .active").attr('a4'));
-                    $("#notifyVote button").each(function(){
-                        if($(this).text() == '')
-                            $(this).css('display', 'none');
-                        else{
-                            $(this).css('display', 'inline-block');
-                            if($(this).text() == $("#last .lock .active.vote").attr("answer"))
-                                $(this).addClass("selected");
-                        }
-                    });
-                }
-                else $("#notifyVote").css("display", "none");
-                if($("#last .lock .active.barrier.voted").length)
-                    $("#notifyBarrier").addClass("selected");
-            }else{
-                $("#contentChat #sendChat").css('display', 'block');
-                $("#contentChat #displayLock").css('display', 'none');
             }
             $("#contentChat #buffer").html("");
         });
