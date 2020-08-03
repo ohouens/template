@@ -276,7 +276,7 @@ class ThreadControl{
     }
 
     public static function edit(User $user, Post $post, $answer, PostManager $manager){
-        if($user->getId() != $post->getUser() and !self::isAdmin($user, $post, $manager))
+        if($user->getId() != $post->getUser())
             return Constant::ERROR_CODE_USER_WRONG;
         if(!isset($post->getData()["originalField"]))
             $post->addData(["originalField"=>$post->getField()]);

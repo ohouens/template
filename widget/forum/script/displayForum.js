@@ -328,10 +328,8 @@ $(function(){
     }
 
     function loadLast(){
-        if(flag){
+        if(flag)
             timer += refreshTime;
-
-        }
         if(timer >= deadline){
             flag = false;
             timer = 0;
