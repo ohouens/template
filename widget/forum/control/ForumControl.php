@@ -110,20 +110,8 @@ class ForumControl{
 
     public static function checkLockActive(Post $lock, PostManager $manager){
         switch($lock->getData()['lock']){
-            case "barrier":
-                $date = $lock->getCreation() + intval($lock->getField()) - time();
-                if($date <= 0 and $lock->getActive() == 1){
-                    $lock->setActive(2);
-                    $manager->update($lock);
-                }
-                $verroux = $lock->getData()["N"] - count($lock->getData()["unlock"]);
-                if($verroux <= 0 and $lock->getActive() == 1){
-                    $lock->setActive(2);
-                    $manager->update($lock);
-                }
-                break;
             case "vote":
-                if($lock->getCreation()+3600*3-time() <= 0 and $lock->getActive() == 1){
+                if($lock->getCreation()+3600*24-time() <= 0 and $lock->getActive() == 1){
                     $lock->setActive(2);
                     $manager->update($lock);
                 }
