@@ -1,6 +1,7 @@
 $(function(){
     var flag = false;
     var flagBis = false;
+    var ctrlFlag = false;
     var timer = 0;
     var deadline = 5000;
     var refreshTime = 700;
@@ -8,6 +9,7 @@ $(function(){
     var first = true;
     var state = 0;
     var disable = false;
+    var colorSave = $("header").css("background-color");
 
     if($("#contentStatistic").length){
         $('.emojiable-question').emojiPicker({
@@ -69,6 +71,17 @@ $(function(){
             if(keycode == '27'){
                 editOff();
             }
+            if(keycode == '17'){
+                ctrlFlag = false;
+                $("header").css("background-color", colorSave);
+            }
+        });
+        $("body").keydown(function(e){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '17'){
+                ctrlFlag = true;
+                $("header").css("background-color", "#191919");
+            }
         });
         $("#sendChat textarea").on("keyup paste change",function(){
             var str = $(this).val();
@@ -118,29 +131,28 @@ $(function(){
 
         $("#addAction").click(function(e){
             e.preventDefault();
-            if(state == 0){
-                var ta = $("#contentChat form textarea").val();
-                if(ta.substring(0,11) != "~$ declare ")
-                    $("#contentChat form textarea").val('~$ declare \n'+ta);
-                $("#contentChat form textarea").focus();
-                if($("#voteBlock.kid").length)
-                    state = 1;
-                else
-                    state = 0;
-            }else if (state == 1) {
+            if(ctrlFlag){
                 $("textarea.kid").css("display", "none");
                 $("#voteBlock.kid").css("display", "block");
                 $("#send").css("display", "inline-block");
                 $("#trigger").css("display", "none");
                 disable = true;
-                state = 2
+                state = 2;
             }else{
-                $("#voteBlock.kid").css("display", "none");
-                $("textarea.kid").css("display", "block");
-                $("#send").css("display", "none");
-                $("#trigger").css("display", "inline-block");
-                disable = false;
-                state = 0
+                if(state == 2){
+                    $("#voteBlock.kid").css("display", "none");
+                    $("textarea.kid").css("display", "block");
+                    $("#send").css("display", "none");
+                    $("#trigger").css("display", "inline-block");
+                    disable = false;
+                }else{
+                    var ta = $("#contentChat form textarea").val();
+                    if(ta.substring(0,11) != "~$ declare "){
+                        $("#contentChat form textarea").val('~$ declare \n'+ta);
+                        $("#contentChat form textarea").focus();
+                    }
+                }
+                state = 0;
             }
             $("#contentChat form input[name='state']").val(state);
         });
@@ -269,9 +281,10 @@ $(function(){
                 if(lock.find(".active.barrier.voted").length)
                     $("#notifyBarrier").addClass("selected");
             }else{
-                $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
                 $("#contentChat #sendChat").css('display', 'inline-block');
                 $("#contentChat #displayLock").css('display', 'none');
+                if(ctrlFlag)
+                    $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
             }
         });
     }

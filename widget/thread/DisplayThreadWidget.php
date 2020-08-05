@@ -78,7 +78,7 @@ class DisplayThreadWidget extends Widget{
     private function constructForum(User $user, Post $post, UserManager $manager, PostManager $pm){
         global $hash;
         $option = '';
-        if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
+        // if($user->getId() == $post->getUser() or in_array($user->getPseudo(), $post->getData()['writers']))
             $option = '
             <div id="voteBlock" class="kid plein vide">
                 <input type="text" class="input" placeholder="question ?" name="question"><br>
