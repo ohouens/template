@@ -279,20 +279,8 @@ class ForumControl{
                     $post->setField(array_slice(explode(":", $result), 1));
                 }
                 break;
-            case 1: //lock barrier
-                if($user->getId() != $temoin->getUser() and !in_array($user->getPseudo(), $temoin->getData()['writers']))
-                    return 444;
-                if(!preg_match("/^[0-9]{1,5}$/", $var['length']))
-                    return Constant::ERROR_CODE_THREAD_ANSWER;
-                if(count($temoin->getData()['followers']) <= 0)
-                    return 447;
-                $post->setField($var['length']);
-                $post->addData(["lock"=>"barrier"]);
-                $post->addData(["N"=>count($temoin->getData()['followers'])]);
-                $post->addData(["unlock"=>[]]);
-                break;
             case 2: //lock vote
-                if($user->getId() != $temoin->getUser() and !in_array($user->getPseudo(), $temoin->getData()['writers']))
+                if(!ThreadControl::checkMode($user, $temoin, "execute", $pm))
                     return 444;
                 if(!preg_match("/^.{1,100}$/", $var['question']))
                     return Constant::ERROR_CODE_THREAD_LENGTH;

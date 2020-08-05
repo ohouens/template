@@ -257,6 +257,7 @@ $(function(){
     function longPress(){
         $(".answer").click(function(){
             if($(this).find(".lock").length){
+                $("#notifyVote button").removeClass("selected");
                 var lock = $(this).find(".lock");
                 $("#sendChat input[name='cursor']").val($(this).attr('num'));
                 $("#contentChat #sendChat").css('display', 'none');
