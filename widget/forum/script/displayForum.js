@@ -291,13 +291,17 @@ $(function(){
     }
 
     function editSwitch(){
-        $(".answer").dblclick(function(){
-            $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
+        $(".answer:not(.switched)").dblclick(function(){
             $("#sendChat input[name='cursor']").val($(this).attr('num'));
-            $(".nonCache").css("display", "none");
-            $(".cache").css("display", "inline-block");
-            $("#sendChat textarea[name='answer']").focus();
-        });
+            if(ctrlFlag){
+                $("#delete").trigger("click");
+            }else{
+                $("#sendChat textarea[name='answer']").val($(this).find('.text').text());
+                $(".nonCache").css("display", "none");
+                $(".cache").css("display", "inline-block");
+                $("#sendChat textarea[name='answer']").focus();
+            }
+        }).addClass("switched");
     }
 
     function editOff(){
