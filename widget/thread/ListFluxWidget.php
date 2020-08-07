@@ -16,6 +16,7 @@ class ListFluxWidget extends Widget{
     private function subConstruct(User $user, PostManager $manager){
         global $hash;
         $page = "";
+        $blog = $manager->get($_GET['thread']);
         $list = ThreadControl::list($user, $manager);
         foreach($list as $inter){
             if($inter->getType() != Constant::THREAD_FLUX)
@@ -37,6 +38,7 @@ class ListFluxWidget extends Widget{
             </div>';
         return
         '<div id="thread">
+            <p style="margin-top:2vh; margin-bottom:2vh; font-size:1.5em; font-family:sourceBold;">Choose your flux which will listen to the thread <a target="_blank" href="index.php?thread='.$hash->get($_GET['thread']).'" style="color: #33F7B7" class="link">'.$blog->getData()['title'].'</a></p>
             '.$page.'
         </div>';
     }
