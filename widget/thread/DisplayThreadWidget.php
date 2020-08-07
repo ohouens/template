@@ -166,6 +166,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Subscribe').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
             </div>
         </div><!--
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
@@ -215,6 +216,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Get ticket').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
             </div>
         </div><!--
         --><div id="displayWriter" class="mainSection grand children alignement" num="'.$hash->get($post->getId()).'">
