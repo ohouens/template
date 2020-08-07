@@ -111,6 +111,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()), 'Access forum').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
             </div>
         </div><!--
         --><div id="contentChat" class="grand children alignement" num="'.$hash->get($post->getId()).'">
