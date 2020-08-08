@@ -7,7 +7,7 @@ class QrCode{
             <span class="qrLink" style="display:none;">http://onisowo.com/'.preg_replace("#%26#", "&", $link).'</span>
             <div class="square">
                 <div class="center">
-                    '.$writing.'
+                    <a href="http://onisowo.com/'.$link.'" class="link">'.$writing.'</a>
                 </div>
             </div>
             <div class="qrInfo" class="space"></div>
