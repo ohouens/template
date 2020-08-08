@@ -72,7 +72,11 @@ class FluxControl{
                 }
                 array_push($result, $num);
                 if(in_array($parent->getId(), $thread->getData()["input"])){
-                    $result = array_merge($result, self::createAnswer($userManager->get($thread->getUser()), $answer, $thread, $postManager, $userManager, $result, false));
+                    $head = $postManager->get($thread->getData()['head']);
+                    if(!is_int($head) and $head->getField() == $answer)
+                        continue;
+                    else
+                        $result = array_merge($result, self::createAnswer($userManager->get($thread->getUser()), $answer, $thread, $postManager, $userManager, $result, false));
                 }else{
                     $parent->addData(["tunnelv2"=>array_diff($parent->getData()["tunnelv2"], [$thread->getId()])]);
                     $postManager->update($parent);
