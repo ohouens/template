@@ -212,6 +212,9 @@ class DisplayThreadWidget extends Widget{
         $alert = "";
         if(ThreadControl::isAlert($post))
             $alert = ' <img src="style/icon/notification.png" alt="alert on subscribe" class="notify"/>';
+        $cancel = "";
+        if(in_array($user->getId(), $post->getData()[ThreadControl::getInfluence($post)]))
+            $cancel = '<p><a class="link" href="index.php?thread='.$hash->get($post->getId()).'&amp;request=3&amp;token='.$post->getData()["keys"][$user->getId()].'">cancel</a></p>';
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -240,6 +243,7 @@ class DisplayThreadWidget extends Widget{
             <div id="contentCountdown" class="square">
                 <div class="center">
                     <p class="countdown" date="'.$timer.'"></p>
+                    '.$cancel.'
                 </div>
             </div>
         </div>';
