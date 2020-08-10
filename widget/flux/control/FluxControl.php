@@ -92,7 +92,12 @@ class FluxControl{
         if(isset($thread->getData()["tunnelv2"])){
             foreach($thread->getData()["tunnelv2"] as $t){
                 $tunnel = $pm->get($t);
-                self::createAnswer($um->get($tunnel->getUser()), $hash->get($thread->getId())." -> ".$message, $tunnel, $pm, $um);
+                if(in_array($thread->getId(), $tunnel->getData()["input"]))
+                    self::createAnswer($um->get($tunnel->getUser()), $hash->get($thread->getId())." -> ".$message, $tunnel, $pm, $um);
+                else{
+                    $thread->addData(["tunnelv2"=>array_diff($thread->getData()["tunnelv2"], [$t])]);
+                    $pm->update($thread);
+                }
             }
         }
     }
