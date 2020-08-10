@@ -313,55 +313,6 @@ class ForumControl{
                     return 456;
                 FluxControl::answerRelay($parent, "@".$user->getPseudo().": ".$message, $pm, $um);
                 return $result;
-            case 'add':
-                if($parent->getUser() != $user->getId())
-                    return 44;
-                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
-                    return 45;
-                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
-                    return 46;
-                $thread = $pm->get($hash->traduct($order[3]));
-                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
-                    return 47;
-                $subscriber = $um->get($order[2]);
-                ListControl::subscribe($subscriber, $thread, $pm, $um, false);
-                array_push($result, "@".$order[2]);
-                array_push($result, "to");
-                array_push($result, $order[3]);
-                return implode(" ", $result);
-            case 'addH':
-                if($parent->getUser() != $user->getId())
-                    return 44;
-                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
-                    return 45;
-                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
-                    return 46;
-                $thread = $pm->get($hash->traduct($order[3]));
-                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
-                    return 47;
-                $subscriber = $um->get($order[2]);
-                ListControl::subscribe($subscriber, $thread, $pm, $um, true);
-                array_push($result, "@".$order[2]);
-                array_push($result, "to");
-                array_push($result, $order[3]);
-                return implode(" ", $result);
-            case 'remove':
-                if($parent->getUser() != $user->getId())
-                    return 44;
-                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
-                    return 45;
-                if(!preg_match(Constant::REGEX_THREAD_HASH, $order[3]))
-                    return 46;
-                $thread = $pm->get($hash->traduct($order[3]));
-                if($thread->getType() != Constant::THREAD_LIST or $user->getId() != $thread->getUser())
-                    return 47;
-                $subscriber = $um->get($order[2]);
-                $subscriber->addData(["pass"=>$thread->getData()["keys"][$subscriber->getId()]]);
-                ListControl::unsubscribe($subscriber, $thread, $pm, $um, false);
-                array_push($result, "@".$order[2]);
-                array_push($result, "from");
-                array_push($result, $order[3]);
-                return implode(" ", $result);
             case 'append':
                 if($parent->getUser() != $user->getId())
                     return 44;
@@ -409,18 +360,6 @@ class ForumControl{
                 array_push($result, "from");
                 array_push($result, $order[3]);
                 FluxControl::answerRelay($thread, "removing of ".$hash->get($toAdd->getId()), $pm, $um);
-                return implode(" ", $result);
-            case 'instagram':
-                if($parent->getUser() != $user->getId() and !in_array($user->getId(), [1,6]))
-                    return 44;
-                if(!preg_match(Constant::REGEX_PSEUDO, $order[2]))
-                    return 45;
-                $state = SettingControl::changeInstagram($order[3], $um->get($order[2]), $um);
-                if($state != 0)
-                    return 4444;
-                array_push($result, $order[2]);
-                array_push($result, "is now");
-                array_push($result, $order[3]);
                 return implode(" ", $result);
             default:
                 return 44;
