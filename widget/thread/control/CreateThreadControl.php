@@ -66,9 +66,9 @@ class createThreadControl{
         $hash->add($thread->getId());
     }
 
-    public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm){
+    public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm, $limit=true){
         global $hash;
-        if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
+        if($limit and !LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
