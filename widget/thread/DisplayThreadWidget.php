@@ -162,6 +162,12 @@ class DisplayThreadWidget extends Widget{
         $alert = "";
         if(ThreadControl::isAlert($post))
             $alert = ' <img src="style/icon/notification.png" alt="alert on subscribe" class="notify"/>';
+        $declare = "";
+        $cancel = "";
+        if($user->getId() == $post->getUser()){
+            $declare = '<img src="style/icon/plusB.png" id="declare" alt="declare" class="vide">';
+            $cancel = '<img src="style/icon/plusB.png" id="cancel" alt="declare" class="vide">';
+        }
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
@@ -172,10 +178,12 @@ class DisplayThreadWidget extends Widget{
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
             <div id="flux" class="grand large">
                 <h1>'.$post->getData()['title'].$alert.$notify.'</h1>
+                '.$declare.'
                 <div id="fluxLast"></div>
             </div>
             <div class="grand large vide">
                 <div class="center">
+                    '.$cancel.'
                     <form action="index.php?thread='.$hash->get($post->getId()).'&amp;request=2" method="post">
                         <textarea class="noBorder" name="answer"></textarea>
                         <span>500</span>

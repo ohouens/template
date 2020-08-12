@@ -14,6 +14,10 @@ $(function(){
         }
     });
 
+    $("#flux #declare, .grand #cancel").click(function(){
+        $("#addFlux").trigger("click");
+    });
+
     $("#contentFlux form textarea").on('keyup paste', function(){
         var l = parseInt($(this).val().length);
         var count = 500 - l;

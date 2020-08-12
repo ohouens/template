@@ -11,24 +11,6 @@
     height: 35px;
     vertical-align: middle;
 }
-/* #contentFlux #messages{
-    text-align: left;
-    font-size: 1.2em;
-    font-family: source;
-}
-#contentFlux #messages p{
-    border-left: 2px solid grey;
-    padding-left: 1%;
-    padding-top: 5px;
-    padding-bottom: 15px;
-    margin-left: 4px;
-}
-#contentFlux .mark{
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: grey;
-} */
 
 #contentFlux form{
     background-color: white;
@@ -42,4 +24,20 @@
 }
 #contentFlux .grand.vide button:hover{
     background-color: #004080;
+}
+
+#contentFlux #flux #declare, .grand #cancel{
+    cursor: pointer;
+    height: 10vh;
+    margin: auto;
+    margin-bottom: 2vh;
+}
+
+@media (max-width: 800px), (orientation: portrait){
+    #flux #declare, .grand #cancel{
+        display: block;
+    }
+    #addFlux{
+        display: none;
+    }
 }
