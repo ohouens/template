@@ -23,25 +23,25 @@ class ThreadOW extends OptionWidget{
                 case Constant::THREAD_FLUX:
                     if(isset($this->_user->getData()["number"][$thread->getId()])){
                         if($this->_user->getData()["number"][$thread->getId()] < $thread->getData()["head"])
-                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'":  New messages !</a>';
+                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": <span class="vert">New messages !</span></a>';
                     }
                     break;
                 case Constant::THREAD_FORUM:
                     if(isset($this->_user->getData()["number"][$thread->getId()])){
                         if($this->_user->getData()["number"][$thread->getId()] < $thread->getData()["head"])
-                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": New messages !</a>';
+                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": <span class="vert">New messages !</span></a>';
                     }
                     break;
                 case Constant::THREAD_TICKETING:
                     if(isset($this->_user->getData()["number"][$thread->getId()])){
                         if($this->_user->getData()["number"][$thread->getId()] < count($thread->getData()[ThreadControl::getInfluence($thread)]))
-                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": New members !</a>';
+                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": <span class="vert">New members !</span></a>';
                     }
                     break;
                 case Constant::THREAD_LIST:
                     if(isset($this->_user->getData()["number"][$thread->getId()])){
                         if($this->_user->getData()["number"][$thread->getId()] < count($thread->getData()["list"]))
-                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": New threads !</a>';
+                            return '<a href="index.php?thread='.$hash->get($thread->getId()).'">'.ucfirst(ThreadControl::getType($thread)).' "'.$thread->getData()["title"].'": <span class="vert">New threads !</span></a>';
                     }
                     break;
                 default:

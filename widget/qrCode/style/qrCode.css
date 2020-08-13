@@ -1,7 +1,6 @@
 .presentation{
     width: 75%;
     background: #2D2D2D;
-    /* border-radius: 5%; */
     padding:4%;
     padding-bottom: 1%;
     font-family: sourceBold;
@@ -10,6 +9,4 @@
 }
 .qrCode{
     width: 100%;
-    cursor: pointer;
-    /* margin-bottom: 10%; */
 }

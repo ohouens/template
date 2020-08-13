@@ -89,6 +89,9 @@ button.selected, input[type="submit"].selected{
     color: grey;
     font-size: 0.7em;
 }
+.vert{
+	color: #33F7B7;
+}
 .noBorder{
 	border: none;
 }
