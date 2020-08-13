@@ -16,7 +16,7 @@ class ProfileOW extends OptionWidget{
             "✊🏿✊🏿✊🏿✊🏿✊🏿✊🏿✊🏿",
             "Fraternité, Justice, Travail",
             "¿A que hora comemos?",
-            "あなたに長い人生"
+            "<span class='vert'>あなたに長い人生</span>"
         ];
         if(!isset($this->_user->getData()['instagram']))
             array_push($list, "You can link your instagram profile in your profile setting");
