@@ -28,9 +28,10 @@ $(function(){
         });
     }
 
-    if($(this).width() < 800)
+    if($(this).width() < 800 && !$("#contentChat").length)
         $(".flickery").flickity({
-            draggable: false,
+            draggable: true,
+            prevNextButtons: false,
             groupCells: true,
             pageDots: false,
             initialIndex: 1

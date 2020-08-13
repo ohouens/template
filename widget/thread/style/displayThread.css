@@ -55,4 +55,8 @@
     #contentCode, .mainSection, #contentStatistic{
         width: 100%;
     }
+
+    #contentAuthor img.profilePicture{
+        display: none;
+    }
 }

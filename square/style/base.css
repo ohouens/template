@@ -107,3 +107,9 @@ button.selected, input[type="submit"].selected{
 .wait{
 	height: 50px;
 }
+
+@media (max-width: 800px){
+	 .invisible{
+		 display: none;
+	 }
+}

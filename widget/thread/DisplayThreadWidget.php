@@ -108,7 +108,7 @@ class DisplayThreadWidget extends Widget{
             $grand = '';
         }
         return
-        '<div id="contentCode" class="grand children rectangle">
+        '<div id="contentCode" class="grand children rectangle invisible">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()), 'Access forum').'
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
@@ -132,7 +132,7 @@ class DisplayThreadWidget extends Widget{
                 </div>
             </div>
         </div><!--
-        --><div id="contentStatistic" class="grand children alignement">
+        --><div id="contentStatistic" class="grand children alignement invisible">
             <div id="contentAuthor" class="square">
                 <div class="center">
                     <a class="link" href="?page='.ForumControl::getAutor($post->getUser(), $manager)->getPseudo().'"><img class="profilePicture" src="media/user/pp/'.ForumControl::getAutor($post->getUser(), $manager)->getData()['pp'].'" alt="profile"></a>
@@ -172,7 +172,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Subscribe').'
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux', 'invisible').'
             </div>
         </div><!--
         --><div id="contentFlux" class="mainSection grand children rectangle" num="'.$hash->get($post->getId()).'">
@@ -227,7 +227,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Get ticket').'
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux', 'invisible').'
             </div>
         </div><!--
         --><div id="displayWriter" class="mainSection grand children alignement" num="'.$hash->get($post->getId()).'">
@@ -269,7 +269,7 @@ class DisplayThreadWidget extends Widget{
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect%26only', "Follow").'
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect'.$token, $qrString).'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3%26redirect'.$token, $qrString, 'invisible').'
             </div>
         </div><!--
         --><div id="displayList" class="mainSection grand children alignement">
