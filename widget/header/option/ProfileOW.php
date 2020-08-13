@@ -13,8 +13,10 @@ class ProfileOW extends OptionWidget{
             "Not Minecraft but kind of",
             "Liberté,  Égalité, Fraternité",
             "You are incredible 🙌🏿",
-            "Black Lives Matter ✊🏿",
-            "Fraternité, Justice, Travail"
+            "✊🏿✊🏿✊🏿✊🏿✊🏿✊🏿✊🏿",
+            "Fraternité, Justice, Travail",
+            "¿A que hora comemos?",
+            "あなたに長い人生"
         ];
         if(!isset($this->_user->getData()['instagram']))
             array_push($list, "You can link your instagram profile in your profile setting");

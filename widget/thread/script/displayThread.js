@@ -28,11 +28,11 @@ $(function(){
         });
     }
 
-    if($(this).width() < 800 && !$("#contentChat").length)
+    if($(this).width() < 800)
         $(".flickery").flickity({
             draggable: true,
             prevNextButtons: false,
-            dragThreshold: 30,
+            dragThreshold: 60,
             groupCells: true,
             pageDots: false,
             initialIndex: 1
