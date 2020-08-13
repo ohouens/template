@@ -65,7 +65,7 @@ class ForumControl{
                     }
                     try{
                         $user = self::getAutor($inter->getUser(), $userManager);
-                        $account = '<p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getId().'">'.$user->getPseudo().'</a></p>';
+                        $account = '<p class="pseudo alignement '.self::color($post, $user).'"><a href="index.php?page='.$user->getPseudo().'">'.$user->getPseudo().'</a></p>';
                     }catch(Exception $e){
                         $account = '<p class="pseudo alignement">Account deleted</p>';
                     }
