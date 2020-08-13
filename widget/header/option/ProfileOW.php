@@ -9,8 +9,12 @@ class ProfileOW extends OptionWidget{
 
     public function screen(Manager $manager){
         $list = [
-            "You can copy the link of a thread by clicking the qr code",
-            "By double clicking the qr code, you will be redirected in the link of it"
+            "Groooooooowth !",
+            "Not Minecraft but kind of",
+            "Liberté,  Égalité, Fraternité",
+            "You are incredible 🙌🏿",
+            "Black Lives Matter ✊🏿",
+            "Fraternité, Justice, Travail"
         ];
         if(!isset($this->_user->getData()['instagram']))
             array_push($list, "You can link your instagram profile in your profile setting");

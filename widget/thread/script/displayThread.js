@@ -32,6 +32,7 @@ $(function(){
         $(".flickery").flickity({
             draggable: true,
             prevNextButtons: false,
+            dragThreshold: 30,
             groupCells: true,
             pageDots: false,
             initialIndex: 1
