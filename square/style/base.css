@@ -92,6 +92,9 @@ button.selected, input[type="submit"].selected{
 .vert{
 	color: #33F7B7;
 }
+.gold{
+	color: #ffd700;
+}
 .noBorder{
 	border: none;
 }

@@ -6,6 +6,68 @@ class Katalogi{
     	return $result;
     }
 
+    public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
+        global $hash;
+        $limit = CreateThreadControl::hasLimit($user,$lm);
+        if($limit != 0)
+            return $limit;
+        if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
+            return Constant::ERROR_CODE_THREAD_TITLE;
+        if(!preg_match("#^.{1,250}$#s", $desc))
+            return Constant::ERROR_CODE_THREAD_LENGTH;
+        $post = new Post();
+        switch($subtype){
+            case 2: //gps
+                $frag = explode(" || ", $extra);
+                if($frag[0] == null or $frag[0] == "")
+                    return Constant::ERROR_CODE_USER_WRONG;
+                if(!preg_match("/^[0-9]\.[0-9]+$/", $frag[1]) or !preg_match("/^[0-9]\.[0-9]+$/", $frag[2]))
+                    return Constant::ERROR_CODE_USER_WRONG;
+                $post->addData(["address"=>$frag[0]]);
+                $post->addData(["lat"=>$frag[1]]);
+                $post->addData(["long"=>$frag[2]]);
+                break;
+            case 3: //code
+                if(!preg_match("/^.{1,20}$/", $extra))
+                    return Constant::ERROR_CODE_USER_WRONG;
+                $post->addData(["code"=>$extra]);
+                break;
+            case 5: //link
+                if(!preg_match("/^((http):\/\/(w{3}\.)?)?[a-z]{1,255}\.[a-z]{2,15}\//", $extra))
+                    return Constant::ERROR_CODE_USER_WRONG;
+                $post->addData(["link"=>$extra]);
+                break;
+        }
+        $extension = substr(strrchr($cover['name'],'.'),1);
+        $rename = $user->getID().achage(42).'.'.$extension;
+        $dest = $path.'media/forum/cover/'.$rename;
+        $verif = upload($cover, $dest, 1048576, ["png", "jpg", "jpeg"]);
+        switch($verif){
+            case 0:
+                return 15;
+            case 1:
+                $post->setUser($user->getId());
+                $post->setField($subtype);
+                $post->setType(Constant::THREAD_POSTER);
+                $post->addData(["title"=>$title]);
+                $post->addData(["cover"=>$rename]);
+                $post->addData(["desc"=>$desc]);
+                $pm->add($post);
+                $pm->add($post);
+                $lid = $pm->lastId();
+                self::indexThread($lid, $user, $post, $um, $pm);
+                return $hash->get($lid);
+            case 701:
+                return 12;
+            case 702:
+                return 13;
+            case 703:
+                return 14;
+            default:
+                break;
+        }
+    }
+
     public static function catalogue($bdd, $id){
     	$tab=[];
     	$i=0;
