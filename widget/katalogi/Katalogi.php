@@ -17,7 +17,7 @@ class Katalogi{
             return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
         switch($subtype){
-            case 2: //gps
+            case "1": //gps
                 $frag = explode(" || ", $extra);
                 if($frag[0] == null or $frag[0] == "")
                     return Constant::ERROR_CODE_USER_WRONG;
@@ -27,13 +27,13 @@ class Katalogi{
                 $post->addData(["lat"=>$frag[1]]);
                 $post->addData(["long"=>$frag[2]]);
                 break;
-            case 3: //code
+            case "2": //code
                 if(!preg_match("/^.{1,20}$/", $extra))
                     return Constant::ERROR_CODE_USER_WRONG;
                 $post->addData(["code"=>$extra]);
                 break;
-            case 5: //link
-                if(!preg_match("/^((http):\/\/(w{3}\.)?)?[a-z]{1,255}\.[a-z]{2,15}\//", $extra))
+            case "3": //link
+                if(!preg_match("/^((https?):\/\/(w{3}\.)?)?[a-z]{1,255}\.[a-z]{2,15}\/?/", $extra))
                     return Constant::ERROR_CODE_USER_WRONG;
                 $post->addData(["link"=>$extra]);
                 break;
@@ -55,7 +55,7 @@ class Katalogi{
                 $pm->add($post);
                 $pm->add($post);
                 $lid = $pm->lastId();
-                self::indexThread($lid, $user, $post, $um, $pm);
+                CreateThreadControl::indexThread($lid, $user, $post, $um, $pm);
                 return $hash->get($lid);
             case 701:
                 return 12;

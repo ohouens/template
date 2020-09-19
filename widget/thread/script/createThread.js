@@ -31,7 +31,7 @@ $(function(){
     $("#createThread form").submit(function(e){
         e.preventDefault();
         $('#createThread #submit').trigger('click');
-    })
+    });
 
     $("#createThread .select span").click(function(){
         $('#createThread form').attr('origin', $(this).attr("action"));

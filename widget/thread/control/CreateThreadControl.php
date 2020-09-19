@@ -62,7 +62,7 @@ class createThreadControl{
         $um->update($user);
     }
 
-    private static function indexThread($threadId, User $user, Post $post, UserManager $um, PostManager $pm){
+    public static function indexThread($threadId, User $user, Post $post, UserManager $um, PostManager $pm){
         global $hash;
         $thread = $pm->get($threadId);
         if($post->getUser() != $thread->getUser() or $post->getData()['title'] != $thread->getData()['title'])
