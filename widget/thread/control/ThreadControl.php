@@ -307,6 +307,8 @@ class ThreadControl{
                 return "register";
             case Constant::THREAD_LIST:
                 return "list";
+            case Constant::THREAD_POSTER:
+                return "poster";
             default:
                 return 'thread';
         }
@@ -322,6 +324,8 @@ class ThreadControl{
                 return 'tickets';
             case Constant::THREAD_LIST:
                 return 'followers';
+            case Constant::THREAD_POSTER:
+                return 'viewers';
             default:
                 return '';
         }

@@ -6,6 +6,31 @@ class Katalogi{
     	return $result;
     }
 
+    public static function indexThreadFromStart(User $user, UserManager $um, PostManager $pm){
+        global $hash;
+        $tab = [];
+        foreach($pm->getList() as $thread){
+            if($thread->getUser() == $user->getId() and in_array($thread->getType(), [Constant::THREAD_POSTER])){
+                array_push($tab, $thread->getId());
+                $hash->add($thread->getId());
+            }
+        }
+        $user->addData(["posters"=>$tab]);
+        $um->update($user);
+    }
+
+    public static function indexThread($threadId, User $user, Post $post, UserManager $um, PostManager $pm){
+        global $hash;
+        $thread = $pm->get($threadId);
+        if($post->getUser() != $thread->getUser() or $post->getData()['title'] != $thread->getData()['title'])
+            return self::indexThreadFromStart($user, $um, $pm);
+        $tab = $user->getData()["posters"];
+        array_push($tab, $threadId);
+        $user->addData(["posters"=>$tab]);
+        $um->update($user);
+        $hash->add($thread->getId());
+    }
+
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
         $limit = CreateThreadControl::hasLimit($user,$lm);
@@ -50,12 +75,15 @@ class Katalogi{
                 $post->setField($subtype);
                 $post->setType(Constant::THREAD_POSTER);
                 $post->addData(["title"=>$title]);
+                $post->addData(["writers"=>[]]);
+                $post->addData(["viewers"=>[]]);
+                $post->addData(["open"=>false]);
                 $post->addData(["cover"=>$rename]);
                 $post->addData(["desc"=>$desc]);
                 $pm->add($post);
                 $pm->add($post);
                 $lid = $pm->lastId();
-                CreateThreadControl::indexThread($lid, $user, $post, $um, $pm);
+                self::indexThread($lid, $user, $post, $um, $pm);
                 return $hash->get($lid);
             case 701:
                 return 12;

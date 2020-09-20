@@ -54,9 +54,10 @@ class createThreadControl{
         global $hash;
         $tab = [];
         foreach($pm->getList() as $thread){
-            if($thread->getUser() == $user->getId() and in_array($thread->getType(), [Constant::THREAD_FLUX, Constant::THREAD_LIST, Constant::THREAD_FORUM, Constant::THREAD_TICKETING]))
+            if($thread->getUser() == $user->getId() and in_array($thread->getType(), [Constant::THREAD_FLUX, Constant::THREAD_LIST, Constant::THREAD_FORUM, Constant::THREAD_TICKETING])){
                 array_push($tab, $thread->getId());
                 $hash->add($thread->getId());
+            }
         }
         $user->addData(["threads"=>$tab]);
         $um->update($user);
