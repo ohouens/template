@@ -1,6 +1,22 @@
 $(function(){
     $.getScript('script/utils.js');
 
+    $('#createPoster form input[name="address"]').on('blur', function(){
+		$.getJSON('index.php', {address: encodeURIComponent($('#createPoster form input[name="address"]').val()), katalogi: "getAddress"}).done(function(data){
+			if(data.status == "OK"){
+				$('#createPoster form input[name="extra"]').val(data.results[0].formatted_address+" || "+data.results[0].geometry.location.lat+" || "+data.results[0].geometry.location.lng);
+                $('#createPoster form input[name="address"]').val(data.results[0].formatted_address);
+			}else{
+				$('#erreurCreate').text("incorrect adddress");
+				setTimeout(function(){
+					$('#erreurCreate').text("");
+				},3000);
+			}
+		}).error(function(data){
+			alert("error: "+data);
+		});
+	});
+
     $("#createPoster #submit").click(function(){
         $('#erreurCreate').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
 		var dire = "erreur";
@@ -38,7 +54,7 @@ $(function(){
     });
 
     $('#createPoster form select[name="subtype"]').change(function(){
-        $('#createPoster form input[name="extra"]').addClass('vide');
+        $('#createPoster form input[name="extra"]').addClass('vide').val('');
         $('#createPoster form input[name="address"]').addClass('vide');
         switch ($(this).val()) {
             case "1":

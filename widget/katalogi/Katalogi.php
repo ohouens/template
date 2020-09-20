@@ -20,9 +20,9 @@ class Katalogi{
             case "1": //gps
                 $frag = explode(" || ", $extra);
                 if($frag[0] == null or $frag[0] == "")
-                    return Constant::ERROR_CODE_USER_WRONG;
-                if(!preg_match("/^[0-9]\.[0-9]+$/", $frag[1]) or !preg_match("/^[0-9]\.[0-9]+$/", $frag[2]))
-                    return Constant::ERROR_CODE_USER_WRONG;
+                    return 295;
+                if(!preg_match("/^[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^[0-9]\.[0-9]+$/", $frag[2]))
+                    return 296;
                 $post->addData(["address"=>$frag[0]]);
                 $post->addData(["lat"=>$frag[1]]);
                 $post->addData(["long"=>$frag[2]]);
@@ -178,5 +178,19 @@ class Katalogi{
     		"annonces" => $tab
     	);
     	return json_encode($fini);
+    }
+
+    public static function mapsAPI($address){
+        $curl = curl_init();
+        $send = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBiMGhNTqf79uOzcdYzPwujsczTHZaU_SY&address=".$address;
+    	$opts = [
+    		CURLOPT_SSL_VERIFYPEER => false,
+    		CURLOPT_URL            => $send,
+    		CURLOPT_RETURNTRANSFER => true,
+    	];
+    	curl_setopt_array($curl, $opts);
+    	$content = curl_exec($curl);
+        return $content;
+    	curl_close($curl);
     }
 }
