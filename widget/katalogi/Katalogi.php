@@ -6,6 +6,23 @@ class Katalogi{
     	return $result;
     }
 
+    public static function getSubType(Post $post){
+        if($post->getType() != 5)
+            return "thread";
+        switch($post->getField()){
+            case 0:
+                return "lecture";
+            case 1:
+                return "gps";
+            case 2:
+                return "code";
+            case 3:
+                return "link";
+            default:
+                return "undefined";
+        }
+    }
+
     public static function indexThreadFromStart(User $user, UserManager $um, PostManager $pm){
         global $hash;
         $tab = [];
