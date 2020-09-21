@@ -94,7 +94,7 @@ class Katalogi{
                 $post->addData(["title"=>$title]);
                 $post->addData(["writers"=>[]]);
                 $post->addData(["viewers"=>[]]);
-                $post->addData(["open"=>false]);
+                $post->addData(["open"=>true]);
                 $post->addData(["cover"=>$rename]);
                 $post->addData(["desc"=>$desc]);
                 $pm->add($post);
