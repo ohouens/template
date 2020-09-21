@@ -23,8 +23,8 @@ class SettingKatalogiWidget extends Widget{
             else $no = "selected";
             $button = "read";
             if($post->getField() == 1)$button = "GPS";
-            if($post->getField() == 1)$button = "Code";
-            if($post->getField() == 1)$button = "link";
+            if($post->getField() == 2)$button = "Code";
+            if($post->getField() == 3)$button = "link";
             return '
                 <div id="settingPoster" class="child">
                     <div class="grand alignement" id="preview" style="background-image: url(\'media/forum/cover/'.$post->getData()['cover'].'\');">

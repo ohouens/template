@@ -31,7 +31,7 @@ $(function(){
             data: data,
             success: function(data){
                 if(data.length == 40){
-    				window.location.replace('index.php?thread='+data);
+    				window.location.replace('index.php?katalogi=settings&poster='+data);
     			}else{
     				$('#erreurCreate').text(traduction(data));
     				setTimeout(function(){
