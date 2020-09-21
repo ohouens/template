@@ -125,6 +125,8 @@ class Katalogi{
 			$tab[$i]["titre"] = $poster->getData()["title"];
 			$tab[$i]["description"] = $poster->getData()["desc"];
 			$tab[$i]["image"] = $poster->getData()["cover"];
+            $tab[$i]["lat"] = 0.0;
+            $tab[$i]["long"] = 0.0;
             switch($poster->getField()){
                 case 1:
                     $tab[$i]["address"] = $poster->getData()["address"];
