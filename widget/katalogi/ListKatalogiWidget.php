@@ -16,7 +16,7 @@ class ListKatalogiWidget extends Widget{
     private function subConstruct(User $user, PostManager $manager){
         global $hash;
         $page = "";
-        foreach($user->getData()['posters'] as $num){
+        foreach(array_reverse($user->getData()['posters']) as $num){
             $inter = $manager->get($num);
             $lock = "unlocked";
             if(!$inter->getData()['open'])

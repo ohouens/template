@@ -117,7 +117,7 @@ class Katalogi{
         global $hash;
     	$tab=[];
     	$i=0;
-    	foreach($pm->getListOfType(Constant::THREAD_POSTER) as $poster){
+    	foreach(array_reverse($pm->getListOfType(Constant::THREAD_POSTER)) as $poster){
             if($i >= 30) break;
 			//creation de la demande
 			$tab[$i]["num"] = $hash->get($poster->getId());
