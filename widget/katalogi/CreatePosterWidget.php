@@ -21,7 +21,6 @@ class CreatePosterWidget extends Widget{
         '<div id="createPoster">
             <h1>New Poster</h1>
             <form enctype="multipart/form-data" method="post" action="index.php?katalogi=creation">
-                <input type="hidden" name="extra" value=""/>
                 <input class="input" type="text" name="title" placeholder="Title"/><br>
                 <select name="subtype" class="input">
                     <option value="0">reading</option>

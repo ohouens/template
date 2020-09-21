@@ -63,7 +63,7 @@ class Katalogi{
                 $frag = explode(" || ", $extra);
                 if($frag[0] == null or $frag[0] == "")
                     return 295;
-                if(!preg_match("/^[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^[0-9]\.[0-9]+$/", $frag[2]))
+                if(!preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[2]))
                     return 296;
                 $post->addData(["address"=>$frag[0]]);
                 $post->addData(["lat"=>$frag[1]]);
