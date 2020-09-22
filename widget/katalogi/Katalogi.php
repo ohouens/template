@@ -119,6 +119,8 @@ class Katalogi{
     	$i=0;
     	foreach(array_reverse($pm->getListOfType(Constant::THREAD_POSTER)) as $poster){
             if($i >= 30) break;
+            if(strlen($hash->get($poster->getId())) < 10) continue;
+            if(!ThreadControl::isOpen($poster)) continue;
 			//creation de la demande
 			$tab[$i]["num"] = $hash->get($poster->getId());
             $tab[$i]["type"] = $poster->getField();
