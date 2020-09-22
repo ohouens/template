@@ -12,6 +12,9 @@ class KatalogiOW extends OptionWidget{
     }
 
     public function screen(Manager $manager){
-        return '<a href="https://play.google.com/store?hl=fr"><span class="gold">Check the app !</span></a>';
+        return '
+        <span class="gold"style="vertical-align:middle;"">Check the app !</span>
+        <a href="https://play.google.com/store?hl=fr"> <img src="style/icon/playstore.png" alt="playstore" style="height: 30px; vertical-align:middle;"></a>
+        <img src="style/icon/ios.png" alt="ios" style="height: 30px; vertical-align:middle;">';
     }
 }
