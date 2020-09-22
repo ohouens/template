@@ -1,9 +1,9 @@
-#settingPoster{
+#settingPoster .child{
     height: 84vh;
 }
 
-#settingPoster .child{
-    height: 100%;
+#settingPoster .grand.alignement{
+    background-size: cover;
 }
 
 #settingPoster #preview{
@@ -23,4 +23,13 @@
 }
 #settingPoster #setting #resume .input, #settingPoster #setting #resume .tab{
     font-size: 1.4em;
+}
+
+@media (max-width: 800px){
+    #settingPoster .child{
+        height: 100vh;
+    }
+    #settingPoster #preview, #settingPoster #setting{
+        width:100%;
+    }
 }

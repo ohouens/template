@@ -27,7 +27,7 @@ class SettingKatalogiWidget extends Widget{
             if($post->getField() == 3)$button = "link";
             return '
                 <div id="settingPoster" class="child">
-                    <div class="grand alignement" id="preview" style="background-image: url(\'media/forum/cover/'.$post->getData()['cover'].'\');">
+                    <div class="grand alignement child" id="preview" style="background-image: url(\'media/forum/cover/'.$post->getData()['cover'].'\');">
                         <div class="super">
                             <div class="center">
                                 <h1>'.$post->getData()['title'].'</h1>
