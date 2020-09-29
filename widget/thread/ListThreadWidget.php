@@ -23,7 +23,7 @@ class ListThreadWidget extends Widget{
                 $lock = "locked";
             $gold="";
             if($inter->getUser() == $user->getId())
-                $gold = ' class="gold"';
+                $gold = ' class="vert"';
             $page .=
             '<p class="list alignement">
                 <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&setting">

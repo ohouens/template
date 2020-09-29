@@ -21,13 +21,13 @@ class AdvancedWidget extends Widget{
                     <div id="desc" class="alignement">
                         <h1>Onisowo Advanced</h1>
                         <p>
-                            Support our team and unlock 14 thread slots.
+                            Support our team and unlock 77 thread slots.
                         </p>
                         <button id="logPaypal" class="space">
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>
                             <span>Checkout</span>
                         </button><br>
-                        <p id="price" class="alignement"><strong>5.00 €</strong></p>
+                        <p id="price" class="alignement"><strong>26.00 €</strong></p>
                     </div>
                 </div>
             </div>
