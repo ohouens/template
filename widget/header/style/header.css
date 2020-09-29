@@ -25,4 +25,6 @@
 }
 #action{
 	cursor: pointer;
+}#action .alignement.plein{
+	display: none;
 }

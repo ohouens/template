@@ -1,26 +1,26 @@
-#licence{
+.store{
     background-size: cover;
-}#licence .super{
+}.store .super{
     min-height: 84vh;
 }
 
-#licence h1{
+.store h1{
     /* background-color: red; */
     font-family: sourceBold;
     font-size: 1.4em;
     margin-bottom: 2%;
 }
 
-#licence #price{
+.store #price{
     vertical-align: middle;
     /* font-family: sourceRegular; */
     font-family: sourceBold;
-}#licence #price strong{
+}.store #price strong{
     /* color: yellow; */
     font-size: 2em;
 }
 
-#licence #desc{
+.store #desc{
     text-align: left;
     font-family: source;
     max-width: 450px;
@@ -29,7 +29,7 @@
     vertical-align: middle;
 }
 
-#licence #example{
+.store #example{
     max-width: 300px;
     vertical-align: middle;
 }
@@ -50,15 +50,15 @@
 
 
 @media (max-width: 800px){
-    #licence #example{
+    .store #example{
         display: none;
     }
 
-    #licence #desc{
+    .store #desc{
         max-width: 320px;
     }
 
-    #licence #logPaypal{
+    .store #logPaypal{
         max-width: 100%;
     }
 }

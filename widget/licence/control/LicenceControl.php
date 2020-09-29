@@ -36,6 +36,9 @@ class LicenceControl{
             case "beginner":
                 $user->addData(["slots"=>$user->getData()["slots"]+14]);
                 break;
+            case "one":
+                $user->addData(["slots"=>$user->getData()["slots"]+1]);
+                break;
             default:
                 break;
         }

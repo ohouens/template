@@ -36,7 +36,7 @@ $(function(){
     }
 
     function init(){
-        $('#action .action').not($('#'+option)).css("display", "none");
+        $('#action #'+option).css("display", "block");
         $("#menu").css('background', $('#'+option).css('background-color'));
         screen();
     }
