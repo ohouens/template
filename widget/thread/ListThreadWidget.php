@@ -21,10 +21,13 @@ class ListThreadWidget extends Widget{
             $lock = "unlocked";
             if(!$inter->getData()['open'])
                 $lock = "locked";
+            $gold="";
+            if($inter->getUser() == $user->getId())
+                $gold = ' class="gold"';
             $page .=
             '<p class="list alignement">
                 <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&setting">
-                    '.$inter->getData()['title'].'<br/>
+                    <span'.$gold.'>'.$inter->getData()['title'].'</span><br/>
                     type:'.ThreadControl::getType($inter).'<br/>
                     date:'.date("d/m/Y", $inter->getCreation()).'<br/>
                     influence:'.count($inter->getData()[ThreadControl::getInfluence($inter)]).'<br/>
