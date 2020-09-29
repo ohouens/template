@@ -4,13 +4,14 @@ class StoreOW extends OptionWidget{
 
     public function __construct(User $user){
         $this->_hash = [
+            "one" => "store=detail&object=one",
             "beginner" => "store=detail&object=beginner",
             "advanced" => "store=detail&object=advanced",
             "licence" => "store=detail&object=licence",
             "template" => "store=detail&object=template",
             "software" => "store=detail&object=software"
         ];
-        parent::__construct("Store", "store", "#535F67", ['licence', 'advanced', 'beginner']);
+        parent::__construct("Store", "store", "#535F67", ['licence', 'advanced', 'beginner', 'one']);
         $this->_user = $user;
     }
 

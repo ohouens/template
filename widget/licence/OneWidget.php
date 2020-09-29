@@ -21,13 +21,13 @@ class OneWidget extends Widget{
                     <div id="desc" class="alignement">
                         <h1>Onisowo One</h1>
                         <p>
-                            Support our team and unlock 14 thread slots.
+                            Support our team and unlock 1 thread slot.
                         </p>
                         <button id="logPaypal" class="space">
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>
                             <span>Checkout</span>
                         </button><br>
-                        <p id="price" class="alignement"><strong>5.00 €</strong></p>
+                        <p id="price" class="alignement"><strong>1.00 €</strong></p>
                     </div>
                 </div>
             </div>
