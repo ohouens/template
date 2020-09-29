@@ -41,7 +41,7 @@ class LicenceWidget extends Widget{
                     <div id="desc" class="alignement">
                         <h1>Onisowo Licence</h1>
                         <p>
-                            Support our team and unlock 77 thread slots.
+                            Support our team and unlock 777 thread slots.
                             You will be able to make your own distributed network
                             and do whatever you want with it.
                         </p>
@@ -49,7 +49,7 @@ class LicenceWidget extends Widget{
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>
                             <span>Checkout</span>
                         </button><br>
-                        <p id="price" class="alignement"><strong>50.00 €</strong></p>
+                        <p id="price" class="alignement"><strong>250.00 €</strong></p>
                     </div>
                 </div>
             </div>

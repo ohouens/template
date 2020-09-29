@@ -50,9 +50,8 @@ class Katalogi{
 
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
-        $limit = CreateThreadControl::hasLimit($user,$lm);
-        if($limit != 0)
-            return $limit;
+        if(CreateThreadControl::hasLimit($user, $lm))
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         if(!preg_match("#^.{1,250}$#s", $desc))

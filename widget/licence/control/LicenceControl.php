@@ -24,7 +24,21 @@ class LicenceControl{
             "token"=>$token,
             "id"=>$buyerID
         ]);
-        $user->addData(["licence"=>$licence->getName()]);
+
+        switch($object){
+            case "licence":
+                $user->addData(["licence"=>$licence->getName()]);
+                $user->addData(["slots"=>$user->getData()["slots"]+777]);
+                break;
+            case "advanced":
+                $user->addData(["slots"=>$user->getData()["slots"]+77]);
+                break;
+            case "beginner":
+                $user->addData(["slots"=>$user->getData()["slots"]+14]);
+                break;
+            default:
+                break;
+        }
 
         try {
             $pointManager->add($licence);

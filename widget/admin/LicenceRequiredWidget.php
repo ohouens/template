@@ -21,8 +21,8 @@ class LicenceRequiredWidget extends Widget{
             <div class="center">
                 <p>
                     <img src="style/icon/sad.png" alt="that\'s sad"/><br/>
-                    A licence is Required to execute this action<br/>
-                    <button id="buyLicence" class="button space">Get Licence</button>
+                    A licence is Required<br/>
+                    <button id="buyLicence" class="button space">Get a licence</button>
                 </p>
             </div>
         </div>';

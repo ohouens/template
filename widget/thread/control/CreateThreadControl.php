@@ -1,8 +1,6 @@
 <?php
 class createThreadControl{
-    const WEAK_LIMIT = 0;
-    // const WEAK_LIMIT = 20;
-    const LIMIT = 77 + WEAK_LIMIT;
+    const LIMIT = 7;
     const UNLIMITED = [1];
 
     public static function getObject($thread){
@@ -43,11 +41,9 @@ class createThreadControl{
     }
 
     public static function hasLimit(User $user, PointManager $lm){
-        if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        return 0;
+        if(count($user->getData()["threads"]) >= self::LIMIT + $user->getData()["slots"] and !in_array($user->getId(), self::UNLIMITED))
+            return true;
+        return false;
     }
 
     public static function indexThreadFromStart(User $user, UserManager $um, PostManager $pm){
@@ -77,9 +73,7 @@ class createThreadControl{
 
     public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm, $limit=true){
         global $hash;
-        if($limit and !LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
+        if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -102,9 +96,7 @@ class createThreadControl{
 
     public static function createForum(User $user, $title, $cover, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
-        if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
+        if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -143,9 +135,7 @@ class createThreadControl{
 
     public static function createTicketing(User $user, $title, $date, UserManager $um, PostManager $pm, PointManager $lm){
         global $hash;
-        if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
+        if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
@@ -168,9 +158,7 @@ class createThreadControl{
 
     public static function createList(User $user, $title, $list, UserManager $um, PostManager $pm, PointManager $lm){
         global $hash;
-        if(!LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::WEAK_LIMIT))
-            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
-        if(LicenceControl::isValide($user, $lm) and (count($user->getData()["threads"]) >= self::LIMIT and !in_array($user->getId(), self::UNLIMITED)))
+        if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
