@@ -226,7 +226,7 @@ class DisplayThreadWidget extends Widget{
         return
         '<div id="contentCode" class="grand children rectangle">
             <div class="center">
-                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Get ticket').'
+                '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26request=3', 'Enroll').'
                 '.QrCode::code('index.php?thread='.$hash->get($post->getId()).'%26add', 'Add to flux', 'invisible').'
             </div>
         </div><!--

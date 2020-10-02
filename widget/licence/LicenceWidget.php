@@ -42,8 +42,7 @@ class LicenceWidget extends Widget{
                         <h1>Onisowo Licence</h1>
                         <p>
                             Support our team and unlock 777 thread slots.
-                            You will be able to make your own distributed network
-                            and do whatever you want with it.
+                            You will unlock all features(newsletters, instant chats, threads lists, ticketing) + write rights to katalogi.
                         </p>
                         <button id="logPaypal" class="space">
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>

@@ -98,6 +98,8 @@ class createThreadControl{
         global $hash;
         if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
+        if(!LicenceControl::isValide($user, $lm))
+            return Constant::ERROR_CODE_USER_NO_LICENCE;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         $extension = substr(strrchr($cover['name'],'.'),1);
@@ -160,6 +162,8 @@ class createThreadControl{
         global $hash;
         if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
+        if(!LicenceControl::isValide($user, $lm))
+            return Constant::ERROR_CODE_USER_NO_LICENCE;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
             return Constant::ERROR_CODE_THREAD_TITLE;
         $post = new Post();
