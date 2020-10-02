@@ -62,9 +62,9 @@ class SquareTemplate extends Base{
         <?php
     }
 
-    public function lock($wrapperHeight=''){
+    public function lock($wrapperHeight='', $padding=80){
         ?>
-        <div class="wrapper" <?php if($wrapperHeight != '')echo'style="height: '.$wrapperHeight.'vh"'; ?>>
+        <div class="wrapper" <?php if($wrapperHeight != '')echo'style="height: '.$wrapperHeight.'vh; padding-top: '.$padding.'px;"'; ?>>
         <?php
     }
 

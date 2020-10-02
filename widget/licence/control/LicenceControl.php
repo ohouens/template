@@ -19,6 +19,7 @@ class LicenceControl{
         $licence->compressName();
 
         $licence->addData([
+            "buyer"=>$user->getId(),
             "object"=>$object,
             "amount"=>$price,
             "token"=>$token,
