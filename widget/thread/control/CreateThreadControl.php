@@ -71,7 +71,7 @@ class createThreadControl{
         $hash->add($thread->getId());
     }
 
-    public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm, $limit=true){
+    public static function createFlux(User $user, $title, $intro, UserManager $um, PostManager $pm, PointManager $lm){
         global $hash;
         if(self::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
