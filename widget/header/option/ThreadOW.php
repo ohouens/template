@@ -5,7 +5,7 @@ class ThreadOW extends OptionWidget{
     public function __construct(User $user){
         $this->_hash = [
             "new" => "thread=none&creation",
-            "setting" => "thread=none&setting"
+            "settings" => "thread=none&settings"
         ];
         parent::__construct("Thread", "thread", "#35465E", ['new', 'setting']);
         $this->_user = $user;

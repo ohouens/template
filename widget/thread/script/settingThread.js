@@ -31,7 +31,10 @@ $(function(){
                 if(data == "0"){
                     $("#error").html('<img src="style/icon/success.png" alt="success" class="wait" />');
                     setTimeout(function(){
-                        window.location.href = "index.php?thread=none&setting";
+                        if($("#setting").length)
+                            window.location.href = "index.php?katalogi=settings&menu=Katalogi";
+                        else
+                            window.location.href = "index.php?thread=none&settings";
                     },3000);
                 }else{
                     $("#error").html('<img src="style/icon/fail.png" alt="fail" class="wait" />');

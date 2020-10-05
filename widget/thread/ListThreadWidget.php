@@ -26,7 +26,7 @@ class ListThreadWidget extends Widget{
                 $gold = ' class="vert"';
             $page .=
             '<p class="list alignement">
-                <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&setting">
+                <a class="link" href="index.php?thread='.$hash->get($inter->getId()).'&settings">
                     <span'.$gold.'>'.$inter->getData()['title'].'</span><br/>
                     type:'.ThreadControl::getType($inter).'<br/>
                     date:'.date("d/m/Y", $inter->getCreation()).'<br/>

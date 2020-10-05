@@ -39,7 +39,7 @@ class SettingWidget extends Widget{
         --><div id="settingGeneral" class="alignement children">
             <div class="a super square">
                 <div class="center">
-                    <h2>General setting</h2>
+                    <h2>General settings</h2>
                     <p>
                         You can change information links to your account to improves your experience.
                     </p>
@@ -74,27 +74,27 @@ class SettingWidget extends Widget{
             --><a class="link" href="#changeHobby"><img src="media/dataProfiling/favorite.png" alt="your favorite hobby"/></a>
         </p>
         <div class="grand vide">
-            <form class="vide" id="changeGender" method="post" action="index.php?setting&amp;request=4">
+            <form class="vide" id="changeGender" method="post" action="index.php?settings&amp;request=4">
                 <input type="hidden" name="gender"/>
                 <img class="gender '.$selectG.'" src="media/dataProfiling/gender/girl.png" origin="girl" alt="female" val="0"/>
                 <img class="gender '.$selectB.'" src="media/dataProfiling/gender/boy.png" origin="boy" alt="male" val="1"/><br/>
                 <input class="buttonC space" type="submit" value="save"/>
             </form>
-            <form class="vide" id="changeCountry" method="post" action="index.php?setting&amp;request=5">
+            <form class="vide" id="changeCountry" method="post" action="index.php?settings&amp;request=5">
                 '.SettingUtil::countriesList('input').'
                 <img src="https://www.countryflags.io/'.SettingControl::country($user).'/flat/64.png" alt="'.SettingControl::country($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="save"/>
             </form>
-            <form class="vide" id="changeBirth" method="post" action="index.php?setting&amp;request=6">
+            <form class="vide" id="changeBirth" method="post" action="index.php?settings&amp;request=6">
                 <input type="date" name="birth" class="input" value="'.$birth.'"/><br/>
                 <input class="buttonC space" type="submit" value="save"/>
             </form>
-            <form class="vide" id="changeSocial" method="post" action="index.php?setting&amp;request=7">
+            <form class="vide" id="changeSocial" method="post" action="index.php?settings&amp;request=7">
                 <input type="hidden" name="social"/>
                 '.$this->subSocial($user).'<br/>
                 <input class="buttonC space" type="submit" value="save"/>
             </form>
-            <form class="vide" id="changeHobby" method="post" action="index.php?setting&amp;request=8">
+            <form class="vide" id="changeHobby" method="post" action="index.php?settings&amp;request=8">
                 <input type="hidden" name="hobby"/>
                 '.$this->subHobby($user).'<br/>
                 <input class="buttonC space" type="submit" value="save"/>
@@ -120,35 +120,35 @@ class SettingWidget extends Widget{
             <a class="link" href="index.php?desactivate='.$user->getId().'&amp;key='.$user->getToken().'">delete account</a><br>
         </p>
         <div class="grand vide">
-            <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?setting&amp;request=1">
+            <form class="vide" id="changePdp" enctype="multipart/form-data" method="post" action="index.php?settings&amp;request=1">
                 <input type="file" name="pdp" accept="image/x-png,image/jpeg" class="vide"/>
                 <img class="center profilePicture" src="media/user/pp/'.$user->getData()['pp'].'"/><br/>
                 <input class="buttonC space" type="submit" value="validate"/>
             </form>
-            <form class="vide" id="changePassword" method="post" action="index.php?setting&amp;request=2">
+            <form class="vide" id="changePassword" method="post" action="index.php?settings&amp;request=2">
                 <input class="input" type="password" name="old" placeholder="old password" /><br/>
                 <input class="input" type="password" name="new" placeholder="new password" /><br/>
                 <input class="input" type="password" name="confirm" placeholder="confirm new password" /><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeEmail" method="post" action="index.php?setting&amp;request=3">
+            <form class="vide" id="changeEmail" method="post" action="index.php?settings&amp;request=3">
                 <span>current email: '.$user->getEmail().'</span><br/>
                 <input class="input" type="text" name="newMail" placeholder="new email"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeLinkedin" method="post" action="index.php?setting&amp;request=9">
+            <form class="vide" id="changeLinkedin" method="post" action="index.php?settings&amp;request=9">
                 <input class="input" type="text" name="linkedin" placeholder="https://www.linkedin.com/your_profile" value="'.SettingControl::linkedin($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeInstagram" method="post" action="index.php?setting&amp;request=10">
+            <form class="vide" id="changeInstagram" method="post" action="index.php?settings&amp;request=10">
                 @<input class="input" type="text" name="instagram" placeholder="instagram_username" value="'.SettingControl::getInstagram($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeSnapchat" method="post" action="index.php?setting&amp;request=11">
+            <form class="vide" id="changeSnapchat" method="post" action="index.php?settings&amp;request=11">
                 @<input class="input" type="text" name="snapchat" placeholder="snapchat_username" value="'.SettingControl::getSnapchat($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
-            <form class="vide" id="changeFacebook" method="post" action="index.php?setting&amp;request=12">
+            <form class="vide" id="changeFacebook" method="post" action="index.php?settings&amp;request=12">
                 <input class="input" type="text" name="facebook" placeholder="https://www.facebook.com/your_profile" value="'.SettingControl::facebook($user).'"/><br/>
                 <input class="buttonC space" type="submit" value="change"/>
             </form>
