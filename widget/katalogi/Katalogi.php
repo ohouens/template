@@ -112,38 +112,88 @@ class Katalogi{
         }
     }
 
-    public static function catalogue(PostManager $pm, $lat=0, $long=0){
+    private static function transform(Post $poster){
+        global $hash;
+        $result = [];
+        $result["num"] = $hash->get($poster->getId());
+        $result["type"] = $poster->getField();
+        $result["titre"] = $poster->getData()["title"];
+        $result["description"] = $poster->getData()["desc"];
+        $result["image"] = $poster->getData()["cover"];
+        $result["lat"] = 0.0;
+        $result["long"] = 0.0;
+        switch($poster->getField()){
+            case 1:
+                $result["address"] = $poster->getData()["address"];
+                $result["lat"] = $poster->getData()["lat"];
+                $result["long"] = $poster->getData()["long"];
+                break;
+            case 2:
+                $result["extra"] = $poster->getData()["code"];
+                break;
+            case 3:
+                $result["extra"] = $poster->getData()["link"];
+                break;
+        }
+        return $result;
+    }
+
+    private static function catalogue(PostManager $pm, $add=[], $limit=30){
         global $hash;
     	$tab=[];
     	$i=0;
-    	foreach(array_reverse($pm->getListOfType(Constant::THREAD_POSTER)) as $poster){
-            if($i >= 30) break;
+        $list = array_reverse($pm->getListOfType(Constant::THREAD_POSTER));
+    	foreach($add as $poster){
+            if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
             if(!ThreadControl::isOpen($poster)) continue;
-			//creation de la demande
-			$tab[$i]["num"] = $hash->get($poster->getId());
-            $tab[$i]["type"] = $poster->getField();
-			$tab[$i]["titre"] = $poster->getData()["title"];
-			$tab[$i]["description"] = $poster->getData()["desc"];
-			$tab[$i]["image"] = $poster->getData()["cover"];
-            $tab[$i]["lat"] = 0.0;
-            $tab[$i]["long"] = 0.0;
-            switch($poster->getField()){
-                case 1:
-                    $tab[$i]["address"] = $poster->getData()["address"];
-                    $tab[$i]["lat"] = $poster->getData()["lat"];
-                    $tab[$i]["long"] = $poster->getData()["long"];
-                    break;
-                case 2:
-                    $tab[$i]["extra"] = $poster->getData()["code"];
-                    break;
-                case 3:
-                    $tab[$i]["extra"] = $poster->getData()["link"];
-                    break;
+			$tab[$i] = self::transform($poster);
+            $i++;
+    	}
+    	foreach($list as $poster){
+            if($i >= $limit) break;
+            if(strlen($hash->get($poster->getId())) < 10) continue;
+            if(!ThreadControl::isOpen($poster)) continue;
+            foreach($add as $posterBis){
+                if($poster->getId() == $posterBis->getId())
+                    continue 2;
             }
+			$tab[$i] = self::transform($poster);
             $i++;
     	}
     	return json_encode($tab);
+    }
+
+    private static function position(PostManager $pm, $lat, $long, $limit){
+        global $hash;
+    	$tab=[];
+    	$i=0;
+        $lenDis = 0;
+        $distances = array(20, 50, 75, 100, 300, 500, 1000, 8000);
+        $list = array_reverse($pm->getListOfType(Constant::THREAD_POSTER));
+        $inter = $list;
+        while(count($tab)<15 and $lenDis<count($distances)){
+            foreach($list as $poster){
+                if(count($tab)>=$limit) break;
+                if(strlen($hash->get($poster->getId())) < 10) continue;
+                if(!ThreadControl::isOpen($poster)) continue;
+                //verification si la demande n'a pas été déja ajouté
+                if(in_array($poster, $tab)) continue;
+                //verification de la distance a l'utilisateur
+                if(isset($poster->getData()['lat']) and isset($poster->getData()['long'])){
+                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis])
+                        array_push($tab, $poster);
+                }
+            }
+            $lenDis++;
+        }
+        return $tab;
+    }
+
+    public static function cataloguePosition(PostManager $pm, $lat=0, $long=0, $limit=30){
+        if($lat==0 and $long==0)
+            return self::catalogue($pm, [], $limit);
+        return self::catalogue($pm, self::position($pm, $lat, $long, $limit), $limit);
     }
 
     public static function mapsAPI($address){
