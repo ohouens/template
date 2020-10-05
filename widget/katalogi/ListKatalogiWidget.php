@@ -18,6 +18,9 @@ class ListKatalogiWidget extends Widget{
         $page = "";
         foreach(array_reverse($user->getData()['posters']) as $num){
             $inter = $manager->get($num);
+            if(is_int($inter)){
+                continue;
+            }
             $lock = "unlocked";
             if(!$inter->getData()['open'])
                 $lock = "locked";

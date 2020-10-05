@@ -37,7 +37,7 @@ class SettingKatalogiWidget extends Widget{
                         </div>
                     </div><!--
                     --><div class="grand rectangle child" id="setting" num="'.$hash->get($post->getId()).'">
-                        <div class="center" id="resume">
+                        <div class="center" id="resume" num="'.$hash->get($post->getId()).'">
                             <h1>'.$post->getData()['title'].'</h1>
                             <form method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                                 <span class="tab">open:</span><select class="input" name="open">
