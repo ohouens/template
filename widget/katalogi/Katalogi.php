@@ -48,7 +48,7 @@ class Katalogi{
         $hash->add($thread->getId());
     }
 
-    public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
+    public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extraAddress, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
         if(CreateThreadControl::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
@@ -57,16 +57,16 @@ class Katalogi{
         if(!preg_match("#^.{1,250}$#s", $desc))
             return Constant::ERROR_CODE_THREAD_LENGTH;
         $post = new Post();
+        $frag = explode(" || ", $extraAddress);
+        if($frag[0] == null or $frag[0] == "")
+            return 297;
+        if(!preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[2]))
+            return 296;
+        $post->addData(["address"=>$frag[0]]);
+        $post->addData(["lat"=>$frag[1]]);
+        $post->addData(["long"=>$frag[2]]);
         switch($subtype){
             case "1": //gps
-                $frag = explode(" || ", $extra);
-                if($frag[0] == null or $frag[0] == "")
-                    return 295;
-                if(!preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[2]))
-                    return 296;
-                $post->addData(["address"=>$frag[0]]);
-                $post->addData(["lat"=>$frag[1]]);
-                $post->addData(["long"=>$frag[2]]);
                 break;
             case "2": //code
                 if(!preg_match("/^.{1,20}$/", $extra))

@@ -4,7 +4,7 @@ $(function(){
     $('#createPoster form input[name="address"]').on('blur', function(){
 		$.getJSON('index.php', {address: encodeURIComponent($('#createPoster form input[name="address"]').val()), katalogi: "getAddress"}).done(function(data){
 			if(data.status == "OK"){
-				$('#createPoster form input[name="extra"]').val(data.results[0].formatted_address+" || "+data.results[0].geometry.location.lat+" || "+data.results[0].geometry.location.lng);
+				$('#createPoster form input[name="extraAddress"]').val(data.results[0].formatted_address+" || "+data.results[0].geometry.location.lat+" || "+data.results[0].geometry.location.lng);
                 $('#createPoster form input[name="address"]').val(data.results[0].formatted_address);
 			}else{
 				$('#erreurCreate').text("incorrect adddress");
@@ -55,7 +55,6 @@ $(function(){
 
     $('#createPoster form select[name="subtype"]').change(function(){
         $('#createPoster form input[name="extra"]').addClass('vide').val('');
-        $('#createPoster form input[name="address"]').addClass('vide');
         switch ($(this).val()) {
             case "1":
                 $('#createPoster form input[name="address"]').removeClass('vide');

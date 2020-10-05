@@ -29,8 +29,9 @@ class CreatePosterWidget extends Widget{
                     <option value="3">link</option>
                 </select><br>
                 <textarea name="desc" class="input"></textarea><br>
-				<input type="text" name="extra" class="input vide"/><br>
-                <input type="text" name="address" class="input vide" placeholder="address"/><br><br>
+                <input type="text" name="address" class="input" placeholder="address"/><br>
+                <input type="text" name="extraAddress" placeholder="extra address" class="input vide"/>
+				<input type="text" name="extra" class="input vide"/><br><br>
                 <input type="file" name="cover" accept="image/x-png,image/jpeg"/>
             </form>
             <button id="submit" class="button space">Create</button>
