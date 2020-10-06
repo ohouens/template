@@ -142,22 +142,10 @@ class Katalogi{
         global $hash;
     	$tab=[];
     	$i=0;
-        $list = array_reverse($pm->getListOfType(Constant::THREAD_POSTER));
     	foreach($add as $poster){
             if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
             if(!ThreadControl::isOpen($poster)) continue;
-			$tab[$i] = self::transform($poster);
-            $i++;
-    	}
-    	foreach($list as $poster){
-            if($i >= $limit) break;
-            if(strlen($hash->get($poster->getId())) < 10) continue;
-            if(!ThreadControl::isOpen($poster)) continue;
-            foreach($add as $posterBis){
-                if($poster->getId() == $posterBis->getId())
-                    continue 2;
-            }
 			$tab[$i] = self::transform($poster);
             $i++;
     	}
