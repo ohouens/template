@@ -34,7 +34,16 @@ class ListKatalogiWidget extends Widget{
             </p>';
         }
         if($page == "")
-            return "";
+            return '
+            <div id="noThread" class="children square">
+                <div class="center">
+                    <p>
+                        <img src="style/icon/void.png" alt="that\'s sad" style="width:250px;"/><br/>
+                        You have made no poster<br/>
+                    </p>
+                </div>
+            </div>
+            ';
         return
         '<div id="thread">
             '.$page.'
