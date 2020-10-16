@@ -116,17 +116,18 @@ class Katalogi{
         global $hash;
         $result = [];
         $result["num"] = $hash->get($poster->getId());
-        $result["type"] = $poster->getField();
+        $result["type"] = intval($poster->getField());
         $result["titre"] = $poster->getData()["title"];
         $result["description"] = $poster->getData()["desc"];
         $result["image"] = $poster->getData()["cover"];
+        $result["address"] = "";
         $result["lat"] = 0.0;
         $result["long"] = 0.0;
         switch($poster->getField()){
             case 1:
                 $result["address"] = $poster->getData()["address"];
-                $result["lat"] = $poster->getData()["lat"];
-                $result["long"] = $poster->getData()["long"];
+                $result["lat"] = doubleval($poster->getData()["lat"]);
+                $result["long"] = doubleval($poster->getData()["long"]);
                 break;
             case 2:
                 $result["extra"] = $poster->getData()["code"];
@@ -179,6 +180,8 @@ class Katalogi{
     }
 
     public static function cataloguePosition(PostManager $pm, $lat=0, $long=0, $limit=30){
+        if(isset($_GET['katotest']))
+            return self::catalogue($pm, $pm->getListOfType(Constant::THREAD_POSTER), $limit);
         if($lat==0 and $long==0)
             return self::catalogue($pm, [], $limit);
         return self::catalogue($pm, self::position($pm, $lat, $long, $limit), $limit);
