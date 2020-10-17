@@ -2,8 +2,10 @@ $(function(){
     $.getScript('script/utils.js');
 
     $('#createPoster form input[name="address"]').on('blur', function(){
+        $('#erreurCreate').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
 		$.getJSON('index.php', {address: encodeURIComponent($('#createPoster form input[name="address"]').val()), katalogi: "getAddress"}).done(function(data){
 			if(data.status == "OK"){
+                $('#erreurCreate').text("");
 				$('#createPoster form input[name="extraAddress"]').val(data.results[0].formatted_address+" || "+data.results[0].geometry.location.lat+" || "+data.results[0].geometry.location.lng);
                 $('#createPoster form input[name="address"]').val(data.results[0].formatted_address);
 			}else{
