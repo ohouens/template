@@ -69,7 +69,7 @@ class Katalogi{
             case "1": //gps
                 break;
             case "2": //code
-                if(!preg_match("/^.{1,20}$/", $extra))
+                if(!preg_match("/^((https?):\/\/(w{3}\.)?)?[a-z]{1,255}\.[a-z]{2,15}\/?/", $extra))
                     return Constant::ERROR_CODE_USER_WRONG;
                 $post->addData(["code"=>$extra]);
                 break;
