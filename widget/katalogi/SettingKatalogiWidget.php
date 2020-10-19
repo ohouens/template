@@ -40,6 +40,7 @@ class SettingKatalogiWidget extends Widget{
                         <div class="center" id="resume" num="'.$hash->get($post->getId()).'">
                             <h1>'.$post->getData()['title'].'</h1>
                             <form method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
+                                '.$post->getData()['address'].'<br>
                                 <span class="tab">open:</span><select class="input" name="open">
                                     <option value="yes" '.$yes.'>yes</option>
                                     <option value="no" '.$no.'>no</option>
