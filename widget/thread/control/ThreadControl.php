@@ -293,6 +293,9 @@ class ThreadControl{
         $tab = $user->getData()['threads'];
         $tab = array_diff($tab, [$post->getId()]);
         $user->addData(["threads"=>$tab]);
+        $tab = $user->getData()['posters'];
+        $tab = array_diff($tab, [$post->getId()]);
+        $user->addData(["posters"=>$tab]);
         $um->update($user);
         return 0;
     }
