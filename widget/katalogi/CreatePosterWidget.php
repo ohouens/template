@@ -36,7 +36,7 @@ class CreatePosterWidget extends Widget{
             </form>
             <button id="submit" class="button space">Create</button>
             <div id="erreurCreate" class="erreur"></div>
-            <div id="takenSlots">Taken slots: '.count($user->getData()['threads']).' / '.($user->getData()['slots']+CreateThreadControl::LIMIT).'</div>
+            <div id="takenSlots">Taken slots: '.(count($user->getData()['threads'])+count($user->getData()['posters'])).' / '.($user->getData()['slots']+CreateThreadControl::LIMIT).'</div>
         </div>
         ';
     }
