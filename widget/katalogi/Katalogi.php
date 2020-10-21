@@ -181,7 +181,7 @@ class Katalogi{
 
     public static function cataloguePosition(PostManager $pm, $lat=0, $long=0, $limit=30){
         if(isset($_GET['katotest']))
-            return self::catalogue($pm, $pm->getListOfType(Constant::THREAD_POSTER), $limit);
+            return self::catalogue($pm, array_reverse($pm->getListOfType(Constant::THREAD_POSTER)), $limit);
         if($lat==0 and $long==0)
             return self::catalogue($pm, [], $limit);
         return self::catalogue($pm, self::position($pm, $lat, $long, $limit), $limit);
