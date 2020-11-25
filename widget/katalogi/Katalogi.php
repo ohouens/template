@@ -170,7 +170,7 @@ class Katalogi{
                 if(in_array($poster, $tab)) continue;
                 //verification de la distance a l'utilisateur
                 if(isset($poster->getData()['lat']) and isset($poster->getData()['long'])){
-                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis])
+                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear in the application" and $poster->getUser() == 1))
                         array_push($tab, $poster);
                 }
             }
