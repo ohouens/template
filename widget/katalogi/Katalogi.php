@@ -143,6 +143,20 @@ class Katalogi{
         global $hash;
     	$tab=[];
     	$i=0;
+        if(count($add) == 1){
+            $result = [];
+            $result["num"] = "void";
+            $result["type"] = 0;
+            $result["titre"] = "Void zone";
+            $result["description"] = "You might try other locations to find new items";
+            $result["image"] = "void.jpg";
+            $result["address"] = "";
+            $result["extra"] = "";
+            $result["lat"] = 0.0;
+            $result["long"] = 0.0;
+            $tab[$i] = $result;
+            $i++;
+        }
     	foreach($add as $poster){
             if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
