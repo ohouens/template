@@ -42,7 +42,7 @@ class LicenceWidget extends Widget{
                         <h1>Onisowo Licence</h1>
                         <p>
                             Support our team and unlock 777 thread slots.
-                            You will unlock all features(instant messaging, threads lists, registers) + right to post posters on katalogi.
+                            You will unlock new features (instant messaging threads + lists of threads).
                         </p>
                         <button id="logPaypal" class="space">
                             <img src="style/button/paypalCheckout(1).svg" alt="buy now"/>
