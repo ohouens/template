@@ -1,6 +1,6 @@
 <?php
 class createThreadControl{
-    const LIMIT = 7;
+    const LIMIT = 0;
     const UNLIMITED = [1];
 
     public static function getObject($thread){
@@ -41,7 +41,7 @@ class createThreadControl{
     }
 
     public static function hasLimit(User $user, PointManager $lm){
-        if(count($user->getData()["threads"]) >= self::LIMIT + $user->getData()["slots"] and !in_array($user->getId(), self::UNLIMITED))
+        if(count(array_diff($user->getData()["threads"], $user->getData()["threads"])) + count($user->getData()['posters']) >= self::LIMIT + $user->getData()["slots"] and !in_array($user->getId(), self::UNLIMITED))
             return true;
         return false;
     }
