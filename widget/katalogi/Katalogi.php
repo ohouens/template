@@ -50,6 +50,8 @@ class Katalogi{
 
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extraAddress, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
+        if(!LicenceControl::isValide($user, $lm))
+            return Constant::ERROR_CODE_USER_NO_LICENCE;
         if(CreateThreadControl::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))

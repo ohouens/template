@@ -41,7 +41,7 @@ class createThreadControl{
     }
 
     public static function hasLimit(User $user, PointManager $lm){
-        if(count(array_diff($user->getData()["threads"], $user->getData()["threads"])) + count($user->getData()['posters']) >= self::LIMIT + $user->getData()["slots"] and !in_array($user->getId(), self::UNLIMITED))
+        if(count($user->getData()["threads"]) + count($user->getData()['posters']) >= self::LIMIT + $user->getData()["slots"] and !in_array($user->getId(), self::UNLIMITED))
             return true;
         return false;
     }
