@@ -50,8 +50,8 @@ class Katalogi{
 
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extraAddress, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
-        if(!LicenceControl::isValide($user, $lm))
-            return Constant::ERROR_CODE_USER_NO_LICENCE;
+        // if(!LicenceControl::isValide($user, $lm))
+        //     return Constant::ERROR_CODE_USER_NO_LICENCE;
         if(CreateThreadControl::hasLimit($user, $lm))
             return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         if(!preg_match(Constant::REGEX_FORMAT_TITLE, $title))
@@ -186,7 +186,7 @@ class Katalogi{
                 if(in_array($poster, $tab)) continue;
                 //verification de la distance a l'utilisateur
                 if(isset($poster->getData()['lat']) and isset($poster->getData()['long'])){
-                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear on the application" and $poster->getUser() == 1))
+                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear on the app" and $poster->getUser() == 1))
                         array_push($tab, $poster);
                 }
             }

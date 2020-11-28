@@ -35,7 +35,7 @@ class CreateThreadWidget extends Widget{
             <form enctype="multipart/form-data" method="post" action="index.php?thread&request=1"></form>
             <button id="submit" class="button space">Create</button>
             <div id="erreurCreate" class="erreur"></div>
-            <div id="takenSlots">Taken slots: '.(count($user->getData()["threads"])+count($user->getData()['posters'])).' / '.($user->getData()['slots']+CreateThreadControl::LIMIT).'</div>
+            <div id="takenSlots">Taken slots: '.(count(array_diff($user->getData()["threads"], $user->getData()["starter"]))+count($user->getData()['posters'])).' / '.($user->getData()['slots']+CreateThreadControl::LIMIT).'</div>
         </div>
         ';
     }
