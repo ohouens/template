@@ -177,7 +177,7 @@ class Katalogi{
         $distances = array(20, 50, 75, 100, 300, 500, 1000, 8000);
         $list = array_reverse($pm->getListOfType(Constant::THREAD_POSTER));
         $inter = $list;
-        while(count($tab)<15 and $lenDis<count($distances)){
+        while(count($tab)<100 and $lenDis<count($distances)){
             foreach($list as $poster){
                 if(count($tab)>=$limit) break;
                 if(strlen($hash->get($poster->getId())) < 10) continue;
@@ -186,8 +186,21 @@ class Katalogi{
                 if(in_array($poster, $tab)) continue;
                 //verification de la distance a l'utilisateur
                 if(isset($poster->getData()['lat']) and isset($poster->getData()['long'])){
-                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear on the app" and $poster->getUser() == 1))
+                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear on the app" and $poster->getUser() == 1)){
                         array_push($tab, $poster);
+                        continue;
+                    }
+                }
+                //verification de la distance a l'utilisateur avec les duplica du poster
+                if(isset($poster->getData()['addresses'])){
+                    foreach($poster->getData()['addresses'] as $duplica){
+                        if(isset($duplica['lat']) and isset($duplica['long'])){
+                            if(self::distance($lat, $long, $duplica['lat'], $duplica['long']) <= $distances[$lenDis]){
+                                array_push($tab, $poster);
+                                continue;
+                            }
+                        }
+                    }
                 }
             }
             $lenDis++;
