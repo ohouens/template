@@ -1,5 +1,84 @@
 <?php
 class ThreadControl{
+    public static function slotLength(Post $post){
+        $result = 1;
+        if(isset($post->getData()["addresses"]))
+            $result += count($post->getData()["addresses"]);
+        return $result;
+    }
+
+    public static function takenSlots(User $user, PostManager $pm){
+        $diff = [];
+        if(isset($user->getData()["starter"]))
+            $diff = $user->getData()["starter"];
+        $result = count(array_diff($user->getData()["threads"], $diff));
+        foreach($user->getData()["posters"] as $num){
+            $poster = $pm->get($num);
+            if(!is_int($poster))
+                $result += self::slotLength($poster);
+        }
+        return $result;
+    }
+
+    public static function allSlots(User $user){
+        return ($user->getData()['slots']+CreateThreadControl::LIMIT);
+    }
+
+    public static function slotStatut(User $user, PostManager $pm){
+        return '<span id="availableSlots"><span class="deno">'.self::takenSlots($user, $pm).'</span><span class="vert on">/</span><span class="vert nume">'.self::allSlots($user).'</span></span>';
+    }
+
+    public static function addDuplica(User $user, Post $post, $coord, PostManager $pm){
+        $addresses = [];
+        $inter = [];
+        if($coord == "" or $coord == null)
+            return 0;
+        if($post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
+        $frag = explode(" || ", $coord);
+        if($frag[0] == null or $frag[0] == "")
+            return 297;
+        if(!preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[1]) or !preg_match("/^-?[0-9]{1,7}\.[0-9]+$/", $frag[2]))
+            return 296;
+        $inter["address"] = $frag[0];
+        $inter["lat"] = $frag[1];
+        $inter["long"] = $frag[2];
+        if(isset($post->getData()['addresses']))
+            $addresses = $post->getData()['addresses'];
+        array_push($addresses, $inter);
+        $post->addData(["addresses"=>$addresses]);
+        // var_dump($post);
+        $pm->update($post);
+        return 0;
+    }
+
+    public static function removeDuplica(User $user, Post $post, $lat, $long, PostManager $pm){
+        $addresses = [];
+        if($post->getUser() != $user->getId())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if(!isset($post->getData()['addresses']))
+            return 0;
+        foreach($post->getData()['addresses'] as $address){
+            if($address["lat"] != $lat or $address["long"] != $long){
+                array_push($addresses, $address);
+            }
+        }
+        $post->addData(["addresses"=>$addresses]);
+        // var_dump($post);
+        $pm->update($post);
+        return 0;
+    }
+
+    public static function showDuplica(Post $post){
+        $result = "";
+        if(!isset($post->getData()['addresses']))
+            return "";
+        foreach($post->getData()['addresses'] as $address){
+            $result .= '<span class="addressDup">'.$address["address"].' <span class="minus" lat="'.$address["lat"].'" long="'.$address["long"].'">-</span></span><br>';
+        }
+        return $result;
+    }
+
     public static function addList(Post $post, Post $parent, PostManager $pm){
         if(!in_array($parent->getType(), [Constant::THREAD_FORUM, Constant::THREAD_FLUX]))
             return 304;

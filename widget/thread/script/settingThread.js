@@ -1,4 +1,7 @@
 $(function(){
+    $.getScript('script/utils.js');
+    slotStatut();
+
     $("#resume #view").click(function(){
         window.location.href = "index.php?thread="+$("#resume").attr('num');
     });
@@ -6,7 +9,7 @@ $(function(){
     $("#resume #save").click(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($("#resume form").attr('action'), $("#resume form").serialize()).done(function(data){
-            if(data == "000000000")
+            if(data == "0000000000")
                 $("#error").html('<img src="style/icon/success.png" alt="success" class="wait" />');
             else
                 $("#error").html('<img src="style/icon/fail.png" alt="fail" class="wait" />');

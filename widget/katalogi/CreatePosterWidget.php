@@ -2,10 +2,10 @@
 class CreatePosterWidget extends Widget{
     private $_user;
 
-    public function __construct(User $user){
+    public function __construct(User $user, PostManager $pm){
         parent::__construct(
             "",
-            $this->subConstruct($user),
+            $this->subConstruct($user, $pm),
             "",
             "posterCreation",
             "",
@@ -16,7 +16,7 @@ class CreatePosterWidget extends Widget{
         $this->build();
     }
 
-    private function subConstruct(User $user){
+    private function subConstruct(User $user, PostManager $pm){
         return
         '<div id="createPoster">
             <h1>New Poster</h1>
@@ -36,7 +36,7 @@ class CreatePosterWidget extends Widget{
             </form>
             <button id="submit" class="button space">Create</button>
             <div id="erreurCreate" class="erreur"></div>
-            <div id="takenSlots">Taken slots: '.(count(array_diff($user->getData()["threads"], $user->getData()["starter"]))+count($user->getData()['posters'])).' / '.($user->getData()['slots']+CreateThreadControl::LIMIT).'</div>
+            <div id="takenSlots">Taken slots: '.ThreadControl::slotStatut($user, $pm).'</div>
         </div>
         ';
     }

@@ -24,6 +24,14 @@
 #settingPoster #setting #resume .input, #settingPoster #setting #resume .tab{
     font-size: 1.4em;
 }
+#settingPoster #setting .dup{
+    cursor: pointer;
+}
+
+.addressDup .minus{
+    color: red;
+    cursor: pointer;
+}
 
 @media (max-width: 800px){
     #settingPoster .child{

@@ -1,9 +1,9 @@
 <?php
 class SettingKatalogiWidget extends Widget{
-    public function __construct(User $user, Post $post){
+    public function __construct(User $user, Post $post, PostManager $pm){
         parent::__construct(
             '',
-            $this->subConstruct($user, $post),
+            $this->subConstruct($user, $post, $pm),
             '',
             'SettingWidget',
             '',
@@ -13,7 +13,7 @@ class SettingKatalogiWidget extends Widget{
         $this->build();
     }
 
-    public function subConstruct(User $user, Post $post){
+    public function subConstruct(User $user, Post $post, PostManager $pm){
         global $hash;
         if($user->getId() == $post->getUser()){
             $yes = "";
@@ -39,15 +39,21 @@ class SettingKatalogiWidget extends Widget{
                     --><div class="grand rectangle child" id="setting" num="'.$hash->get($post->getId()).'">
                         <div class="center" id="resume" num="'.$hash->get($post->getId()).'">
                             <h1>'.$post->getData()['title'].'</h1>
+                            <span class="dup link vert">Duplicate+</span> <span id="statutContainer">'.ThreadControl::slotStatut($user, $pm).'</span><br>
                             <form method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                                 '.$post->getData()['address'].'<br>
+                                <div id="addDup"></div>
+                                <div id="addresses" class="vide">
+                                    <span class="tab">clone:</span><input type="text" id="adAdding" name="adAdding" class="input" placeholder="Address"/><br>
+                                    <input type="text" name="extraAddress" placeholder="extra address" class="input vide"/>
+                                </div>
                                 <span class="tab">open:</span><select class="input" name="open">
                                     <option value="yes" '.$yes.'>yes</option>
                                     <option value="no" '.$no.'>no</option>
                                 </select>
                             </form>
                             <button id="delete" class="button space">Delete</button>
-                            <button id="save" class="button space">Save</button><br>
+                            <button id="savePoster" class="button space">Save</button><br>
                             <span id="error"></span>
                         </div>
                     </div>
