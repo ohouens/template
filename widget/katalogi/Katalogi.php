@@ -175,7 +175,7 @@ class Katalogi{
     	$i=0;
         $lenDis = 0;
         $distances = array(20, 50, 75, 100, 300, 500, 1000, 8000);
-        $list = array_reverse($pm->getListOfType(Constant::THREAD_POSTER));
+        $list = $pm->getListOfType(Constant::THREAD_POSTER);
         $inter = $list;
         while(count($tab)<100 and $lenDis<count($distances)){
             foreach($list as $poster){
