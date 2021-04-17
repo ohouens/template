@@ -51,17 +51,20 @@ class Katalogi{
     public static function controlPoster(Post $post, UserManager $um, PostManager $pm, PointManager $lm){
         $owner = $um->get($post->getUser());
         if(LicenceControl::isValide($owner, $lm))
-            return $post;
+            return true;
         if(time()-$post->getData()["lastRenew"] > 60*60*24*28){
             if($post->getData()["renew"]){
                 $post->addData(["lastRenew"=>time()]);
                 $post->addData(["renew"=>false]);
+                $pm->update($post);
+                return true;
             }else{
                 $post->setActive(0);
+                $pm->update($post);
+                return false;
             }
-            $pm->update($post);
-            return $post;
         }
+        return true;
     }
 
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extraAddress, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
@@ -159,7 +162,7 @@ class Katalogi{
         return $result;
     }
 
-    private static function catalogue(PostManager $pm, $add=[], $limit=30){
+    private static function catalogue(UserManager $um, PostManager $pm, PointManager $lm, $add=[], $limit=30){
         global $hash;
     	$tab=[];
     	$i=0;
@@ -181,6 +184,7 @@ class Katalogi{
             if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
             if(!ThreadControl::isOpen($poster)) continue;
+            if(!self::controlPoster($poster, $um, $pm, $lm)) continue;
 			$tab[$i] = self::transform($poster);
             $i++;
     	}
@@ -226,12 +230,12 @@ class Katalogi{
         return $tab;
     }
 
-    public static function cataloguePosition(PostManager $pm, $lat=0, $long=0, $limit=30){
+    public static function cataloguePosition(UserManager $um, PostManager $pm, PointManager $lm, $lat=0, $long=0, $limit=30){
         if(isset($_GET['katotest']))
-            return self::catalogue($pm, array_reverse($pm->getListOfType(Constant::THREAD_POSTER)), $limit);
+            return self::catalogue($um, $pm, $lm, array_reverse($pm->getListOfType(Constant::THREAD_POSTER)), $limit);
         if($lat==0 and $long==0)
-            return self::catalogue($pm, [], $limit);
-        return self::catalogue($pm, self::position($pm, $lat, $long, $limit), $limit);
+            return self::catalogue($um, $pm, $lm, [], $limit);
+        return self::catalogue($um, $pm, $lm, self::position($pm, $lat, $long, $limit), $limit);
     }
 
     public static function mapsAPI($address){
