@@ -18,9 +18,14 @@ class SettingKatalogiWidget extends Widget{
         if($user->getId() == $post->getUser()){
             $yes = "";
             $no = "";
+            $renewYes = "";
+            $renewNo = "";
             if($post->getData()['open'])
                 $yes = "selected";
             else $no = "selected";
+            if($post->getData()['renew'])
+                $renewYes = "selected";
+            else $renewNo = "selected";
             $button = "read";
             if($post->getField() == 1)$button = "GPS";
             if($post->getField() == 2)$button = "Code";
@@ -50,6 +55,10 @@ class SettingKatalogiWidget extends Widget{
                                 <span class="tab">open:</span><select class="input" name="open">
                                     <option value="yes" '.$yes.'>yes</option>
                                     <option value="no" '.$no.'>no</option>
+                                </select><br>
+                                <span class="tab">renew:</span><select class="input" name="renew">
+                                    <option value="yes" '.$renewYes.'>yes</option>
+                                    <option value="no" '.$renewNo.'>no</option>
                                 </select>
                             </form>
                             <button id="delete" class="button space">Delete</button>

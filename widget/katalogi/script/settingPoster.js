@@ -31,7 +31,7 @@ $(function(){
     $("#resume #savePoster").click(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($("#resume form").attr('action'), $("#resume form").serialize()).done(function(data){
-            if(data == "0000000000"){
+            if(data == "00000000000"){
                 $('input[name="extraAddress"]').val("");
                 $('#adAdding').val("");
                 $("#addresses").css("display", "none");

@@ -48,6 +48,22 @@ class Katalogi{
         $hash->add($thread->getId());
     }
 
+    public static function controlPoster(Post $post, UserManager $um, PostManager $pm, PointManager $lm){
+        $owner = $um->get($post->getUser());
+        if(LicenceControl::isValide($owner, $lm))
+            return $post;
+        if(time()-$post->getData()["lastRenew"] > 60*60*24*28){
+            if($post->getData()["renew"]){
+                $post->addData(["lastRenew"=>time()]);
+                $post->addData(["renew"=>false]);
+            }else{
+                $post->setActive(0);
+            }
+            $pm->update($post);
+            return $post;
+        }
+    }
+
     public static function createPoster(User $user, $title, $cover, $desc, $subtype, $extraAddress, $extra, UserManager $um, PostManager $pm, PointManager $lm, $path=""){
         global $hash;
         // if(!LicenceControl::isValide($user, $lm))
@@ -96,6 +112,8 @@ class Katalogi{
                 $post->addData(["writers"=>[]]);
                 $post->addData(["viewers"=>[]]);
                 $post->addData(["open"=>true]);
+                $post->addData(["renew"=>true]);
+                $post->addData(["lastRenew"=>time()]);
                 $post->addData(["cover"=>$rename]);
                 $post->addData(["desc"=>$desc]);
                 $pm->add($post);

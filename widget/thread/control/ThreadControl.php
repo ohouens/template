@@ -271,6 +271,16 @@ class ThreadControl{
         $manager->update($post);
         return 0;
     }
+    public static function setRenew(User $user, Post $post, $renew, PostManager $manager){
+        if($user->getId() != $post->getUser())
+            return Constant::ERROR_CODE_USER_WRONG;
+        if($renew == "yes")
+            $post->addData(["renew"=>true]);
+        else
+            $post->addData(["renew"=>false]);
+        $manager->update($post);
+        return 0;
+    }
     public static function setNotify(User $user, Post $post, $notify, PostManager $manager, PointManager $lm){
         $result = 0;
         if($user->getId() != $post->getUser())
