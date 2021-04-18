@@ -10,6 +10,16 @@ $(function(){
     });
     initDup();
 
+    if($(".renewalCountdown").attr("date") == "infinity"){
+        $(".renewalCountdown").text("∞");
+    }else{
+        $(".renewalCountdown").each(function(){
+            $(this).countdown($(this).attr("date"), function(event){
+                $(this).text(event.strftime("%D days %H:%M:%S"));
+            });
+        });
+    }
+
     $("#adAdding").on('blur', function(){
         $('#erreurCreate').html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
 		$.getJSON('index.php', {address: encodeURIComponent($('#adAdding').val()), katalogi: "getAddress"}).done(function(data){

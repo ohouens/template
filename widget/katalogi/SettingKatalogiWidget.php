@@ -38,6 +38,9 @@ class SettingKatalogiWidget extends Widget{
             if($post->getField() == 1)$button = "GPS";
             if($post->getField() == 2)$button = "Code";
             if($post->getField() == 3)$button = "link";
+            $rc = "infinity";
+            if(!isset($user->getData()['licence']))
+                $rc = date("Y-m-d", $post->getData()['lastRenew']+60*60*24*28);
             return '
                 <div id="settingPoster" class="child">
                     <div class="grand alignement child" id="preview" style="background-image: url(\'media/forum/cover/'.$post->getData()['cover'].'\');">
@@ -55,6 +58,7 @@ class SettingKatalogiWidget extends Widget{
                             <span class="dup link vert">Duplicate+</span> <span id="statutContainer">'.ThreadControl::slotStatut($user, $pm).'</span><br>
                             <form method="post" action="index.php?thread='.$hash->get($post->getId()).'&amp;request=8">
                                 '.$post->getData()['address'].'<br>
+                                <span class="vert">priority\'s renewal countdown:</span> <span class="renewalCountdown" date="'.$rc.'"></span><br>
                                 <div id="addDup"></div>
                                 <div id="addresses" class="vide">
                                     <span class="tab">clone:</span><input type="text" id="adAdding" name="adAdding" class="input" placeholder="Address"/><br>

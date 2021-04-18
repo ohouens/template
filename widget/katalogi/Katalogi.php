@@ -55,7 +55,6 @@ class Katalogi{
         if(time()-$post->getData()["lastRenew"] > 60*60*24*28){
             if($post->getData()["renew"]){
                 $post->addData(["lastRenew"=>time()]);
-                $post->addData(["renew"=>false]);
                 $pm->update($post);
                 return true;
             }else{
