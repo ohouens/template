@@ -25,13 +25,15 @@ class ListKatalogiWidget extends Widget{
             if(!$inter->getData()['open'])
                 $lock = "locked";
             $page .=
-            '<p class="list alignement">
-                <a class="link" href="index.php?katalogi=settings&poster='.$hash->get($inter->getId()).'">
-                    '.$inter->getData()['title'].'<br/>
-                    type:'.Katalogi::getSubType($inter).'<br/>
-                    date:'.date("d/m/Y", $inter->getCreation()).'<br/>
-                </a><img class="lock" src="style/icon/'.$lock.'.png" alt="'.$lock.'"/>
-            </p>';
+            '<a href="index.php?katalogi=settings&poster='.$hash->get($inter->getId()).'" style="color:white; text-decoration:none; display:inline-block; width:300px;height:500px; background:url(\'media/forum/cover/'.$inter->getData()['cover'].'\');background-size:cover;">
+                <div style="background:rgba(0,0,0,0.5); display:flex; width:100%; height:100%;">
+                    <div class="center">
+                        '.$inter->getData()['title'].'<br/>
+                        type:'.Katalogi::getSubType($inter).'<br/>
+                        date:'.date("d/m/Y", $inter->getCreation()).'<br/>
+                    </div>
+                </div>
+            </a>';
         }
         if($page == "")
             return '
