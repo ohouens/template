@@ -33,6 +33,11 @@
     cursor: pointer;
 }
 
+
+#resume #deletePoster:hover{
+    background: red;
+}
+
 @media (max-width: 800px){
     #settingPoster .child{
         height: 100vh;

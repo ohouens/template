@@ -69,7 +69,7 @@ class SettingKatalogiWidget extends Widget{
                                     <option value="no" '.$no.'>no</option>
                                 </select><br>'.$renewable.'
                             </form>
-                            <button id="delete" class="button space">Delete</button>
+                            <button id="deletePoster" class="button space">Delete</button>
                             <button id="savePoster" class="button space">Save</button><br>
                             <span id="error"></span>
                         </div>
