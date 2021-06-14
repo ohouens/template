@@ -169,7 +169,7 @@ class Katalogi{
         global $hash;
     	$tab=[];
     	$i=0;
-        if(count($add) == 1){
+        if(count($add) == 0){
             $result = [];
             $result["num"] = "void";
             $result["type"] = 0;
