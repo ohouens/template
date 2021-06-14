@@ -52,6 +52,10 @@ class Katalogi{
         $owner = $um->get($post->getUser());
         if(LicenceControl::isValide($owner, $lm))
             return true;
+        if(!isset($post->getData()["lastRenew"])){
+            $post->addData(["lastRenew"=>$post->getCreation()]);
+            $pm->update($post);
+        }
         if(time()-$post->getData()["lastRenew"] > 60*60*24*28){
             if($post->getData()["renew"]){
                 $post->addData(["lastRenew"=>time()]);

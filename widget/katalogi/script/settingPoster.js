@@ -76,6 +76,11 @@ $(function(){
             setTimeout(function(){
                 $("#error").text("");
             },3000);
+            if(data == "000000000770"){
+                if(confirm("You have no open slot to clone this poster. Would you unlock 1 slot ?")){
+                    window.location.replace('index.php?store=detail&object=one&menu=Store');
+                }
+            }
             // $("#error").html(data);
             if(data.charAt(7) == 1 || data.charAt(8) == 1)
                 alert("A licence is required to alert or notify.");

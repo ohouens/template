@@ -21,6 +21,11 @@ $(function(){
     				setTimeout(function(){
     					$('#erreurCreate').text("");
     				},3000);
+                    if(data == "77"){
+                        if(confirm("You have no open slot to make a thread. Would you unlock 1 slot ?")){
+                            window.location.replace('index.php?store=detail&object=one&menu=Store');
+                        }
+                    }
     			}
             },error: function(){
                 alert('erreur');

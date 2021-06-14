@@ -28,13 +28,15 @@ class ThreadControl{
         return '<span id="availableSlots"><span class="deno">'.self::takenSlots($user, $pm).'</span><span class="vert on">/</span><span class="vert nume">'.self::allSlots($user).'</span></span>';
     }
 
-    public static function addDuplica(User $user, Post $post, $coord, PostManager $pm){
+    public static function addDuplica(User $user, Post $post, $coord, PostManager $pm, PointManager $lm){
         $addresses = [];
         $inter = [];
         if($coord == "" or $coord == null)
             return 0;
         if($post->getUser() != $user->getId())
             return Constant::ERROR_CODE_USER_WRONG;
+        if(CreateThreadControl::hasLimit($user, $lm))
+            return Constant::ERROR_CODE_CREATE_THREAD_LIMIT;
         $frag = explode(" || ", $coord);
         if($frag[0] == null or $frag[0] == "")
             return 297;
