@@ -1,6 +1,5 @@
 $(function(){
     $.getScript('script/utils.js');
-    slotStatut();
 
     $("#resume #viewThread").click(function(){
         window.location.href = "index.php?thread="+$("#resume").attr('num');
