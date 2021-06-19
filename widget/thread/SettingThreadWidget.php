@@ -55,7 +55,7 @@ class SettingThreadWidget extends Widget{
                 <span class="tab">input:</span><textarea class="input" name="input">'.$in.'</textarea>';
                 // <span class="tab">output:</span><textarea class="input" name="output">'.$tunnel.'</textarea>';
             $notify = "";
-            if($post->getType() == Constant::THREAD_FLUX){
+            if($user->getId() == 1 and $post->getType() == Constant::THREAD_FLUX){
                 $ny="";
                 $nn="selected";
                 if(isset($post->getData()['notify']) and $post->getData()['notify']){
@@ -69,7 +69,7 @@ class SettingThreadWidget extends Widget{
                 </select><br/>';
             }
             $alert = "";
-            if(in_array($post->getType(), [Constant::THREAD_FLUX, Constant::THREAD_TICKETING])){
+            if($user->getId() == 1 and in_array($post->getType(), [Constant::THREAD_FLUX, Constant::THREAD_TICKETING])){
                 $ay="";
                 $an="selected";
                 if(isset($post->getData()['alert']) and $post->getData()['alert']){
@@ -105,11 +105,11 @@ class SettingThreadWidget extends Widget{
                     <option value="me" '.$readme.'>I</option>
                     <option value="lock1" '.$readLock.'>lock</option>
                 </select>
-                <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.'
+                <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.$alert.$notify.'
             </form>';
             $save =
-            '<button id="delete" class="button space">Delete</button>
-            <button id="save" class="button space">Save</button>';
+            '<button id="deleteThread" class="button space">Delete</button>
+            <button id="saveThread" class="button space">Save</button>';
         }
         $listeners = 0;
         if(isset($post->getData()["tunnelv2"]))
@@ -127,7 +127,7 @@ class SettingThreadWidget extends Widget{
                         '.$lock.'
                     </div>
                     '.$save.'
-                    <button id="view" class="button space">View</button><br/>
+                    <button id="viewThread" class="button space">View</button><br/>
                     <span id="error"></span>
                 </div>
             </div>

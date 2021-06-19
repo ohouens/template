@@ -2,14 +2,13 @@ $(function(){
     $.getScript('script/utils.js');
     slotStatut();
 
-    $("#resume #view").click(function(){
+    $("#resume #viewThread").click(function(){
         window.location.href = "index.php?thread="+$("#resume").attr('num');
     });
-
-    $("#resume #save").click(function(){
+    $("#resume #saveThread").click(function(){
         $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
         $.post($("#resume form").attr('action'), $("#resume form").serialize()).done(function(data){
-            if(data == "0000000000")
+            if(data == "00000000000")
                 $("#error").html('<img src="style/icon/success.png" alt="success" class="wait" />');
             else
                 $("#error").html('<img src="style/icon/fail.png" alt="fail" class="wait" />');
@@ -24,10 +23,10 @@ $(function(){
 
     $("#resume form").submit(function(e){
         e.preventDefault();
-        $("#resume #save").trigger("click");
+        $("#resume #saveThread").trigger("click");
     });
 
-    $("#resume #delete").click(function(){
+    $("#resume #deleteThread").click(function(){
         if(confirm("Are you sure about this ? This action will be permanent")){
             $("#error").html('<img src="style/icon/wait.gif" alt="wait.." class="wait" />');
             $.get("index.php?thread="+$("#resume").attr('num')+"&request=42", function(data){
