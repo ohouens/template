@@ -169,7 +169,12 @@ class Katalogi{
         global $hash;
     	$tab=[];
     	$i=0;
-        if(count($add) == 0){
+        $totalCount = 0;
+        foreach ($add as $poster) {
+            if($poster->getUser() != 1 or !in_array($poster->getData()['title'],["Appear on this app", "Share this app"]))
+                $totalCount++;
+        }
+        if($totalCount == 0){
             $result = [];
             $result["num"] = "void";
             $result["type"] = 0;
@@ -211,7 +216,7 @@ class Katalogi{
                 if(in_array($poster, $tab)) continue;
                 //verification de la distance a l'utilisateur
                 if(isset($poster->getData()['lat']) and isset($poster->getData()['long'])){
-                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or ($poster->getData()['title'] == "Appear on the app" and $poster->getUser() == 1)){
+                    if(self::distance($lat, $long, $poster->getData()['lat'], $poster->getData()['long']) <= $distances[$lenDis] or (in_array($poster->getData()['title'],["Appear on this app", "Share this app"]) and $poster->getUser() == 1)){
                         array_push($tab, $poster);
                         continue;
                     }
