@@ -188,11 +188,12 @@ class Katalogi{
             $tab[$i] = $result;
             $i++;
         }
+        $reversedCount = count($add)-$totalCount;
         $compose = array_reverse($add);
         if($totalCount > 0){
-            $pre = array_slice($add, 0, $totalCount);
+            $pre = array_slice($add, 0, $reversedCount);
             $pre = array_reverse($pre);
-            $post = array_slice($add, $totalCount);
+            $post = array_slice($add, $reversedCount);
             $compose = array_merge($post,$pre);
         }
     	foreach($compose as $poster){
