@@ -188,10 +188,13 @@ class Katalogi{
             $tab[$i] = $result;
             $i++;
         }
-        $pre = array_slice($add, 0, $totalCount);
-        $post = array_slice($add, $totalCount);
-        $pre = array_reverse($pre);
-        $compose = array_merge($post,$pre);
+        $compose = array_reverse($add);
+        if($totalCount > 0){
+            $pre = array_slice($add, 0, $totalCount);
+            $pre = array_reverse($pre);
+            $post = array_slice($add, $totalCount);
+            $compose = array_merge($post,$pre);
+        }
     	foreach($compose as $poster){
             if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
