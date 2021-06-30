@@ -188,7 +188,11 @@ class Katalogi{
             $tab[$i] = $result;
             $i++;
         }
-    	foreach($add as $poster){
+        $pre = array_slice($add, 0, $totalCount);
+        $post = array_slice($add, $totalCount);
+        $pre = array_reverse($pre);
+        $compose = array_merge($post,$pre);
+    	foreach($compose as $poster){
             if($i >= $limit) break;
             if(strlen($hash->get($poster->getId())) < 10) continue;
             if(!ThreadControl::isOpen($poster)) continue;
