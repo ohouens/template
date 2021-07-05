@@ -105,7 +105,7 @@ class SettingThreadWidget extends Widget{
                     <option value="me" '.$readme.'>I</option>
                     <option value="lock1" '.$readLock.'>lock</option>
                 </select>
-                <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.$alert.'
+                <span class="tab">lock:</span><textarea class="input" name="lock">'.$verrou.'</textarea>'.$forum.$echoTunnel.'
             </form>';
             $save =
             '<button id="deleteThread" class="button space">Delete</button>
