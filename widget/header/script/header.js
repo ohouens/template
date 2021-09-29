@@ -1,5 +1,5 @@
 $(function(){
-    var option = "Katalogi";
+    var option = "Profile";
     let searchParams = new URLSearchParams(window.location.search).get('menu');
     if(searchParams != null)
         option = searchParams
