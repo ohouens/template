@@ -256,7 +256,7 @@ class Katalogi{
 
     public static function mapsAPI($address){
         $curl = curl_init();
-        $send = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBiMGhNTqf79uOzcdYzPwujsczTHZaU_SY&address=".$address;
+        $send = "https://maps.googleapis.com/maps/api/geocode/json?key=".googleMapsKey()."&address=".$address;
     	$opts = [
     		CURLOPT_SSL_VERIFYPEER => false,
     		CURLOPT_URL            => $send,
